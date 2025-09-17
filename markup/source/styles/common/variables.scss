@@ -1,0 +1,36 @@
+// fonts
+$font-title: "Playfair Display", "Times New Roman", serif;
+$font-text: "Montserrat", "Arial", sans-serif;
+$font-decor: "Cyrillic Old", "Times New Roman", serif;
+
+// media widths
+$desktop-max-width: 1920px;
+$desktop-mid-width: 1600px;
+$desktop-min-width: 1325px;
+$tablet-mid-width: 1100px;
+$tablet-min-width: 768px;
+$mobile-mid-width: 500px;
+$mobile-min-width: 320px;
+
+// colors
+$base-text-color: #5c4634;
+$add-text-color: #797979;
+$accent-text-color: #d4b06a;
+$bg-text-color: #ffffff;
+
+$base-bg: #f9f6f1;
+$add-bg: #efe9de;
+$accent-bg: #92140c;
+$accent-add-bg: #d4b06a;
+$accent-light-bg: #fff6d9;
+$accent-dark-bg: #5c4634;
+$form-bg: #d9d9d9;
+
+// gradients
+$windowGradient: linear-gradient(310deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 107, 1) 0%, rgba(0, 0, 0, 1) 80%);
+$cardGradient: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100px, rgba(0, 0, 0, 0.5) 200px, rgba(0, 0, 0, 0.6) 100%);
+
+// shadows
+$cardShadow: 0 10px 15px 0 rgba(0, 0, 0, 0.1);
+$boxShadowOutset: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
+$boxShadowSection: inset 0 3px 4px 0 rgba(0, 0, 0, 0.1);

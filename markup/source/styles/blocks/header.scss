@@ -1,0 +1,154 @@
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 12;
+
+  background-color: $accent-light-bg;
+  box-shadow: $boxShadowOutset;
+  border-bottom: 1px solid $accent-add-bg;
+}
+
+.header__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  height: 80px;
+
+  @media (max-width: $desktop-mid-width) {
+    gap: 20px;
+  }
+  @media (max-width: $tablet-min-width) {
+    gap: 10px;
+  }
+}
+
+.header__logo {
+}
+
+.header__address {
+  font-size: 18px;
+
+  font-style: normal;
+
+  @media (max-width: $desktop-mid-width) {
+    font-size: 16px;
+  }
+  @media (max-width: $tablet-mid-width) {
+    display: none;
+  }
+}
+
+.header__contacts {
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: $tablet-mid-width) {
+    flex-direction: column;
+    gap: 10px;
+  }
+  @media (max-width: $tablet-min-width) {
+    display: none;
+  }
+}
+
+.header__navigation {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 80px);
+  margin-top: 80px;
+  padding: 50px 20px;
+
+  background-color: rgba($add-bg, 0.9);
+
+  transition: 0.6s ease-in-out;
+
+  transform: translateX(-100%);
+
+  &--open {
+    transform: translateX(0);
+  }
+}
+
+.header__menu-button {
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+  height: 45px;
+  gap: 5px;
+  padding: 10px;
+
+  cursor: pointer;
+
+  &--menu-open {
+    .header__menu-button-line {
+      &:nth-of-type(1) {
+        transform: rotateZ(45deg) translate(4px, 1px);
+        transform-origin: bottom;
+      }
+
+      &:nth-of-type(2) {
+        transform: rotateZ(-45deg);
+        transform-origin: top;
+      }
+
+      &:nth-of-type(3) {
+        width: 50%;
+        transform: translate(13px, -6px) rotateZ(45deg);
+        transform-origin: bottom;
+      }
+    }
+  }
+}
+
+.header__menu-button-line {
+  height: 5px;
+  background: $accent-add-bg;
+  border-radius: 10px;
+
+  transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+  &:nth-of-type(1) {
+    width: 50%;
+  }
+
+  &:nth-of-type(2) {
+    width: 100%;
+  }
+
+  &:nth-of-type(3) {
+    width: 75%;
+  }
+}
+
+.header__menu {
+  overflow-y: auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+
+  font-size: 26px;
+
+  @media (max-width: $desktop-mid-width) {
+    font-size: 24px;
+  }
+  @media (max-width: $desktop-min-width) {
+    font-size: 22px;
+  }
+  @media (max-width: $tablet-min-width) {
+    gap: 10px;
+
+    font-size: 20px;
+  }
+}
+
+.header__social {
+}

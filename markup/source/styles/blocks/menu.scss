@@ -1,0 +1,35 @@
+.menu {
+  display: flex;
+  width: 100%;
+}
+
+.menu__item {
+  font-family: $font-decor;
+}
+
+.menu__link {
+  display: block;
+  width: max-content;
+  padding: 10px;
+
+  text-align: center;
+
+  transition: opacity 0.4s ease-in-out;
+
+  @media (max-width: $desktop-mid-width) {
+    padding: 5px;
+  }
+
+  @media (hover: hover) {
+    &:hover,
+    &:active {
+      opacity: 0.6;
+    }
+  }
+
+  &--current {
+    text-decoration: underline;
+
+    pointer-events: none;
+  }
+}

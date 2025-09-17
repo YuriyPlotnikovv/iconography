@@ -1,0 +1,82 @@
+.reviews {
+
+}
+
+.reviews__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+
+  @media (max-width: $tablet-mid-width) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reviews__item {
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  gap: 30px;
+  width: 100%;
+  padding: 30px;
+
+  background-color: $accent-light-bg;
+  box-shadow: $cardShadow;
+  border-radius: 30px;
+}
+
+.reviews__item-decor {
+  width: 30px;
+  height: 30px;
+
+  fill: $accent-bg;
+}
+
+.reviews__item-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding-top: 10px;
+
+  font-size: 16px;
+
+  border-top: 1px solid $accent-add-bg;
+}
+
+.reviews__item-text {
+  font-size: 22px;
+
+  @media (max-width: $desktop-mid-width) {
+    font-size: 20px;
+  }
+  @media (max-width: $desktop-min-width) {
+    font-size: 18px;
+  }
+  @media (max-width: $tablet-mid-width) {
+    font-size: 16px;
+  }
+  @media (max-width: $mobile-mid-width) {
+    font-size: 14px;
+  }
+}
+
+.reviews__item-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.reviews__item-rating-value {
+
+}
+
+.reviews__item-rating-icon {
+  width: 20px;
+  height: 20px;
+
+  fill: $accent-add-bg;
+}
+
+.reviews__button {
+
+}

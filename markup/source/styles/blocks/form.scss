@@ -1,0 +1,130 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  &--calculation {
+
+  }
+}
+
+.form__fieldset {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+
+  border: none;
+}
+
+.form__legend {
+
+}
+
+.form__label {
+  position: relative;
+
+  display: flex;
+  gap: 20px;
+
+
+  &--checkbox {
+    place-self: end;
+    padding-left: 40px;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 30px;
+      height: 30px;
+
+      background-color: $accent-light-bg;
+      border: 1px solid $form-bg;
+      border-radius: 4px;
+
+      content: "";
+    }
+
+    &::after {
+      position: absolute;
+      top: 3px;
+      left: 5px;
+
+      font-size: 26px;
+      line-height: 1;
+
+      opacity: 0;
+
+      transition: all 0.2s ease;
+
+      content: "✓";
+    }
+
+    &:has(input[type="checkbox"]:not(:checked))::after {
+      opacity: 0;
+    }
+
+    &:has(input[type="checkbox"]:checked)::after {
+      opacity: 1;
+    }
+  }
+}
+
+.form__label-text {
+
+}
+
+.form__label-link {
+  color: $accent-add-bg;
+
+  border-bottom: 1px solid $accent-add-bg;
+
+  transition: 0.4s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover,
+    &:active {
+      opacity: 0.6;
+    }
+  }
+}
+
+.form__input {
+  width: 100%;
+  padding: 10px;
+
+  font-size: 18px;
+
+  background: none;
+  border: none;
+  border-bottom: 1px solid $accent-dark-bg;
+
+  transition: 0.4s ease-in-out;
+
+  &:focus {
+    border-bottom: 1px solid $accent-add-bg;
+    outline: none;
+  }
+
+  &:invalid:not(:placeholder-shown) {
+    border-bottom: 1px solid $accent-bg;
+  }
+}
+
+.form__buttons-wrapper {
+  display: flex;
+  align-items: end;
+  gap: 50px;
+}
+
+.form__button {
+  flex-grow: 1;
+  margin: 0;
+}

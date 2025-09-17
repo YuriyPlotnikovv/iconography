@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Иконописная мастерская</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <script src="vendor/swiper/swiper-bundle.min.js" defer="defer"></script>
+    <script src="scripts/index.js" defer></script>
+</head>
+<body>
+<header class="header">
+    <div class="container header__container">
+        <a class="header__logo logo" href="/">
+            <img class="logo__image" src="#" alt="Иконописная мастерская">
+        </a>
+
+        <ul class="header__contacts contacts">
+            <li class="contacts__item">
+                <a class="contacts__link" href="#">
+                    <span class="contacts__link-value">test@test.ru</span>
+                </a>
+            </li>
+
+            <li class="contacts__item">
+                <a class="contacts__link" href="#">
+                    <span class="contacts__link-value">+7 (999) 999 99-99</span>
+                </a>
+            </li>
+        </ul>
+
+        <address class="header__address">
+            <p>Город, улица, дом</p>
+        </address>
+
+        <ul class="header__social social" aria-label="Социальные сети">
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="Vk">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M23.791 17.21c.026.042.053.094.082.156.029.063.058.173.088.331.029.159.027.3-.007.425-.033.125-.137.24-.312.344-.175.104-.421.156-.737.156l-3.2.05c-.2.042-.433.021-.699-.062a3.04 3.04 0 0 1-.65-.275l-.25-.15c-.25-.175-.541-.442-.874-.8-.334-.358-.619-.68-.856-.968a4.149 4.149 0 0 0-.763-.725c-.27-.196-.506-.26-.706-.194a.823.823 0 0 0-.1.044 1.596 1.596 0 0 0-.481.55c-.08.145-.15.362-.212.65-.063.287-.09.61-.081.968 0 .124-.015.24-.044.343a.832.832 0 0 1-.094.231l-.05.063c-.15.158-.37.25-.662.275h-1.437a5.682 5.682 0 0 1-1.824-.207 6.986 6.986 0 0 1-1.644-.662c-.47-.27-.9-.546-1.287-.825a7.429 7.429 0 0 1-.88-.718l-.313-.3a8.161 8.161 0 0 1-.344-.375 27.702 27.702 0 0 1-.893-1.137c-.45-.591-.892-1.22-1.325-1.887-.433-.666-.943-1.545-1.53-2.636a41.24 41.24 0 0 1-1.631-3.4A.995.995 0 0 1 0 6.14c0-.092.013-.159.038-.2l.05-.075c.125-.159.362-.238.712-.238l3.424-.025c.1.017.195.044.287.081a.855.855 0 0 1 .2.107l.063.037a.824.824 0 0 1 .3.4c.166.417.358.848.574 1.293.217.446.388.786.513 1.019l.2.362c.241.5.474.933.7 1.3.224.366.426.652.605.856.18.204.352.364.519.48.166.117.308.176.425.176.116 0 .229-.021.337-.063a.216.216 0 0 0 .062-.062c.025-.033.075-.125.15-.275.075-.15.132-.346.17-.587.037-.242.076-.58.118-1.012a9.726 9.726 0 0 0 0-1.563 5.8 5.8 0 0 0-.113-.911c-.058-.275-.116-.467-.175-.575l-.075-.15c-.208-.284-.562-.463-1.062-.538-.108-.016-.087-.116.063-.3.141-.158.3-.283.475-.374.441-.217 1.437-.317 2.986-.3.683.008 1.246.062 1.687.162.167.042.306.098.419.169.112.07.198.17.256.3.058.13.102.262.13.4.03.137.045.327.045.568 0 .242-.004.471-.013.688l-.031.88c-.012.371-.019.715-.019 1.031 0 .092-.004.267-.012.525-.009.258-.01.459-.007.6.005.142.02.31.044.506.025.196.073.358.144.488a.83.83 0 0 0 .281.306l.213.05c.075.016.183-.03.324-.138.142-.108.3-.252.475-.43.175-.18.392-.459.65-.838.258-.379.541-.827.85-1.343.5-.867.945-1.804 1.337-2.812a.854.854 0 0 1 .125-.218.556.556 0 0 1 .137-.132l.05-.037.063-.031.162-.038a.467.467 0 0 1 .25-.006l3.599-.025c.325-.042.591-.031.8.031.208.063.337.131.387.206l.074.125c.192.533-.433 1.757-1.874 3.674-.2.266-.47.62-.812 1.062-.65.833-1.025 1.378-1.125 1.636-.141.342-.083.68.175 1.013.142.175.48.516 1.012 1.024h.013l.012.013.013.012.025.025c1.174 1.092 1.97 2.012 2.386 2.762Z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="Telegram">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M22.402 2.1 1.117 10.307c-1.458.57-1.433 1.378-.25 1.753l5.45 1.7 12.639-7.958c.587-.39 1.131-.17.686.222l-10.228 9.24-.392 5.617c.57 0 .819-.248 1.113-.543l2.662-2.564 5.519 4.067c1.006.57 1.725.276 1.994-.934l3.624-17.074-.002.002c.32-1.494-.542-2.091-1.53-1.735Z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="WhatsApp">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M17.87 16.142c-.248.694-1.435 1.328-2.006 1.413-.513.077-1.16.109-1.873-.117-.431-.137-.985-.32-1.694-.626-2.787-1.203-4.67-3.903-5.026-4.413a3.564 3.564 0 0 0-.052-.074l-.003-.004c-.158-.21-1.21-1.616-1.21-3.07 0-1.37.672-2.087.982-2.417l.057-.062c.273-.298.595-.372.793-.372.198 0 .397.002.57.01l.066.001c.174 0 .39-.002.603.51.082.196.201.488.328.796.256.622.538 1.31.588 1.41.075.149.124.322.025.52-.1.199-.429.627-.743 1.017a3.107 3.107 0 0 1-.042.05c-.122.145-.244.29-.088.556.173.298.77 1.27 1.653 2.059.95.846 1.775 1.204 2.193 1.386.082.035.149.064.198.089.297.148.47.123.643-.075.174-.198.744-.867.942-1.165.198-.297.396-.248.668-.149.273.1 1.734.818 2.032.967.058.03.112.055.162.08.207.1.347.168.407.267.075.124.075.72-.173 1.413Z"/>
+                        <path fill-rule="evenodd"
+                              d="M12.05 23.794h-.005c-1.99-.001-3.947-.5-5.685-1.448L.054 24l1.688-6.163a11.866 11.866 0 0 1-1.589-5.945C.156 5.335 5.493 0 12.05 0c3.182.001 6.17 1.24 8.415 3.488a11.819 11.819 0 0 1 3.481 8.413c-.002 6.558-5.34 11.893-11.896 11.893Zm.004-21.785c-5.454 0-9.89 4.434-9.892 9.884 0 1.867.522 3.686 1.512 5.26l.235.374-1 3.647 3.743-.98.361.213a9.872 9.872 0 0 0 5.033 1.378h.004c5.45 0 9.885-4.434 9.888-9.885a9.824 9.824 0 0 0-2.894-6.992 9.823 9.823 0 0 0-6.99-2.9Z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="Max">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M17.901 5.053c4.267 3.642 4.08 10.608-.27 14.094-2.465 1.975-5.95 2.435-8.8 1.07-.826-.395-1.482-1.078-2.038-1.804-.074-.012-.217.117-.288.156-.793.436-2.147.699-2.986.303-.786-.371-.476-.964-.365-1.62.216-1.274.117-2.571.157-3.852.062-1.996.444-4.27 1.425-6.004 2.69-4.75 9.072-5.837 13.165-2.343Zm-3.184 3.074c-1.205-.815-2.786-.991-4.106-.368-1.814.857-2.683 2.816-3.045 4.748-.125.662-.304 2.231-.024 2.822.109.23.26.22.48.172.364-.077.717-.311 1.054-.464.033.004.306.314.362.368 2.27 2.164 5.984 1.138 7.049-1.8.724-2-.065-4.325-1.77-5.478Z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="Viber">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M14.603 9.706c0 .2.16.36.361.36.201 0 .362-.16.322-.4-.08-1.361-.803-2.122-2.168-2.202a.36.36 0 0 0-.361.36c0 .16.16.36.361.36.963.04 1.445.521 1.485 1.522Z"/>
+                        <path fill-rule="evenodd"
+                              d="M16.53 10.586a.36.36 0 0 1-.361-.36c.04-1.04-.281-1.841-.883-2.522-.643-.68-1.486-1.04-2.61-1.12a.34.34 0 0 1-.32-.4c0-.2.2-.36.4-.32 1.325.08 2.369.56 3.091 1.36.763.8 1.124 1.841 1.084 3.042-.08.16-.24.32-.401.32Z"/>
+                        <path fill-rule="evenodd"
+                              d="M17.734 10.866c0 .2.16.36.361.36.241 0 .402-.16.361-.32-.04-2-.642-3.642-1.846-4.803-1.204-1.2-2.73-1.8-4.495-1.8a.36.36 0 0 0-.361.36c0 .2.16.36.36.36 1.606 0 2.93.52 4.014 1.56 1.044 1.041 1.606 2.442 1.606 4.283ZM13.198 13.788s.442.04.643-.24l.441-.56c.2-.28.723-.44 1.244-.16.281.16.803.48 1.124.72.321.24 1.044.84 1.044.84.32.28.401.681.2 1.121-.24.4-.561.801-.923 1.161-.32.28-.642.44-.963.44h-.12c-.12 0-.281 0-.402-.08-.481-.12-1.284-.48-2.609-1.2-.883-.48-1.605-.961-2.207-1.441-.22-.165-.44-.367-.673-.58-.107-.099-.217-.2-.33-.3l-.161-.161a10.81 10.81 0 0 1-.618-.69c-.089-.106-.177-.21-.265-.31-.482-.601-.964-1.322-1.445-2.202-.723-1.32-1.084-2.121-1.204-2.602-.04-.12-.08-.28-.08-.4v-.12c.04-.32.2-.64.44-.96.362-.401.723-.721 1.165-.921.441-.24.843-.16 1.124.2 0 0 .562.68.843 1.04.24.32.562.841.722 1.121.281.52.12 1.04-.16 1.241l-.562.44c-.281.24-.241.64-.241.64s.843 3.163 3.973 3.963Z"/>
+                        <path fill-rule="evenodd"
+                              d="M12.717.02c5.418.04 7.827 1.8 8.429 2.36 1.966 1.682 3.09 5.524 2.328 11.488-.66 5.339-4.402 6.268-5.625 6.572-.116.029-.21.052-.276.073-.36.12-3.331.84-7.184.52-.442.52-1.004 1.16-1.405 1.601-.13.137-.254.274-.37.404-.566.628-1.005 1.116-1.637.917-.642-.2-.602-1.16-.602-1.16v-2.402C.715 18.792.795 12.948.876 9.826c.08-3.122.683-5.644 2.408-7.365C6.375-.381 12.717.019 12.717.019Zm4.469 18.79c1.055-.235 4.055-.904 4.602-5.342.642-5.003-.24-8.445-1.887-9.886-.521-.44-2.689-1.802-7.264-1.842 0 0-5.42-.36-8.028 2.002-1.445 1.44-1.967 3.562-2.007 6.164l-.005.306c-.05 2.67-.135 7.35 4.46 8.66 0 0-.04 3.682-.04 4.002 0 .2.04.36.16.4.121 0 .242-.04.362-.16.763-.8 3.211-3.722 3.211-3.722 3.291.2 5.9-.44 6.181-.52.063-.019.149-.038.255-.061Z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+
+        <button class="header__menu-button" type="button" aria-label="Открыть/закрыть меню">
+            <span class="header__menu-button-line"></span>
+            <span class="header__menu-button-line"></span>
+            <span class="header__menu-button-line"></span>
+        </button>
+
+        <nav class="header__navigation" aria-label="Основная по сайту">
+            <ul class="header__menu menu">
+                <li class="menu__item">
+                    <a class="menu__link menu__link--current" href="/">
+                        Главная
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./news.html">
+                        Новости
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./reviews.html">
+                        Отзывы
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./gallery.html">
+                        Галерея
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./works.html">
+                        Наши работы
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./in-stock.html">
+                        Рукописные иконы в наличии
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./restoration.html">
+                        Реставрация
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./order-delivery.html">
+                        Заказ и доставка
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./contacts.html">
+                        Контакты
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="main">
+    <h1 class="visually-hidden">
+        Иконописная мастерская
+    </h1>
+
+    <section class="section slider swiper slider--main" data-navigation data-pagination>
+        <h2 class="visually-hidden">
+            Последние поступления
+        </h2>
+
+        <ul class="slider__list swiper-wrapper">
+            <li class="slider__item swiper-slide">
+                <img class="slider__item-image" src="./img/cover.jpg" alt="">
+
+                <div class="slider__item-content">
+                    <h3 class="slider__item-title">
+                        Заголовок слайда
+                    </h3>
+
+                    <div class="slider__item-text">
+                        Текст слайда
+                    </div>
+
+                    <a class="slider__item-button button button--arrow" href="./news-detail.html">Подробнее</a>
+                </div>
+            </li>
+
+            <li class="slider__item swiper-slide">
+                <img class="slider__item-image" src="./img/cover.jpg" alt="">
+
+                <div class="slider__item-content">
+                    <h3 class="slider__item-title">
+                        Заголовок слайда
+                    </h3>
+
+                    <div class="slider__item-text">
+                        Текст слайда
+                    </div>
+
+                    <a class="slider__item-button button button--arrow" href="./news-detail.html">Подробнее</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="slider__pagination"></div>
+
+        <button class="slider__navigation-item slider__navigation-item--prev" aria-label="Предыдущий слайд">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill-rule="evenodd"
+                      d="M14.45 21h-1.275L5 12l8.137-9h1.275l-8.137 9 8.175 9Zm-5.175-9 8.175-9h-1.275L8 12l8.137 9h1.276l-8.138-9Z"/>
+            </svg>
+        </button>
+
+        <button class="slider__navigation-item slider__navigation-item--next" aria-label="Следующий слайд">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill-rule="evenodd"
+                      d="M17.725 12 9.587 3h1.275L19 12l-8.138 9H9.587l8.138-9ZM6.587 21h1.275L16 12 7.862 3H6.587l8.138 9-8.138 9Z"/>
+            </svg>
+        </button>
+    </section>
+
+    <section class="section anchor">
+        <h2 class="visually-hidden">
+            Навигация по странице
+        </h2>
+
+        <nav class="container anchor__container" aria-label="По главной странице">
+            <ul class="anchor__list">
+                <li class="anchor__item">
+                    <a class="anchor__link" href="#masters">
+                        Наши мастера
+                    </a>
+                </li>
+
+                <li class="anchor__item">
+                    <a class="anchor__link" href="#process">
+                        Процесс изготовления
+                    </a>
+                </li>
+
+                <li class="anchor__item">
+                    <a class="anchor__link" href="#categories">
+                        Категории икон
+                    </a>
+                </li>
+
+                <li class="anchor__item">
+                    <a class="anchor__link" href="#calculation">
+                        Расчёт стоимости
+                    </a>
+                </li>
+
+                <li class="anchor__item">
+                    <a class="anchor__link" href="#faq">
+                        Вопрос-ответ
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+
+    <section class="section about">
+        <div class="container about__container">
+            <h2 class="about__title">
+                Иконописная мастерская
+            </h2>
+
+            <img class="about__image" src="./img/cover.jpg" alt="Фото мастерской">
+
+            <div class="about__text">
+                Приветствие на сайте, Описание мастерской
+            </div>
+        </div>
+    </section>
+
+    <section class="section advantages">
+        <div class="container">
+            <h2 class="section__title">
+                Преимущества заказа у нас
+            </h2>
+
+            <ul class="advantages__list">
+                <li class="advantages__item">
+                    <h3 class="advantages__item-title">
+                        Заголовок
+                    </h3>
+
+                    <div class="advantages__item-text">
+                        Текст
+                    </div>
+                </li>
+
+                <li class="advantages__item">
+                    <h3 class="advantages__item-title">
+                        Заголовок
+                    </h3>
+
+                    <div class="advantages__item-text">
+                        Текст
+                    </div>
+                </li>
+
+                <li class="advantages__item">
+                    <h3 class="advantages__item-title">
+                        Заголовок
+                    </h3>
+
+                    <div class="advantages__item-text">
+                        Текст
+                    </div>
+                </li>
+
+                <li class="advantages__item">
+                    <h3 class="advantages__item-title">
+                        Заголовок
+                    </h3>
+
+                    <div class="advantages__item-text">
+                        Текст
+                    </div>
+                </li>
+
+                <li class="advantages__item">
+                    <h3 class="advantages__item-title">
+                        Заголовок
+                    </h3>
+
+                    <div class="advantages__item-text">
+                        Текст
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section last-works">
+        <div class="container slider swiper slider--cards" data-cards data-navigation data-pagination>
+            <h2 class="section__title">
+                Последние работы
+            </h2>
+
+            <ul class="slider__list swiper-wrapper">
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="./work-detail.html">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="./work-detail.html">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="./work-detail.html">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы Описание работы Описание работы Описание работы Описание работы Описание
+                                работы Описание работы Описание работы Описание работы Описание работы Описание работы
+                                Описание работы Описание работы Описание работы Описание работы Описание работы Описание
+                                работы Описание работы Описание работы Описание работы Описание работы Описание работы
+                                Описание работы Описание работы Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="slider__controls">
+                <button class="slider__navigation-item slider__navigation-item--prev" aria-label="Предыдущий слайд">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M14.45 21h-1.275L5 12l8.137-9h1.275l-8.137 9 8.175 9Zm-5.175-9 8.175-9h-1.275L8 12l8.137 9h1.276l-8.138-9Z"/>
+                    </svg>
+                </button>
+
+                <div class="slider__pagination"></div>
+
+                <button class="slider__navigation-item slider__navigation-item--next" aria-label="Следующий слайд">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M17.725 12 9.587 3h1.275L19 12l-8.138 9H9.587l8.138-9ZM6.587 21h1.275L16 12 7.862 3H6.587l8.138 9-8.138 9Z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <a class="button button--accent" href="./works.html">Посмотреть ещё</a>
+        </div>
+    </section>
+
+    <section class="section in-stock">
+        <div class="container">
+            <h2 class="section__title">
+                Рукописные иконы в наличии
+            </h2>
+
+            <ul class="in-stock__list">
+                <li class="in-stock__item card">
+                    <a class="card__link" href="./in-stock.html">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="in-stock__item card">
+                    <a class="card__link" href="./in-stock.html">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="in-stock__item card">
+                    <a class="card__link" href="./in-stock.html">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="in-stock__item card">
+                    <a class="card__link" href="./in-stock.html">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="in-stock__item card">
+                    <a class="card__link" href="./in-stock.html">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="in-stock__item card">
+                    <a class="card__link" href="./in-stock.html">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <a class="in-stock__button button button--accent" href="./in-stock.html">Посмотреть ещё</a>
+        </div>
+    </section>
+
+    <section class="section masters" id="masters">
+        <div class="container slider swiper slider--masters" data-cards data-navigation data-pagination>
+            <h2 class="section__title">
+                Наши мастера
+            </h2>
+
+            <ul class="slider__list swiper-wrapper">
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="slider__controls">
+                <button class="slider__navigation-item slider__navigation-item--prev" aria-label="Предыдущий слайд">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M14.45 21h-1.275L5 12l8.137-9h1.275l-8.137 9 8.175 9Zm-5.175-9 8.175-9h-1.275L8 12l8.137 9h1.276l-8.138-9Z"/>
+                    </svg>
+                </button>
+
+                <div class="slider__pagination"></div>
+
+                <button class="slider__navigation-item slider__navigation-item--next" aria-label="Следующий слайд">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M17.725 12 9.587 3h1.275L19 12l-8.138 9H9.587l8.138-9ZM6.587 21h1.275L16 12 7.862 3H6.587l8.138 9-8.138 9Z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section process" id="process">
+        <div class="container">
+            <h2 class="section__title">
+                Процесс изготовления
+            </h2>
+
+            <ul class="process__list">
+                <li class="process__item">
+                    <img class="process__item-image" src="./img/cover.jpg" alt="">
+
+                    <h3 class="process__item-title">
+                        Заголовок
+                    </h3>
+
+                    <div class="process__item-text">
+                        Описание
+                    </div>
+                </li>
+
+                <li class="process__item">
+                    <img class="process__item-image" src="./img/cover.jpg" alt="">
+
+                    <h3 class="process__item-title">
+                        Заголовок
+                    </h3>
+
+                    <div class="process__item-text">
+                        Описание
+                    </div>
+                </li>
+
+                <li class="process__item">
+                    <img class="process__item-image" src="./img/cover.jpg" alt="">
+
+                    <h3 class="process__item-title">
+                        Заголовок
+                    </h3>
+
+                    <div class="process__item-text">
+                        Описание
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section categories" id="categories">
+        <div class="container slider swiper slider--category" data-grid data-navigation data-pagination>
+            <h2 class="section__title">
+                Категории икон
+            </h2>
+
+            <ul class="slider__list swiper-wrapper">
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="slider__controls">
+                <button class="slider__navigation-item slider__navigation-item--prev" aria-label="Предыдущий слайд">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M14.45 21h-1.275L5 12l8.137-9h1.275l-8.137 9 8.175 9Zm-5.175-9 8.175-9h-1.275L8 12l8.137 9h1.276l-8.138-9Z"/>
+                    </svg>
+                </button>
+
+                <div class="slider__pagination"></div>
+
+                <button class="slider__navigation-item slider__navigation-item--next" aria-label="Следующий слайд">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M17.725 12 9.587 3h1.275L19 12l-8.138 9H9.587l8.138-9ZM6.587 21h1.275L16 12 7.862 3H6.587l8.138 9-8.138 9Z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section calculation" id="calculation">
+        <div class="container">
+            <h2 class="section__title">
+                Расчёт стоимости
+            </h2>
+
+            <form class="form form--calculation" action="#">
+                <fieldset class="form__fieldset">
+                    <legend class="form__legend">
+                        Заголовок группы
+                    </legend>
+
+                    <label class="form__label">
+                        <span class="form__label-text">Ваше имя</span>
+
+                        <input class="form__input" type="text" placeholder="Имя">
+                    </label>
+
+                    <label class="form__label">
+                        <span class="form__label-text">Телефон</span>
+
+                        <input class="form__input" type="tel" placeholder="Телефон">
+                    </label>
+
+                    <label class="form__label">
+                        <span class="form__label-text">Email</span>
+
+                        <input class="form__input" type="email" placeholder="Email">
+                    </label>
+                </fieldset>
+
+                <div class="form__buttons-wrapper">
+                    <button class="form__button button button--clear" type="reset">Очистить форму</button>
+
+                    <button class="form__button button button--accent" type="submit">Рассчитать стоимость</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="section gallery">
+        <div class="container slider  swiper slider--gallery" data-cards data-navigation data-pagination>
+            <h2 class="section__title">
+                Галерея
+            </h2>
+
+            <ul class="slider__list swiper-wrapper">
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="slider__item swiper-slide card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="slider__controls">
+                <button class="slider__navigation-item slider__navigation-item--prev" aria-label="Предыдущий слайд">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M14.45 21h-1.275L5 12l8.137-9h1.275l-8.137 9 8.175 9Zm-5.175-9 8.175-9h-1.275L8 12l8.137 9h1.276l-8.138-9Z"/>
+                    </svg>
+                </button>
+
+                <div class="slider__pagination"></div>
+
+                <button class="slider__navigation-item slider__navigation-item--next" aria-label="Следующий слайд">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M17.725 12 9.587 3h1.275L19 12l-8.138 9H9.587l8.138-9ZM6.587 21h1.275L16 12 7.862 3H6.587l8.138 9-8.138 9Z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <a class="gallery__button button button--accent" href="#">Посмотреть ещё</a>
+        </div>
+    </section>
+
+    <section class="section restoration">
+        <div class="container">
+            <h2 class="section__title">
+                Реставрация икон
+            </h2>
+
+            <div class="restoration__content">
+                <img class="restoration__image" src="./img/cover.jpg" alt="">
+
+                <div class="restoration__text">
+                    Описание услуги
+                </div>
+
+                <a class="restoration__button button button--accent" href="#">Подробнее</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reviews">
+        <div class="container">
+            <h2 class="section__title">
+                Отзывы
+            </h2>
+
+            <ul class="reviews__list">
+                <li class="reviews__item">
+                    <svg class="reviews__item-decor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g clip-path="url(#clip0_3796_252)">
+                            <path fill-rule="evenodd"
+                                  d="M13.667 22.321v-4.004c0-.544.44-.984.983-.984 1.938 0 2.992-1.987 3.138-5.91H14.65a.984.984 0 0 1-.983-.983V1.984c0-.543.44-.983.983-.983h8.367c.542 0 .983.44.983.983v8.456c0 1.88-.19 3.606-.563 5.13-.382 1.562-.97 2.927-1.746 4.06-.797 1.162-1.796 2.075-2.967 2.71-1.179.64-2.55.965-4.074.965a.984.984 0 0 1-.983-.984ZM.983 17.333a.983.983 0 0 0-.983.983v4.005c0 .543.44.983.983.983 1.524 0 2.896-.324 4.074-.964 1.171-.636 2.17-1.548 2.968-2.712.776-1.131 1.363-2.497 1.746-4.06.373-1.524.562-3.25.562-5.129V1.983A.983.983 0 0 0 9.35 1H.983A.983.983 0 0 0 0 1.983v8.456c0 .543.44.983.983.983h3.094c-.144 3.924-1.183 5.91-3.094 5.91Z"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_3796_252">
+                                <path fill="#fff" d="M0 0h24v24H0z"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    <div class="reviews__item-text">
+                        <p>Текст отзыва</p>
+                    </div>
+
+                    <div class="reviews__item-info">
+                        <time class="reviews__item-date" datetime="2025-08-14">
+                            14.08.2025
+                        </time>
+
+                        <p class="reviews__item-name">
+                            Имя
+                        </p>
+
+                        <p class="reviews__item-rating">
+                            <span class="reviews__item-rating-value">5</span>
+
+                            <svg class="reviews__item-rating-icon" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 25">
+                                <path fill-rule="evenodd"
+                                      d="m12 1.435 3.63 6.49L23 9.318l-5.133 5.39.916 7.334L12 18.925l-6.783 3.153.916-7.333L1 9.318l7.37-1.393L12 1.435Z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        </p>
+                    </div>
+                </li>
+
+                <li class="reviews__item">
+                    <svg class="reviews__item-decor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g clip-path="url(#clip0_3796_252)">
+                            <path fill-rule="evenodd"
+                                  d="M13.667 22.321v-4.004c0-.544.44-.984.983-.984 1.938 0 2.992-1.987 3.138-5.91H14.65a.984.984 0 0 1-.983-.983V1.984c0-.543.44-.983.983-.983h8.367c.542 0 .983.44.983.983v8.456c0 1.88-.19 3.606-.563 5.13-.382 1.562-.97 2.927-1.746 4.06-.797 1.162-1.796 2.075-2.967 2.71-1.179.64-2.55.965-4.074.965a.984.984 0 0 1-.983-.984ZM.983 17.333a.983.983 0 0 0-.983.983v4.005c0 .543.44.983.983.983 1.524 0 2.896-.324 4.074-.964 1.171-.636 2.17-1.548 2.968-2.712.776-1.131 1.363-2.497 1.746-4.06.373-1.524.562-3.25.562-5.129V1.983A.983.983 0 0 0 9.35 1H.983A.983.983 0 0 0 0 1.983v8.456c0 .543.44.983.983.983h3.094c-.144 3.924-1.183 5.91-3.094 5.91Z"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_3796_252">
+                                <path fill="#fff" d="M0 0h24v24H0z"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+
+                    <div class="reviews__item-text">
+                        <p>Текст отзыва</p>
+                    </div>
+
+                    <div class="reviews__item-info">
+                        <time class="reviews__item-date" datetime="2025-08-14">
+                            14.08.2025
+                        </time>
+
+                        <p class="reviews__item-name">
+                            Имя
+                        </p>
+
+                        <p class="reviews__item-rating">
+                            <span class="reviews__item-rating-value">5</span>
+
+                            <svg class="reviews__item-rating-icon" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 25">
+                                <path fill-rule="evenodd"
+                                      d="m12 1.435 3.63 6.49L23 9.318l-5.133 5.39.916 7.334L12 18.925l-6.783 3.153.916-7.333L1 9.318l7.37-1.393L12 1.435Z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+
+            <a class="reviews__button button button--accent" href="./reviews.html">Посмотреть ещё</a>
+        </div>
+    </section>
+
+    <section class="section news">
+        <div class="container">
+            <h2 class="section__title">
+                Наши новости
+            </h2>
+
+            <ul class="news__list">
+                <li class="news__item card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="news__item card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="news__item card">
+                    <a class="card__link" href="#">
+                        <img class="card__image" src="./img/cover.jpg" alt="">
+
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                Заголовок
+                            </h3>
+
+                            <div class="card__text">
+                                Описание работы
+                            </div>
+
+                            <div class="card__button button button--arrow">Подробнее</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <a class="news__button button button--accent" href="./news.html">Посмотреть ещё</a>
+        </div>
+    </section>
+
+    <section class="section faq" id="faq">
+        <div class="container">
+            <h2 class="section__title">
+                Вопрос-ответ
+            </h2>
+
+            <ul class="faq__list">
+                <li class="faq__item">
+                    <details class="faq__item-details">
+                        <summary class="faq__item-title">Вопрос</summary>
+                        <p class="faq__item-text">Ответ</p>
+                    </details>
+                </li>
+
+                <li class="faq__item">
+                    <details class="faq__item-details">
+                        <summary class="faq__item-title">Вопрос</summary>
+                        <p class="faq__item-text">Ответ</p>
+                    </details>
+                </li>
+
+                <li class="faq__item">
+                    <details class="faq__item-details">
+                        <summary class="faq__item-title">Вопрос</summary>
+                        <p class="faq__item-text">Ответ</p>
+                    </details>
+                </li>
+            </ul>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer__container">
+        <img class="footer__logo logo" src="#" alt="Иконописная мастерская">
+
+        <ul class="footer__social social" aria-label="Социальные сети">
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="Vk">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M23.791 17.21c.026.042.053.094.082.156.029.063.058.173.088.331.029.159.027.3-.007.425-.033.125-.137.24-.312.344-.175.104-.421.156-.737.156l-3.2.05c-.2.042-.433.021-.699-.062a3.04 3.04 0 0 1-.65-.275l-.25-.15c-.25-.175-.541-.442-.874-.8-.334-.358-.619-.68-.856-.968a4.149 4.149 0 0 0-.763-.725c-.27-.196-.506-.26-.706-.194a.823.823 0 0 0-.1.044 1.596 1.596 0 0 0-.481.55c-.08.145-.15.362-.212.65-.063.287-.09.61-.081.968 0 .124-.015.24-.044.343a.832.832 0 0 1-.094.231l-.05.063c-.15.158-.37.25-.662.275h-1.437a5.682 5.682 0 0 1-1.824-.207 6.986 6.986 0 0 1-1.644-.662c-.47-.27-.9-.546-1.287-.825a7.429 7.429 0 0 1-.88-.718l-.313-.3a8.161 8.161 0 0 1-.344-.375 27.702 27.702 0 0 1-.893-1.137c-.45-.591-.892-1.22-1.325-1.887-.433-.666-.943-1.545-1.53-2.636a41.24 41.24 0 0 1-1.631-3.4A.995.995 0 0 1 0 6.14c0-.092.013-.159.038-.2l.05-.075c.125-.159.362-.238.712-.238l3.424-.025c.1.017.195.044.287.081a.855.855 0 0 1 .2.107l.063.037a.824.824 0 0 1 .3.4c.166.417.358.848.574 1.293.217.446.388.786.513 1.019l.2.362c.241.5.474.933.7 1.3.224.366.426.652.605.856.18.204.352.364.519.48.166.117.308.176.425.176.116 0 .229-.021.337-.063a.216.216 0 0 0 .062-.062c.025-.033.075-.125.15-.275.075-.15.132-.346.17-.587.037-.242.076-.58.118-1.012a9.726 9.726 0 0 0 0-1.563 5.8 5.8 0 0 0-.113-.911c-.058-.275-.116-.467-.175-.575l-.075-.15c-.208-.284-.562-.463-1.062-.538-.108-.016-.087-.116.063-.3.141-.158.3-.283.475-.374.441-.217 1.437-.317 2.986-.3.683.008 1.246.062 1.687.162.167.042.306.098.419.169.112.07.198.17.256.3.058.13.102.262.13.4.03.137.045.327.045.568 0 .242-.004.471-.013.688l-.031.88c-.012.371-.019.715-.019 1.031 0 .092-.004.267-.012.525-.009.258-.01.459-.007.6.005.142.02.31.044.506.025.196.073.358.144.488a.83.83 0 0 0 .281.306l.213.05c.075.016.183-.03.324-.138.142-.108.3-.252.475-.43.175-.18.392-.459.65-.838.258-.379.541-.827.85-1.343.5-.867.945-1.804 1.337-2.812a.854.854 0 0 1 .125-.218.556.556 0 0 1 .137-.132l.05-.037.063-.031.162-.038a.467.467 0 0 1 .25-.006l3.599-.025c.325-.042.591-.031.8.031.208.063.337.131.387.206l.074.125c.192.533-.433 1.757-1.874 3.674-.2.266-.47.62-.812 1.062-.65.833-1.025 1.378-1.125 1.636-.141.342-.083.68.175 1.013.142.175.48.516 1.012 1.024h.013l.012.013.013.012.025.025c1.174 1.092 1.97 2.012 2.386 2.762Z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="Telegram">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M22.402 2.1 1.117 10.307c-1.458.57-1.433 1.378-.25 1.753l5.45 1.7 12.639-7.958c.587-.39 1.131-.17.686.222l-10.228 9.24-.392 5.617c.57 0 .819-.248 1.113-.543l2.662-2.564 5.519 4.067c1.006.57 1.725.276 1.994-.934l3.624-17.074-.002.002c.32-1.494-.542-2.091-1.53-1.735Z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="WhatsApp">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M17.87 16.142c-.248.694-1.435 1.328-2.006 1.413-.513.077-1.16.109-1.873-.117-.431-.137-.985-.32-1.694-.626-2.787-1.203-4.67-3.903-5.026-4.413a3.564 3.564 0 0 0-.052-.074l-.003-.004c-.158-.21-1.21-1.616-1.21-3.07 0-1.37.672-2.087.982-2.417l.057-.062c.273-.298.595-.372.793-.372.198 0 .397.002.57.01l.066.001c.174 0 .39-.002.603.51.082.196.201.488.328.796.256.622.538 1.31.588 1.41.075.149.124.322.025.52-.1.199-.429.627-.743 1.017a3.107 3.107 0 0 1-.042.05c-.122.145-.244.29-.088.556.173.298.77 1.27 1.653 2.059.95.846 1.775 1.204 2.193 1.386.082.035.149.064.198.089.297.148.47.123.643-.075.174-.198.744-.867.942-1.165.198-.297.396-.248.668-.149.273.1 1.734.818 2.032.967.058.03.112.055.162.08.207.1.347.168.407.267.075.124.075.72-.173 1.413Z"/>
+                        <path fill-rule="evenodd"
+                              d="M12.05 23.794h-.005c-1.99-.001-3.947-.5-5.685-1.448L.054 24l1.688-6.163a11.866 11.866 0 0 1-1.589-5.945C.156 5.335 5.493 0 12.05 0c3.182.001 6.17 1.24 8.415 3.488a11.819 11.819 0 0 1 3.481 8.413c-.002 6.558-5.34 11.893-11.896 11.893Zm.004-21.785c-5.454 0-9.89 4.434-9.892 9.884 0 1.867.522 3.686 1.512 5.26l.235.374-1 3.647 3.743-.98.361.213a9.872 9.872 0 0 0 5.033 1.378h.004c5.45 0 9.885-4.434 9.888-9.885a9.824 9.824 0 0 0-2.894-6.992 9.823 9.823 0 0 0-6.99-2.9Z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="Max">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M17.901 5.053c4.267 3.642 4.08 10.608-.27 14.094-2.465 1.975-5.95 2.435-8.8 1.07-.826-.395-1.482-1.078-2.038-1.804-.074-.012-.217.117-.288.156-.793.436-2.147.699-2.986.303-.786-.371-.476-.964-.365-1.62.216-1.274.117-2.571.157-3.852.062-1.996.444-4.27 1.425-6.004 2.69-4.75 9.072-5.837 13.165-2.343Zm-3.184 3.074c-1.205-.815-2.786-.991-4.106-.368-1.814.857-2.683 2.816-3.045 4.748-.125.662-.304 2.231-.024 2.822.109.23.26.22.48.172.364-.077.717-.311 1.054-.464.033.004.306.314.362.368 2.27 2.164 5.984 1.138 7.049-1.8.724-2-.065-4.325-1.77-5.478Z"/>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="social__item">
+                <a class="social__link" href="#" aria-label="Viber">
+                    <svg class="social__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                              d="M14.603 9.706c0 .2.16.36.361.36.201 0 .362-.16.322-.4-.08-1.361-.803-2.122-2.168-2.202a.36.36 0 0 0-.361.36c0 .16.16.36.361.36.963.04 1.445.521 1.485 1.522Z"/>
+                        <path fill-rule="evenodd"
+                              d="M16.53 10.586a.36.36 0 0 1-.361-.36c.04-1.04-.281-1.841-.883-2.522-.643-.68-1.486-1.04-2.61-1.12a.34.34 0 0 1-.32-.4c0-.2.2-.36.4-.32 1.325.08 2.369.56 3.091 1.36.763.8 1.124 1.841 1.084 3.042-.08.16-.24.32-.401.32Z"/>
+                        <path fill-rule="evenodd"
+                              d="M17.734 10.866c0 .2.16.36.361.36.241 0 .402-.16.361-.32-.04-2-.642-3.642-1.846-4.803-1.204-1.2-2.73-1.8-4.495-1.8a.36.36 0 0 0-.361.36c0 .2.16.36.36.36 1.606 0 2.93.52 4.014 1.56 1.044 1.041 1.606 2.442 1.606 4.283ZM13.198 13.788s.442.04.643-.24l.441-.56c.2-.28.723-.44 1.244-.16.281.16.803.48 1.124.72.321.24 1.044.84 1.044.84.32.28.401.681.2 1.121-.24.4-.561.801-.923 1.161-.32.28-.642.44-.963.44h-.12c-.12 0-.281 0-.402-.08-.481-.12-1.284-.48-2.609-1.2-.883-.48-1.605-.961-2.207-1.441-.22-.165-.44-.367-.673-.58-.107-.099-.217-.2-.33-.3l-.161-.161a10.81 10.81 0 0 1-.618-.69c-.089-.106-.177-.21-.265-.31-.482-.601-.964-1.322-1.445-2.202-.723-1.32-1.084-2.121-1.204-2.602-.04-.12-.08-.28-.08-.4v-.12c.04-.32.2-.64.44-.96.362-.401.723-.721 1.165-.921.441-.24.843-.16 1.124.2 0 0 .562.68.843 1.04.24.32.562.841.722 1.121.281.52.12 1.04-.16 1.241l-.562.44c-.281.24-.241.64-.241.64s.843 3.163 3.973 3.963Z"/>
+                        <path fill-rule="evenodd"
+                              d="M12.717.02c5.418.04 7.827 1.8 8.429 2.36 1.966 1.682 3.09 5.524 2.328 11.488-.66 5.339-4.402 6.268-5.625 6.572-.116.029-.21.052-.276.073-.36.12-3.331.84-7.184.52-.442.52-1.004 1.16-1.405 1.601-.13.137-.254.274-.37.404-.566.628-1.005 1.116-1.637.917-.642-.2-.602-1.16-.602-1.16v-2.402C.715 18.792.795 12.948.876 9.826c.08-3.122.683-5.644 2.408-7.365C6.375-.381 12.717.019 12.717.019Zm4.469 18.79c1.055-.235 4.055-.904 4.602-5.342.642-5.003-.24-8.445-1.887-9.886-.521-.44-2.689-1.802-7.264-1.842 0 0-5.42-.36-8.028 2.002-1.445 1.44-1.967 3.562-2.007 6.164l-.005.306c-.05 2.67-.135 7.35 4.46 8.66 0 0-.04 3.682-.04 4.002 0 .2.04.36.16.4.121 0 .242-.04.362-.16.763-.8 3.211-3.722 3.211-3.722 3.291.2 5.9-.44 6.181-.52.063-.019.149-.038.255-.061Z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+
+        <nav class="footer__navigation" aria-label="Дополнительная по сайту">
+            <ul class="footer__menu menu">
+                <li class="menu__item">
+                    <a class="menu__link" href="./news.html">
+                        Новости
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./reviews.html">
+                        Отзывы
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./gallery.html">
+                        Галерея
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./works.html">
+                        Наши работы
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./in-stock.html">
+                        Рукописные иконы в наличии
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./restoration.html">
+                        Реставрация
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./order-delivery.html">
+                        Заказ и доставка
+                    </a>
+                </li>
+
+                <li class="menu__item">
+                    <a class="menu__link" href="./contacts.html">
+                        Контакты
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="footer__wrapper">
+            <p class="footer__copyright">
+                © Иконописная мастерская, 2025
+            </p>
+
+            <a class="footer__developer developer" href="https://yuriyplotnikovv.ru" target="_blank">
+                <span class="developer__text">Дизайн и разработка:</span>
+
+                <svg class="developer__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <path fill="#111"
+                          d="M0 23.438C0 10.492 10.493 0 23.438 0h53.124C89.507 0 100 10.493 100 23.438v53.124C100 89.507 89.507 100 76.562 100H23.438C10.492 100 0 89.507 0 76.562V23.438Z"/>
+                    <path fill="#fff" stroke="#fff" stroke-width="3"
+                          d="M62.353 20.219c5.93 0 11.272 1.187 15.988 3.598h.001c4.665 2.36 8.316 5.895 10.94 10.563l.25.455.008.013.006.013c2.028 3.945 3.057 8.007 3.057 12.17 0 2.994-.555 5.905-1.657 8.726-1.057 2.839-2.64 5.444-4.735 7.814-3.046 3.487-6.842 5.977-11.357 7.463-4.432 1.46-9.123 2.185-14.063 2.185-2.512 0-5.048-.16-7.608-.48l-.017-.003-.018-.003a92.578 92.578 0 0 1-7.416-1.418v6.297l.073 2.181.001.025v.026c0 .965-.266 1.92-.962 2.634a3.176 3.176 0 0 1-.474.423l.002.001c-.007.006-.015.01-.022.015l-.039.03-.001-.002a4.282 4.282 0 0 1-.322.22c-.6.384-1.28.6-2.026.6l-.05-.001-.024.002c-.87 0-1.67-.258-2.346-.766-.1-.074-.199-.153-.294-.238v-.001a3.134 3.134 0 0 1-.533-.606c-.462-.655-.67-1.424-.67-2.233v-2.098l-.353-10.43c-6.067-.83-11.296-3.175-15.633-7.058-4.725-4.231-7.988-9.811-9.823-16.667v-.001a28.748 28.748 0 0 1-.824-4.612l-.001-.005a51.75 51.75 0 0 1-.242-4.989c0-1.29.055-2.555.162-3.796.107-1.274.239-2.498.399-3.672v-.009c.138-.958.52-1.915 1.367-2.55l.034-.025.034-.024a4.131 4.131 0 0 1 2.317-.72c1.102 0 2.136.342 2.935 1.142.918.862 1.108 2.063.976 3.189l-.002.024-.004.024a30.29 30.29 0 0 0-.298 3.051v.004a61.099 61.099 0 0 0-.076 3.05c0 2.955.299 5.745.89 8.375 1.047 3.775 2.625 6.99 4.719 9.672 2.157 2.697 4.718 4.768 7.688 6.23a21.437 21.437 0 0 0 5.122 1.673l-1.11-32.852V26.797c0-1.05.274-2.111 1.082-2.894.798-.773 1.865-1.028 2.918-1.028.802 0 1.598.205 2.268.727.204.158.38.338.537.53 5.685-2.179 10.88-3.442 15.575-3.75a20.502 20.502 0 0 1 1.787-.084 23.133 23.133 0 0 1 1.864-.08Zm9.862 9.086c.034.437.06.877.077 1.32a51.46 51.46 0 0 1 .159 4.063c0 1.495-.08 2.99-.239 4.485l-.047.554a28.82 28.82 0 0 1-.612 3.813l-.003.014c-1.677 6.975-4.918 12.624-9.762 16.865a27.966 27.966 0 0 1-7.598 4.817c.32.054.642.105.965.155 2.326.302 4.569.453 6.73.453 3.811 0 7.348-.551 10.62-1.642 3.188-1.063 5.878-2.816 8.095-5.27 3.11-3.548 4.628-7.473 4.628-11.823 0-3.256-.857-6.349-2.596-9.3l-.4-.638c-2.043-3.132-4.687-5.45-7.942-6.986l-.006-.004a24.525 24.525 0 0 0-2.069-.876Zm-9.55-1.633c-.77 0-1.6.049-2.49.147l-.039.004-.039.002c-.852.05-1.704.125-2.556.225-3.996.517-8.44 1.818-13.343 3.931l.94 27.979c2.452-.299 4.71-.969 6.782-2.005 2.97-1.51 5.475-3.602 7.526-6.287l.003-.003c2.1-2.736 3.63-5.953 4.574-9.673.296-1.232.491-2.433.589-3.601l.003-.03.004-.032c.148-1.188.222-2.376.222-3.563 0-1.209-.05-2.39-.15-3.542l-.001-.005a40.097 40.097 0 0 0-.446-3.509 31.35 31.35 0 0 0-1.578-.038Z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

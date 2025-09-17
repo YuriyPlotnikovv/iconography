@@ -1,0 +1,26 @@
+.logo {
+  display: flex;
+
+  transition: opacity 0.4s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover,
+    &:active {
+      opacity: 0.6;
+    }
+  }
+}
+
+.logo__image {
+  width: 150px;
+  height: 100%;
+
+  background-color: $form-bg;
+
+  @media (max-width: $tablet-mid-width) {
+    width: 120px;
+  }
+  @media (max-width: $tablet-min-width) {
+    width: 100px;
+  }
+}

@@ -1,0 +1,278 @@
+.slider {
+  position: relative;
+
+  overflow: unset;
+  width: 100%;
+
+  &--main {
+    overflow: hidden;
+
+    .slider__item {
+      height: 800px;
+    }
+
+    .slider__item-content {
+      position: absolute;
+      bottom: 30%;
+      left: 50%;
+      z-index: 10;
+
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      color: $bg-text-color;
+
+      transform: translateX(-50%);
+    }
+
+    .slider__item-image {
+      filter: brightness(0.75);
+    }
+
+    .slider__item-title {
+      font-size: 72px;
+
+      @media (max-width: $desktop-mid-width) {
+        font-size: 60px;
+      }
+      @media (max-width: $desktop-min-width) {
+        font-size: 48px;
+      }
+      @media (max-width: $tablet-mid-width) {
+        font-size: 36px;
+      }
+      @media (max-width: $mobile-mid-width) {
+        font-size: 24px;
+      }
+    }
+
+    .slider__item-text {
+      font-size: 28px;
+
+      @media (max-width: $desktop-mid-width) {
+        font-size: 26px;
+      }
+      @media (max-width: $desktop-min-width) {
+        font-size: 22px;
+      }
+      @media (max-width: $tablet-mid-width) {
+        font-size: 18px;
+      }
+      @media (max-width: $mobile-mid-width) {
+        font-size: 14px;
+      }
+    }
+
+    .slider__pagination {
+      position: absolute;
+      top: unset;
+      right: 30px;
+      bottom: 30px;
+      left: unset;
+      z-index: 2;
+
+      opacity: 0.8;
+    }
+
+    .slider__navigation-item {
+      position: absolute;
+      top: 50%;
+      bottom: unset;
+      z-index: 2;
+
+      width: 80px;
+      height: 80px;
+
+      transform: translateY(-50%);
+
+      &--prev {
+        left: 100px;
+
+        @media (max-width: $desktop-mid-width) {
+          left: 80px;
+        }
+        @media (max-width: $desktop-min-width) {
+          left: 60px;
+        }
+        @media (max-width: $tablet-mid-width) {
+          left: 40px;
+        }
+        @media (max-width: $mobile-mid-width) {
+          left: 20px;
+        }
+      }
+
+      &--next {
+        right: 100px;
+
+        @media (max-width: $desktop-mid-width) {
+          right: 80px;
+        }
+        @media (max-width: $desktop-min-width) {
+          right: 60px;
+        }
+        @media (max-width: $tablet-mid-width) {
+          right: 40px;
+        }
+        @media (max-width: $mobile-mid-width) {
+          right: 20px;
+        }
+      }
+    }
+  }
+
+  &--detail {
+    .slider__item {
+      height: 500px;
+    }
+
+    .slider__item-image {
+      border-radius: 40px;
+    }
+  }
+
+  &--cards {
+    .slider__item {
+      height: 400px;
+    }
+
+    .card__content {
+      top: 280px;
+    }
+  }
+
+  &--masters {
+    .slider__item {
+      height: 400px;
+    }
+
+    .card__content {
+      top: 280px;
+    }
+  }
+
+  &--category {
+    .slider__list {
+      height: 820px;
+
+      @media (max-width: $tablet-min-width) {
+        height: 400px;
+      }
+    }
+
+    .card__content {
+      top: 280px;
+    }
+  }
+
+  &--gallery {
+    .slider__item {
+      height: 400px;
+    }
+
+    .card__content {
+      top: 280px;
+    }
+  }
+}
+
+.slider__list {
+  width: 100%;
+  height: auto;
+}
+
+.slider__item {
+  position: relative;
+
+  height: 100%;
+}
+
+.slider__item-image {
+
+}
+
+.slider__item-content {
+
+}
+
+.slider__item-title {
+
+}
+
+.slider__item-text {
+
+}
+
+.slider__controls {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  justify-self: flex-end;
+}
+
+.slider__pagination {
+  width: auto;
+  min-width: 100px;
+
+  font-family: $font-decor;
+  font-size: 44px;
+  line-height: 1;
+  text-align: center;
+  color: $accent-bg;
+
+  pointer-events: none;
+  user-select: none;
+
+  @media (max-width: $desktop-mid-width) {
+    font-size: 40px;
+  }
+  @media (max-width: $desktop-min-width) {
+    font-size: 34px;
+  }
+  @media (max-width: $tablet-mid-width) {
+    font-size: 28px;
+  }
+  @media (max-width: $mobile-mid-width) {
+    font-size: 22px;
+  }
+}
+
+.slider__navigation-item {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+
+  cursor: pointer;
+  transition: opacity 0.4s ease-in-out;
+
+  fill: $accent-bg;
+
+  @media (max-width: $desktop-mid-width) {
+    font-size: 40px;
+  }
+  @media (max-width: $desktop-min-width) {
+    font-size: 34px;
+  }
+  @media (max-width: $tablet-mid-width) {
+    font-size: 28px;
+  }
+  @media (max-width: $mobile-mid-width) {
+    font-size: 22px;
+  }
+
+  @media (hover: hover) {
+    &:hover,
+    &:active {
+      opacity: 0.6;
+    }
+  }
+
+  &--prev {
+
+  }
+
+  &--next {
+
+  }
+}
