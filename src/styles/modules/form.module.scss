@@ -1,12 +1,6 @@
 @use "../../styles/variables.scss" as var;
 
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.form__fieldset {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 50px;
@@ -14,18 +8,30 @@
   padding: 0;
 
   border: none;
+
+  @media (max-width: var.$desktop-mid-width) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: var.$desktop-min-width) {
+    gap: 30px;
+  }
+  @media (max-width: var.$tablet-min-width) {
+    display: flex;
+    flex-direction: column;
+  }
+  @media (max-width: var.$mobile-mid-width) {
+
+  }
 }
 
-.form__legend {
-
+.form__wrapper {
 }
 
 .form__label {
   position: relative;
 
   display: flex;
-  gap: 20px;
-
+  align-items: start;
 
   &--checkbox {
     place-self: end;
@@ -118,8 +124,9 @@
 
 .form__buttons-wrapper {
   display: flex;
+  flex-wrap: wrap;
   align-items: end;
-  gap: 50px;
+  gap: 30px;
 }
 
 .form__button {

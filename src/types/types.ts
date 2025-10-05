@@ -47,3 +47,15 @@ export type FaqItem = {
     question: string;
     answer: string;
 }
+
+export type SlideItem = {
+    id: number;
+    image: string;
+    alt: string;
+    href: string;
+}
+
+export type BreadcrumbItem = {
+    title: string;
+    url?: string;
+};

@@ -1,0 +1,32 @@
+@use '../../styles/variables.scss' as var;
+
+.detail {
+
+}
+
+.detail__container  {
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+  @media (max-width: var.$tablet-mid-width) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail__content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @media (max-width: var.$tablet-mid-width) {
+    order: 2;
+  }
+}
+
+.detail__text {
+  font-size: 22px;
+}
+
+.detail__slider {
+  overflow: hidden;
+}

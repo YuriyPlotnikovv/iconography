@@ -1,6 +1,10 @@
-@use "../../styles/variables" as var;
+@use '../../styles/variables.scss' as var;
 
-.news__list {
+.gallery {
+
+}
+
+.gallery__list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-auto-rows: 1fr;

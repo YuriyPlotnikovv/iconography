@@ -1,0 +1,36 @@
+@use "../../styles/variables.scss" as var;
+
+.breadcrumbs {
+}
+
+.breadcrumbs__list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.breadcrumbs__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &:not(:first-child)::before {
+    content: "—";
+  }
+}
+
+.breadcrumbs__item-link {
+  font-size: 16px;
+
+  &[href] {
+    transition: opacity 0.4s ease-in-out;
+
+    @media (hover: hover) {
+      &:hover,
+      &:active {
+        opacity: 0.6;
+      }
+    }
+  }
+}

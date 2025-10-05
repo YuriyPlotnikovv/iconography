@@ -6,16 +6,6 @@
   overflow: unset;
   width: 100%;
 
-  &--detail {
-    .slider__item {
-      height: 500px;
-    }
-
-    .slider__item-image {
-      border-radius: 40px;
-    }
-  }
-
   &--cards {
     .slider__item {
       height: 400px;

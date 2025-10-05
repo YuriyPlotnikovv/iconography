@@ -1,0 +1,29 @@
+import type {Metadata} from 'next';
+import {JSX} from 'react';
+import {BreadcrumbItem} from '@/types/types';
+import Heading from '@/components/Heading/Heading';
+import NotFound from '@/components/NotFound/NotFound';
+
+export const metadata: Metadata = {
+    title: 'Страница не найдена | Иконописная мастерская',
+    description: 'Иконописная мастерская - описание',
+};
+
+const breadcrumbsList: BreadcrumbItem[] = [
+    {
+        title: 'Главная',
+        url: '/',
+    },
+    {
+        title: 'Страница не найдена',
+    },
+]
+
+export default function Page(): JSX.Element {
+    return (
+        <>
+            <Heading currentPageTitle={'Страница не найдена'} breadcrumbsList={breadcrumbsList}/>
+            <NotFound/>
+        </>
+    );
+}
