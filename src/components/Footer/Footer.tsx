@@ -1,97 +1,30 @@
 import {JSX} from 'react';
-import styles from './Footer.module.scss'
+import footerStyles from './Footer.module.scss';
+import clsx from 'clsx';
+import Logo from '@/components/Logo/Logo';
+import Social from '@/components/Social/Social';
+import Menu from '@/components/Menu/Menu';
+import Developer from '@/components/Developer/Developer';
 
-type FooterProps = {
-    children?: React.ReactNode;
-}
-
-export default function Footer({}: FooterProps): JSX.Element {
+export default function Footer(): JSX.Element {
     return (
-        <footer className="page__footer footer">
-            <div className="container">
-                <img className="footer__logo logo" src="#" alt="Лого"/>
+        <footer className={footerStyles['footer']}>
+            <div className={clsx('container', footerStyles['footer__container'])}>
+                <Logo addClass={footerStyles['footer__logo']}/>
 
-                <nav className="footer__navigation" aria-label="Дополнительная по сайту">
-                    <ul className="footer__menu menu">
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Новости
-                            </a>
-                        </li>
+                <Social addClass={footerStyles['footer__social']}/>
 
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Отзывы
-                            </a>
-                        </li>
-
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Галерея
-                            </a>
-                        </li>
-
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Наши работы
-                            </a>
-                        </li>
-
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Рукописные иконы в наличии
-                            </a>
-                        </li>
-
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Реставрация
-                            </a>
-                        </li>
-
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Заказ и доставка
-                            </a>
-                        </li>
-
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Контакты
-                            </a>
-                        </li>
-                    </ul>
-
-                    <ul className="footer__social social" aria-label="Социальные сети">
-                        <li className="social__item">
-                            <a className="social__link" href="#">
-                                Vk
-                            </a>
-                        </li>
-
-                        <li className="social__item">
-                            <a className="social__link" href="#">
-                                Telegram
-                            </a>
-                        </li>
-
-                        <li className="social__item">
-                            <a className="social__link" href="#">
-                                Whatsapp
-                            </a>
-                        </li>
-                    </ul>
+                <nav className={footerStyles['footer__navigation']} aria-label="Дополнительная по сайту">
+                    <Menu addClass={footerStyles['footer__menu']}/>
                 </nav>
 
-                <p className="footer__copyright">
-                    © Иконописная мастерская, 2025
-                </p>
+                <div className={footerStyles['footer__wrapper']}>
+                    <p className={footerStyles['footer__copyright']}>
+                        © Иконописная мастерская, {new Date().getFullYear()}
+                    </p>
 
-                <a className="footer__developer developer" href="https://yuriyplotnikovv.ru" target="_blank">
-                    <span className="developer__text">Дизайн и разработка:</span>
-
-                    <img className="developer__logo" src="#" alt="YuriyPlotnikovv | Frontend-разработчик"/>
-                </a>
+                    <Developer addClass={footerStyles['footer__developer']}/>
+                </div>
             </div>
         </footer>
     );

@@ -1,0 +1,76 @@
+@use '../../styles/variables.scss' as var;
+
+.section {
+  display: flex;
+  overflow: hidden;
+  padding: 50px 0;
+
+  box-shadow: var.$boxShadowSection;
+
+  scroll-margin-top: 150px;
+
+  &:nth-of-type(even) {
+    .section__title {
+      align-self: end;
+      justify-self: end;
+
+      @media (max-width: var.$tablet-min-width) {
+        align-self: center;
+      }
+    }
+  }
+
+  &:nth-of-type(odd) {
+    background-color: var.$add-bg;
+
+    .section__title {
+      align-self: start;
+      justify-self: start;
+
+      @media (max-width: var.$tablet-min-width) {
+        align-self: center;
+      }
+    }
+  }
+
+  &:last-of-type {
+    box-shadow: var.$boxShadowSection, var.$boxShadowOutset;
+  }
+
+  &.slider--main {
+    padding: 0;
+  }
+}
+
+.section__title {
+  display: flex;
+
+  font-size: 48px;
+
+  @media (max-width: var.$desktop-mid-width) {
+    font-size: 44px;
+  }
+  @media (max-width: var.$desktop-min-width) {
+    font-size: 40px;
+  }
+  @media (max-width: var.$tablet-mid-width) {
+    font-size: 32px;
+  }
+  @media (max-width: var.$mobile-mid-width) {
+    font-size: 24px;
+  }
+}
+
+.section__description {
+  font-size: 20px;
+
+  @media (max-width: var.$desktop-min-width) {
+    font-size: 18px;
+  }
+  @media (max-width: var.$tablet-mid-width) {
+    font-size: 16px;
+  }
+  @media (max-width: var.$mobile-mid-width) {
+    font-size: 14px;
+  }
+}

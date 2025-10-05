@@ -1,0 +1,60 @@
+@use "../../styles/variables.scss" as var;
+
+.advantages {
+
+}
+
+.advantages__list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 50px;
+
+  @media (max-width: var.$tablet-mid-width) {
+    gap: 30px;
+  }
+}
+
+.advantages__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  &::before {
+    width: 100px;
+    height: 100px;
+
+    background-color: var.$form-bg;
+
+    content: "";
+  }
+}
+
+.advantages__item-title {
+  font-size: 28px;
+
+  @media (max-width: var.$desktop-min-width) {
+    font-size: 24px;
+  }
+  @media (max-width: var.$tablet-mid-width) {
+    font-size: 22px;
+  }
+  @media (max-width: var.$mobile-mid-width) {
+    font-size: 20px;
+  }
+}
+
+.advantages__item-text {
+  font-size: 20px;
+
+  @media (max-width: var.$desktop-min-width) {
+    font-size: 18px;
+  }
+  @media (max-width: var.$tablet-mid-width) {
+    font-size: 16px;
+  }
+  @media (max-width: var.$mobile-mid-width) {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,29 @@
+@use '../../styles/variables.scss' as var;
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.social__item {
+
+}
+
+.social__link {
+  display: block;
+  padding: 5px;
+
+  @media (max-width: var.$mobile-mid-width) {
+    padding: 0;
+  }
+}
+
+.social__icon {
+  width: 30px;
+  height: 30px;
+
+  fill: var.$accent-add-bg;
+}

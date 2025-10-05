@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 
-export const cyrillicOld = localFont({
+export const CyrillicOld = localFont({
     src: [
         {
             path: "../fonts/CyrillicOld.woff2",
@@ -14,10 +14,12 @@ export const cyrillicOld = localFont({
         }
     ],
     variable: "--font-decor",
+    fallback: ['Times New Roman', 'serif'],
+    adjustFontFallback: 'Times New Roman',
     display: "swap",
 });
 
-export const playfair = localFont({
+export const Playfair = localFont({
     src: [
         {
             path: "../fonts/PlayfairDisplay-Variable.woff2",
@@ -41,10 +43,12 @@ export const playfair = localFont({
         }
     ],
     variable: "--font-title",
+    fallback: ['Times New Roman', 'serif'],
+    adjustFontFallback: 'Times New Roman',
     display: "swap",
 });
 
-export const montserrat = localFont({
+export const Montserrat = localFont({
     src: [
         {
             path: "../fonts/Montserrat-Variable.woff2",
@@ -68,5 +72,7 @@ export const montserrat = localFont({
         }
     ],
     variable: "--font-text",
+    fallback: ['Arial', 'sans-serif'],
+    adjustFontFallback: 'Arial',
     display: "swap",
 });

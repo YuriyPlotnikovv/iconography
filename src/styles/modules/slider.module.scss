@@ -1,0 +1,167 @@
+@use "../../styles/variables.scss" as var;
+
+.slider {
+  position: relative;
+
+  overflow: unset;
+  width: 100%;
+
+  &--detail {
+    .slider__item {
+      height: 500px;
+    }
+
+    .slider__item-image {
+      border-radius: 40px;
+    }
+  }
+
+  &--cards {
+    .slider__item {
+      height: 400px;
+    }
+
+    .card__content {
+      top: 280px;
+    }
+  }
+
+  &--masters {
+    .slider__item {
+      height: 400px;
+    }
+
+    .card__content {
+      top: 280px;
+    }
+  }
+
+  &--category {
+    .slider__list {
+      height: 820px;
+
+      @media (max-width: var.$tablet-min-width) {
+        height: 400px;
+      }
+    }
+
+    .card__content {
+      top: 280px;
+    }
+  }
+
+  &--gallery {
+    .slider__item {
+      height: 400px;
+    }
+
+    .card__content {
+      top: 280px;
+    }
+  }
+}
+
+.slider__heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider__list {
+  width: 100%;
+  height: auto;
+}
+
+.slider__item {
+  position: relative;
+
+  height: 100%;
+}
+
+.slider__item-image {
+
+}
+
+.slider__item-content {
+
+}
+
+.slider__item-title {
+
+}
+
+.slider__item-text {
+
+}
+
+.slider__controls {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  justify-self: flex-end;
+}
+
+.slider__pagination {
+  width: auto;
+  min-width: 100px;
+
+  font-family: var.$font-decor;
+  font-size: 44px;
+  line-height: 1;
+  text-align: center;
+  color: var.$accent-bg;
+
+  pointer-events: none;
+  user-select: none;
+
+  @media (max-width: var.$desktop-mid-width) {
+    font-size: 40px;
+  }
+  @media (max-width: var.$desktop-min-width) {
+    font-size: 34px;
+  }
+  @media (max-width: var.$tablet-mid-width) {
+    font-size: 28px;
+  }
+  @media (max-width: var.$mobile-mid-width) {
+    font-size: 22px;
+  }
+}
+
+.slider__navigation-item {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+
+  cursor: pointer;
+  transition: opacity 0.4s ease-in-out;
+
+  fill: var.$accent-bg;
+
+  @media (max-width: var.$desktop-mid-width) {
+    font-size: 40px;
+  }
+  @media (max-width: var.$desktop-min-width) {
+    font-size: 34px;
+  }
+  @media (max-width: var.$tablet-mid-width) {
+    font-size: 28px;
+  }
+  @media (max-width: var.$mobile-mid-width) {
+    font-size: 22px;
+  }
+
+  @media (hover: hover) {
+    &:hover,
+    &:active {
+      opacity: 0.6;
+    }
+  }
+
+  &--prev {
+
+  }
+
+  &--next {
+
+  }
+}

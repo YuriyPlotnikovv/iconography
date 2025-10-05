@@ -1,0 +1,25 @@
+@use '../variables.scss' as var;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 100%;
+  max-width: var.$desktop-max-width;
+  margin: 0 auto;
+  padding: 0 120px;
+
+  @media (max-width: var.$desktop-mid-width) {
+    padding: 0 80px;
+  }
+  @media (max-width: var.$desktop-min-width) {
+    padding: 0 60px;
+  }
+  @media (max-width: var.$tablet-mid-width) {
+    gap: 30px;
+    padding: 0 40px;
+  }
+  @media (max-width: var.$mobile-mid-width) {
+    padding: 0 20px;
+  }
+}

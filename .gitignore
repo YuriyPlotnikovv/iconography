@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/markup/node_modules
+/markup/build
 /.pnp
 .pnp.*
 .yarn/*

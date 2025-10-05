@@ -1,0 +1,62 @@
+@use '../variables.scss' as var;
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  margin: 0 auto;
+  padding: 15px 30px;
+
+  font-size: 16px;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  box-shadow: var.$cardShadow;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: opacity 0.4s ease-in-out;
+
+  @media (max-width: var.$tablet-min-width) {
+    padding: 10px 20px;
+
+    font-size: 14px;
+  }
+
+  @media (hover: hover) {
+    &:hover,
+    &:active {
+      opacity: 0.6;
+    }
+  }
+
+  &--accent {
+    color: var.$bg-text-color;
+
+    background-color: var.$accent-bg;
+    border: 1px solid var.$accent-bg;
+  }
+
+  &--clear {
+    color: var.$accent-text-color;
+
+    background-color: transparent;
+    border: 1px solid var.$accent-add-bg;
+  }
+
+  &--arrow {
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+
+    text-transform: unset;
+
+    box-shadow: unset;
+
+    &::after {
+      content: "⟫";
+    }
+  }
+}

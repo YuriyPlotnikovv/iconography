@@ -1,86 +1,33 @@
 import {JSX} from 'react';
-import styles from './Header.module.scss'
+import headerStyles from './Header.module.scss';
+import clsx from 'clsx';
+import Contacts from '@/components/Contacts/Contacts';
+import Logo from '@/components/Logo/Logo';
+import Social from '@/components/Social/Social';
+import Menu from '@/components/Menu/Menu';
 
-type HeaderProps = {
-    children?: React.ReactNode;
-}
-
-export default function Header({}: HeaderProps): JSX.Element {
+export default function Header(): JSX.Element {
     return (
-        <header className={styles.header}>
-            <div className="container">
-                <img className="header__logo logo" src="#" alt=""/>
+        <header className={headerStyles['header']}>
+            <div className={clsx('container', headerStyles['header__container'])}>
+                <Logo addClass={headerStyles['header__logo']}/>
 
-                <nav className="header__navigation" aria-label="Основная по сайту">
-                    <ul className={styles.header__menu}>
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Наши работы
-                            </a>
-                        </li>
+                <Contacts addClass={headerStyles['header__contacts']}/>
 
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Рукописные иконы в наличии
-                            </a>
-                        </li>
+                <address className={headerStyles['header__address']}>
+                    <p>Город, улица, дом</p>
+                </address>
 
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Реставрация
-                            </a>
-                        </li>
+                <Social addClass={headerStyles['header__social']}/>
 
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Заказ и доставка
-                            </a>
-                        </li>
+                <button className={headerStyles['header__menu-button']} type="button" aria-label="Открыть/закрыть меню">
+                    <span className={headerStyles['header__menu-button-line']}></span>
+                    <span className={headerStyles['header__menu-button-line']}></span>
+                    <span className={headerStyles['header__menu-button-line']}></span>
+                </button>
 
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Новости
-                            </a>
-                        </li>
-
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Отзывы
-                            </a>
-                        </li>
-
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Галерея
-                            </a>
-                        </li>
-
-                        <li className="menu__item">
-                            <a className="menu__link" href="#">
-                                Контакты
-                            </a>
-                        </li>
-                    </ul>
-
-                    <ul className="header__social social" aria-label="Социальные сети">
-                        <li className="social__item">
-                            <a className="social__link" href="#">
-                                Vk
-                            </a>
-                        </li>
-
-                        <li className="social__item">
-                            <a className="social__link" href="#">
-                                Telegram
-                            </a>
-                        </li>
-
-                        <li className="social__item">
-                            <a className="social__link" href="#">
-                                Whatsapp
-                            </a>
-                        </li>
-                    </ul>
+                <nav className={headerStyles['header__navigation']} aria-label="Основная по сайту">
+                    <Menu addClass={headerStyles['header__menu']}/>
                 </nav>
             </div>
         </header>
