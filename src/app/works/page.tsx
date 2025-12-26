@@ -2,10 +2,10 @@ import type {Metadata} from 'next';
 import {JSX} from 'react';
 import {BreadcrumbItem, CardItem} from '@/types/types';
 import Heading from '@/components/Heading/Heading';
-import GalleryPage from '@/components/GalleryPage/GalleryPage';
+import Works from '@/components/Works/Works';
 
 export const metadata: Metadata = {
-    title: 'Галерея | Иконописная мастерская',
+    title: 'Наши работы | Иконописная мастерская',
     description: 'Иконописная мастерская - описание',
 };
 
@@ -15,16 +15,16 @@ const breadcrumbsList: BreadcrumbItem[] = [
         url: '/',
     },
     {
-        title: 'Галерея',
+        title: 'Наши работы',
     },
 ];
 
-const galleryList: CardItem[] = [
+const worksList: CardItem[] = [
     {
         id: 1,
         title: 'Заголовок',
-        text: 'Описание',
-        href: '/gallery',
+        text: 'Описание работы',
+        href: '/works/1',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -32,7 +32,7 @@ const galleryList: CardItem[] = [
         id: 2,
         title: 'Заголовок',
         text: 'Описание работы',
-        href: '/gallery',
+        href: '/works/2',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -40,7 +40,7 @@ const galleryList: CardItem[] = [
         id: 3,
         title: 'Заголовок',
         text: 'Описание работы',
-        href: '/gallery',
+        href: '/works/3',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -48,7 +48,7 @@ const galleryList: CardItem[] = [
         id: 4,
         title: 'Заголовок',
         text: 'Описание работы',
-        href: '/gallery',
+        href: '/works/4',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -56,7 +56,7 @@ const galleryList: CardItem[] = [
         id: 5,
         title: 'Заголовок',
         text: 'Описание работы',
-        href: '/gallery',
+        href: '/works/5',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -65,10 +65,10 @@ const galleryList: CardItem[] = [
 export default function Page(): JSX.Element {
     return (
         <>
-            <Heading title={'Галерея'} description={'<p>Подробное описание раздела</p>'}
+            <Heading title={'Наши работы'} description={'<p>Подробное описание раздела</p>'}
                      breadcrumbsList={breadcrumbsList}/>
 
-            <GalleryPage galleryList={galleryList}/>
+            <Works worksList={worksList}/>
         </>
     );
 }

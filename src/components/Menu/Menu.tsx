@@ -1,37 +1,41 @@
-"use client";
+'use client';
 
-import {JSX} from 'react';
-import menuStyles from './Menu.module.scss';
+import {JSX, RefObject} from 'react';
+import {usePathname} from 'next/navigation';
 import clsx from 'clsx';
 import Link from 'next/link';
-import {usePathname} from 'next/navigation';
+import type {MenuItem} from '@/types/types';
 import {menuItems} from '@/const/const';
-import {MenuItem} from '@/types/types';
+import menuStyles from './Menu.module.scss';
 
 type MenuProps = {
-    addClass: string,
-}
+    addClass?: string;
+    onCloseMenu: () => void;
+    firstMenuItemRef: RefObject<HTMLAnchorElement | null>;
+};
 
-export default function Menu({addClass}: MenuProps): JSX.Element {
+export default function Menu({addClass, onCloseMenu, firstMenuItemRef}: MenuProps): JSX.Element {
     const currentPath = usePathname();
 
     return (
-        <ul className={clsx(addClass, menuStyles['menu'])}>
-            {
-                menuItems.map((menuItem: MenuItem) => {
-                    const isActive = menuItem.href === '/'
-                        ? currentPath === '/'
-                        : currentPath.startsWith(menuItem.href);
+        <ul className={clsx(addClass, menuStyles.menu)}>
+            {menuItems.map((menuItem: MenuItem, index) => {
+                const isActive = menuItem.href === '/'
+                    ? currentPath === '/'
+                    : currentPath.startsWith(menuItem.href);
 
-                    return (
-                        <li className={menuStyles['menu__item']} key={menuItem.href}>
-                            <Link className={clsx(menuStyles['menu__link'], isActive && menuStyles['menu__link-current'])} href={menuItem.href}>
-                                {menuItem.label}
-                            </Link>
-                        </li>
-                    );
-                })
-            }
+                return (
+                    <li className={menuStyles.menu__item} key={menuItem.href}>
+                        <Link className={clsx(menuStyles.menu__link, isActive && menuStyles['menu__link--current'])}
+                            href={menuItem.href}
+                            onClick={onCloseMenu}
+                            ref={index === 0 ? firstMenuItemRef : null}
+                        >
+                            {menuItem.label}
+                        </Link>
+                    </li>
+                );
+            })}
         </ul>
     );
 }

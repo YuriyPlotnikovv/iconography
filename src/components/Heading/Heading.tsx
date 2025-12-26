@@ -1,24 +1,35 @@
 import {JSX} from 'react';
 import headingStyles from './Heading.module.scss';
-import Link from 'next/link';
 import clsx from 'clsx';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import {BreadcrumbItem} from '@/types/types';
+import {createSanitizedHTML} from '@/functions/functions';
 
 type HeadingProps = {
-    currentPageTitle: string,
+    title?: string,
+    description?: string,
     breadcrumbsList: BreadcrumbItem[],
 }
 
-export default function Heading({currentPageTitle, breadcrumbsList}: HeadingProps): JSX.Element {
+export default function Heading({title, description, breadcrumbsList}: HeadingProps): JSX.Element {
     return (
         <section className={clsx('section', headingStyles['heading'])}>
             <div className={clsx('container', headingStyles['heading__container'])}>
-                <Breadcrumbs breadcrumbsList={breadcrumbsList} />
+                <Breadcrumbs breadcrumbsList={breadcrumbsList}/>
 
-                <h1 className="visually-hidden">
-                    {currentPageTitle}
-                </h1>
+                {
+                    title && (
+                        <h1 className="section__title">
+                            {title}
+                        </h1>
+                    )
+                }
+
+                {
+                    description && (
+                        <div className="section__description" dangerouslySetInnerHTML={createSanitizedHTML(description)}/>
+                    )
+                }
             </div>
         </section>
     );

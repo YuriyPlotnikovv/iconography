@@ -59,7 +59,9 @@ export default function News(): JSX.Element {
                     {
                         newsList.map((news) => {
                             return (
-                                <Card data={news} key={news.id}/>
+                                <li className={newsStyles['news__item']} key={news.id}>
+                                    <Card data={news}/>
+                                </li>
                             );
                         })
                     }

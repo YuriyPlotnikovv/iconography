@@ -17,12 +17,13 @@ const breadcrumbsList: BreadcrumbItem[] = [
     {
         title: 'Страница не найдена',
     },
-]
+];
 
 export default function Page(): JSX.Element {
     return (
         <>
-            <Heading currentPageTitle={'Страница не найдена'} breadcrumbsList={breadcrumbsList}/>
+            <Heading title={'Страница не найдена'} breadcrumbsList={breadcrumbsList}/>
+
             <NotFound/>
         </>
     );

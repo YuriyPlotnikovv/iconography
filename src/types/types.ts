@@ -52,7 +52,7 @@ export type SlideItem = {
     id: number;
     image: string;
     alt: string;
-    href: string;
+    href?: string;
 }
 
 export type BreadcrumbItem = {

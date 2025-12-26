@@ -17,12 +17,14 @@ const breadcrumbsList: BreadcrumbItem[] = [
     {
         title: 'Контакты',
     },
-]
+];
 
 export default function Page(): JSX.Element {
     return (
         <>
-            <Heading currentPageTitle={'Контакты'} breadcrumbsList={breadcrumbsList}/>
+            <Heading title={'Контакты'} description={'<p>Подробное описание раздела</p>'}
+                     breadcrumbsList={breadcrumbsList}/>
+
             <ContactsPage/>
         </>
     );

@@ -1,42 +1,26 @@
 import {JSX} from 'react';
-import detailStyles from './Detail.module.scss';
-import {SlideItem} from '@/types/types';
-import SliderDetail from '@/components/SliderDetail/SliderDetail';
 import clsx from 'clsx';
+import {SlideItem} from '@/types/types';
+import {createSanitizedHTML} from '@/functions/functions';
+import SliderDetail from '@/components/SliderDetail/SliderDetail';
+import detailStyles from './Detail.module.scss';
 
-const slidesList: SlideItem[] = [
-    {
-        id: 1,
-        image: '/img/cover.jpg',
-        alt: 'Обложка слайда',
-        href: './news-detail.html'
-    },
-    {
-        id: 2,
-        image: '/img/cover.jpg',
-        alt: 'Обложка слайда',
-        href: './news-detail.html'
-    },
-    {
-        id: 3,
-        image: '/img/cover.jpg',
-        alt: 'Обложка слайда',
-        href: './news-detail.html'
-    },
-];
+type DetailProps = {
+    title: string;
+    description: string;
+    slidesList: SlideItem[];
+}
 
-export default function Detail(): JSX.Element {
+export default function Detail({slidesList, title, description}: DetailProps): JSX.Element {
     return (
         <section className={clsx('section', detailStyles['detail'])}>
             <div className={clsx('container', detailStyles['detail__container'])}>
                 <div className={detailStyles['detail__content']}>
                     <h2 className="section__title">
-                        Заголовок новости
+                        {title}
                     </h2>
 
-                    <div className={detailStyles['detail__text']}>
-                        <p>Текст новости</p>
-                    </div>
+                    <div className={detailStyles['detail__text']} dangerouslySetInnerHTML={createSanitizedHTML(description)}/>
 
                 </div>
 

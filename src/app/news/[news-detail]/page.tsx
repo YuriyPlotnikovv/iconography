@@ -1,6 +1,6 @@
 import type {Metadata} from 'next';
 import {JSX} from 'react';
-import {BreadcrumbItem} from '@/types/types';
+import {BreadcrumbItem, SlideItem} from '@/types/types';
 import Heading from '@/components/Heading/Heading';
 import Detail from '@/components/Detail/Detail';
 
@@ -21,13 +21,36 @@ const breadcrumbsList: BreadcrumbItem[] = [
     {
         title: 'Заголовок новости',
     },
-]
+];
+
+const slidesList: SlideItem[] = [
+    {
+        id: 1,
+        image: '/img/cover.jpg',
+        alt: 'Обложка слайда',
+        href: '/news/1'
+    },
+    {
+        id: 2,
+        image: '/img/cover.jpg',
+        alt: 'Обложка слайда',
+        href: '/news/2'
+    },
+    {
+        id: 3,
+        image: '/img/cover.jpg',
+        alt: 'Обложка слайда',
+        href: '/news/3'
+    },
+];
 
 export default function Page(): JSX.Element {
     return (
         <>
-            <Heading currentPageTitle={'Заголовок новости'} breadcrumbsList={breadcrumbsList} />
-            <Detail/>
+            <Heading title={'Заголовок новости'} description={'<p>Подробное описание раздела</p>'}
+                     breadcrumbsList={breadcrumbsList}/>
+
+            <Detail slidesList={slidesList} title={'Заголовок новости'} description={'<p>Текст новости</p>'}/>
         </>
     );
 }

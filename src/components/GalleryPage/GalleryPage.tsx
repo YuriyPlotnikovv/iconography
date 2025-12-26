@@ -16,7 +16,9 @@ export default function GalleryPage({galleryList}: GalleryPageProps): JSX.Elemen
                     {
                         galleryList.map(gallery => {
                             return (
-                                <Card data={gallery} key={gallery.id}/>
+                                <li className={galleryPageStyles['gallery__item']} key={gallery.id}>
+                                    <Card data={gallery}/>
+                                </li>
                             );
                         })
                     }

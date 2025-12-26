@@ -1,3 +1,5 @@
+import DOMPurify from 'isomorphic-dompurify';
+
 export const convertDateToLocale = (dateString: string, locale: string = 'ru-RU'): string => {
     const date = new Date(dateString);
 
@@ -7,3 +9,8 @@ export const convertDateToLocale = (dateString: string, locale: string = 'ru-RU'
         day: '2-digit',
     });
 };
+
+export function createSanitizedHTML(htmlString: string | null | undefined): { __html: string; } {
+    const sanitized = DOMPurify.sanitize(htmlString || '');
+    return { __html: sanitized };
+}
