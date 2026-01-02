@@ -26,7 +26,7 @@ const slidesList: CardItem[] = [
         alt: 'Обложка слайда',
         title: 'Заголовок слайда',
         text: 'Текст слайда',
-        href: './news-detail.html'
+        href: '/news/test-1'
     },
     {
         id: 2,
@@ -34,7 +34,7 @@ const slidesList: CardItem[] = [
         alt: 'Обложка слайда',
         title: 'Заголовок слайда',
         text: 'Текст слайда',
-        href: './news-detail.html'
+        href: '/news/test-2'
     },
     {
         id: 3,
@@ -42,7 +42,7 @@ const slidesList: CardItem[] = [
         alt: 'Обложка слайда',
         title: 'Заголовок слайда',
         text: 'Текст слайда',
-        href: './news-detail.html'
+        href: '/news/test-3'
     },
 ];
 
