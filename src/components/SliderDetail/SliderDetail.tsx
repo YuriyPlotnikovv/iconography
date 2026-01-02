@@ -1,6 +1,6 @@
 'use client';
 
-import {JSX, useRef} from 'react';
+import {JSX, useState} from 'react';
 import clsx from 'clsx';
 import {Navigation, Pagination, A11y, Autoplay} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -10,11 +10,10 @@ import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import type {Swiper as SwiperCore} from 'swiper';
 import type {NavigationOptions, PaginationOptions} from 'swiper/types';
+import {SlideItem} from '@/types/types';
 
 import Image from 'next/image';
-import {SlideItem} from '@/types/types';
 import sliderStyles from '../../styles/modules/slider.module.scss';
 import sliderDetailStyles from './SliderDetail.module.scss';
 
@@ -23,23 +22,9 @@ type SliderDetailProps = {
 }
 
 export default function SliderDetail({items}: SliderDetailProps): JSX.Element {
-    const prevRef = useRef<HTMLButtonElement>(null);
-    const nextRef = useRef<HTMLButtonElement>(null);
-    const paginationRef = useRef<HTMLDivElement>(null);
-
-    const onBeforeInit = (swiper: SwiperCore) => {
-        if (prevRef.current && nextRef.current && swiper.params.navigation) {
-            (swiper.params.navigation as NavigationOptions).prevEl = prevRef.current;
-            (swiper.params.navigation as NavigationOptions).nextEl = nextRef.current;
-        }
-
-        if (paginationRef.current && swiper.params.pagination) {
-            (swiper.params.pagination as PaginationOptions).el = paginationRef.current;
-            (swiper.params.pagination as PaginationOptions).type = 'custom';
-            (swiper.params.pagination as PaginationOptions).clickable = true;
-            (swiper.params.pagination as PaginationOptions).renderCustom = (swiper, current, total) => current + ' | ' + total;
-        }
-    };
+    const [prevEl, setPrevEl] = useState<HTMLButtonElement | null>(null);
+    const [nextEl, setNextEl] = useState<HTMLButtonElement | null>(null);
+    const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null);
 
     return (
         <div className={clsx(sliderStyles['slider'], sliderDetailStyles['slider-detail'])}>
@@ -53,7 +38,16 @@ export default function SliderDetail({items}: SliderDetailProps): JSX.Element {
                         disableOnInteraction: false,
                         pauseOnMouseEnter: true,
                     }}
-                    onBeforeInit={onBeforeInit}
+                    navigation={{
+                        prevEl,
+                        nextEl,
+                    } as NavigationOptions}
+                    pagination={{
+                        el: paginationEl,
+                        type: 'custom',
+                        clickable: true,
+                        renderCustom: (swiper, current, total) => current + ' | ' + total
+                    } as PaginationOptions}
             >
                 {
                     items.map((item) => {
@@ -68,10 +62,10 @@ export default function SliderDetail({items}: SliderDetailProps): JSX.Element {
                     })
                 }
 
-                <div ref={paginationRef}
+                <div ref={setPaginationEl}
                      className={clsx(sliderStyles['slider__pagination'], sliderDetailStyles['slider-detail__pagination'])}></div>
 
-                <button ref={prevRef}
+                <button ref={setPrevEl}
                         className={clsx(sliderStyles['slider__navigation-item'], sliderDetailStyles['slider-detail__navigation-item'], sliderDetailStyles['slider-detail__navigation-item--prev'])}
                         aria-label="Предыдущий слайд">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -80,7 +74,7 @@ export default function SliderDetail({items}: SliderDetailProps): JSX.Element {
                     </svg>
                 </button>
 
-                <button ref={nextRef}
+                <button ref={setNextEl}
                         className={clsx(sliderStyles['slider__navigation-item'], sliderDetailStyles['slider-detail__navigation-item'], sliderDetailStyles['slider-detail__navigation-item--next'])}
                         aria-label="Следующий слайд">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

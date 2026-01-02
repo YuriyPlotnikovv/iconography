@@ -1,6 +1,6 @@
 'use client';
 
-import {JSX, useRef} from 'react';
+import {JSX, useState} from 'react';
 import clsx from 'clsx';
 import {Navigation, Pagination, A11y, Autoplay} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -10,10 +10,9 @@ import 'swiper/css/autoplay';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import type {Swiper as SwiperCore} from 'swiper';
 import type {NavigationOptions, PaginationOptions} from 'swiper/types';
-
 import {CardItem} from '@/types/types';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import sliderStyles from '../../../styles/modules/slider.module.scss';
@@ -47,23 +46,9 @@ const slidesList: CardItem[] = [
 ];
 
 export default function SliderMain(): JSX.Element {
-    const prevRef = useRef<HTMLButtonElement>(null);
-    const nextRef = useRef<HTMLButtonElement>(null);
-    const paginationRef = useRef<HTMLDivElement>(null);
-
-    const onBeforeInit = (swiper: SwiperCore) => {
-        if (prevRef.current && nextRef.current && swiper.params.navigation) {
-            (swiper.params.navigation as NavigationOptions).prevEl = prevRef.current;
-            (swiper.params.navigation as NavigationOptions).nextEl = nextRef.current;
-        }
-
-        if (paginationRef.current && swiper.params.pagination) {
-            (swiper.params.pagination as PaginationOptions).el = paginationRef.current;
-            (swiper.params.pagination as PaginationOptions).type = 'custom';
-            (swiper.params.pagination as PaginationOptions).clickable = true;
-            (swiper.params.pagination as PaginationOptions).renderCustom = (swiper, current, total) => current + ' | ' + total;
-        }
-    };
+    const [prevEl, setPrevEl] = useState<HTMLButtonElement | null>(null);
+    const [nextEl, setNextEl] = useState<HTMLButtonElement | null>(null);
+    const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null);
 
     return (
         <section className={clsx('section', sliderStyles['slider'], stylesSliderMain['slider-main'])}>
@@ -80,7 +65,16 @@ export default function SliderMain(): JSX.Element {
                         disableOnInteraction: false,
                         pauseOnMouseEnter: true,
                     }}
-                    onBeforeInit={onBeforeInit}
+                    navigation={{
+                        prevEl,
+                        nextEl,
+                    } as NavigationOptions}
+                    pagination={{
+                        el: paginationEl,
+                        type: 'custom',
+                        clickable: true,
+                        renderCustom: (swiper, current, total) => current + ' | ' + total
+                    } as PaginationOptions}
             >
                 {slidesList.map((slide) => {
                     return (
@@ -106,9 +100,9 @@ export default function SliderMain(): JSX.Element {
                     );
                 })}
 
-                <div ref={paginationRef} className={clsx(sliderStyles['slider__pagination'], stylesSliderMain['slider-main__pagination'])}></div>
+                <div ref={setPaginationEl} className={clsx(sliderStyles['slider__pagination'], stylesSliderMain['slider-main__pagination'])}></div>
 
-                <button ref={prevRef}
+                <button ref={setPrevEl}
                         className={clsx(sliderStyles['slider__navigation-item'], stylesSliderMain['slider-main__navigation-item'], stylesSliderMain['slider-main__navigation-item--prev'])}
                         aria-label="Предыдущий слайд">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -117,7 +111,7 @@ export default function SliderMain(): JSX.Element {
                     </svg>
                 </button>
 
-                <button ref={nextRef}
+                <button ref={setNextEl}
                         className={clsx(sliderStyles['slider__navigation-item'], stylesSliderMain['slider-main__navigation-item'], stylesSliderMain['slider-main__navigation-item--next'])}
                         aria-label="Следующий слайд">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
