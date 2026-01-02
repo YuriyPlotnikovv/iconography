@@ -9,6 +9,10 @@
 .slider-main__item {
   height: 800px;
   max-height: calc(100vh - 80px);
+
+  @supports (max-height: calc(100dvh - 80px)) {
+    max-height: calc(100dvh - 80px);
+  }
 }
 
 .slider-main__item-image {
