@@ -23,7 +23,7 @@ const galleryList: CardItem[] = [
         id: 1,
         title: 'Заголовок',
         text: 'Описание',
-        href: '/gallery',
+        href: '/gallery/',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -31,7 +31,7 @@ const galleryList: CardItem[] = [
         id: 2,
         title: 'Заголовок',
         text: 'Описание работы',
-        href: '/work-detail',
+        href: '/gallery/',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -39,7 +39,7 @@ const galleryList: CardItem[] = [
         id: 3,
         title: 'Заголовок',
         text: 'Описание работы',
-        href: '/work-detail',
+        href: '/gallery/',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -47,7 +47,7 @@ const galleryList: CardItem[] = [
         id: 4,
         title: 'Заголовок',
         text: 'Описание работы',
-        href: '/work-detail',
+        href: '/gallery/',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -55,7 +55,7 @@ const galleryList: CardItem[] = [
         id: 5,
         title: 'Заголовок',
         text: 'Описание работы',
-        href: '/work-detail',
+        href: '/gallery/',
         image: '/img/cover.jpg',
         alt: 'Подпись к фото',
     },
@@ -130,7 +130,7 @@ export default function Gallery(): JSX.Element {
                     }
                 </Swiper>
 
-                <Link className="button button--accent" href="#">Посмотреть ещё</Link>
+                <Link className="button button--accent" href="/gallery">Посмотреть ещё</Link>
             </div>
         </section>
     );

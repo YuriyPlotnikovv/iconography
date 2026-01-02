@@ -131,7 +131,7 @@ export default function LastWorks(): JSX.Element {
                     }
                 </Swiper>
 
-                <Link className="button button--accent" href="/last-works">Посмотреть ещё</Link>
+                <Link className="button button--accent" href="/works">Посмотреть ещё</Link>
             </div>
         </section>
     );
