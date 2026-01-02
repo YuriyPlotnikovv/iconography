@@ -23,7 +23,7 @@
 /build
 
 # cms
-#/cockpit
+/cockpit
 
 # misc
 .DS_Store
