@@ -10,8 +10,8 @@ import menuStyles from './Menu.module.scss';
 
 type MenuProps = {
     addClass?: string;
-    onCloseMenu: () => void;
-    firstMenuItemRef: RefObject<HTMLAnchorElement | null>;
+    onCloseMenu?: () => void;
+    firstMenuItemRef?: RefObject<HTMLAnchorElement | null>;
 };
 
 export default function Menu({addClass, onCloseMenu, firstMenuItemRef}: MenuProps): JSX.Element {
