@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use "../../styles/variables.scss" as var;
 
 .slider-detail {
 
@@ -6,6 +6,10 @@
 
 .slider-detail__item {
   height: 500px;
+
+  @media (max-width: var.$tablet-min-width) {
+    height: 400px;
+  }
 }
 
 .slider-detail__item-image {
@@ -34,11 +38,24 @@
 
   transform: translateY(-50%);
 
+  @media (max-width: var.$tablet-min-width) {
+    width: 60px;
+    height: 60px;
+  }
+
   &--prev {
     left: 20px;
+
+    @media (max-width: var.$tablet-min-width) {
+      left: 10px;
+    }
   }
 
   &--next {
     right: 20px;
+
+    @media (max-width: var.$tablet-min-width) {
+      right: 10px;
+    }
   }
 }

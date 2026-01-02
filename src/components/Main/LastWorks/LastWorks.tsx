@@ -113,7 +113,18 @@ export default function LastWorks(): JSX.Element {
 
                 <Swiper className={sliderStyles['slider__list']}
                         modules={[Navigation, Pagination, A11y]}
-                        slidesPerView={3}
+                        slidesPerView={1}
+                        breakpoints={{
+                            480: {
+                                slidesPerView: 1.5,
+                            },
+                            768: {
+                                slidesPerView: 2,
+                            },
+                            1100: {
+                                slidesPerView: 3,
+                            }
+                        }}
                         spaceBetween={30}
                         loop={true}
                         speed={2000}

@@ -22,5 +22,9 @@
 }
 
 .in-stock__item {
-
+  @media (max-width: var.$tablet-min-width) {
+    &:nth-of-type(n+4) {
+      display: none;
+    }
+  }
 }

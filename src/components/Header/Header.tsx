@@ -53,7 +53,7 @@ export default function Header(): JSX.Element {
                     <p>Город, улица, дом</p>
                 </address>
 
-                <Social addClass={headerStyles['header__social']}/>
+                <Social addClass={headerStyles['header__social-desktop']}/>
 
                 <button className={clsx(headerStyles['header__menu-button'], isMenuOpen && headerStyles['header__menu-button--menu-open'])}
                     type="button"
@@ -72,6 +72,8 @@ export default function Header(): JSX.Element {
                           onCloseMenu={closeMenu}
                           firstMenuItemRef={firstMenuItemRef}
                     />
+
+                    <Social addClass={headerStyles['header__social-mobile']}/>
                 </nav>
             </div>
         </header>

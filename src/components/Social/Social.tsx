@@ -3,7 +3,7 @@ import socialStyles from './Social.module.scss';
 import clsx from 'clsx';
 
 type SocialProps = {
-    addClass: string,
+    addClass?: string,
 }
 
 export default function Social({addClass}: SocialProps): JSX.Element {

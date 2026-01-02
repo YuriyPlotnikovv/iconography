@@ -90,6 +90,11 @@
 
   transform: translateY(-50%);
 
+  @media (max-width: var.$tablet-min-width) {
+    width: 60px;
+    height: 60px;
+  }
+
   &--prev {
     left: 100px;
 
@@ -102,7 +107,7 @@
     @media (max-width: var.$tablet-mid-width) {
       left: 40px;
     }
-    @media (max-width: var.$mobile-mid-width) {
+    @media (max-width: var.$tablet-min-width) {
       left: 20px;
     }
   }
@@ -119,7 +124,7 @@
     @media (max-width: var.$tablet-mid-width) {
       right: 40px;
     }
-    @media (max-width: var.$mobile-mid-width) {
+    @media (max-width: var.$tablet-min-width) {
       right: 20px;
     }
   }

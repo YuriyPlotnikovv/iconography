@@ -10,8 +10,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 50px;
 
-  @media (max-width: var.$tablet-mid-width) {
-    grid-template-rows: auto 400px auto;
+  @media (max-width: var.$tablet-min-width) {
+    grid-template-rows: auto 300px auto;
     grid-template-columns: 1fr;
     gap: 30px;
   }

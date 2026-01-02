@@ -49,8 +49,7 @@ const slidesList: SlideItem[] = [
 export default function Page(): JSX.Element {
     return (
         <>
-            <Heading title={'Название работы'} description={'<p>Подробное описание раздела</p>'}
-                     breadcrumbsList={breadcrumbsList}/>
+            <Heading breadcrumbsList={breadcrumbsList}/>
 
             <Detail slidesList={slidesList} title={'Название работы'} description={'<p>Описание работы</p>'}/>
 

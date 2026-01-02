@@ -80,6 +80,7 @@
 
   @media (max-width: var.$tablet-min-width) {
     grid-row: 1 / 2;
+    max-height: 300px;
   }
 }
 
