@@ -10,8 +10,8 @@
   height: 800px;
   max-height: calc(100vh - 80px);
 
-  @supports (max-height: calc(100dvh - 80px)) {
-    max-height: calc(100dvh - 80px);
+  @supports (max-height: calc(100svh - 80px)) {
+    max-height: calc(100svh - 80px);
   }
 }
 
