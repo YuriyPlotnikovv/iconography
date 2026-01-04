@@ -22,18 +22,16 @@
     }
   }
 
-  @media (hover: none) {
-    .card__content {
-      top: 0;
-    }
-  }
-
   @media (max-width: var.$desktop-min-width) {
     height: 400px;
   }
 
   @media (max-width: var.$tablet-min-width) {
     height: 300px;
+
+    .card__content {
+      top: 0;
+    }
   }
 }
 
