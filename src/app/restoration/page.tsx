@@ -27,7 +27,7 @@ export default function Page(): JSX.Element {
             <Heading title={'Реставрация'} description={'<p>Подробное описание раздела</p>'}
                      breadcrumbsList={breadcrumbsList}/>
 
-            <Process/>
+            <Payment/>
 
             <section className="section">
                 <div className="container">
@@ -39,7 +39,7 @@ export default function Page(): JSX.Element {
                 </div>
             </section>
 
-            <Payment/>
+            <Process/>
         </>
     );
 }

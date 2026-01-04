@@ -47,7 +47,7 @@ export default function Process(): JSX.Element {
         <section className={clsx('section', processStyles['process'])} id="process">
             <div className="container">
                 <h2 className="section__title">
-                    Процесс изготовления
+                    Процесс
                 </h2>
 
                 <ul className={processStyles['process__list']}>
