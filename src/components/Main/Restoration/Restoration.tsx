@@ -13,15 +13,21 @@ export default function Restoration(): JSX.Element {
                 </h2>
 
                 <div className={restorationStyles['restoration__content']}>
-                    <Image className={restorationStyles['restoration__image']} src="/img/cover.jpg" alt="" width={500}
-                           height={500}/>
+                    <div className={restorationStyles['restoration__image-wrapper']}>
+                        <Image className={restorationStyles['restoration__image']}
+                               src="/img/cover.jpg"
+                               sizes="(max-width: 768px) 100vw, 40vw"
+                               alt=""
+                               fill
+                        />
+                    </div>
 
                     <div className={restorationStyles['restoration__text']}>
                         Описание услуги
                     </div>
 
                     <Link className={clsx(restorationStyles['restoration__button'], 'button', 'button--accent')}
-                       href="/restoration">Подробнее</Link>
+                          href="/restoration">Подробнее</Link>
                 </div>
             </div>
         </section>

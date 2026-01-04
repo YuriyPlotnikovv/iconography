@@ -17,20 +17,24 @@
   }
 }
 
-.restoration__image {
+.restoration__image-wrapper {
+  position: relative;
+
   grid-row: 1 / -1;
   grid-column: 1 / 2;
   width: 100%;
   height: 500px;
-
-  border-radius: 40px;
-  box-shadow: var.$cardShadow;
 
   @media (max-width: var.$tablet-mid-width) {
     grid-row: 2 / 3;
     grid-column: 1 / -1;
     height: 100%;
   }
+}
+
+.restoration__image {
+  border-radius: 40px;
+  box-shadow: var.$cardShadow;
 }
 
 .restoration__text {
