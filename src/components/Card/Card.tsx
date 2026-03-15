@@ -19,7 +19,7 @@ export default function Card({data}: CardProps): JSX.Element {
                 </h3>
 
                 <div className={cardStyles['card__text']}>
-                    {data.text}
+                    {data.description}
                 </div>
 
                 <div className="button button--arrow">Подробнее</div>

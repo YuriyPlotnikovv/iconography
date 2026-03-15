@@ -6,7 +6,7 @@ import Categories from '@/components/Categories/Categories';
 
 export const metadata: Metadata = {
     title: 'Категории икон | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
+    description: 'Все категории икон, создаваемых в нашей иконописной мастерской',
 };
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -22,8 +22,11 @@ const breadcrumbsList: BreadcrumbItem[] = [
 export default function Page(): JSX.Element {
     return (
         <>
-            <Heading title={'Новости'} description={'<p>Подробное описание раздела</p>'}
-                     breadcrumbsList={breadcrumbsList}/>
+            <Heading
+                title={'Категории икон'}
+                description={'<p>Выберите интересующую вас категорию икон, чтобы узнать подробнее о каждом направлении нашей иконописной мастерской.</p>'}
+                breadcrumbsList={breadcrumbsList}
+            />
 
             <Categories/>
         </>

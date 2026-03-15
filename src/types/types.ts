@@ -4,25 +4,19 @@ export type MenuItem = {
 }
 
 export type CardItem = {
-    id: number;
+    id: number | string;
     title: string;
-    text: string;
+    description: string;
     href: string;
     image: string;
     alt: string;
 }
 
-export type AdvantageItem = {
-    id: number;
-    title: string;
-    text: string;
-}
-
 export type ProcessItem = {
-    id: number;
+    _id: string;
     title: string;
-    text: string;
-    image: string;
+    description: string;
+    image: ImageItem;
     alt: string;
 }
 
@@ -35,7 +29,7 @@ export type GalleryItem = {
 }
 
 export type ReviewItem = {
-    id: number;
+    id: number | string;
     date: string;
     stars: number;
     name: string;
@@ -59,3 +53,94 @@ export type BreadcrumbItem = {
     title: string;
     url?: string;
 };
+
+export type ImageItem = {
+    _id: string;
+    title: string;
+    alt: string;
+    width: string;
+    height: string;
+}
+
+export type MainInfo = {
+    title: string;
+    description: string;
+    logo: ImageItem;
+    image: ImageItem;
+    address: string;
+    email: string;
+    phone: string;
+    telegram: string;
+    whatsapp: string;
+    vk: string;
+    max: string;
+}
+
+export type AdvantageItem = {
+    _id: number;
+    title: string;
+    description: string;
+    icon: ImageItem;
+}
+
+export type CategoryFromServer = {
+    _id: string;
+    title: string;
+    description: string;
+    image: ImageItem;
+    sort: number;
+}
+
+export type WorkFromServer = {
+    _id: string;
+    title: string;
+    description: string;
+    image: ImageItem;
+    slider: ImageItem[];
+    date: string;
+    instock: boolean;
+}
+
+export type NewsFromServer = {
+    _id: string;
+    title: string;
+    description: string;
+    content: string;
+    image: ImageItem;
+    date: string;
+}
+
+export type ReviewFromServer = {
+    _id: string;
+    name: string;
+    text: string;
+    stars: number;
+    date: string;
+}
+
+export type MasterFromServer = {
+    _id: string;
+    name: string;
+    description: string;
+    image: ImageItem;
+}
+
+export type GalleryFromServer = {
+    _id: string;
+    title: string;
+    description: string;
+    image: ImageItem;
+}
+
+export type FaqFromServer = {
+    _id: string;
+    question: string;
+    answer: string;
+}
+
+export type RestorationFromServer = {
+    _id: string;
+    title: string;
+    description: string;
+    image: ImageItem;
+}

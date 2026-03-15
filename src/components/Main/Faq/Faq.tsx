@@ -1,27 +1,17 @@
 import {JSX} from 'react';
-import faqStyles from './Faq.module.scss';
 import clsx from 'clsx';
-import {FaqItem} from '@/types/types';
 
-const faqList: FaqItem[] = [
-    {
-        id: 1,
-        question: 'Вопрос',
-        answer: 'Ответ',
-    },
-    {
-        id: 2,
-        question: 'Вопрос',
-        answer: 'Ответ',
-    },
-    {
-        id: 3,
-        question: 'Вопрос',
-        answer: 'Ответ',
-    },
-];
+import {FaqFromServer} from '@/types/types';
+import faqStyles from './Faq.module.scss';
+import cockpit from '@/lib/CockpitAPI';
 
-export default function Faq(): JSX.Element {
+export default async function Faq(): Promise<JSX.Element | null> {
+    const faqData: FaqFromServer[] = await cockpit.getCollection('faq');
+
+    if (!faqData || faqData.length === 0) {
+        return null;
+    }
+
     return (
         <section className={clsx('section', faqStyles['faq'])} id="faq">
             <div className="container">
@@ -31,9 +21,9 @@ export default function Faq(): JSX.Element {
 
                 <ul className={faqStyles['faq__list']}>
                     {
-                        faqList.map((faq) => {
+                        faqData.map((faq) => {
                             return (
-                                <li className={faqStyles['faq__item']} key={faq.id}>
+                                <li className={faqStyles['faq__item']} key={faq._id}>
                                     <details className={faqStyles['faq__item-details']} name="question">
                                         <summary className={faqStyles['faq__item-title']}>
                                             {faq.question}

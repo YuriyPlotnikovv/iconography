@@ -1,33 +1,28 @@
 import {JSX} from 'react';
-import {ReviewItem} from '@/types/types';
 import Link from 'next/link';
+
+import {ReviewFromServer, ReviewItem} from '@/types/types';
 import ReviewsList from '@/components/ReviewsList/ReviewsList';
+import cockpit from '@/lib/CockpitAPI';
 
-const reviewsList: ReviewItem[] = [
-    {
-        id: 1,
-        date: '2025-08-14',
-        stars: 5,
-        name: 'Имя',
-        text: 'Отзыв',
-    },
-    {
-        id: 2,
-        date: '2025-08-14',
-        stars: 5,
-        name: 'Имя',
-        text: 'Отзыв',
-    },
-    {
-        id: 3,
-        date: '2025-08-14',
-        stars: 5,
-        name: 'Имя',
-        text: 'Отзыв',
-    },
-];
+export default async function Reviews(): Promise<JSX.Element | null> {
+    const reviewsData: ReviewFromServer[] = await cockpit.getCollection('reviews', {
+        sort: {date: -1},
+        limit: 6
+    });
 
-export default function Reviews(): JSX.Element {
+    if (!reviewsData || reviewsData.length === 0) {
+        return null;
+    }
+
+    const reviewsList: ReviewItem[] = reviewsData.map((review) => ({
+        id: review._id,
+        date: review.date,
+        stars: review.stars,
+        name: review.name,
+        text: review.text,
+    }));
+
     return (
         <section className="section">
             <div className="container">

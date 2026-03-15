@@ -1,55 +1,68 @@
 import type {Metadata} from 'next';
 import {JSX} from 'react';
-import {BreadcrumbItem, SlideItem} from '@/types/types';
+import {notFound} from 'next/navigation';
+import {BreadcrumbItem, NewsFromServer, SlideItem} from '@/types/types';
 import Heading from '@/components/Heading/Heading';
 import Detail from '@/components/Detail/Detail';
+import cockpit from '@/lib/CockpitAPI';
 
-export const metadata: Metadata = {
-    title: 'Новость детально | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
+type PageParams = {
+    params: Promise<{
+        'news-detail': string;
+    }>;
 };
 
-const breadcrumbsList: BreadcrumbItem[] = [
-    {
-        title: 'Главная',
-        url: '/',
-    },
-    {
-        title: 'Новости',
-        url: '/news',
-    },
-    {
-        title: 'Заголовок новости',
-    },
-];
+export async function generateMetadata({params}: PageParams): Promise<Metadata> {
+    const {['news-detail']: id} = await params;
+    const news: NewsFromServer | null = await cockpit.getCollectionItem('news', id);
 
-const slidesList: SlideItem[] = [
-    {
-        id: 1,
-        image: '/img/cover.jpg',
-        alt: 'Обложка слайда',
-        href: '/news/1'
-    },
-    {
-        id: 2,
-        image: '/img/cover.jpg',
-        alt: 'Обложка слайда',
-        href: '/news/2'
-    },
-    {
-        id: 3,
-        image: '/img/cover.jpg',
-        alt: 'Обложка слайда',
-        href: '/news/3'
-    },
-];
+    if (!news) {
+        return {
+            title: 'Новость не найдена | Иконописная мастерская',
+        };
+    }
 
-export default function Page(): JSX.Element {
+    return {
+        title: `${news.title} | Иконописная мастерская`,
+        description: news.description,
+    };
+}
+
+export default async function Page({params}: PageParams): Promise<JSX.Element> {
+    const {['news-detail']: id} = await params;
+    const news: NewsFromServer | null = await cockpit.getCollectionItem('news', id);
+
+    if (!news) {
+        notFound();
+    }
+
+    const breadcrumbsList: BreadcrumbItem[] = [
+        {
+            title: 'Главная',
+            url: '/',
+        },
+        {
+            title: 'Новости',
+            url: '/news',
+        },
+        {
+            title: news.title,
+        },
+    ];
+
+    const slidesList: SlideItem[] = [
+        {
+            id: 1,
+            image: cockpit.getImageUrl(news.image._id, 800, 800),
+            alt: news.image.title || news.title,
+        },
+    ];
+
     return (
         <>
             <Heading breadcrumbsList={breadcrumbsList}/>
 
-            <Detail slidesList={slidesList} title={'Заголовок новости'} description={'<p>Текст новости</p>'}/>
+            <Detail slidesList={slidesList} title={news.title} description={news.content}/>
         </>
     );
 }

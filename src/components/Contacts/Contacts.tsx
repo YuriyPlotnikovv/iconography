@@ -1,25 +1,46 @@
 import {JSX} from 'react';
 import contactsStyles from './Contacts.module.scss';
 import clsx from 'clsx';
+import {MainInfo} from '@/types/types';
+import cockpit from '@/lib/CockpitAPI';
+import {createEmailLink, createPhoneLink} from '@/functions/functions';
 
 type ContactsProps = {
     addClass: string,
 }
 
-export default function Contacts({addClass}: ContactsProps): JSX.Element {
+export default async function Contacts({addClass}: ContactsProps): Promise<JSX.Element> {
+    const mainInfo: MainInfo = await cockpit.getSingleItem('maininfo');
+
+    const email = mainInfo.email;
+    const phone = mainInfo.phone;
+
+    if (!email && !phone) {
+        return (
+            <></>
+        );
+    }
+
     return (
         <ul className={clsx(addClass, contactsStyles['contacts'])}>
-            <li className={contactsStyles['contacts__item']}>
-                <a className={contactsStyles['contacts__link']} href="mailto:test@test.ru">
-                    <span className={contactsStyles['contacts__link-value']}>test@test.ru</span>
-                </a>
-            </li>
-
-            <li className={contactsStyles['contacts__item']}>
-                <a className={contactsStyles['contacts__link']} href="tel:+79999999999">
-                    <span className={contactsStyles['contacts__link-value']}>+7 (999) 999 99-99</span>
-                </a>
-            </li>
+            {
+                email && (
+                    <li className={contactsStyles['contacts__item']}>
+                        <a className={contactsStyles['contacts__link']} href={createEmailLink(email)}>
+                            <span className={contactsStyles['contacts__link-value']}>{email}</span>
+                        </a>
+                    </li>
+                )
+            }
+            {
+                phone && (
+                    <li className={contactsStyles['contacts__item']}>
+                        <a className={contactsStyles['contacts__link']} href={createPhoneLink(phone)}>
+                            <span className={contactsStyles['contacts__link-value']}>{phone}</span>
+                        </a>
+                    </li>
+                )
+            }
         </ul>
     );
 }

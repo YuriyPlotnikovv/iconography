@@ -1,8 +1,9 @@
 import type {Metadata} from 'next';
 import {JSX} from 'react';
-import {BreadcrumbItem, CardItem} from '@/types/types';
+import {BreadcrumbItem, CardItem, GalleryFromServer} from '@/types/types';
 import Heading from '@/components/Heading/Heading';
 import GalleryPage from '@/components/GalleryPage/GalleryPage';
+import cockpit from '@/lib/CockpitAPI';
 
 export const metadata: Metadata = {
     title: 'Галерея | Иконописная мастерская',
@@ -19,56 +20,24 @@ const breadcrumbsList: BreadcrumbItem[] = [
     },
 ];
 
-const galleryList: CardItem[] = [
-    {
-        id: 1,
-        title: 'Заголовок',
-        text: 'Описание',
-        href: '/gallery',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 2,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/gallery',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 3,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/gallery',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 4,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/gallery',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 5,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/gallery',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-];
+export default async function Page(): Promise<JSX.Element> {
+    const galleryData: GalleryFromServer[] = await cockpit.getCollection('gallery');
 
-export default function Page(): JSX.Element {
+    const galleryList: CardItem[] = galleryData.map((item) => ({
+        id: item._id,
+        title: item.title,
+        description: item.description,
+        href: '/gallery',
+        image: cockpit.getImageUrl(item.image._id, 400, 400),
+        alt: item.image.title || item.title,
+    }));
+
     return (
         <>
             <Heading title={'Галерея'} description={'<p>Подробное описание раздела</p>'}
                      breadcrumbsList={breadcrumbsList}/>
 
-            <GalleryPage galleryList={galleryList}/>
+            {galleryList.length > 0 && <GalleryPage galleryList={galleryList}/>}
         </>
     );
 }

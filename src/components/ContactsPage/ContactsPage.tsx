@@ -3,8 +3,17 @@ import contactsPageStyles from './ContactsPage.module.scss';
 import clsx from 'clsx';
 import Social from '@/components/Social/Social';
 import FormContacts from '@/components/Forms/FormContacts/FormContacts';
+import {MainInfo} from '@/types/types';
+import cockpit from '@/lib/CockpitAPI';
+import {createEmailLink, createPhoneLink} from '@/functions/functions';
 
-export default function ContactsPage(): JSX.Element {
+export default async function ContactsPage(): Promise<JSX.Element> {
+    const contactsInfo: MainInfo = await cockpit.getSingleItem('maininfo');
+
+    const address = contactsInfo.address;
+    const email = contactsInfo.email;
+    const phone = contactsInfo.phone;
+
     return (
         <>
             <section className={clsx('section', contactsPageStyles['contacts'])}>
@@ -14,29 +23,41 @@ export default function ContactsPage(): JSX.Element {
                     </h2>
 
                     <ul className={contactsPageStyles['contacts__list']}>
-                        <li className={contactsPageStyles['contacts__item']}>
-                            <a className={contactsPageStyles['contacts__link']} href="#">
-                                <address className={contactsPageStyles['contacts__address']}>
-                                    <span className={contactsPageStyles['contacts__link-caption']}>Адрес:</span>
-                                    <span
-                                        className={contactsPageStyles['contacts__link-value']}>Город, улица, дом</span>
-                                </address>
-                            </a>
-                        </li>
+                        {
+                            address && (
+                                <li className={contactsPageStyles['contacts__item']}>
+                                    <a className={contactsPageStyles['contacts__link']} href="#">
+                                        <address className={contactsPageStyles['contacts__address']}>
+                                            <span className={contactsPageStyles['contacts__link-caption']}>Адрес:</span>
+                                            <span
+                                                className={contactsPageStyles['contacts__link-value']}>{address}</span>
+                                        </address>
+                                    </a>
+                                </li>
+                            )
+                        }
 
-                        <li className={contactsPageStyles['contacts__item']}>
-                            <a className={contactsPageStyles['contacts__link']} href="mailto:test@test.ru">
-                                <span className={contactsPageStyles['contacts__link-caption']}>Email:</span>
-                                <span className={contactsPageStyles['contacts__link-value']}>test@test.ru</span>
-                            </a>
-                        </li>
+                        {
+                            email && (
+                                <li className={contactsPageStyles['contacts__item']}>
+                                    <a className={contactsPageStyles['contacts__link']} href={createEmailLink(email)}>
+                                        <span className={contactsPageStyles['contacts__link-caption']}>Email:</span>
+                                        <span className={contactsPageStyles['contacts__link-value']}>{email}</span>
+                                    </a>
+                                </li>
+                            )
+                        }
 
-                        <li className={contactsPageStyles['contacts__item']}>
-                            <a className={contactsPageStyles['contacts__link']} href="tel:+79999999999">
-                                <span className={contactsPageStyles['contacts__link-caption']}>Телефон:</span>
-                                <span className={contactsPageStyles['contacts__link-value']}>+7 (999) 999 99-99</span>
-                            </a>
-                        </li>
+                        {
+                            phone && (
+                                <li className={contactsPageStyles['contacts__item']}>
+                                    <a className={contactsPageStyles['contacts__link']} href={createPhoneLink(phone)}>
+                                        <span className={contactsPageStyles['contacts__link-caption']}>Телефон:</span>
+                                        <span className={contactsPageStyles['contacts__link-value']}>{phone}</span>
+                                    </a>
+                                </li>
+                            )
+                        }
                     </ul>
 
                     <Social addClass={contactsPageStyles['contacts__social']}/>

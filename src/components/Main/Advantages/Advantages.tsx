@@ -2,41 +2,13 @@ import {JSX} from 'react';
 import advantagesStyles from './Advantages.module.scss';
 import {AdvantageItem} from '@/types/types';
 import clsx from 'clsx';
+import cockpit from '@/lib/CockpitAPI';
+import Image from 'next/image';
+import logoStyles from '@/components/Logo/Logo.module.scss';
 
-const advantagesList: AdvantageItem[] = [
-    {
-        id: 1,
-        title: 'Заголовок',
-        text: 'Текст',
-    },
-    {
-        id: 2,
-        title: 'Заголовок',
-        text: 'Текст',
-    },
-    {
-        id: 3,
-        title: 'Заголовок',
-        text: 'Текст',
-    },
-    {
-        id: 4,
-        title: 'Заголовок',
-        text: 'Текст',
-    },
-    {
-        id: 5,
-        title: 'Заголовок',
-        text: 'Текст',
-    },
-    {
-        id: 6,
-        title: 'Заголовок',
-        text: 'Текст',
-    },
-];
+export default async function Advantages(): Promise<JSX.Element> {
+    const advantagesList: AdvantageItem[] = await cockpit.getCollection('advantages');
 
-export default function Advantages(): JSX.Element {
     return (
         <section className={clsx('section', advantagesStyles['advantages'])}>
             <div className="container">
@@ -47,15 +19,31 @@ export default function Advantages(): JSX.Element {
                 <ul className={advantagesStyles['advantages__list']}>
                     {
                         advantagesList.map(item => {
+                            const title = item.title;
+                            const description = item.description;
+                            const icon = cockpit.getImageUrl(item.icon._id, 100, 100);
+
                             return (
-                                <li className={advantagesStyles['advantages__item']} key={item.id}>
+                                <li className={advantagesStyles['advantages__item']} key={item._id}>
+                                    <Image className={logoStyles['logo__image']}
+                                           src={icon}
+                                           width="100"
+                                           height="100"
+                                           unoptimized
+                                           alt="Иконописная мастерская"
+                                    />
+
                                     <h3 className={advantagesStyles['advantages__item-title']}>
-                                        {item.title}
+                                        {title}
                                     </h3>
 
-                                    <div className={advantagesStyles['advantages__item-text']}>
-                                        {item.text}
-                                    </div>
+                                    {
+                                        description && (
+                                            <div className={advantagesStyles['advantages__item-text']}>
+                                                {description}
+                                            </div>
+                                        )
+                                    }
                                 </li>
                             );
                         })

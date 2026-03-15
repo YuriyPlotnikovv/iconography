@@ -1,8 +1,9 @@
 import type {Metadata} from 'next';
 import {JSX} from 'react';
-import {BreadcrumbItem, CardItem} from '@/types/types';
+import {BreadcrumbItem, CardItem, WorkFromServer} from '@/types/types';
 import Heading from '@/components/Heading/Heading';
 import Works from '@/components/Works/Works';
+import cockpit from '@/lib/CockpitAPI';
 
 export const metadata: Metadata = {
     title: 'Рукописные иконы в наличии | Иконописная мастерская',
@@ -19,50 +20,21 @@ const breadcrumbsList: BreadcrumbItem[] = [
     },
 ];
 
-const inStockList: CardItem[] = [
-    {
-        id: 1,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/1',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 2,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/2',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 3,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/3',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 4,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/4',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 5,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/5',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-];
+export default async function Page(): Promise<JSX.Element> {
+    const worksData: WorkFromServer[] = await cockpit.getCollection('works', {
+        filter: {instock: true},
+        sort: {date: -1}
+    });
 
-export default function Page(): JSX.Element {
+    const inStockList: CardItem[] = worksData.map((work) => ({
+        id: work._id,
+        title: work.title,
+        description: work.description,
+        href: `/in-stock/${work._id}`,
+        image: cockpit.getImageUrl(work.image._id, 400, 400),
+        alt: work.image.title || work.title,
+    }));
+
     return (
         <>
             <Heading title={'Рукописные иконы в наличии'} description={'<p>Подробное описание раздела</p>'}
