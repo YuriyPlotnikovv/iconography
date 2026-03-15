@@ -1,0 +1,14 @@
+@use "../../styles/variables.scss" as var;
+
+.address {
+  font-size: 18px;
+
+  font-style: normal;
+
+  @media (max-width: var.$desktop-mid-width) {
+    font-size: 16px;
+  }
+  @media (max-width: var.$tablet-mid-width) {
+    display: none;
+  }
+}

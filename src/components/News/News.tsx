@@ -1,53 +1,26 @@
 import {JSX} from 'react';
 import newsStyles from './News.module.scss';
-import {CardItem} from '@/types/types';
+import {CardItem, NewsFromServer} from '@/types/types';
 import Card from '@/components/Card/Card';
 import clsx from 'clsx';
+import cockpit from '@/lib/CockpitAPI';
 
-const newsList: CardItem[] = [
-    {
-        id: 1,
-        title: 'Заголовок',
-        text: 'Описание',
-        href: '/news/test-1',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 2,
-        title: 'Заголовок',
-        text: 'Описание',
-        href: '/news/test-2',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 3,
-        title: 'Заголовок',
-        text: 'Описание',
-        href: '/news/test-3',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 4,
-        title: 'Заголовок',
-        text: 'Описание',
-        href: '/news/test-4',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 5,
-        title: 'Заголовок',
-        text: 'Описание',
-        href: '/news/test-5',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-];
+export default async function News(): Promise<JSX.Element | null> {
+    const newsData: NewsFromServer[] = await cockpit.getCollection('news');
 
-export default function News(): JSX.Element {
+    if (!newsData || newsData.length === 0) {
+        return null;
+    }
+
+    const newsList: CardItem[] = newsData.map((news) => ({
+        id: news._id,
+        title: news.title,
+        description: news.description,
+        href: `/news/${news._id}`,
+        image: cockpit.getImageUrl(news.image._id, 400, 400),
+        alt: news.image.title || news.title,
+    }));
+
     return (
         <section className={clsx('section', newsStyles['news'])}>
             <div className="container">

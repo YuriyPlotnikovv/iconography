@@ -1,54 +1,31 @@
 import {JSX} from 'react';
-import inStockStyles from './InStock.module.scss';
-import {CardItem} from '@/types/types';
 import clsx from 'clsx';
-import Card from '@/components/Card/Card';
 import Link from 'next/link';
 
-const inStockList: CardItem[] = [
-    {
-        id: 1,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/1',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 2,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/2',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 3,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/3',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 4,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/4',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 5,
-        title: 'Заголовок',
-        text: 'Описание работы',
-        href: '/in-stock/5',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-];
+import {CardItem, WorkFromServer} from '@/types/types';
+import Card from '@/components/Card/Card';
+import inStockStyles from './InStock.module.scss';
+import cockpit from '@/lib/CockpitAPI';
 
-export default function InStock(): JSX.Element {
+export default async function InStock(): Promise<JSX.Element | null> {
+    const worksData: WorkFromServer[] = await cockpit.getCollection('works', {
+        filter: {instock: true},
+        sort: {date: -1}
+    });
+
+    if (!worksData || worksData.length === 0) {
+        return null;
+    }
+
+    const inStockList: CardItem[] = worksData.map((work) => ({
+        id: work._id,
+        title: work.title,
+        description: work.description,
+        href: `/in-stock/${work._id}`,
+        image: cockpit.getImageUrl(work.image._id, 400, 400),
+        alt: work.image.title || work.title,
+    }));
+
     return (
         <section className={clsx('section', inStockStyles['in-stock'])}>
             <div className="container">

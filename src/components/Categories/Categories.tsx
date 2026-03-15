@@ -1,53 +1,22 @@
 import {JSX} from 'react';
-import categoriesStyles from './Categories.module.scss';
-import {CardItem} from '@/types/types';
-import Card from '@/components/Card/Card';
 import clsx from 'clsx';
+import {CardItem, CategoryFromServer} from '@/types/types';
+import Card from '@/components/Card/Card';
+import categoriesStyles from './Categories.module.scss';
+import cockpit from '@/lib/CockpitAPI';
 
-const categoriesList: CardItem[] = [
-    {
-        id: 1,
-        title: 'Заголовок',
-        text: 'Описание категории',
-        href: '/categories/1',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 2,
-        title: 'Заголовок',
-        text: 'Описание категории',
-        href: '/categories/2',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 3,
-        title: 'Заголовок',
-        text: 'Описание категории',
-        href: '/categories/3',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 4,
-        title: 'Заголовок',
-        text: 'Описание категории',
-        href: '/categories/4',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-    {
-        id: 5,
-        title: 'Заголовок',
-        text: 'Описание категории',
-        href: '/categories/5',
-        image: '/img/cover.jpg',
-        alt: 'Подпись к фото',
-    },
-];
+export default async function Categories(): Promise<JSX.Element> {
+    const categoriesData: CategoryFromServer[] = await cockpit.getCollection('category');
 
-export default function Categories(): JSX.Element {
+    const categoriesList: CardItem[] = categoriesData.map((category) => ({
+        id: category._id,
+        title: category.title,
+        description: category.description,
+        href: `/categories/${category._id}`,
+        image: cockpit.getImageUrl(category.image._id, 400, 400),
+        alt: category.image.title || category.title,
+    }));
+
     return (
         <section className={clsx('section', categoriesStyles['categories'])}>
             <div className="container">
@@ -57,10 +26,10 @@ export default function Categories(): JSX.Element {
 
                 <ul className={categoriesStyles['categories__list']}>
                     {
-                        categoriesList.map((categories) => {
+                        categoriesList.map((category) => {
                             return (
-                                <li className={categoriesStyles['categories__item']} key={categories.id}>
-                                    <Card data={categories}/>
+                                <li className={categoriesStyles['categories__item']} key={category.id}>
+                                    <Card data={category}/>
                                 </li>
                             );
                         })

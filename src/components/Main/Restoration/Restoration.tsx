@@ -1,33 +1,46 @@
 import {JSX} from 'react';
-import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import restorationStyles from './Restoration.module.scss';
+import clsx from 'clsx';
 
-export default function Restoration(): JSX.Element {
+import {RestorationFromServer} from '@/types/types';
+import restorationStyles from './Restoration.module.scss';
+import cockpit from '@/lib/CockpitAPI';
+
+export default async function Restoration(): Promise<JSX.Element | null> {
+    const restorationData: RestorationFromServer[] = await cockpit.getCollection('restoration', {
+        limit: 1
+    });
+
+    if (!restorationData || restorationData.length === 0) {
+        return null;
+    }
+
+    const restoration = restorationData[0];
+
     return (
-        <section className={clsx('section', restorationStyles['restoration'])}>
+        <section className={clsx('section', restorationStyles['restoration'])} id="restoration">
             <div className="container">
                 <h2 className="section__title">
-                    Реставрация икон
+                    {restoration.title || 'Реставрация икон'}
                 </h2>
 
-                <div className={restorationStyles['restoration__content']}>
-                    <div className={restorationStyles['restoration__image-wrapper']}>
-                        <Image className={restorationStyles['restoration__image']}
-                               src="/img/cover.jpg"
-                               sizes="(max-width: 768px) 100vw, 40vw"
-                               alt=""
-                               fill
-                        />
-                    </div>
+                <div className={restorationStyles['restoration__wrapper']}>
+                    <Image className={restorationStyles['restoration__image']}
+                           src={cockpit.getImageUrl(restoration.image._id, 600, 600)}
+                           width={600}
+                           height={600}
+                           alt={restoration.image.title || restoration.title}/>
 
-                    <div className={restorationStyles['restoration__text']}>
-                        Описание услуги
-                    </div>
+                    <div className={restorationStyles['restoration__content']}>
+                        <p className={restorationStyles['restoration__text']}>
+                            {restoration.description}
+                        </p>
 
-                    <Link className={clsx(restorationStyles['restoration__button'], 'button', 'button--accent')}
-                          href="/restoration">Подробнее</Link>
+                        <Link className="button button--accent" href="/restoration">
+                            Подробнее
+                        </Link>
+                    </div>
                 </div>
             </div>
         </section>

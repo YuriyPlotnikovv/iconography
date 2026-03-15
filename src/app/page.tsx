@@ -16,15 +16,15 @@ import News from '@/components/Main/News/News';
 import Faq from '@/components/Main/Faq/Faq';
 
 export const metadata: Metadata = {
-    title: 'Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
+    title: 'Иконописная Артель',
+    description: 'В нашей артели Вы можете заказать рукописную каноническую икону. Мы пишем в древней технологии яичной темперой храмовые, семейные, мерные иконы, венчальные пары.',
 };
 
 export default function Page() {
     return (
         <>
             <h1 className="visually-hidden">
-                Иконописная мастерская
+                Иконописная Артель
             </h1>
 
             <SliderMain/>

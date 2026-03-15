@@ -1,48 +1,13 @@
 import {JSX} from 'react';
 import processStyles from './Process.module.scss';
-import {ProcessItem} from '@/types/types';
+import {MainInfo, ProcessItem} from '@/types/types';
 import Image from 'next/image';
 import clsx from 'clsx';
+import cockpit from '@/lib/CockpitAPI';
 
-const processList: ProcessItem[] = [
-    {
-        id: 1,
-        title: 'Заголовок этапа',
-        text: 'Описание этапа',
-        image: '/img/cover.jpg',
-        alt: 'Фото этапа',
-    },
-    {
-        id: 2,
-        title: 'Заголовок этапа',
-        text: 'Описание этапа',
-        image: '/img/cover.jpg',
-        alt: 'Фото этапа',
-    },
-    {
-        id: 3,
-        title: 'Заголовок этапа',
-        text: 'Описание этапа',
-        image: '/img/cover.jpg',
-        alt: 'Фото этапа',
-    },
-    {
-        id: 4,
-        title: 'Заголовок этапа',
-        text: 'Описание этапа',
-        image: '/img/cover.jpg',
-        alt: 'Фото этапа',
-    },
-    {
-        id: 5,
-        title: 'Заголовок этапа',
-        text: 'Описание этапа',
-        image: '/img/cover.jpg',
-        alt: 'Фото этапа',
-    },
-];
+export default async function Process(): Promise<JSX.Element> {
+    const processList: ProcessItem[] = await cockpit.getCollection('createprocess', {sort: {sort: 1}});
 
-export default function Process(): JSX.Element {
     return (
         <section className={clsx('section', processStyles['process'])} id="process">
             <div className="container">
@@ -53,22 +18,31 @@ export default function Process(): JSX.Element {
                 <ul className={processStyles['process__list']}>
                     {
                         processList.map(process => {
+                            const title = process.title;
+                            const description = process.description;
+                            const image = cockpit.getImageUrl(process.image._id, 800, 500);
+                            const alt = process.alt ?? process.title;
+
                             return (
-                                <li className={processStyles['process__item']} key={process.id}>
+                                <li className={processStyles['process__item']} key={process._id}>
                                     <Image className={processStyles['process__item-image']}
-                                           src={process.image}
-                                           alt={process.alt}
+                                           src={image}
+                                           alt={alt}
                                            width={500}
                                            height={500}
                                     />
 
                                     <h3 className={processStyles['process__item-title']}>
-                                        {process.title}
+                                        {title}
                                     </h3>
 
-                                    <div className={processStyles['process__item-text']}>
-                                        {process.text}
-                                    </div>
+                                    {
+                                        description && (
+                                            <div className={processStyles['process__item-text']}>
+                                                {description}
+                                            </div>
+                                        )
+                                    }
                                 </li>
                             );
                         })

@@ -1,9 +1,10 @@
 import type {Metadata} from 'next';
 import {JSX} from 'react';
-import {BreadcrumbItem, ReviewItem} from '@/types/types';
+import {BreadcrumbItem, ReviewItem, ReviewFromServer} from '@/types/types';
 import Heading from '@/components/Heading/Heading';
 import ReviewsList from '@/components/ReviewsList/ReviewsList';
 import FormReviews from '@/components/Forms/FormReviews/FormReviews';
+import cockpit from '@/lib/CockpitAPI';
 
 export const metadata: Metadata = {
     title: 'Отзывы | Иконописная мастерская',
@@ -20,31 +21,17 @@ const breadcrumbsList: BreadcrumbItem[] = [
     },
 ];
 
-const reviewsList: ReviewItem[] = [
-    {
-        id: 1,
-        date: '2025-08-14',
-        stars: 5,
-        name: 'Имя',
-        text: 'Отзыв',
-    },
-    {
-        id: 2,
-        date: '2025-08-14',
-        stars: 5,
-        name: 'Имя',
-        text: 'Отзыв',
-    },
-    {
-        id: 3,
-        date: '2025-08-14',
-        stars: 5,
-        name: 'Имя',
-        text: 'Отзыв',
-    },
-];
+export default async function Page(): Promise<JSX.Element> {
+    const reviewsData: ReviewFromServer[] = await cockpit.getCollection('reviews');
 
-export default function Page(): JSX.Element {
+    const reviewsList: ReviewItem[] = reviewsData.map((review) => ({
+        id: review._id,
+        date: review.date,
+        stars: review.stars,
+        name: review.name,
+        text: review.text,
+    }));
+
     return (
         <>
             <Heading title={'Отзывы'} description={'<p>Подробное описание раздела</p>'}
@@ -56,7 +43,7 @@ export default function Page(): JSX.Element {
                         Отзывы о нас
                     </h2>
 
-                    <ReviewsList reviewsList={reviewsList}/>
+                    {reviewsList.length > 0 && <ReviewsList reviewsList={reviewsList}/>}
                 </div>
             </section>
 
