@@ -1,6 +1,6 @@
 interface CockpitOptions {
     locale?: string;
-    filter?: Record<string, any>;
+    filter?: Record<string, boolean>;
     sort?: Record<string, number>;
     limit?: number;
     skip?: number;

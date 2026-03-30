@@ -5,7 +5,6 @@ import {BreadcrumbItem, MasterFromServer, SlideItem, WorkFromServer} from '@/typ
 import Heading from '@/components/Heading/Heading';
 import Detail from '@/components/Detail/Detail';
 import Master from '@/components/Master/Master';
-import FormCalculation from '@/components/Forms/FormCalculation/FormCalculation';
 import cockpit from '@/lib/CockpitAPI';
 
 type PageProps = {
