@@ -5,8 +5,8 @@ import Heading from '@/components/Heading/Heading';
 import News from '@/components/News/News';
 
 export const metadata: Metadata = {
-    title: 'Новости | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
+    title: 'Новости | Иконописная Артель',
+    description: 'Иконописная Артель - описание',
 };
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -20,11 +20,16 @@ const breadcrumbsList: BreadcrumbItem[] = [
 ];
 
 export default function Page(): JSX.Element {
+    const title = 'Новости';
+    const description = '<p></p>';
+
     return (
         <>
-            <Heading title={'Новости'} description={'<p>Подробное описание раздела</p>'}
-                     breadcrumbsList={breadcrumbsList}/>
-
+            <Heading title={title}
+                     description={description}
+                     breadcrumbsList={breadcrumbsList}
+            />
+            
             <News/>
         </>
     );

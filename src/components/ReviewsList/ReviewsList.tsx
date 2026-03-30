@@ -28,7 +28,7 @@ export default function ReviewsList({reviewsList}: ReviewsListProps): JSX.Elemen
                             </svg>
 
                             <div className={reviewsListStyles['reviews__item-text']}>
-                                {review.text}
+                                {review.review}
                             </div>
 
                             <div className={reviewsListStyles['reviews__item-info']}>
@@ -41,9 +41,9 @@ export default function ReviewsList({reviewsList}: ReviewsListProps): JSX.Elemen
                                 </p>
 
                                 <p className={reviewsListStyles['reviews__item-rating']}>
-                                            <span className={reviewsListStyles['reviews__item-rating-value']}>
-                                                {review.stars}
-                                            </span>
+                                    <span className={reviewsListStyles['reviews__item-rating-value']}>
+                                        {review.stars}
+                                    </span>
 
                                     <svg className={reviewsListStyles['reviews__item-rating-icon']}
                                          xmlns="http://www.w3.org/2000/svg"

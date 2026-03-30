@@ -18,12 +18,12 @@ export async function generateMetadata({params}: PageParams): Promise<Metadata> 
 
     if (!news) {
         return {
-            title: 'Новость не найдена | Иконописная мастерская',
+            title: 'Новость не найдена | Иконописная Артель',
         };
     }
 
     return {
-        title: `${news.title} | Иконописная мастерская`,
+        title: `${news.title} | Иконописная Артель`,
         description: news.description,
     };
 }
@@ -50,19 +50,22 @@ export default async function Page({params}: PageParams): Promise<JSX.Element> {
         },
     ];
 
-    const slidesList: SlideItem[] = [
-        {
-            id: 1,
-            image: cockpit.getImageUrl(news.image._id, 800, 800),
-            alt: news.image.title || news.title,
-        },
-    ];
+    const slidesList: SlideItem[] = news.slider?.map((image) => ({
+        id: image._id,
+        image: cockpit.getImageUrl(image._id, 800, 800),
+        alt: image.title || news.title,
+    })) || [];
 
     return (
         <>
             <Heading breadcrumbsList={breadcrumbsList}/>
 
-            <Detail slidesList={slidesList} title={news.title} description={news.content}/>
+            <Detail
+                title={news.title}
+                description={news.content}
+                image={news.image}
+                slidesList={slidesList}
+            />
         </>
     );
 }

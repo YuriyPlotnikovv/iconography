@@ -9,16 +9,18 @@ type ContactsProps = {
     addClass: string,
 }
 
-export default async function Contacts({addClass}: ContactsProps): Promise<JSX.Element> {
-    const mainInfo: MainInfo = await cockpit.getSingleItem('maininfo');
+export default async function Contacts({addClass}: ContactsProps): Promise<JSX.Element | null> {
+    const mainInfo: MainInfo | null = await cockpit.getSingleItem('maininfo');
+
+    if (!mainInfo) {
+        return null;
+    }
 
     const email = mainInfo.email;
     const phone = mainInfo.phone;
 
     if (!email && !phone) {
-        return (
-            <></>
-        );
+        return null;
     }
 
     return (

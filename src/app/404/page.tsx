@@ -5,8 +5,8 @@ import Heading from '@/components/Heading/Heading';
 import NotFound from '@/components/NotFound/NotFound';
 
 export const metadata: Metadata = {
-    title: 'Страница не найдена | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
+    title: 'Страница не найдена | Иконописная Артель',
+    description: 'Иконописная Артель - описание',
 };
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -22,7 +22,10 @@ const breadcrumbsList: BreadcrumbItem[] = [
 export default function Page(): JSX.Element {
     return (
         <>
-            <Heading title={'Страница не найдена'} breadcrumbsList={breadcrumbsList}/>
+            <Heading
+                title={'Страница не найдена'}
+                breadcrumbsList={breadcrumbsList}
+            />
 
             <NotFound/>
         </>

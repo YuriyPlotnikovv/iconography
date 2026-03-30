@@ -6,8 +6,8 @@ import GalleryPage from '@/components/GalleryPage/GalleryPage';
 import cockpit from '@/lib/CockpitAPI';
 
 export const metadata: Metadata = {
-    title: 'Галерея | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
+    title: 'Галерея | Иконописная Артель',
+    description: 'Иконописная Артель - описание',
 };
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -21,9 +21,14 @@ const breadcrumbsList: BreadcrumbItem[] = [
 ];
 
 export default async function Page(): Promise<JSX.Element> {
-    const galleryData: GalleryFromServer[] = await cockpit.getCollection('gallery');
+    const title = 'Галерея';
+    const description = '<p></p>';
 
-    const galleryList: CardItem[] = galleryData.map((item) => ({
+    const galleryData: GalleryFromServer[] | null = await cockpit.getCollection('gallery', {
+        sort: {sort: 1}
+    });
+
+    const galleryList: CardItem[] = (galleryData || []).map((item) => ({
         id: item._id,
         title: item.title,
         description: item.description,
@@ -34,10 +39,17 @@ export default async function Page(): Promise<JSX.Element> {
 
     return (
         <>
-            <Heading title={'Галерея'} description={'<p>Подробное описание раздела</p>'}
-                     breadcrumbsList={breadcrumbsList}/>
+            <Heading
+                title={title}
+                description={description}
+                breadcrumbsList={breadcrumbsList}
+            />
 
-            {galleryList.length > 0 && <GalleryPage galleryList={galleryList}/>}
+            {
+                galleryList.length > 0 && (
+                    <GalleryPage galleryList={galleryList}/>
+                )
+            }
         </>
     );
 }

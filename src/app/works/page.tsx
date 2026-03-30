@@ -6,8 +6,8 @@ import Works from '@/components/Works/Works';
 import cockpit from '@/lib/CockpitAPI';
 
 export const metadata: Metadata = {
-    title: 'Наши работы | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
+    title: 'Наши работы | Иконописная Артель',
+    description: 'Иконописная Артель - описание',
 };
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -21,11 +21,14 @@ const breadcrumbsList: BreadcrumbItem[] = [
 ];
 
 export default async function Page(): Promise<JSX.Element> {
-    const worksData: WorkFromServer[] = await cockpit.getCollection('works', {
+    const title = 'Наши работы';
+    const description = '<p></p>';
+
+    const worksData: WorkFromServer[] | null = await cockpit.getCollection('works', {
         sort: {date: -1}
     });
 
-    const worksList: CardItem[] = worksData.map((work) => ({
+    const worksList: CardItem[] = (worksData || []).map((work) => ({
         id: work._id,
         title: work.title,
         description: work.description,
@@ -36,9 +39,11 @@ export default async function Page(): Promise<JSX.Element> {
 
     return (
         <>
-            <Heading title={'Наши работы'} description={'<p>Подробное описание раздела</p>'}
-                     breadcrumbsList={breadcrumbsList}/>
-
+            <Heading title={title}
+                     description={description}
+                     breadcrumbsList={breadcrumbsList}
+            />
+            
             <Works worksList={worksList}/>
         </>
     );

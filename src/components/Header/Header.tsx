@@ -17,7 +17,7 @@ export default function Header(): JSX.Element {
 
                 <Address/>
 
-                <Social addClass={headerStyles['header__social-desktop']}/>
+                <Social/>
 
                 <HeaderMenu/>
             </div>

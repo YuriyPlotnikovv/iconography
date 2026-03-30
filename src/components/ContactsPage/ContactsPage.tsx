@@ -7,8 +7,12 @@ import {MainInfo} from '@/types/types';
 import cockpit from '@/lib/CockpitAPI';
 import {createEmailLink, createPhoneLink} from '@/functions/functions';
 
-export default async function ContactsPage(): Promise<JSX.Element> {
-    const contactsInfo: MainInfo = await cockpit.getSingleItem('maininfo');
+export default async function ContactsPage(): Promise<JSX.Element | null> {
+    const contactsInfo: MainInfo | null = await cockpit.getSingleItem('maininfo');
+
+    if (!contactsInfo) {
+        return null;
+    }
 
     const address = contactsInfo.address;
     const email = contactsInfo.email;
@@ -26,13 +30,15 @@ export default async function ContactsPage(): Promise<JSX.Element> {
                         {
                             address && (
                                 <li className={contactsPageStyles['contacts__item']}>
-                                    <a className={contactsPageStyles['contacts__link']} href="#">
-                                        <address className={contactsPageStyles['contacts__address']}>
-                                            <span className={contactsPageStyles['contacts__link-caption']}>Адрес:</span>
-                                            <span
-                                                className={contactsPageStyles['contacts__link-value']}>{address}</span>
-                                        </address>
-                                    </a>
+                                    <address className={contactsPageStyles['contacts__address']}>
+                                        <span className={contactsPageStyles['contacts__link-caption']}>
+                                            Адрес:
+                                        </span>
+
+                                        <span className={contactsPageStyles['contacts__link-value']}>
+                                            {address}
+                                        </span>
+                                    </address>
                                 </li>
                             )
                         }
@@ -41,8 +47,13 @@ export default async function ContactsPage(): Promise<JSX.Element> {
                             email && (
                                 <li className={contactsPageStyles['contacts__item']}>
                                     <a className={contactsPageStyles['contacts__link']} href={createEmailLink(email)}>
-                                        <span className={contactsPageStyles['contacts__link-caption']}>Email:</span>
-                                        <span className={contactsPageStyles['contacts__link-value']}>{email}</span>
+                                        <span className={contactsPageStyles['contacts__link-caption']}>
+                                            Email:
+                                        </span>
+
+                                        <span className={contactsPageStyles['contacts__link-value']}>
+                                            {email}
+                                        </span>
                                     </a>
                                 </li>
                             )
@@ -52,8 +63,13 @@ export default async function ContactsPage(): Promise<JSX.Element> {
                             phone && (
                                 <li className={contactsPageStyles['contacts__item']}>
                                     <a className={contactsPageStyles['contacts__link']} href={createPhoneLink(phone)}>
-                                        <span className={contactsPageStyles['contacts__link-caption']}>Телефон:</span>
-                                        <span className={contactsPageStyles['contacts__link-value']}>{phone}</span>
+                                        <span className={contactsPageStyles['contacts__link-caption']}>
+                                            Телефон:
+                                        </span>
+
+                                        <span className={contactsPageStyles['contacts__link-value']}>
+                                            {phone}
+                                        </span>
                                     </a>
                                 </li>
                             )

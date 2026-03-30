@@ -5,8 +5,8 @@ const nextConfig: NextConfig = {
         formats: ['image/avif', 'image/webp'],
         remotePatterns: [
             {
-                protocol: 'https',
-                hostname: 'test.yuriyplotnikovv.ru',
+                protocol: 'http',
+                hostname: 'icon-artel.stacy1z1.beget.tech',
             },
         ],
     },

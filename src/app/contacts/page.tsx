@@ -5,8 +5,8 @@ import Heading from '@/components/Heading/Heading';
 import ContactsPage from '@/components/ContactsPage/ContactsPage';
 
 export const metadata: Metadata = {
-    title: 'Контакты | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
+    title: 'Контакты | Иконописная Артель',
+    description: 'Иконописная Артель - описание',
 };
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -20,10 +20,15 @@ const breadcrumbsList: BreadcrumbItem[] = [
 ];
 
 export default function Page(): JSX.Element {
+    const title = 'Контакты';
+    const description = '<p></p>';
+
     return (
         <>
-            <Heading title={'Контакты'} description={'<p>Подробное описание раздела</p>'}
-                     breadcrumbsList={breadcrumbsList}/>
+            <Heading title={title} 
+                     description={description}
+                     breadcrumbsList={breadcrumbsList}
+            />
 
             <ContactsPage/>
         </>

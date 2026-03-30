@@ -20,7 +20,7 @@ export default function Footer(): JSX.Element {
 
                 <div className={footerStyles['footer__wrapper']}>
                     <p className={footerStyles['footer__copyright']}>
-                        © Иконописная мастерская, {new Date().getFullYear()}
+                        © Иконописная Артель, {new Date().getFullYear()}
                     </p>
 
                     <Developer addClass={footerStyles['footer__developer']}/>

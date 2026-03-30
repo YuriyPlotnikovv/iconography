@@ -2,10 +2,6 @@ import {MenuItem} from '@/types/types';
 
 export const menuItems: MenuItem[] = [
     {
-        href: '/',
-        label: 'Главная'
-    },
-    {
         href: '/news',
         label: 'Новости'
     },
@@ -13,10 +9,10 @@ export const menuItems: MenuItem[] = [
         href: '/reviews',
         label: 'Отзывы'
     },
-    {
-        href: '/gallery',
-        label: 'Галерея'
-    },
+    // {
+    //     href: '/gallery',
+    //     label: 'Галерея'
+    // },
     {
         href: '/works',
         label: 'Наши работы'
@@ -24,10 +20,6 @@ export const menuItems: MenuItem[] = [
     {
         href: '/in-stock',
         label: 'Рукописные иконы в наличии'
-    },
-    {
-        href: '/restoration',
-        label: 'Реставрация'
     },
     {
         href: '/order-delivery',

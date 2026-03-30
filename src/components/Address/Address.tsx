@@ -3,8 +3,13 @@ import addressStyles from './Address.module.scss';
 import {MainInfo} from '@/types/types';
 import cockpit from '@/lib/CockpitAPI';
 
-export default async function Address(): Promise<JSX.Element> {
-    const mainInfo: MainInfo = await cockpit.getSingleItem('maininfo');
+export default async function Address(): Promise<JSX.Element | null> {
+    const mainInfo: MainInfo | null = await cockpit.getSingleItem('maininfo');
+
+    if (!mainInfo || !mainInfo.address) {
+        return null;
+    }
+
     const address = mainInfo.address;
 
     return (

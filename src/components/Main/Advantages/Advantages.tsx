@@ -6,8 +6,14 @@ import cockpit from '@/lib/CockpitAPI';
 import Image from 'next/image';
 import logoStyles from '@/components/Logo/Logo.module.scss';
 
-export default async function Advantages(): Promise<JSX.Element> {
-    const advantagesList: AdvantageItem[] = await cockpit.getCollection('advantages');
+export default async function Advantages(): Promise<JSX.Element | null> {
+    const advantagesList: AdvantageItem[] = await cockpit.getCollection('advantages', {
+        sort: {sort: 1}
+    });
+
+    if (!advantagesList || advantagesList.length === 0) {
+        return null;
+    }
 
     return (
         <section className={clsx('section', advantagesStyles['advantages'])}>
@@ -30,7 +36,7 @@ export default async function Advantages(): Promise<JSX.Element> {
                                            width="100"
                                            height="100"
                                            unoptimized
-                                           alt="Иконописная мастерская"
+                                           alt="Иконописная Артель"
                                     />
 
                                     <h3 className={advantagesStyles['advantages__item-title']}>

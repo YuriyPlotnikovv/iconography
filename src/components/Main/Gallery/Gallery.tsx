@@ -8,7 +8,8 @@ import cockpit from '@/lib/CockpitAPI';
 
 export default async function Gallery(): Promise<JSX.Element | null> {
     const galleryData: GalleryFromServer[] = await cockpit.getCollection('gallery', {
-        limit: 10
+        limit: 10,
+        sort: {sort: 1}
     });
 
     if (!galleryData || galleryData.length === 0) {
@@ -19,7 +20,7 @@ export default async function Gallery(): Promise<JSX.Element | null> {
         id: item._id,
         title: item.title,
         description: item.description,
-        href: '/gallery/',
+        href: '/gallery',
         image: cockpit.getImageUrl(item.image._id, 400, 400),
         alt: item.image.title || item.title,
     }));

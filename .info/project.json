@@ -1,0 +1,51 @@
+{
+    "date": "04.2026",
+    "complexity": "4",
+    "category": "commercial",
+    "deploy": "https:\/\/icon-artel.ru",
+    "title": {
+        "ru": "Иконописная Артель",
+        "en": "Icon Painting Artel"
+    },
+    "textFirst": {
+        "ru": "Частный проект на React + Next.js",
+        "en": "A private project on React + Next.js"
+    },
+    "textSecond": {
+        "ru": "",
+        "en": ""
+    },
+    "functionality": {
+        "ru": [
+            "Cockpit CMS",
+            "Подключен Swiper"
+        ],
+        "en": [
+            "Cockpit CMS",
+            "Swiper is integrated"
+        ]
+    },
+    "technologies": [
+        "html",
+        "scss",
+        "javascript",
+        "react",
+        "next"
+    ],
+    "pages": {
+        "ru": [
+            "Главная"
+        ],
+        "en": [
+            "Main"
+        ]
+    },
+    "notImplemented": {
+        "ru": [
+            "Интеграция с Telegram и ВК"
+        ],
+        "en": [
+            "Integration with Telegram and VK"
+        ]
+    }
+}

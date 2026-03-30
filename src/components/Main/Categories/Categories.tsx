@@ -8,7 +8,9 @@ import categoriesStyles from './Categories.module.scss';
 import cockpit from '@/lib/CockpitAPI';
 
 export default async function Categories(): Promise<JSX.Element | null> {
-    const categoriesData: CategoryFromServer[] = await cockpit.getCollection('category');
+    const categoriesData: CategoryFromServer[] = await cockpit.getCollection('category', {
+        sort: {sort: 1}
+    });
 
     if (!categoriesData || categoriesData.length === 0) {
         return null;

@@ -40,19 +40,3 @@
     display: none;
   }
 }
-
-.header__social-mobile {
-  display: none;
-
-  @media (max-width: var.$mobile-mid-width) {
-    display: flex;
-  }
-}
-
-.header__social-desktop {
-  display: flex;
-
-  @media (max-width: var.$mobile-mid-width) {
-    display: none;
-  }
-}

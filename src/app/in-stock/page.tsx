@@ -6,8 +6,8 @@ import Works from '@/components/Works/Works';
 import cockpit from '@/lib/CockpitAPI';
 
 export const metadata: Metadata = {
-    title: 'Рукописные иконы в наличии | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
+    title: 'Рукописные иконы в наличии | Иконописная Артель',
+    description: 'Иконописная Артель - описание',
 };
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -21,12 +21,15 @@ const breadcrumbsList: BreadcrumbItem[] = [
 ];
 
 export default async function Page(): Promise<JSX.Element> {
-    const worksData: WorkFromServer[] = await cockpit.getCollection('works', {
-        filter: {instock: true},
+    const title = 'Рукописные иконы в наличии';
+    const description = '<p></p>';
+
+    const worksData: WorkFromServer[] | null = await cockpit.getCollection('works', {
+        filter: {in_stock: true},
         sort: {date: -1}
     });
 
-    const inStockList: CardItem[] = worksData.map((work) => ({
+    const inStockList: CardItem[] = (worksData || []).map((work) => ({
         id: work._id,
         title: work.title,
         description: work.description,
@@ -37,8 +40,10 @@ export default async function Page(): Promise<JSX.Element> {
 
     return (
         <>
-            <Heading title={'Рукописные иконы в наличии'} description={'<p>Подробное описание раздела</p>'}
-                     breadcrumbsList={breadcrumbsList}/>
+            <Heading title={title}
+                     description={description}
+                     breadcrumbsList={breadcrumbsList}
+            />
 
             <Works worksList={inStockList}/>
         </>

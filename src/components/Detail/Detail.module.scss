@@ -30,3 +30,19 @@
 .detail__slider {
   overflow: hidden;
 }
+
+.detail__image-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 500px;
+
+  @media (max-width: var.$tablet-min-width) {
+    height: 400px;
+  }
+}
+
+.detail__image {
+  border-radius: 40px;
+  box-shadow: var.$cardShadow;
+}

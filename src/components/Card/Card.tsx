@@ -3,6 +3,8 @@ import cardStyles from './Card.module.scss';
 import {CardItem} from '@/types/types';
 import Link from 'next/link';
 import Image from 'next/image';
+import {createSanitizedHTML} from '@/functions/functions';
+import clsx from 'clsx';
 
 type CardProps = {
     data: CardItem,
@@ -18,9 +20,9 @@ export default function Card({data}: CardProps): JSX.Element {
                     {data.title}
                 </h3>
 
-                <div className={cardStyles['card__text']}>
-                    {data.description}
-                </div>
+                <div className={clsx('block-html', cardStyles['card__text'])}
+                     dangerouslySetInnerHTML={createSanitizedHTML(data.description)}
+                />
 
                 <div className="button button--arrow">Подробнее</div>
             </div>

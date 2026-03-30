@@ -55,8 +55,11 @@ export default function SliderDetail({items}: SliderDetailProps): JSX.Element {
                             <SwiperSlide
                                 className={clsx(sliderStyles['slider__item'], sliderDetailStyles['slider-detail__item'])}
                                 key={item.id}>
-                                <Image className={sliderDetailStyles['slider-detail__item-image']} src={item.image}
-                                       alt={item.alt} fill/>
+                                <Image className={sliderDetailStyles['slider-detail__item-image']}
+                                       src={item.image}
+                                       alt={item.alt}
+                                       fill
+                                />
                             </SwiperSlide>
                         );
                     })

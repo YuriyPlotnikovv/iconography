@@ -20,7 +20,7 @@ export default async function Reviews(): Promise<JSX.Element | null> {
         date: review.date,
         stars: review.stars,
         name: review.name,
-        text: review.text,
+        review: review.review,
     }));
 
     return (

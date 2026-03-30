@@ -5,7 +5,7 @@ import Heading from '@/components/Heading/Heading';
 import Categories from '@/components/Categories/Categories';
 
 export const metadata: Metadata = {
-    title: 'Категории икон | Иконописная мастерская',
+    title: 'Категории икон | Иконописная Артель',
     description: 'Все категории икон, создаваемых в нашей иконописной мастерской',
 };
 
@@ -20,11 +20,14 @@ const breadcrumbsList: BreadcrumbItem[] = [
 ];
 
 export default function Page(): JSX.Element {
+    const title = 'Категории икон';
+    const description = '<p>Выберите интересующую вас категорию икон, чтобы узнать подробнее о каждом направлении нашей иконописной мастерской.</p>';
+    
     return (
         <>
             <Heading
-                title={'Категории икон'}
-                description={'<p>Выберите интересующую вас категорию икон, чтобы узнать подробнее о каждом направлении нашей иконописной мастерской.</p>'}
+                title={title}
+                description={description}
                 breadcrumbsList={breadcrumbsList}
             />
 

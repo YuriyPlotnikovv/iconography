@@ -1,6 +1,6 @@
 import '../styles/globals.scss';
 import '../styles/blocks.scss';
-import {Playfair, Montserrat, CyrillicOld} from './fonts';
+import {Montserrat, CyrillicOld} from './fonts';
 import {JSX} from 'react';
 import clsx from 'clsx';
 import Header from '@/components/Header/Header';
@@ -13,7 +13,7 @@ type LayoutProps = {
 export default function RootLayout({children}: LayoutProps): JSX.Element {
     return (
         <html lang="ru">
-        <body className={clsx(Playfair.variable, Montserrat.variable, CyrillicOld.variable)}>
+        <body className={clsx(Montserrat.variable, CyrillicOld.variable)}>
         <Header/>
         <main>
             {children}

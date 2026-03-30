@@ -1,3 +1,12 @@
+export type PriceItem = {
+    _id: string;
+    sort: number;
+    size: string;
+    without_gold: number;
+    all: number;
+    halo: number;
+    price_for_inch: boolean;
+};
 export type MenuItem = {
     label: string;
     href: string;
@@ -33,7 +42,7 @@ export type ReviewItem = {
     date: string;
     stars: number;
     name: string;
-    text: string;
+    review: string;
 }
 
 export type FaqItem = {
@@ -43,7 +52,7 @@ export type FaqItem = {
 }
 
 export type SlideItem = {
-    id: number;
+    id: string;
     image: string;
     alt: string;
     href?: string;
@@ -85,10 +94,11 @@ export type AdvantageItem = {
 
 export type CategoryFromServer = {
     _id: string;
+    sort: number;
     title: string;
     description: string;
     image: ImageItem;
-    sort: number;
+    slider: ImageItem[];
 }
 
 export type WorkFromServer = {
@@ -98,22 +108,24 @@ export type WorkFromServer = {
     image: ImageItem;
     slider: ImageItem[];
     date: string;
-    instock: boolean;
+    master: MasterFromServer | null;
+    in_stock: boolean;
 }
 
 export type NewsFromServer = {
-    _id: string;
+    slider: ImageItem[];
     title: string;
     description: string;
     content: string;
     image: ImageItem;
+    _id: string;
     date: string;
 }
 
 export type ReviewFromServer = {
     _id: string;
     name: string;
-    text: string;
+    review: string;
     stars: number;
     date: string;
 }
@@ -123,6 +135,11 @@ export type MasterFromServer = {
     name: string;
     description: string;
     image: ImageItem;
+}
+
+export type OrderFromServer = {
+    _id: string;
+    description: string;
 }
 
 export type GalleryFromServer = {
@@ -144,3 +161,12 @@ export type RestorationFromServer = {
     description: string;
     image: ImageItem;
 }
+
+export type MainSliderFromServer = {
+    _id: string;
+    title?: string;
+    description?: string;
+    link?: string;
+    image: ImageItem;
+}
+

@@ -9,8 +9,12 @@ type SocialProps = {
     addClass?: string,
 }
 
-export default async function Social({addClass}: SocialProps): Promise<JSX.Element> {
-    const mainInfo: MainInfo = await cockpit.getSingleItem('maininfo');
+export default async function Social({addClass}: SocialProps): Promise<JSX.Element | null> {
+    const mainInfo: MainInfo | null = await cockpit.getSingleItem('maininfo');
+
+    if (!mainInfo) {
+        return null;
+    }
 
     const telegram = mainInfo.telegram;
     const whatsapp = mainInfo.whatsapp;
@@ -18,9 +22,7 @@ export default async function Social({addClass}: SocialProps): Promise<JSX.Eleme
     const max = mainInfo.max;
 
     if (!telegram && !whatsapp && !vk && !max) {
-        return (
-            <></>
-        )
+        return null;
     }
 
     return (

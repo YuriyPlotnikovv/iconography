@@ -27,7 +27,9 @@ export default function Heading({title, description, breadcrumbsList}: HeadingPr
 
                 {
                     description && (
-                        <div className="section__description" dangerouslySetInnerHTML={createSanitizedHTML(description)}/>
+                        <div className={clsx('block-html', 'section__description')}
+                             dangerouslySetInnerHTML={createSanitizedHTML(description)}
+                        />
                     )
                 }
             </div>

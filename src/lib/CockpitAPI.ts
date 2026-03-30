@@ -12,36 +12,56 @@ class CockpitClient {
     private readonly apiKey: string;
 
     constructor() {
-        this.baseUrl = process.env.COCKPIT_URL || '';
-        this.apiKey = process.env.COCKPIT_API_KEY || '';
+        this.baseUrl = process.env.NEXT_PUBLIC_COCKPIT_URL || '';
+        this.apiKey = process.env.NEXT_PUBLIC_COCKPIT_API_KEY || '';
     }
 
     async getSingleItem(modelId: string, options: CockpitOptions = {}) {
         const query = this.createQueryString(options);
         const endpoint = `content/item/${modelId}${query}`;
-        console.log(endpoint);
-        return this.cockpitFetch(endpoint);
+
+        try {
+            return await this.cockpitFetch(endpoint);
+        } catch (e) {
+            console.error('Cockpit getSingleItem error', e);
+            return null;
+        }
     }
 
     async getCollection(modelId: string, options: CockpitOptions = {}) {
         const query = this.createQueryString(options);
         const endpoint = `content/items/${modelId}${query}`;
 
-        return this.cockpitFetch(endpoint);
+        try {
+            return await this.cockpitFetch(endpoint);
+        } catch (e) {
+            console.error('Cockpit getCollection error', e);
+            return [];
+        }
     }
 
     async getCollectionItem(modelId: string, elementId: string, options: CockpitOptions = {}) {
         const query = this.createQueryString(options);
         const endpoint = `content/item/${modelId}/${elementId}${query}`;
 
-        return this.cockpitFetch(endpoint);
+        try {
+            return await this.cockpitFetch(endpoint);
+        } catch (e) {
+            console.error('Cockpit getCollectionItem error', e);
+            return null;
+        }
     }
 
     async getTree(modelId: string, options: CockpitOptions = {}) {
         const query = this.createQueryString(options);
         const endpoint = `content/tree/${modelId}${query}`;
 
-        return this.cockpitFetch(endpoint);
+        try {
+            return await this.cockpitFetch(endpoint);
+        } catch (e) {
+            console.error('Cockpit getTree error', e);
+            return null;
+        }
     }
 
     getImageUrl(imageId: string, width: number, height: number) {

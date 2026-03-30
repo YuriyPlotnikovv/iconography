@@ -43,15 +43,9 @@ export default function FormReviews(): JSX.Element {
                 <input className="visually-hidden" type="checkbox" autoComplete="off" required/>
             </label>
 
-            <div className={formStyles['form__buttons-wrapper']}>
-                <button className={clsx(formStyles['form__button'], 'button', 'button--clear')} type="reset">
-                    Очистить форму
-                </button>
-
-                <button className={clsx(formStyles['form__button'], 'button', 'button--accent')} type="submit">
-                    Отправить сообщение
-                </button>
-            </div>
+            <button className={clsx(formStyles['form__button'], 'button', 'button--accent')} type="submit">
+                Отправить сообщение
+            </button>
         </form>
     );
 }

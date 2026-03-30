@@ -4,7 +4,6 @@ import {JSX, useState, useEffect, useRef} from 'react';
 import headerMenuStyles from './HeaderMenu.module.scss';
 import clsx from 'clsx';
 import Menu from '@/components/Menu/Menu';
-// import Social from '@/components/Social/Social';
 
 export default function HeaderMenu(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,8 +58,6 @@ export default function HeaderMenu(): JSX.Element {
                       onCloseMenu={closeMenu}
                       firstMenuItemRef={firstMenuItemRef}
                 />
-
-                {/*<Social addClass={headerMenuStyles['header__social-mobile']}/>*/}
             </nav>
         </>
     );

@@ -19,12 +19,12 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
         const category: CategoryFromServer = await cockpit.getCollectionItem('category', categoryId);
 
         return {
-            title: `${category.title} | Иконописная мастерская`,
+            title: `${category.title} | Иконописная Артель`,
             description: category.description,
         };
     } catch {
         return {
-            title: 'Категория не найдена | Иконописная мастерская',
+            title: 'Категория не найдена | Иконописная Артель',
         };
     }
 }
@@ -54,19 +54,21 @@ export default async function Page({params}: PageProps): Promise<JSX.Element> {
         },
     ];
 
-    const slidesList: SlideItem[] = [
-        {
-            id: 1,
-            image: cockpit.getImageUrl(category.image._id, 800, 800),
-            alt: category.image.title || category.title,
-        },
-    ];
+    const slidesList: SlideItem[] = category.slider?.map((image) => ({
+        id: image._id,
+        image: cockpit.getImageUrl(image._id, 800, 800),
+        alt: image.title || category.title,
+    }));
 
     return (
         <>
             <Heading breadcrumbsList={breadcrumbsList}/>
 
-            <Detail slidesList={slidesList} title={category.title} description={category.description}/>
+            <Detail title={category.title}
+                    description={category.description}
+                    image={category.image}
+                    slidesList={slidesList}
+            />
         </>
     );
 }

@@ -9,7 +9,7 @@ import cockpit from '@/lib/CockpitAPI';
 
 export default async function InStock(): Promise<JSX.Element | null> {
     const worksData: WorkFromServer[] = await cockpit.getCollection('works', {
-        filter: {instock: true},
+        filter: {in_stock: true},
         sort: {date: -1}
     });
 

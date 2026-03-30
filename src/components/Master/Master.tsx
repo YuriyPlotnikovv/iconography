@@ -2,8 +2,20 @@ import {JSX} from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import masterStyles from './Master.module.scss';
+import {MasterFromServer} from '@/types/types';
+import cockpit from '@/lib/CockpitAPI';
+import {createSanitizedHTML} from '@/functions/functions';
 
-export default function Master(): JSX.Element {
+type MasterProps = {
+    master: MasterFromServer;
+}
+
+export default function Master({master}: MasterProps): JSX.Element {
+    const name = master.name;
+    const description = master.description;
+    const image = cockpit.getImageUrl(master.image._id, 800, 500);
+    const alt = master.image.alt ?? name;
+
     return (
         <section className={clsx('section', masterStyles['master'])}>
             <div className={clsx('container', masterStyles['master__container'])}>
@@ -11,10 +23,23 @@ export default function Master(): JSX.Element {
                     Информация о мастере-художнике
                 </h2>
 
-                <Image className={masterStyles['master__image']} src="/img/cover.jpg" alt="" width={500} height={500}/>
+                <div className={masterStyles['master__image-wrapper']}>
+                    <Image className={masterStyles['master__image']}
+                           src={image}
+                           sizes="(max-width: 768px) 100vw, 40vw"
+                           alt={alt}
+                           fill
+                    />
+                </div>
 
                 <div className={masterStyles['master__info']}>
-                    <p>Информация о мастере</p>
+                    <h3 className={masterStyles['master__info-name']}>
+                        {name}
+                    </h3>
+
+                    <div className={clsx('block-html', masterStyles['master__info-description'])}
+                         dangerouslySetInnerHTML={createSanitizedHTML(description)}
+                    />
                 </div>
             </div>
         </section>

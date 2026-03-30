@@ -4,9 +4,12 @@ import clsx from 'clsx';
 import {FaqFromServer} from '@/types/types';
 import faqStyles from './Faq.module.scss';
 import cockpit from '@/lib/CockpitAPI';
+import {createSanitizedHTML} from '@/functions/functions';
 
 export default async function Faq(): Promise<JSX.Element | null> {
-    const faqData: FaqFromServer[] = await cockpit.getCollection('faq');
+    const faqData: FaqFromServer[] = await cockpit.getCollection('faq', {
+        sort: {sort: 1}
+    });
 
     if (!faqData || faqData.length === 0) {
         return null;
@@ -25,12 +28,13 @@ export default async function Faq(): Promise<JSX.Element | null> {
                             return (
                                 <li className={faqStyles['faq__item']} key={faq._id}>
                                     <details className={faqStyles['faq__item-details']} name="question">
-                                        <summary className={faqStyles['faq__item-title']}>
-                                            {faq.question}
-                                        </summary>
-                                        <p className={faqStyles['faq__item-text']}>
-                                            {faq.answer}
-                                        </p>
+                                        <summary className={clsx('block-html', faqStyles['faq__item-title'])}
+                                                 dangerouslySetInnerHTML={createSanitizedHTML(faq.question)}
+                                        />
+
+                                        <p className={clsx('block-html', faqStyles['faq__item-text'])}
+                                           dangerouslySetInnerHTML={createSanitizedHTML(faq.answer)}
+                                        />
                                     </details>
                                 </li>
                             );

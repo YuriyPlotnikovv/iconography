@@ -1,18 +1,25 @@
 import {JSX} from 'react';
 import processStyles from './Process.module.scss';
-import {MainInfo, ProcessItem} from '@/types/types';
+import {ProcessItem} from '@/types/types';
 import Image from 'next/image';
 import clsx from 'clsx';
 import cockpit from '@/lib/CockpitAPI';
+import {createSanitizedHTML} from '@/functions/functions';
 
-export default async function Process(): Promise<JSX.Element> {
-    const processList: ProcessItem[] = await cockpit.getCollection('createprocess', {sort: {sort: 1}});
+export default async function Process(): Promise<JSX.Element | null> {
+    const processList: ProcessItem[] = await cockpit.getCollection('createprocess', {
+        sort: {sort: 1}
+    });
+
+    if (!processList || processList.length === 0) {
+        return null;
+    }
 
     return (
         <section className={clsx('section', processStyles['process'])} id="process">
             <div className="container">
                 <h2 className="section__title">
-                    Процесс
+                    Процесс сотворения образа
                 </h2>
 
                 <ul className={processStyles['process__list']}>
@@ -38,9 +45,9 @@ export default async function Process(): Promise<JSX.Element> {
 
                                     {
                                         description && (
-                                            <div className={processStyles['process__item-text']}>
-                                                {description}
-                                            </div>
+                                            <div className={clsx('block-html', processStyles['process__item-text'])}
+                                                 dangerouslySetInnerHTML={createSanitizedHTML(description)}
+                                            />
                                         )
                                     }
                                 </li>
