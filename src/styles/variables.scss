@@ -27,8 +27,19 @@ $accent-dark-bg: #5c4634;
 $form-bg: #d9d9d9;
 
 // gradients
-$windowGradient: linear-gradient(310deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 107, 1) 0%, rgba(0, 0, 0, 1) 80%);
-$cardGradient: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100px, rgba(0, 0, 0, 0.5) 200px, rgba(0, 0, 0, 0.6) 100%);
+$windowGradient: linear-gradient(
+  310deg,
+  rgba(2, 0, 36, 1) 0%,
+  rgba(9, 9, 107, 1) 0%,
+  rgba(0, 0, 0, 1) 80%
+);
+$cardGradient: linear-gradient(
+  180deg,
+  transparent 0%,
+  rgba(0, 0, 0, 0.3) 100px,
+  rgba(0, 0, 0, 0.5) 200px,
+  rgba(0, 0, 0, 0.6) 100%
+);
 
 // shadows
 $cardShadow: 0 10px 15px 0 rgba(0, 0, 0, 0.1);

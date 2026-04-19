@@ -10,10 +10,14 @@
 }
 
 @keyframes twinkle {
-  0%, 20%, 40%, 100% {
+  0%,
+  20%,
+  40%,
+  100% {
     transform: scale(1);
   }
-  10%, 30% {
+  10%,
+  30% {
     transform: scale(0.3);
   }
 }

@@ -1,7 +1,6 @@
-@use "../../../styles/variables" as var;
+@use '../../../styles/variables' as var;
 
 .in-stock {
-
 }
 
 .in-stock__list {
@@ -23,7 +22,7 @@
 
 .in-stock__item {
   @media (max-width: var.$tablet-min-width) {
-    &:nth-of-type(n+4) {
+    &:nth-of-type(n + 4) {
       display: none;
     }
   }

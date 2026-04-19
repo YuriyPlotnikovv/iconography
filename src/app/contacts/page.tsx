@@ -1,31 +1,33 @@
-import type {Metadata} from 'next';
-import {JSX} from 'react';
-import {BreadcrumbItem} from '@/types/types';
-import Heading from '@/components/Heading/Heading';
-import ContactsPage from '@/components/ContactsPage/ContactsPage';
+import type { Metadata } from 'next'
+import { JSX } from 'react'
+import { BreadcrumbItem } from '@/types/types'
+import Heading from '@/components/Heading/Heading'
+import ContactsPage from '@/components/ContactsPage/ContactsPage'
 
 export const metadata: Metadata = {
-    title: 'Контакты | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
-};
+  title: 'Контакты | Иконописная Артель',
+  description: 'Иконописная Артель - описание',
+}
 
 const breadcrumbsList: BreadcrumbItem[] = [
-    {
-        title: 'Главная',
-        url: '/',
-    },
-    {
-        title: 'Контакты',
-    },
-];
+  {
+    title: 'Главная',
+    url: '/',
+  },
+  {
+    title: 'Контакты',
+  },
+]
 
 export default function Page(): JSX.Element {
-    return (
-        <>
-            <Heading title={'Контакты'} description={'<p>Подробное описание раздела</p>'}
-                     breadcrumbsList={breadcrumbsList}/>
+  const title = 'Контакты'
+  const description = '<p></p>'
 
-            <ContactsPage/>
-        </>
-    );
+  return (
+    <>
+      <Heading title={title} description={description} breadcrumbsList={breadcrumbsList} />
+
+      <ContactsPage />
+    </>
+  )
 }

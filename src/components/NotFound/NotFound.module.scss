@@ -1,6 +1,6 @@
-@use "sass:math";
-@use "../../styles/variables.scss" as var;
-@use "../../styles/animations.scss";
+@use 'sass:math';
+@use '../../styles/variables.scss' as var;
+@use '../../styles/animations.scss';
 
 .not-found {
   z-index: 10;
@@ -130,7 +130,7 @@
         background: var.$bg-text-color;
         filter: blur(1px);
 
-        content: "";
+        content: '';
       }
     }
   }

@@ -1,48 +1,44 @@
-import {JSX} from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import clsx from 'clsx';
+import { JSX } from 'react'
+import Image from 'next/image'
+import clsx from 'clsx'
 
-import {RestorationFromServer} from '@/types/types';
-import restorationStyles from './Restoration.module.scss';
-import cockpit from '@/lib/CockpitAPI';
+import { RestorationFromServer } from '@/types/types'
+import restorationStyles from './Restoration.module.scss'
+import cockpit from '@/lib/CockpitAPI'
+import { createSanitizedHTML } from '@/functions/functions'
 
 export default async function Restoration(): Promise<JSX.Element | null> {
-    const restorationData: RestorationFromServer[] = await cockpit.getCollection('restoration', {
-        limit: 1
-    });
+  const restorationData: RestorationFromServer = await cockpit.getSingleItem('restoration')
 
-    if (!restorationData || restorationData.length === 0) {
-        return null;
-    }
+  if (!restorationData) {
+    return null
+  }
 
-    const restoration = restorationData[0];
+  const title = restorationData.title
+  const description = restorationData.description
+  const image = cockpit.getImageUrl(restorationData.image._id, 800, 500)
+  const alt = restorationData.image.alt ?? title
 
-    return (
-        <section className={clsx('section', restorationStyles['restoration'])} id="restoration">
-            <div className="container">
-                <h2 className="section__title">
-                    {restoration.title || 'Реставрация икон'}
-                </h2>
+  return (
+    <section className={clsx('section', restorationStyles['restoration'])} id="restoration">
+      <div className={clsx('container', restorationStyles['restoration__container'])}>
+        <h2 className={restorationStyles['restoration__title']}>{title}</h2>
 
-                <div className={restorationStyles['restoration__wrapper']}>
-                    <Image className={restorationStyles['restoration__image']}
-                           src={cockpit.getImageUrl(restoration.image._id, 600, 600)}
-                           width={600}
-                           height={600}
-                           alt={restoration.image.title || restoration.title}/>
+        <div className={restorationStyles['restoration__image-wrapper']}>
+          <Image
+            className={restorationStyles['restoration__image']}
+            src={image}
+            sizes="(max-width: 768px) 100vw, 40vw"
+            alt={alt}
+            fill
+          />
+        </div>
 
-                    <div className={restorationStyles['restoration__content']}>
-                        <p className={restorationStyles['restoration__text']}>
-                            {restoration.description}
-                        </p>
-
-                        <Link className="button button--accent" href="/restoration">
-                            Подробнее
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+        <div
+          className={clsx('block-html', restorationStyles['restoration__text'])}
+          dangerouslySetInnerHTML={createSanitizedHTML(description)}
+        />
+      </div>
+    </section>
+  )
 }

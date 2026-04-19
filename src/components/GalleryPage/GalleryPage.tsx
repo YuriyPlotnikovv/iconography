@@ -1,29 +1,27 @@
-import {JSX} from 'react';
-import clsx from 'clsx';
-import {CardItem} from '@/types/types';
-import Card from '@/components/Card/Card';
-import galleryPageStyles from './GalleryPage.module.scss';
+import { JSX } from 'react'
+import clsx from 'clsx'
+import { CardItem } from '@/types/types'
+import Card from '@/components/Card/Card'
+import galleryPageStyles from './GalleryPage.module.scss'
 
 type GalleryPageProps = {
-    galleryList: CardItem[],
+  galleryList: CardItem[]
 }
 
-export default function GalleryPage({galleryList}: GalleryPageProps): JSX.Element {
-    return (
-        <section className={clsx('section', galleryPageStyles['gallery'])}>
-            <div className="container">
-                <ul className={galleryPageStyles['gallery__list']}>
-                    {
-                        galleryList.map(gallery => {
-                            return (
-                                <li className={galleryPageStyles['gallery__item']} key={gallery.id}>
-                                    <Card data={gallery}/>
-                                </li>
-                            );
-                        })
-                    }
-                </ul>
-            </div>
-        </section>
-    );
+export default function GalleryPage({ galleryList }: GalleryPageProps): JSX.Element {
+  return (
+    <section className={clsx('section', galleryPageStyles['gallery'])}>
+      <div className="container">
+        <ul className={galleryPageStyles['gallery__list']}>
+          {galleryList.map((gallery) => {
+            return (
+              <li className={galleryPageStyles['gallery__item']} key={gallery.id}>
+                <Card data={gallery} />
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    </section>
+  )
 }

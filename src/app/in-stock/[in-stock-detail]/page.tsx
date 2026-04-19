@@ -1,79 +1,89 @@
-import type {Metadata} from 'next';
-import {JSX} from 'react';
-import {BreadcrumbItem, SlideItem, WorkFromServer} from '@/types/types';
-import Heading from '@/components/Heading/Heading';
-import Detail from '@/components/Detail/Detail';
-import Master from '@/components/Master/Master';
-import FormCalculation from '@/components/Forms/FormCalculation/FormCalculation';
-import cockpit from '@/lib/CockpitAPI';
+import type { Metadata } from 'next'
+import { JSX } from 'react'
+import { notFound } from 'next/navigation'
+import { BreadcrumbItem, MasterFromServer, SlideItem, WorkFromServer } from '@/types/types'
+import Heading from '@/components/Heading/Heading'
+import Detail from '@/components/Detail/Detail'
+import Master from '@/components/Master/Master'
+import cockpit from '@/lib/CockpitAPI'
 
 type PageProps = {
-    params: Promise<{
-        'in-stock-detail': string;
-    }>;
-};
+  params: Promise<{
+    'in-stock-detail': string
+  }>
+}
 
-export async function generateMetadata({params}: PageProps): Promise<Metadata> {
-    const {['in-stock-detail']: workId} = await params;
-    const work: WorkFromServer = await cockpit.getCollectionItem('works', workId);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { ['in-stock-detail']: workId } = await params
+  const work: WorkFromServer | null = await cockpit.getCollectionItem('works', workId)
 
+  if (!work) {
     return {
-        title: `${work.title} | Иконописная мастерская`,
-        description: work.description || 'Иконописная мастерская - описание',
-    };
+      title: 'Работа не найдена | Иконописная Артель',
+    }
+  }
+
+  return {
+    title: `${work.title} | Иконописная Артель`,
+    description: work.description || 'Иконописная Артель - описание',
+  }
 }
 
 export async function generateStaticParams() {
-    const works: WorkFromServer[] = await cockpit.getCollection('works', {
-        filter: {instock: true}
-    });
+  const works: WorkFromServer[] = await cockpit.getCollection('works', {
+    filter: { in_stock: true },
+  })
 
-    return works.map((work) => ({
-        'in-stock-detail': work._id,
-    }));
+  return works.map((work) => ({
+    'in-stock-detail': work._id,
+  }))
 }
 
-export default async function Page({params}: PageProps): Promise<JSX.Element> {
-    const {['in-stock-detail']: workId} = await params;
-    const work: WorkFromServer = await cockpit.getCollectionItem('works', workId);
+export default async function Page({ params }: PageProps): Promise<JSX.Element> {
+  const { ['in-stock-detail']: workId } = await params
+  const work: WorkFromServer | null = await cockpit.getCollectionItem('works', workId)
 
-    const breadcrumbsList: BreadcrumbItem[] = [
-        {
-            title: 'Главная',
-            url: '/',
-        },
-        {
-            title: 'Рукописные иконы в наличии',
-            url: '/in-stock',
-        },
-        {
-            title: work.title,
-        },
-    ];
+  if (!work) {
+    notFound()
+  }
 
-    const slidesList: SlideItem[] = work.slider?.map((image, index) => ({
-        id: index + 1,
-        image: cockpit.getImageUrl(image._id, 800, 800),
-        alt: image.title || work.title,
-    })) || [];
+  const breadcrumbsList: BreadcrumbItem[] = [
+    {
+      title: 'Главная',
+      url: '/',
+    },
+    {
+      title: 'Рукописные иконы в наличии',
+      url: '/in-stock',
+    },
+    {
+      title: work.title,
+    },
+  ]
 
-    return (
-        <>
-            <Heading breadcrumbsList={breadcrumbsList}/>
+  const slidesList: SlideItem[] =
+    work.slider?.map((image) => ({
+      id: image._id,
+      image: cockpit.getImageUrl(image._id, 800, 800),
+      alt: image.title || work.title,
+    })) || []
 
-            <Detail slidesList={slidesList} title={work.title} description={work.description}/>
+  const MasterInfo: MasterFromServer | null = work.master
+    ? await cockpit.getCollectionItem('masters', work.master?._id)
+    : null
 
-            <Master/>
+  return (
+    <>
+      <Heading breadcrumbsList={breadcrumbsList} />
 
-            <section className="section">
-                <div className="container">
-                    <h2 className="section__title">
-                        Расчёт стоимости заказа работы
-                    </h2>
+      <Detail
+        title={work.title}
+        description={work.description}
+        image={work.image}
+        slidesList={slidesList}
+      />
 
-                    <FormCalculation/>
-                </div>
-            </section>
-        </>
-    );
+      {MasterInfo && <Master master={MasterInfo} />}
+    </>
+  )
 }

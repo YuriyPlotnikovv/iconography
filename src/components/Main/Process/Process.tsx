@@ -1,54 +1,55 @@
-import {JSX} from 'react';
-import processStyles from './Process.module.scss';
-import {MainInfo, ProcessItem} from '@/types/types';
-import Image from 'next/image';
-import clsx from 'clsx';
-import cockpit from '@/lib/CockpitAPI';
+import { JSX } from 'react'
+import processStyles from './Process.module.scss'
+import { ProcessItem } from '@/types/types'
+import Image from 'next/image'
+import clsx from 'clsx'
+import cockpit from '@/lib/CockpitAPI'
+import { createSanitizedHTML } from '@/functions/functions'
 
-export default async function Process(): Promise<JSX.Element> {
-    const processList: ProcessItem[] = await cockpit.getCollection('createprocess', {sort: {sort: 1}});
+export default async function Process(): Promise<JSX.Element | null> {
+  const processList: ProcessItem[] = await cockpit.getCollection('createprocess', {
+    sort: { sort: 1 },
+  })
 
-    return (
-        <section className={clsx('section', processStyles['process'])} id="process">
-            <div className="container">
-                <h2 className="section__title">
-                    Процесс
-                </h2>
+  if (!processList || processList.length === 0) {
+    return null
+  }
 
-                <ul className={processStyles['process__list']}>
-                    {
-                        processList.map(process => {
-                            const title = process.title;
-                            const description = process.description;
-                            const image = cockpit.getImageUrl(process.image._id, 800, 500);
-                            const alt = process.alt ?? process.title;
+  return (
+    <section className={clsx('section', processStyles['process'])} id="process">
+      <div className="container">
+        <h2 className="section__title">Процесс сотворения образа</h2>
 
-                            return (
-                                <li className={processStyles['process__item']} key={process._id}>
-                                    <Image className={processStyles['process__item-image']}
-                                           src={image}
-                                           alt={alt}
-                                           width={500}
-                                           height={500}
-                                    />
+        <ul className={processStyles['process__list']}>
+          {processList.map((process) => {
+            const title = process.title
+            const description = process.description
+            const image = cockpit.getImageUrl(process.image._id, 800, 500)
+            const alt = process.alt ?? process.title
 
-                                    <h3 className={processStyles['process__item-title']}>
-                                        {title}
-                                    </h3>
+            return (
+              <li className={processStyles['process__item']} key={process._id}>
+                <Image
+                  className={processStyles['process__item-image']}
+                  src={image}
+                  alt={alt}
+                  width={500}
+                  height={500}
+                />
 
-                                    {
-                                        description && (
-                                            <div className={processStyles['process__item-text']}>
-                                                {description}
-                                            </div>
-                                        )
-                                    }
-                                </li>
-                            );
-                        })
-                    }
-                </ul>
-            </div>
-        </section>
-    );
+                <h3 className={processStyles['process__item-title']}>{title}</h3>
+
+                {description && (
+                  <div
+                    className={clsx('block-html', processStyles['process__item-text'])}
+                    dangerouslySetInnerHTML={createSanitizedHTML(description)}
+                  />
+                )}
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    </section>
+  )
 }
