@@ -1,7 +1,6 @@
-@use "../../../styles/variables" as var;
+@use '../../../styles/variables' as var;
 
 .process {
-
 }
 
 .process__list {
@@ -84,7 +83,6 @@
     max-height: 300px;
   }
 }
-
 
 .process__item-title {
   grid-row: 1 / 2;

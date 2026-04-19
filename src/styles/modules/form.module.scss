@@ -1,4 +1,4 @@
-@use "../../styles/variables.scss" as var;
+@use '../../styles/variables.scss' as var;
 
 .form {
   display: grid;
@@ -20,7 +20,21 @@
     flex-direction: column;
   }
   @media (max-width: var.$mobile-mid-width) {
+  }
+}
 
+.form--calculation {
+  grid-template-columns: 2fr 1fr;
+
+  @media (max-width: var.$tablet-min-width) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form__radio-group {
+    grid-row: 2/ 3;
+    grid-column: 1 / 2;
   }
 }
 
@@ -53,7 +67,7 @@
       border: 1px solid var.$form-bg;
       border-radius: 4px;
 
-      content: "";
+      content: '';
     }
 
     &::after {
@@ -68,21 +82,129 @@
 
       transition: all 0.2s ease;
 
-      content: "✓";
+      content: '✓';
     }
 
-    &:has(input[type="checkbox"]:not(:checked))::after {
+    &:has(input[type='checkbox']:not(:checked))::after {
       opacity: 0;
     }
 
-    &:has(input[type="checkbox"]:checked)::after {
+    &:has(input[type='checkbox']:checked)::after {
       opacity: 1;
     }
   }
 }
 
-.form__label-text {
+.form__radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
+.form__radio-switch {
+  position: relative;
+
+  display: flex;
+  overflow: visible;
+  align-items: center;
+  gap: 0;
+  margin-top: 8px;
+
+  background: transparent;
+  border-radius: 8px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+
+  width: 1px;
+  height: 1px;
+
+  white-space: nowrap;
+}
+
+.form__radio-option {
+  z-index: 2;
+
+  flex: 1 1 0;
+  padding: 8px 12px;
+
+  font-size: 16px;
+  text-align: center;
+
+  background: transparent;
+  border-radius: 6px;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.form__radio-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  z-index: 1;
+
+  width: calc(100% / 3);
+
+  background: var.$accent-light-bg;
+  box-shadow: var.$cardShadow;
+  border-radius: 6px;
+
+  transition:
+    transform 200ms ease,
+    left 200ms ease,
+    width 200ms ease;
+}
+
+.form__radio-label {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 36px;
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+.form__custom-radio {
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: var.$accent-light-bg;
+  border: 1px solid var.$form-bg;
+  border-radius: 50%;
+
+  transform: translateY(-50%);
+}
+
+.form__radio-label input[type='radio']:checked + .form__custom-radio::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 12px;
+  height: 12px;
+
+  background-color: var.$accent-add-bg;
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  content: '';
+}
+
+.form__label-text {
 }
 
 .form__label-link {
@@ -122,14 +244,107 @@
   }
 }
 
-.form__buttons-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  gap: 30px;
+.form__button {
+  align-self: end;
+  margin: 0;
 }
 
-.form__button {
-  flex-grow: 1;
-  margin: 0;
+.form__select {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.form__select__current {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+
+  font-family: var.$font-text;
+  font-size: 16px;
+
+  background: none;
+  border: none;
+  border-bottom: 1px solid var.$accent-dark-bg;
+
+  cursor: pointer;
+}
+
+.form__select__current[aria-expanded='true'] .form__select__icon {
+  transform: rotate(180deg);
+}
+
+.form__select__icon {
+  display: block;
+  width: 10px;
+  height: 10px;
+
+  transition: transform 0.2s ease-in-out;
+}
+
+.form__select__list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 100;
+
+  overflow: hidden;
+  width: 100%;
+
+  background-color: var.$base-bg;
+  box-shadow: var.$cardShadow;
+  border-radius: 4px;
+}
+
+.form__select__option {
+  padding: 10px;
+
+  font-size: 16px;
+  line-height: 1.5;
+  text-transform: lowercase;
+
+  cursor: pointer;
+}
+
+.form__select__option:hover,
+.form__select__option:active,
+.form__select__option:focus {
+  background: var.$add-bg;
+  outline: none;
+}
+
+.form__select__option--selected {
+  font-weight: 700;
+  color: var.$bg-text-color;
+
+  background-color: var.$accent-bg;
+
+  pointer-events: none;
+}
+
+.form__result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: start;
+  grid-row: 1 / 3;
+  grid-column: 2;
+  width: 100%;
+  height: 100%;
+  padding: 18px;
+
+  font-family: var.$font-decor;
+  font-size: 24px;
+  font-weight: 700;
+
+  background-color: var.$accent-light-bg;
+  box-shadow: var.$cardShadow;
+  border-radius: 6px;
 }

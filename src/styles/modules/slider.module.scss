@@ -1,4 +1,4 @@
-@use "../../styles/variables.scss" as var;
+@use '../../styles/variables.scss' as var;
 
 .slider {
   position: relative;
@@ -68,19 +68,15 @@
 }
 
 .slider__item-image {
-
 }
 
 .slider__item-content {
-
 }
 
 .slider__item-title {
-
 }
 
 .slider__item-text {
-
 }
 
 .slider__controls {
@@ -148,10 +144,8 @@
   }
 
   &--prev {
-
   }
 
   &--next {
-
   }
 }

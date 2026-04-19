@@ -1,0 +1,184 @@
+name: Build & Deploy Docker
+
+on:
+  pull_request:
+    types: [ closed ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ghcr.io/${{ github.repository }}:latest
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy docker-compose and nginx config to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          source: "docker-compose.yml,deploy/nginx/icon-artel.conf"
+          target: "/opt/icon-artel-deploy/"
+
+      - name: Deploy on server (write .env, pull image and restart + setup SSL)
+        uses: appleboy/ssh-action@v1.0.0
+        env:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          NEXT_PUBLIC_SITE_URL: https://icon-artel.ru
+          NEXT_PUBLIC_CAPTCHA_SITE_KEY: ${{ secrets.CAPTCHA_SITE_KEY }}
+          CAPTCHA_SECRET: ${{ secrets.CAPTCHA_SECRET }}
+          COCKPIT_API_URL: ${{ secrets.COCKPIT_API_URL }}
+          COCKPIT_API_KEY: ${{ secrets.COCKPIT_API_KEY }}
+          SSL_EMAIL: ${{ secrets.SSL_EMAIL }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          envs: IMAGE_NAME,NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_CAPTCHA_SITE_KEY,CAPTCHA_SECRET,COCKPIT_API_URL,COCKPIT_API_KEY,SSL_EMAIL
+          script: |
+            set -euo pipefail
+            echo "🚀 Starting deployment on $HOST"
+
+            mkdir -p /opt/icon-artel-deploy
+            cd /opt/icon-artel-deploy
+
+            echo "📝 Writing .env file..."
+            cat > .env <<EOF
+            IMAGE_NAME=$IMAGE_NAME
+            NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+            NEXT_PUBLIC_CAPTCHA_SITE_KEY=$NEXT_PUBLIC_CAPTCHA_SITE_KEY
+            CAPTCHA_SECRET=$CAPTCHA_SECRET
+            COCKPIT_API_URL=$COCKPIT_API_URL
+            COCKPIT_API_KEY=$COCKPIT_API_KEY
+            NODE_ENV=production
+            EOF
+            echo "✅ .env file written"
+
+            echo "🔑 Logging into GitHub Container Registry..."
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+            echo "⏹️  Stopping old containers (if any)..."
+            docker compose -f docker-compose.yml down || true
+
+            echo "📦 Pulling new image: $IMAGE_NAME"
+            docker pull $IMAGE_NAME || true
+
+            echo "▶️  Starting container..."
+            docker compose -f docker-compose.yml up -d
+
+            echo "🧹 Cleaning up old images..."
+            docker image prune -af || true
+
+            echo "📌 Installing nginx config..."
+            # Move nginx config into place; requires sudo
+            if [ -f ./icon-artel.conf ]; then
+              sudo mv -f ./icon-artel.conf /etc/nginx/sites-available/icon-artel.conf
+              sudo ln -sf /etc/nginx/sites-available/icon-artel.conf /etc/nginx/sites-enabled/icon-artel.conf
+              sudo nginx -t && sudo systemctl reload nginx || echo "⚠️ nginx reload failed — check config"
+            else
+              echo "⚠️ nginx config not provided"
+            fi
+
+            # Ensure ACME webroot exists for certbot
+            sudo mkdir -p /var/www/letsencrypt
+            sudo chown -R $USER:www-data /var/www/letsencrypt || true
+            sudo chmod -R 755 /var/www/letsencrypt || true
+
+            # Install certbot and obtain/renew certificates if needed
+            if ! command -v certbot >/dev/null 2>&1; then
+              echo "📥 Installing certbot..."
+              sudo apt-get update -y
+              sudo apt-get install -y software-properties-common
+              sudo add-apt-repository -y universe || true
+              sudo apt-get update -y
+              sudo apt-get install -y certbot python3-certbot-nginx || true
+            fi
+
+            # Obtain certificate if not present
+            if [ ! -d "/etc/letsencrypt/live/icon-artel.ru" ]; then
+              echo "🔐 Requesting Let's Encrypt certificate for icon-artel.ru..."
+              sudo certbot --nginx -n --agree-tos --email "$SSL_EMAIL" -d icon-artel.ru -d www.icon-artel.ru || 
+                { echo "❌ certbot failed"; exit 1; }
+            else
+              echo "✅ Certificate already exists, attempting renewal test"
+              sudo certbot renew --dry-run || echo "⚠️ certbot renew dry-run failed"
+            fi
+
+            # Enable certbot timer (for automatic renewals)
+            if systemctl list-timers | grep -q certbot; then
+              echo "✅ certbot.timer is active"
+            else
+              sudo systemctl enable --now certbot.timer || echo "⚠️ Failed to enable certbot.timer"
+            fi
+
+            echo "✅ Deployment finished"
+
+  verify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify deployment (remote checks)
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            cd /opt/icon-artel-deploy || true
+            echo "🚦 Docker compose ps:";
+            docker compose ps || true
+            echo "\n📄 Recent logs:";
+            docker compose logs --tail=50 || true
+            echo "\n🌐 Quick HTTP check:";
+            curl -I -sS http://127.0.0.1:3000 | head -n 5 || true
+
+

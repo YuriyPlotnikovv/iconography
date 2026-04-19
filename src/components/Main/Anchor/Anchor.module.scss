@@ -1,4 +1,4 @@
-@use "../../../styles/variables" as var;
+@use '../../../styles/variables' as var;
 
 .anchor {
   padding: 20px 0;
@@ -11,13 +11,12 @@
 .anchor__list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   padding: 0 50px;
 
   @media (max-width: var.$tablet-mid-width) {
-    justify-content: center;
     gap: 5px 10px;
     padding: 0;
   }

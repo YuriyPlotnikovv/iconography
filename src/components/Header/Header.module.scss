@@ -1,4 +1,4 @@
-@use "../../styles/variables.scss" as var;
+@use '../../styles/variables.scss' as var;
 
 .header {
   position: fixed;
@@ -37,22 +37,6 @@
     gap: 10px;
   }
   @media (max-width: var.$tablet-min-width) {
-    display: none;
-  }
-}
-
-.header__social-mobile {
-  display: none;
-
-  @media (max-width: var.$mobile-mid-width) {
-    display: flex;
-  }
-}
-
-.header__social-desktop {
-  display: flex;
-
-  @media (max-width: var.$mobile-mid-width) {
     display: none;
   }
 }

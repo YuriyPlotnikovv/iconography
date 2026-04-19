@@ -1,24 +1,34 @@
-import {JSX} from 'react';
-import logoStyles from './Logo.module.scss';
-import Link from 'next/link';
-import Image from 'next/image';
-import {MainInfo} from '@/types/types';
-import cockpit from '@/lib/CockpitAPI';
+import { JSX } from 'react'
+import logoStyles from './Logo.module.scss'
+import Link from 'next/link'
+import Image from 'next/image'
+import { MainInfo } from '@/types/types'
+import cockpit from '@/lib/CockpitAPI'
+import clsx from 'clsx'
 
-export default async function Logo(): Promise<JSX.Element> {
-    const mainInfo: MainInfo = await cockpit.getSingleItem('maininfo');
+type LogoProps = {
+  addClass?: string
+}
 
-    const logo = cockpit.getImageUrl(mainInfo.logo._id, 60, 60);
+export default async function Logo({ addClass }: LogoProps): Promise<JSX.Element | null> {
+  const mainInfo: MainInfo | null = await cockpit.getSingleItem('maininfo')
 
-    return (
-        <Link className={logoStyles['logo']} href="/">
-            <Image className={logoStyles['logo__image']}
-                   src={logo}
-                   width="60"
-                   height="60"
-                   unoptimized
-                   alt="Иконописная мастерская"
-            />
-        </Link>
-    );
+  if (!mainInfo || !mainInfo.logo) {
+    return null
+  }
+
+  const logo = cockpit.getImageUrl(mainInfo.logo._id, 60, 60)
+
+  return (
+    <Link className={clsx(addClass, logoStyles['logo'])} href="/">
+      <Image
+        className={logoStyles['logo__image']}
+        src={logo}
+        width="60"
+        height="60"
+        unoptimized
+        alt={mainInfo.logo.alt ?? ''}
+      />
+    </Link>
+  )
 }

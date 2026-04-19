@@ -1,8 +1,7 @@
-@use "../../../styles/variables" as var;
-@use "../../../styles/animations";
+@use '../../../styles/variables' as var;
+@use '../../../styles/animations';
 
 .faq {
-
 }
 
 .faq__list {
@@ -26,7 +25,9 @@
   &::details-content {
     overflow: hidden;
     height: 0;
-    transition: height 0.3s ease-in-out, content-visibility 0.3s ease-in-out;
+    transition:
+      height 0.3s ease-in-out,
+      content-visibility 0.3s ease-in-out;
     transition-behavior: allow-discrete;
   }
 
@@ -101,7 +102,7 @@
     transition: transform 0.4s ease-in-out;
     transform: translateY(-50%);
 
-    content: "⟫";
+    content: '⟫';
   }
 }
 

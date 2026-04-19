@@ -1,45 +1,49 @@
-import type {Metadata} from 'next';
-import {JSX} from 'react';
-import {BreadcrumbItem} from '@/types/types';
-import Heading from '@/components/Heading/Heading';
-import Process from '@/components/Main/Process/Process';
-import FormCalculation from '@/components/Forms/FormCalculation/FormCalculation';
-import Payment from '@/components/Payment/Payment';
+import type { Metadata } from 'next'
+import { JSX } from 'react'
+import { BreadcrumbItem } from '@/types/types'
+import Heading from '@/components/Heading/Heading'
+import Process from '@/components/Main/Process/Process'
+import FormCalculation from '@/components/Forms/FormCalculation/FormCalculation'
+import Payment from '@/components/Payment/Payment'
 
 export const metadata: Metadata = {
-    title: 'Заказ и доставка | Иконописная мастерская',
-    description: 'Иконописная мастерская - описание',
-};
+  title: 'Заказ и доставка | Иконописная Артель',
+  description: 'Иконописная Артель - описание',
+}
 
 const breadcrumbsList: BreadcrumbItem[] = [
-    {
-        title: 'Главная',
-        url: '/',
-    },
-    {
-        title: 'Заказ и доставка',
-    },
-];
+  {
+    title: 'Главная',
+    url: '/',
+  },
+  {
+    title: 'Заказ и доставка',
+  },
+]
 
 export default function Page(): JSX.Element {
-    return (
-        <>
-            <Heading title={'Заказ и доставка'} description={'<p>Подробное описание раздела</p>'}
-                     breadcrumbsList={breadcrumbsList}/>
+  const title = 'Заказ и доставка'
+  const description = '<p></p>'
 
-            <Payment/>
+  return (
+    <>
+      <Heading title={title} description={description} breadcrumbsList={breadcrumbsList} />
 
-            <section className="section calculation">
-                <div className="container">
-                    <h2 className="section__title">
-                        Расчёт стоимости заказа работы
-                    </h2>
+      <Payment />
 
-                    <FormCalculation/>
-                </div>
-            </section>
+      <section className="section calculation">
+        <div className="container">
+          <h2 className="section__title">Расчёт примерной стоимости</h2>
 
-            <Process/>
-        </>
-    );
+          <p className="section__description">
+            (выполнение гравировки и ассиста рассчитывается отдельно)
+          </p>
+
+          <FormCalculation />
+        </div>
+      </section>
+
+      <Process />
+    </>
+  )
 }

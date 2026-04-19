@@ -22,9 +22,6 @@
 # production
 /build
 
-# cms
-/cockpit
-
 # misc
 .DS_Store
 *.pem

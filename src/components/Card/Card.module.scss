@@ -1,5 +1,5 @@
-@use "../../styles/variables.scss" as var;
-@use "../../styles/mixins" as mixin;
+@use '../../styles/variables.scss' as var;
+@use '../../styles/mixins' as mixin;
 
 .card {
   position: relative;
@@ -36,7 +36,6 @@
 }
 
 .card__image {
-
 }
 
 .card__content {
