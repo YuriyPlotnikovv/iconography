@@ -1,16 +1,8 @@
-version: '3.8'
-
 services:
-  web:
-    # Укажите полный IMAGE_NAME через .env (например: ghcr.io/OWNER/REPO:latest)
-    image: '${IMAGE_NAME}'
+  iconography:
+    image: ghcr.io/${IMAGE_NAME}:latest
+    container_name: iconography
     restart: unless-stopped
     env_file: .env
-    # Проксируем локально на 127.0.0.1:3000 — nginx на хосте будет обращаться по этому адресу
     ports:
       - '127.0.0.1:3000:3000'
-    # Логи и кеш можно монтировать на хост для диагностики
-    volumes:
-      - /opt/icon-artel/logs:/var/log/icon-artel
-    # Опционально: uncomment если хотите билдить образ на сервере
-    # build: .
