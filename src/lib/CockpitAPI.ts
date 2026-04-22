@@ -84,7 +84,7 @@ class CockpitClient {
 
   private async cockpitFetch(endpoint: string, options: RequestInit = {}) {
     if (!this.baseUrl) {
-      throw new Error('Cockpit base URL is not configured. Set NEXT_PUBLIC_COCKPIT_URL or COCKPIT_API_URL in environment')
+      throw new Error('Cockpit base URL is not configured. Set COCKPIT_API_URL in environment')
     }
 
     const url = `${this.baseUrl.replace(/\/$/, '')}/api/${endpoint}`
