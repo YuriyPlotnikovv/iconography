@@ -5,7 +5,6 @@ FROM node:24-alpine AS builder
 ARG COCKPIT_API_URL
 ARG COCKPIT_API_KEY
 ENV NEXT_PUBLIC_COCKPIT_URL=$COCKPIT_API_URL
-ENV COCKPIT_API_KEY=$COCKPIT_API_KEY
 WORKDIR /app
 
 # Install dependencies (prefer npm ci when lockfile present)
@@ -23,7 +22,7 @@ WORKDIR /app
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
+#COPY --from=builder /app/public ./public
 
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s CMD wget -qO- http://127.0.0.1:3000/health || exit 1
