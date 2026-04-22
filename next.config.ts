@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next'
 
-const cockpitUrl = process.env.COCKPIT_API_URL || process.env.NEXT_PUBLIC_COCKPIT_URL || ''
+const cockpitUrl = process.env.COCKPIT_API_URL || ''
 const cockpitHost = cockpitUrl ? new URL(cockpitUrl).hostname : ''
 
 const nextConfig: NextConfig = {
@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: cockpitHost,
-        pathname: '/**',
       },
     ],
   },
