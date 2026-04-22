@@ -12,7 +12,7 @@ class CockpitClient {
   private readonly apiKey: string
 
   constructor() {
-    this.baseUrl = process.env.COCKPIT_API_URL || process.env.NEXT_PUBLIC_COCKPIT_URL || ''
+    this.baseUrl = process.env.COCKPIT_API_URL || ''
     this.apiKey = process.env.COCKPIT_API_KEY || ''
   }
 
