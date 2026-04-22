@@ -1,6 +1,9 @@
 # ===== Stage 1: Builder =====
 FROM node:24-alpine AS builder
 
+ARG COCKPIT_API_URL
+ENV COCKPIT_API_URL=$COCKPIT_API_URL
+
 WORKDIR /app
 
 # Copy package files first for better layer caching
