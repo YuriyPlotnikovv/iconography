@@ -2,10 +2,10 @@
 # Builds the app and serves it with `next start` on port 3000
 
 FROM node:24-alpine AS builder
-ARG NEXT_PUBLIC_COCKPIT_URL
-ARG NEXT_PUBLIC_COCKPIT_API_KEY
-ENV NEXT_PUBLIC_COCKPIT_URL=$NEXT_PUBLIC_COCKPIT_URL
-ENV NEXT_PUBLIC_COCKPIT_API_KEY=$NEXT_PUBLIC_COCKPIT_API_KEY
+ARG COCKPIT_API_URL
+ARG COCKPIT_API_KEY
+ENV NEXT_PUBLIC_COCKPIT_URL=$COCKPIT_API_URL
+ENV COCKPIT_API_KEY=$COCKPIT_API_KEY
 WORKDIR /app
 
 # Install dependencies (prefer npm ci when lockfile present)
@@ -18,7 +18,6 @@ RUN npm run build
 
 FROM node:24-alpine AS runner
 WORKDIR /app
-ENV NODE_ENV=production
 
 # Copy only what is needed to run
 COPY --from=builder /app/package.json ./

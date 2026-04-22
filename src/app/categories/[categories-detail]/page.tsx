@@ -20,7 +20,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     return {
       title: `${category.title} | Иконописная Артель`,
-      description: category.description,
+      description: category.description ? category.description.replace(/<[^>]*>/g, '').slice(0, 160) : '',
+      openGraph: {
+        title: category.title,
+        description: category.description ? category.description.replace(/<[^>]*>/g, '').slice(0, 160) : '',
+        images: category.image ? [{ url: cockpit.getImageUrl(category.image._id, 1200, 630), alt: category.title }] : [],
+      },
+      alternates: {
+        canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/categories/${category._id}`,
+      },
     }
   } catch {
     return {

@@ -12,8 +12,8 @@ class CockpitClient {
   private readonly apiKey: string
 
   constructor() {
-    this.baseUrl = process.env.NEXT_PUBLIC_COCKPIT_URL || ''
-    this.apiKey = process.env.NEXT_PUBLIC_COCKPIT_API_KEY || ''
+    this.baseUrl = process.env.COCKPIT_API_URL || process.env.NEXT_PUBLIC_COCKPIT_URL || ''
+    this.apiKey = process.env.COCKPIT_API_KEY || ''
   }
 
   async getSingleItem(modelId: string, options: CockpitOptions = {}) {
@@ -65,7 +65,7 @@ class CockpitClient {
   }
 
   getImageUrl(imageId: string, width: number, height: number) {
-    return `${this.baseUrl}/api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1`
+    return `${this.baseUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1`
   }
 
   private createQueryString(options: object = {}) {
