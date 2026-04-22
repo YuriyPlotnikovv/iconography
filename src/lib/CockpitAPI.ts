@@ -65,7 +65,7 @@ class CockpitClient {
   }
 
   getImageUrl(imageId: string, width: number, height: number) {
-    return `${this.baseUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1`
+    return `${this.baseUrl}api/assets/image/${imageId}?m=bestFit&w=${width}&h=${height}&q=80&o=1`
   }
 
   private createQueryString(options: object = {}) {
