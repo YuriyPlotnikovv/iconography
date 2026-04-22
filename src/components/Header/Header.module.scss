@@ -34,7 +34,7 @@
 
   @media (max-width: var.$tablet-mid-width) {
     flex-direction: column;
-    gap: 10px;
+    gap: 0;
   }
   @media (max-width: var.$tablet-min-width) {
     display: none;

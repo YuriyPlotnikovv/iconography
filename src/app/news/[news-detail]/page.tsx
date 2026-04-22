@@ -22,9 +22,19 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
     }
   }
 
+  const description = (news.content || news.description || '').replace(/<[^>]*>/g, '').slice(0, 160)
+
   return {
     title: `${news.title} | Иконописная Артель`,
-    description: news.description,
+    description,
+    openGraph: {
+      title: news.title,
+      description,
+      images: news.image ? [{ url: cockpit.getImageUrl(news.image._id, 1200, 630), alt: news.title }] : [],
+    },
+    alternates: {
+      canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/news/${news._id}`,
+    },
   }
 }
 

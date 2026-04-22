@@ -17,7 +17,7 @@ export default async function About(): Promise<JSX.Element | null> {
   const description = mainInfo.description
   const image = mainInfo.image
     ? cockpit.getImageUrl(mainInfo.image._id, 800, 500)
-    : '/img/cover.jpg'
+    : ''
   const alt = mainInfo.image?.alt ?? mainInfo.title
 
   return (
