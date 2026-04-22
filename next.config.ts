@@ -1,12 +1,15 @@
 import type { NextConfig } from 'next'
 
+const cockpitUrl = process.env.COCKPIT_API_URL || process.env.NEXT_PUBLIC_COCKPIT_URL || ''
+const cockpitHost = cockpitUrl ? new URL(cockpitUrl).hostname : ''
+
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'icon-artel.ru',
+        hostname: cockpitHost,
         pathname: '/**',
       },
     ],
