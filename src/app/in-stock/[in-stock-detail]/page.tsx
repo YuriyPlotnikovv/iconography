@@ -23,9 +23,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
+  const description = work.description ? work.description.replace(/<[^>]*>/g, '').slice(0, 160) : ''
+
   return {
     title: `${work.title} | Иконописная Артель`,
-    description: work.description || 'Иконописная Артель - описание',
+    description,
+    openGraph: {
+      title: work.title,
+      description,
+      images: work.image? [{ url: cockpit.getImageUrl(work.image._id, 1200, 630), alt: work.title }] : [],
+    },
+    alternates: {
+      canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work._id}`,
+    },
   }
 }
 

@@ -11,7 +11,7 @@ export default function Header(): JSX.Element {
   return (
     <header className={headerStyles['header']}>
       <div className={clsx('container', headerStyles['header__container'])}>
-        <Logo />
+        <Logo showCaption={true} />
 
         <Contacts addClass={headerStyles['header__contacts']} />
 
