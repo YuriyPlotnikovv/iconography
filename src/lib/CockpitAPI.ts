@@ -1,6 +1,7 @@
 interface CockpitOptions {
   locale?: string
-  filter?: Record<string, boolean>
+  // filter values can be string, number, boolean or complex objects (e.g. { field: value })
+  filter?: Record<string, unknown>
   sort?: Record<string, number>
   limit?: number
   skip?: number
@@ -48,6 +49,23 @@ class CockpitClient {
       return await this.cockpitFetch(endpoint)
     } catch (e) {
       console.error('Cockpit getCollectionItem error', e)
+      return null
+    }
+  }
+
+  /**
+   * Fetch single item from a collection by arbitrary field (e.g. slug)
+   * Returns first matched item or null
+   */
+  async getCollectionItemByField(modelId: string, field: string, value: string, options: CockpitOptions = {}) {
+    try {
+      const filter = { ...(options.filter || {}), [field]: value }
+      const items: unknown[] = await this.getCollection(modelId, { ...options, filter, limit: 1 })
+
+      if (Array.isArray(items) && items.length > 0) return items[0] as unknown
+      return null
+    } catch (e) {
+      console.error('Cockpit getCollectionItemByField error', e)
       return null
     }
   }

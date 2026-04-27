@@ -99,6 +99,7 @@ export type CategoryFromServer = {
   description: string
   image: ImageItem
   slider: ImageItem[]
+  slug?: string
 }
 
 export type WorkFromServer = {
@@ -110,6 +111,7 @@ export type WorkFromServer = {
   date: string
   master: MasterFromServer | null
   in_stock: boolean
+  slug?: string
 }
 
 export type NewsFromServer = {
@@ -120,6 +122,7 @@ export type NewsFromServer = {
   image: ImageItem
   _id: string
   date: string
+  slug?: string
 }
 
 export type ReviewFromServer = {
@@ -135,6 +138,7 @@ export type MasterFromServer = {
   name: string
   description: string
   image: ImageItem
+  slug?: string
 }
 
 export type OrderFromServer = {
