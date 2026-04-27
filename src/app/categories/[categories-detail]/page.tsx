@@ -13,10 +13,10 @@ type PageProps = {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { ['categories-detail']: categoryId } = await params
+  const { ['categories-detail']: slug } = await params
 
   try {
-    const category: CategoryFromServer = await cockpit.getCollectionItem('category', categoryId)
+    const category: CategoryFromServer = (await cockpit.getCollectionItemByField('category', 'slug', slug)) || (await cockpit.getCollectionItem('category', slug))
 
     return {
       title: `${category.title} | Иконописная Артель`,
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         images: category.image ? [{ url: cockpit.getImageUrl(category.image._id, 1200, 630), alt: category.title }] : [],
       },
       alternates: {
-        canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/categories/${category._id}`,
+        canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/categories/${category.slug || category._id}`,
       },
     }
   } catch {
@@ -38,12 +38,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps): Promise<JSX.Element> {
-  const { ['categories-detail']: categoryId } = await params
+  const { ['categories-detail']: slug } = await params
 
   let category: CategoryFromServer
 
   try {
-    category = await cockpit.getCollectionItem('category', categoryId)
+    category = (await cockpit.getCollectionItemByField('category', 'slug', slug)) || (await cockpit.getCollectionItem('category', slug))
   } catch {
     notFound()
   }

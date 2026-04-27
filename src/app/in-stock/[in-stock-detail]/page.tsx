@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { JSX } from 'react'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { BreadcrumbItem, MasterFromServer, SlideItem, WorkFromServer } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
 import Detail from '@/components/Detail/Detail'
@@ -14,8 +14,8 @@ type PageProps = {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { ['in-stock-detail']: workId } = await params
-  const work: WorkFromServer | null = await cockpit.getCollectionItem('works', workId)
+  const { ['in-stock-detail']: slug } = await params
+  const work: WorkFromServer | null = (await cockpit.getCollectionItemByField('works', 'slug', slug)) || (await cockpit.getCollectionItem('works', slug))
 
   if (!work) {
     return {
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: work.image? [{ url: cockpit.getImageUrl(work.image._id, 1200, 630), alt: work.title }] : [],
     },
     alternates: {
-      canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work._id}`,
+      canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work.slug || work._id}`,
     },
   }
 }
@@ -45,16 +45,20 @@ export async function generateStaticParams() {
   })
 
   return works.map((work) => ({
-    'in-stock-detail': work._id,
+    'in-stock-detail': work.slug || work._id,
   }))
 }
 
 export default async function Page({ params }: PageProps): Promise<JSX.Element> {
-  const { ['in-stock-detail']: workId } = await params
-  const work: WorkFromServer | null = await cockpit.getCollectionItem('works', workId)
+  const { ['in-stock-detail']: slug } = await params
+  const work: WorkFromServer | null = (await cockpit.getCollectionItemByField('works', 'slug', slug)) || (await cockpit.getCollectionItem('works', slug))
 
   if (!work) {
     notFound()
+  }
+
+  if (work.slug && work.slug !== slug) {
+    redirect(`/in-stock/${work.slug}`)
   }
 
   const breadcrumbsList: BreadcrumbItem[] = [

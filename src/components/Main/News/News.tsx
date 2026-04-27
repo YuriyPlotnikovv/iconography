@@ -17,10 +17,10 @@ export default async function News(): Promise<JSX.Element | null> {
   }
 
   const newsList: CardItem[] = newsData.map((news) => ({
-    id: news._id,
+    id: news.slug || news._id,
     title: news.title,
     description: news.description,
-    href: `/news/${news._id}`,
+    href: `/news/${news.slug || news._id}`,
     image: cockpit.getImageUrl(news.image._id, 400, 400),
     alt: news.image.title || news.title,
   }))

@@ -17,10 +17,10 @@ export default async function Masters(): Promise<JSX.Element | null> {
   }
 
   const mastersList: CardItem[] = mastersData.map((master) => ({
-    id: master._id,
+    id: master.slug || master._id,
     title: master.name,
     description: master.description,
-    href: `/masters/${master._id}`,
+    href: `/masters/${master.slug || master._id}`,
     image: cockpit.getImageUrl(master.image._id, 400, 400),
     alt: master.image.title || master.name,
   }))

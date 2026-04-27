@@ -17,10 +17,10 @@ export default async function LastWorks(): Promise<JSX.Element | null> {
   }
 
   const worksList: CardItem[] = worksData.map((work) => ({
-    id: work._id,
+    id: work.slug || work._id,
     title: work.title,
     description: work.description,
-    href: `/works/${work._id}`,
+    href: `/works/${work.slug || work._id}`,
     image: cockpit.getImageUrl(work.image._id, 400, 400),
     alt: work.image.title || work.title,
   }))

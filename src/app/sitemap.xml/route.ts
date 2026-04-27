@@ -27,22 +27,22 @@ export async function GET() {
 
     if (Array.isArray(works)) {
       works.forEach((w: unknown) => {
-        const item = w as { _id?: string }
-        if (item && item._id) urls.push(`${siteUrl}/works/${item._id}`)
+        const item = w as { _id?: string; slug?: string }
+        if (item && (item.slug || item._id)) urls.push(`${siteUrl}/works/${item.slug || item._id}`)
       })
     }
 
     if (Array.isArray(news)) {
       news.forEach((n: unknown) => {
-        const item = n as { _id?: string }
-        if (item && item._id) urls.push(`${siteUrl}/news/${item._id}`)
+        const item = n as { _id?: string; slug?: string }
+        if (item && (item.slug || item._id)) urls.push(`${siteUrl}/news/${item.slug || item._id}`)
       })
     }
 
     if (Array.isArray(categories)) {
       categories.forEach((c: unknown) => {
-        const item = c as { _id?: string }
-        if (item && item._id) urls.push(`${siteUrl}/categories/${item._id}`)
+        const item = c as { _id?: string; slug?: string }
+        if (item && (item.slug || item._id)) urls.push(`${siteUrl}/categories/${item.slug || item._id}`)
       })
     }
   } catch (e) {
