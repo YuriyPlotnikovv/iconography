@@ -12,9 +12,10 @@ type MenuProps = {
   addClass?: string
   onCloseMenu?: () => void
   firstMenuItemRef?: RefObject<HTMLAnchorElement | null>
+  isFooter?: boolean
 }
 
-export default function Menu({ addClass, onCloseMenu, firstMenuItemRef }: MenuProps): JSX.Element {
+export default function Menu({ addClass, onCloseMenu, firstMenuItemRef, isFooter }: MenuProps): JSX.Element {
   const currentPath = usePathname()
 
   return (
@@ -26,7 +27,10 @@ export default function Menu({ addClass, onCloseMenu, firstMenuItemRef }: MenuPr
         return (
           <li className={menuStyles.menu__item} key={menuItem.href}>
             <Link
-              className={clsx(menuStyles.menu__link, isActive && menuStyles['menu__link--current'])}
+              className={clsx(
+                menuStyles.menu__link,
+                isActive && !isFooter && menuStyles['menu__link--current'],
+              )}
               href={menuItem.href}
               onClick={onCloseMenu}
               ref={index === 0 ? firstMenuItemRef : null}

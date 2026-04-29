@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .social {
   display: flex;
@@ -14,7 +14,7 @@
   display: block;
   padding: 5px;
 
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     padding: 0;
   }
 }
@@ -23,5 +23,5 @@
   width: 30px;
   height: 30px;
 
-  fill: var.$accent-add-bg;
+  fill: $accent-add-bg;
 }

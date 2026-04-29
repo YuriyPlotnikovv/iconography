@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .logo {
   display: flex;
@@ -21,16 +21,17 @@
 }
 
 .logo__text {
-  font-family: var.$font-decor;
+  font-family: $font-decor;
   font-size: 28px;
 
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 24px;
   }
-  @media (max-width: var.$tablet-min-width) {
-    font-size: 18px;
+  @media (max-width: $tablet-min-width) {
+    font-size: 20px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     display: none;
   }
 }
+

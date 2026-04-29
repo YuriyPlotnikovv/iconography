@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as var;
+@use '../../../styles/variables' as *;
 
 .anchor {
   padding: 20px 0;
@@ -16,20 +16,20 @@
   gap: 20px;
   padding: 0 50px;
 
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     gap: 5px 10px;
     padding: 0;
   }
 }
 
 .anchor__item {
-  font-family: var.$font-decor;
+  font-family: $font-decor;
   font-size: 22px;
 
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 20px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 18px;
   }
 }
@@ -43,7 +43,7 @@
 
   transition: opacity 0.4s ease-in-out;
 
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     padding: 5px;
   }
 

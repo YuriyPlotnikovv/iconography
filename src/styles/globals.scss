@@ -1,4 +1,4 @@
-@use './variables.scss' as var;
+@use './variables.scss' as *;
 
 *,
 *::before,
@@ -10,16 +10,16 @@ html,
 body {
   display: flex;
   flex-direction: column;
-  min-width: var.$mobile-min-width;
+  min-width: $mobile-min-width;
   height: 100%;
   margin: 0;
 
-  font-family: var.$font-text;
+  font-family: $font-text;
   font-size: 14px;
   line-height: 1.4;
-  color: var.$base-text-color;
+  color: $base-text-color;
 
-  background-color: var.$base-bg;
+  background-color: $base-bg;
 
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
@@ -46,7 +46,7 @@ h5,
 h6 {
   margin: 0;
 
-  font-family: var.$font-decor;
+  font-family: $font-decor;
   line-height: 1;
 }
 

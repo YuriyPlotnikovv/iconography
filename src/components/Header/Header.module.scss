@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .header {
   position: fixed;
@@ -7,9 +7,9 @@
   left: 0;
   z-index: 12;
 
-  background-color: var.$accent-light-bg;
-  box-shadow: var.$boxShadowOutset;
-  border-bottom: 1px solid var.$accent-add-bg;
+  background-color: $accent-light-bg;
+  box-shadow: $boxShadowOutset;
+  border-bottom: 1px solid $accent-add-bg;
 }
 
 .header__container {
@@ -20,10 +20,10 @@
   gap: 40px;
   height: 80px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     gap: 20px;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     gap: 10px;
   }
 }
@@ -32,11 +32,11 @@
   display: flex;
   gap: 20px;
 
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     flex-direction: column;
     gap: 0;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     display: none;
   }
 }

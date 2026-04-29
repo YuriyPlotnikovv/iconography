@@ -1,24 +1,24 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .footer {
   margin-top: auto;
   padding: 30px 0;
 
-  color: var.$bg-text-color;
+  color: $bg-text-color;
 
-  background-color: var.$accent-dark-bg;
+  background-color: $accent-dark-bg;
 }
 
 .footer__container {
   display: grid;
   grid-template-rows: repeat(3, auto);
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 350px 1fr;
   gap: 30px;
 
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     gap: 20px;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     display: flex;
     flex-direction: column;
   }
@@ -41,7 +41,7 @@
   grid-column: 2 / 3;
   gap: 30px;
 
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     flex-direction: column;
     gap: 20px;
   }
@@ -55,7 +55,7 @@
 
   place-items: start;
 
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
 
     font-size: 18px;
@@ -71,9 +71,9 @@
   gap: 20px;
   padding: 20px 0 0;
 
-  border-top: 1px solid var.$accent-add-bg;
+  border-top: 1px solid $accent-add-bg;
 
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     flex-direction: column-reverse;
   }
 }

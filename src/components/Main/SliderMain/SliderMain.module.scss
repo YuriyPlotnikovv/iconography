@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as var;
+@use '../../../styles/variables' as *;
 
 .slider-main {
   overflow: hidden;
@@ -29,7 +29,7 @@
   flex-direction: column;
   gap: 20px;
 
-  color: var.$bg-text-color;
+  color: $bg-text-color;
 
   transform: translateX(-50%);
 }
@@ -37,16 +37,16 @@
 .slider-main__item-title {
   font-size: 72px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 60px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 48px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 36px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 24px;
   }
 }
@@ -54,16 +54,16 @@
 .slider-main__item-text {
   font-size: 28px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 26px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 22px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 18px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 14px;
   }
 }
@@ -93,7 +93,7 @@
 
   transform: translateY(-50%);
 
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     width: 60px;
     height: 60px;
   }
@@ -101,16 +101,16 @@
   &--prev {
     left: 100px;
 
-    @media (max-width: var.$desktop-mid-width) {
+    @media (max-width: $desktop-mid-width) {
       left: 80px;
     }
-    @media (max-width: var.$desktop-min-width) {
+    @media (max-width: $desktop-min-width) {
       left: 60px;
     }
-    @media (max-width: var.$tablet-mid-width) {
+    @media (max-width: $tablet-mid-width) {
       left: 40px;
     }
-    @media (max-width: var.$tablet-min-width) {
+    @media (max-width: $tablet-min-width) {
       left: 20px;
     }
   }
@@ -118,16 +118,16 @@
   &--next {
     right: 100px;
 
-    @media (max-width: var.$desktop-mid-width) {
+    @media (max-width: $desktop-mid-width) {
       right: 80px;
     }
-    @media (max-width: var.$desktop-min-width) {
+    @media (max-width: $desktop-min-width) {
       right: 60px;
     }
-    @media (max-width: var.$tablet-mid-width) {
+    @media (max-width: $tablet-mid-width) {
       right: 40px;
     }
-    @media (max-width: var.$tablet-min-width) {
+    @media (max-width: $tablet-min-width) {
       right: 20px;
     }
   }
