@@ -15,7 +15,12 @@ type MenuProps = {
   isFooter?: boolean
 }
 
-export default function Menu({ addClass, onCloseMenu, firstMenuItemRef, isFooter }: MenuProps): JSX.Element {
+export default function Menu({
+  addClass,
+  onCloseMenu,
+  firstMenuItemRef,
+  isFooter,
+}: MenuProps): JSX.Element {
   const currentPath = usePathname()
 
   return (

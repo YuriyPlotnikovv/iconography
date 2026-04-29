@@ -15,7 +15,9 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { ['in-stock-detail']: slug } = await params
-  const work: WorkFromServer | null = (await cockpit.getCollectionItemByField('works', 'slug', slug)) || (await cockpit.getCollectionItem('works', slug))
+  const work: WorkFromServer | null =
+    (await cockpit.getCollectionItemByField('works', 'slug', slug)) ||
+    (await cockpit.getCollectionItem('works', slug))
 
   if (!work) {
     return {
@@ -31,7 +33,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: work.title,
       description,
-      images: work.image? [{ url: cockpit.getImageUrl(work.image._id, 1200, 630), alt: work.title }] : [],
+      images: work.image
+        ? [{ url: cockpit.getImageUrl(work.image._id, 1200, 630), alt: work.title }]
+        : [],
     },
     alternates: {
       canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work.slug || work._id}`,
@@ -51,7 +55,9 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: PageProps): Promise<JSX.Element> {
   const { ['in-stock-detail']: slug } = await params
-  const work: WorkFromServer | null = (await cockpit.getCollectionItemByField('works', 'slug', slug)) || (await cockpit.getCollectionItem('works', slug))
+  const work: WorkFromServer | null =
+    (await cockpit.getCollectionItemByField('works', 'slug', slug)) ||
+    (await cockpit.getCollectionItem('works', slug))
 
   if (!work) {
     notFound()

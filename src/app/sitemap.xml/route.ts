@@ -42,7 +42,8 @@ export async function GET() {
     if (Array.isArray(categories)) {
       categories.forEach((c: unknown) => {
         const item = c as { _id?: string; slug?: string }
-        if (item && (item.slug || item._id)) urls.push(`${siteUrl}/categories/${item.slug || item._id}`)
+        if (item && (item.slug || item._id))
+          urls.push(`${siteUrl}/categories/${item.slug || item._id}`)
       })
     }
   } catch (e) {
@@ -51,7 +52,10 @@ export async function GET() {
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
-    .map((u) => `  <url>\n    <loc>${u}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`)
+    .map(
+      (u) =>
+        `  <url>\n    <loc>${u}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`,
+    )
     .join('\n')}\n</urlset>`
 
   return new NextResponse(xml, {
@@ -60,5 +64,3 @@ export async function GET() {
     },
   })
 }
-
-

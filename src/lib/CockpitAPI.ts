@@ -57,7 +57,12 @@ class CockpitClient {
    * Fetch single item from a collection by arbitrary field (e.g. slug)
    * Returns first matched item or null
    */
-  async getCollectionItemByField(modelId: string, field: string, value: string, options: CockpitOptions = {}) {
+  async getCollectionItemByField(
+    modelId: string,
+    field: string,
+    value: string,
+    options: CockpitOptions = {},
+  ) {
     try {
       const filter = { ...(options.filter || {}), [field]: value }
       const items: unknown[] = await this.getCollection(modelId, { ...options, filter, limit: 1 })

@@ -73,9 +73,11 @@
     font-size: 20px;
   }
 
-  &:hover,
-  &:active {
-    opacity: 0.6;
+  @media (hover: hover) {
+    &:hover,
+    &:active {
+      opacity: 0.6;
+    }
   }
 
   &::-webkit-details-marker {
