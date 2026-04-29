@@ -10,12 +10,12 @@ export default function Footer(): JSX.Element {
   return (
     <footer className={footerStyles['footer']}>
       <div className={clsx('container', footerStyles['footer__container'])}>
-        <Logo addClass={footerStyles['footer__logo']} />
+        <Logo addClass={footerStyles['footer__logo']} isFooter={true} />
 
         <Social addClass={footerStyles['footer__social']} />
 
         <nav className={footerStyles['footer__navigation']} aria-label="Дополнительная по сайту">
-          <Menu addClass={footerStyles['footer__menu']} />
+          <Menu addClass={footerStyles['footer__menu']} isFooter={true} />
         </nav>
 
         <div className={footerStyles['footer__wrapper']}>

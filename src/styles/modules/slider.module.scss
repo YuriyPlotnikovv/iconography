@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .slider {
   position: relative;
@@ -30,7 +30,7 @@
     .slider__list {
       height: 820px;
 
-      @media (max-width: var.$tablet-min-width) {
+      @media (max-width: $tablet-min-width) {
         height: 400px;
       }
     }
@@ -90,25 +90,25 @@
   width: auto;
   min-width: 100px;
 
-  font-family: var.$font-decor;
+  font-family: $font-decor;
   font-size: 44px;
   line-height: 1;
   text-align: center;
-  color: var.$accent-bg;
+  color: $accent-bg;
 
   pointer-events: none;
   user-select: none;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 40px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 34px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 28px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 22px;
   }
 }
@@ -121,18 +121,18 @@
   cursor: pointer;
   transition: opacity 0.4s ease-in-out;
 
-  fill: var.$accent-bg;
+  fill: $accent-bg;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 40px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 34px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 28px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 22px;
   }
 

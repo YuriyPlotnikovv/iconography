@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .form {
   display: grid;
@@ -9,24 +9,24 @@
 
   border: none;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     grid-template-columns: 1fr 1fr;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     gap: 30px;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     display: flex;
     flex-direction: column;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
   }
 }
 
 .form--calculation {
   grid-template-columns: 2fr 1fr;
 
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -63,8 +63,8 @@
       width: 30px;
       height: 30px;
 
-      background-color: var.$accent-light-bg;
-      border: 1px solid var.$form-bg;
+      background-color: $accent-light-bg;
+      border: 1px solid $form-bg;
       border-radius: 4px;
 
       content: '';
@@ -139,6 +139,10 @@
 
   cursor: pointer;
   user-select: none;
+
+  @media (max-width: $tablet-min-width) {
+    font-size: 14px;
+  }
 }
 
 .form__radio-indicator {
@@ -150,8 +154,8 @@
 
   width: calc(100% / 3);
 
-  background: var.$accent-light-bg;
-  box-shadow: var.$cardShadow;
+  background: $accent-light-bg;
+  box-shadow: $cardShadow;
   border-radius: 6px;
 
   transition:
@@ -171,6 +175,10 @@
   font-size: 16px;
 
   cursor: pointer;
+
+  @media (max-width: $tablet-min-width) {
+    font-size: 14px;
+  }
 }
 
 .form__custom-radio {
@@ -181,8 +189,8 @@
   width: 24px;
   height: 24px;
 
-  background-color: var.$accent-light-bg;
-  border: 1px solid var.$form-bg;
+  background-color: $accent-light-bg;
+  border: 1px solid $form-bg;
   border-radius: 50%;
 
   transform: translateY(-50%);
@@ -196,7 +204,7 @@
   width: 12px;
   height: 12px;
 
-  background-color: var.$accent-add-bg;
+  background-color: $accent-add-bg;
   border-radius: 50%;
 
   transform: translate(-50%, -50%);
@@ -208,9 +216,9 @@
 }
 
 .form__label-link {
-  color: var.$accent-add-bg;
+  color: $accent-add-bg;
 
-  border-bottom: 1px solid var.$accent-add-bg;
+  border-bottom: 1px solid $accent-add-bg;
 
   transition: 0.4s ease-in-out;
 
@@ -230,17 +238,17 @@
 
   background: none;
   border: none;
-  border-bottom: 1px solid var.$accent-dark-bg;
+  border-bottom: 1px solid $accent-dark-bg;
 
   transition: 0.4s ease-in-out;
 
   &:focus {
-    border-bottom: 1px solid var.$accent-add-bg;
+    border-bottom: 1px solid $accent-add-bg;
     outline: none;
   }
 
   &:invalid:not(:placeholder-shown) {
-    border-bottom: 1px solid var.$accent-bg;
+    border-bottom: 1px solid $accent-bg;
   }
 }
 
@@ -266,12 +274,12 @@
   gap: 10px;
   padding: 6px 10px;
 
-  font-family: var.$font-text;
+  font-family: $font-text;
   font-size: 16px;
 
   background: none;
   border: none;
-  border-bottom: 1px solid var.$accent-dark-bg;
+  border-bottom: 1px solid $accent-dark-bg;
 
   cursor: pointer;
 }
@@ -297,8 +305,8 @@
   overflow: hidden;
   width: 100%;
 
-  background-color: var.$base-bg;
-  box-shadow: var.$cardShadow;
+  background-color: $base-bg;
+  box-shadow: $cardShadow;
   border-radius: 4px;
 }
 
@@ -315,15 +323,15 @@
 .form__select__option:hover,
 .form__select__option:active,
 .form__select__option:focus {
-  background: var.$add-bg;
+  background: $add-bg;
   outline: none;
 }
 
 .form__select__option--selected {
   font-weight: 700;
-  color: var.$bg-text-color;
+  color: $bg-text-color;
 
-  background-color: var.$accent-bg;
+  background-color: $accent-bg;
 
   pointer-events: none;
 }
@@ -340,11 +348,11 @@
   height: 100%;
   padding: 18px;
 
-  font-family: var.$font-decor;
+  font-family: $font-decor;
   font-size: 24px;
   font-weight: 700;
 
-  background-color: var.$accent-light-bg;
-  box-shadow: var.$cardShadow;
+  background-color: $accent-light-bg;
+  box-shadow: $cardShadow;
   border-radius: 6px;
 }

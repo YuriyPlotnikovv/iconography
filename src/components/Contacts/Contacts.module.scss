@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .contacts {
 }
@@ -14,7 +14,7 @@
 
   transition: opacity 0.4s ease-in-out;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 16px;
   }
 

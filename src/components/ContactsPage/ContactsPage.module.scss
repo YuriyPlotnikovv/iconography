@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .contacts {
 }
@@ -8,7 +8,7 @@
   grid-template-rows: repeat(3, auto);
   grid-template-columns: 1fr 1fr;
 
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     display: flex;
     flex-direction: column;
   }
@@ -20,7 +20,7 @@
 
   font-size: 18px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 16px;
   }
 }
@@ -50,7 +50,7 @@
 
   transition: opacity 0.4s ease-in-out;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 16px;
   }
 
@@ -77,5 +77,5 @@
   grid-column: 2 / 3;
   min-height: 500px;
 
-  background-color: var.$form-bg;
+  background-color: $form-bg;
 }

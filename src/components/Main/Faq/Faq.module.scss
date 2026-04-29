@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as var;
+@use '../../../styles/variables' as *;
 @use '../../../styles/animations';
 
 .faq {
@@ -13,8 +13,8 @@
 .faq__item {
   width: 100%;
 
-  background-color: var.$accent-light-bg;
-  box-shadow: var.$cardShadow;
+  background-color: $accent-light-bg;
+  box-shadow: $cardShadow;
   border-radius: 30px;
 }
 
@@ -52,7 +52,7 @@
   padding: 20px 20px 20px 50px;
 
   list-style: none;
-  font-family: var.$font-decor;
+  font-family: $font-decor;
   font-size: 28px;
 
   cursor: pointer;
@@ -60,16 +60,16 @@
 
   transition: opacity 0.4s ease-in-out;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 26px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 24px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 22px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 20px;
   }
 
@@ -114,13 +114,13 @@
   opacity: 0;
   transform: translateY(-10px);
 
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 18px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 16px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 14px;
   }
 }

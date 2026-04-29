@@ -1,10 +1,10 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .section {
   display: flex;
   padding: 50px 0;
 
-  box-shadow: var.$boxShadowSection;
+  box-shadow: $boxShadowSection;
 
   scroll-margin-top: 150px;
 
@@ -13,27 +13,27 @@
       align-self: end;
       justify-self: end;
 
-      @media (max-width: var.$tablet-min-width) {
+      @media (max-width: $tablet-min-width) {
         align-self: center;
       }
     }
   }
 
   &:nth-of-type(odd) {
-    background-color: var.$add-bg;
+    background-color: $add-bg;
 
     .section__title {
       align-self: start;
       justify-self: start;
 
-      @media (max-width: var.$tablet-min-width) {
+      @media (max-width: $tablet-min-width) {
         align-self: center;
       }
     }
   }
 
   &:last-of-type {
-    box-shadow: var.$boxShadowSection, var.$boxShadowOutset;
+    box-shadow: $boxShadowSection, $boxShadowOutset;
   }
 
   &.slider--main {
@@ -46,16 +46,16 @@
 
   font-size: 48px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 44px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 40px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 32px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 24px;
   }
 }
@@ -63,13 +63,13 @@
 .section__description {
   font-size: 20px;
 
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 18px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 16px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 14px;
   }
 }

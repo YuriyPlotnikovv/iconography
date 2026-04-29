@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables.scss' as *;
 
 .menu {
   display: flex;
@@ -6,7 +6,7 @@
 }
 
 .menu__item {
-  font-family: var.$font-decor;
+  font-family: $font-decor;
 }
 
 .menu__link {
@@ -18,7 +18,7 @@
 
   transition: opacity 0.4s ease-in-out;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     padding: 5px;
   }
 
