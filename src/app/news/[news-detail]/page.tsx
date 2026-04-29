@@ -15,7 +15,9 @@ type PageParams = {
 export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
   const { ['news-detail']: slug } = await params
   // Try to resolve by slug first (new), fallback to id if needed
-  const news: NewsFromServer | null = (await cockpit.getCollectionItemByField('news', 'slug', slug)) || (await cockpit.getCollectionItem('news', slug))
+  const news: NewsFromServer | null =
+    (await cockpit.getCollectionItemByField('news', 'slug', slug)) ||
+    (await cockpit.getCollectionItem('news', slug))
 
   if (!news) {
     return {
@@ -31,7 +33,9 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
     openGraph: {
       title: news.title,
       description,
-      images: news.image ? [{ url: cockpit.getImageUrl(news.image._id, 1200, 630), alt: news.title }] : [],
+      images: news.image
+        ? [{ url: cockpit.getImageUrl(news.image._id, 1200, 630), alt: news.title }]
+        : [],
     },
     alternates: {
       canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/news/${news.slug || news._id}`,
@@ -41,7 +45,9 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
 
 export default async function Page({ params }: PageParams): Promise<JSX.Element> {
   const { ['news-detail']: slug } = await params
-  const news: NewsFromServer | null = (await cockpit.getCollectionItemByField('news', 'slug', slug)) || (await cockpit.getCollectionItem('news', slug))
+  const news: NewsFromServer | null =
+    (await cockpit.getCollectionItemByField('news', 'slug', slug)) ||
+    (await cockpit.getCollectionItem('news', slug))
 
   if (!news) {
     notFound()
