@@ -2,6 +2,10 @@ import { MenuItem } from '@/types/types'
 
 export const menuItems: MenuItem[] = [
   {
+    href: '/about',
+    label: 'О нас',
+  },
+  {
     href: '/news',
     label: 'Новости',
   },

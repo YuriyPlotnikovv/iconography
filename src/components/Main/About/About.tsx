@@ -2,6 +2,7 @@ import { JSX } from 'react'
 import aboutStyles from './About.module.scss'
 import clsx from 'clsx'
 import Image from 'next/image'
+import Link from 'next/link'
 import cockpit from '@/lib/CockpitAPI'
 import { MainInfo } from '@/types/types'
 import { createSanitizedHTML } from '@/functions/functions'
@@ -37,6 +38,10 @@ export default async function About(): Promise<JSX.Element | null> {
           className={clsx('block-html', aboutStyles['about__text'])}
           dangerouslySetInnerHTML={createSanitizedHTML(description)}
         />
+
+        <Link className="button button--accent" href="/about">
+          Подробнее
+        </Link>
       </div>
     </section>
   )
