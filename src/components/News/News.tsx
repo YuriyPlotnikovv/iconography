@@ -1,6 +1,7 @@
 import { JSX } from 'react'
 import newsStyles from './News.module.scss'
 import { CardItem, NewsFromServer } from '@/types/types'
+import EmptySection from '@/components/EmptySection/EmptySection'
 import Card from '@/components/Card/Card'
 import clsx from 'clsx'
 import cockpit from '@/lib/CockpitAPI'
@@ -9,7 +10,9 @@ export default async function News(): Promise<JSX.Element | null> {
   const newsData: NewsFromServer[] = await cockpit.getCollection('news')
 
   if (!newsData || newsData.length === 0) {
-    return null
+    return (
+      <EmptySection/>
+    )
   }
 
   const newsList: CardItem[] = newsData.map((news) => ({
