@@ -10,6 +10,68 @@
   @supports (max-height: calc(100svh - 80px)) {
     max-height: calc(100svh - 80px);
   }
+
+  .slider-main__pagination {
+    position: absolute;
+    top: unset;
+    right: 30px;
+    bottom: 30px;
+    left: unset;
+    z-index: 2;
+
+    opacity: 0.8;
+  }
+
+  .slider-main__navigation-item {
+    position: absolute;
+    top: 50%;
+    bottom: unset;
+    z-index: 2;
+
+    width: 80px;
+    height: 80px;
+
+    transform: translateY(-50%);
+
+    @media (max-width: $tablet-min-width) {
+      width: 60px;
+      height: 60px;
+    }
+
+    &--prev {
+      left: 100px;
+
+      @media (max-width: $desktop-mid-width) {
+        left: 80px;
+      }
+      @media (max-width: $desktop-min-width) {
+        left: 60px;
+      }
+      @media (max-width: $tablet-mid-width) {
+        left: 40px;
+      }
+      @media (max-width: $tablet-min-width) {
+        left: 20px;
+      }
+    }
+
+    &--next {
+      right: 100px;
+
+      @media (max-width: $desktop-mid-width) {
+        right: 80px;
+      }
+      @media (max-width: $desktop-min-width) {
+        right: 60px;
+      }
+      @media (max-width: $tablet-mid-width) {
+        right: 40px;
+      }
+      @media (max-width: $tablet-min-width) {
+        right: 20px;
+      }
+    }
+  }
 }
 
 .slider-main__item {
@@ -69,66 +131,4 @@
 }
 
 .slider-main__item-button {
-}
-
-.slider-main__pagination {
-  position: absolute;
-  top: unset;
-  right: 30px;
-  bottom: 30px;
-  left: unset;
-  z-index: 2;
-
-  opacity: 0.8;
-}
-
-.slider-main__navigation-item {
-  position: absolute;
-  top: 50%;
-  bottom: unset;
-  z-index: 2;
-
-  width: 80px;
-  height: 80px;
-
-  transform: translateY(-50%);
-
-  @media (max-width: $tablet-min-width) {
-    width: 60px;
-    height: 60px;
-  }
-
-  &--prev {
-    left: 100px;
-
-    @media (max-width: $desktop-mid-width) {
-      left: 80px;
-    }
-    @media (max-width: $desktop-min-width) {
-      left: 60px;
-    }
-    @media (max-width: $tablet-mid-width) {
-      left: 40px;
-    }
-    @media (max-width: $tablet-min-width) {
-      left: 20px;
-    }
-  }
-
-  &--next {
-    right: 100px;
-
-    @media (max-width: $desktop-mid-width) {
-      right: 80px;
-    }
-    @media (max-width: $desktop-min-width) {
-      right: 60px;
-    }
-    @media (max-width: $tablet-mid-width) {
-      right: 40px;
-    }
-    @media (max-width: $tablet-min-width) {
-      right: 20px;
-    }
-  }
 }
