@@ -3,11 +3,11 @@
 .slider {
   position: relative;
 
-  overflow: unset;
+  overflow: hidden;
   width: 100%;
 
-  .slider-main {
-    overflow: hidden;
+  .slider__list {
+    overflow: unset;
   }
 }
 
