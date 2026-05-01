@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as *;
+@use "../../styles/variables.scss" as *;
 
 .slider {
   position: relative;
@@ -6,48 +6,8 @@
   overflow: unset;
   width: 100%;
 
-  &--cards {
-    .slider__item {
-      height: 400px;
-    }
-
-    .card__content {
-      top: 280px;
-    }
-  }
-
-  &--masters {
-    .slider__item {
-      height: 400px;
-    }
-
-    .card__content {
-      top: 280px;
-    }
-  }
-
-  &--category {
-    .slider__list {
-      height: 820px;
-
-      @media (max-width: $tablet-min-width) {
-        height: 400px;
-      }
-    }
-
-    .card__content {
-      top: 280px;
-    }
-  }
-
-  &--gallery {
-    .slider__item {
-      height: 400px;
-    }
-
-    .card__content {
-      top: 280px;
-    }
+  .slider-main {
+    overflow: hidden;
   }
 }
 
@@ -57,9 +17,9 @@
 }
 
 .slider__list {
+  overflow: unset;
   width: 100%;
   height: auto;
-  overflow: unset;
 }
 
 .slider__item {
