@@ -30,6 +30,14 @@ body {
 
 html {
   box-sizing: border-box;
+
+  .lg-backdrop.in {
+    opacity: 0.8;
+  }
+
+  &.lg-on {
+    overflow: hidden;
+  }
 }
 
 body {

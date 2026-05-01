@@ -153,6 +153,31 @@ export type GalleryFromServer = {
   image: ImageItem
 }
 
+export type GalleryTreeItem = {
+  _id: string
+  title: string
+  slug: string
+  type?: 'Категория' | 'Фото'
+  image: ImageItem
+  _children: GalleryTreeItem[]
+}
+
+export type GalleryItemForClient = {
+  _id: string
+  title: string
+  slug: string
+  type?: string
+  imageUrl: string
+  imageLargeUrl: string
+  imageThumbUrl: string
+  imageAlt: string
+  hasNestedCategories: boolean
+  childrenCount: number
+  categoriesCount: number
+  photosCount: number
+  children: GalleryItemForClient[]
+}
+
 export type FaqFromServer = {
   _id: string
   question: string

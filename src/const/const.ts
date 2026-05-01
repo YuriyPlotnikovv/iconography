@@ -13,10 +13,10 @@ export const menuItems: MenuItem[] = [
     href: '/reviews',
     label: 'Отзывы',
   },
-  // {
-  //     href: '/gallery',
-  //     label: 'Галерея'
-  // },
+  {
+    href: '/gallery',
+    label: 'Галерея',
+  },
   {
     href: '/works',
     label: 'Наши работы',

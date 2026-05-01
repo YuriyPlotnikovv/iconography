@@ -9,7 +9,6 @@ import Masters from '@/components/Main/Masters/Masters'
 import Process from '@/components/Main/Process/Process'
 import Categories from '@/components/Main/Categories/Categories'
 import Calculation from '@/components/Main/Calculation/Calculation'
-import Gallery from '@/components/Main/Gallery/Gallery'
 import Restoration from '@/components/Main/Restoration/Restoration'
 import Reviews from '@/components/Main/Reviews/Reviews'
 import News from '@/components/Main/News/News'
@@ -36,7 +35,6 @@ export default function Page() {
       <Process />
       <Categories />
       <Calculation />
-      <Gallery />
       <Restoration />
       <Reviews />
       <News />
