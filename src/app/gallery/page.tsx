@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import { JSX } from 'react'
-import { BreadcrumbItem, CardItem, GalleryFromServer } from '@/types/types'
+import { BreadcrumbItem, GalleryTreeItem } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
-import GalleryPage from '@/components/GalleryPage/GalleryPage'
+import GalleryPageClient from '@/components/GalleryPage/GalleryPageClient'
 import cockpit from '@/lib/CockpitAPI'
+import { prepareGalleryItems } from '@/functions/gallery'
 
 export const metadata: Metadata = {
-  title: 'Галерея | Иконописная Артель',
+  title: 'Галерея',
   description: 'Иконописная Артель - описание',
 }
 
@@ -20,28 +21,19 @@ const breadcrumbsList: BreadcrumbItem[] = [
   },
 ]
 
+
 export default async function Page(): Promise<JSX.Element> {
   const title = 'Галерея'
   const description = '<p></p>'
 
-  const galleryData: GalleryFromServer[] | null = await cockpit.getCollection('gallery', {
-    sort: { sort: 1 },
-  })
-
-  const galleryList: CardItem[] = (galleryData || []).map((item) => ({
-    id: item._id,
-    title: item.title,
-    description: item.description,
-    href: '/gallery',
-    image: cockpit.getImageUrl(item.image._id, 400, 400),
-    alt: item.image.title || item.title,
-  }))
+  const galleryData: GalleryTreeItem[] | null = await cockpit.getTree('gallery')
+  const preparedItems = galleryData ? prepareGalleryItems(galleryData) : []
 
   return (
     <>
       <Heading title={title} description={description} breadcrumbsList={breadcrumbsList} />
 
-      {galleryList.length > 0 && <GalleryPage galleryList={galleryList} />}
+      {preparedItems.length > 0 && <GalleryPageClient items={preparedItems} />}
     </>
   )
 }
