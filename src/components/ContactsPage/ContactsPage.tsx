@@ -3,6 +3,7 @@ import contactsPageStyles from './ContactsPage.module.scss'
 import clsx from 'clsx'
 import Social from '@/components/Social/Social'
 import FormContacts from '@/components/Forms/FormContacts/FormContacts'
+import YandexMap from '@/components/YandexMap/YandexMap'
 import { MainInfo } from '@/types/types'
 import cockpit from '@/lib/CockpitAPI'
 import { createEmailLink, createPhoneLink } from '@/functions/functions'
@@ -14,7 +15,9 @@ export default async function ContactsPage(): Promise<JSX.Element | null> {
     return null
   }
 
+  const logo = cockpit.getImageUrl(contactsInfo.logo._id, 60, 60)
   const address = contactsInfo.address
+  const coordinates = contactsInfo.coordinates
   const email = contactsInfo.email
   const phone = contactsInfo.phone
 
@@ -58,7 +61,11 @@ export default async function ContactsPage(): Promise<JSX.Element | null> {
 
           <Social addClass={contactsPageStyles['contacts__social']} />
 
-          <div className={contactsPageStyles['contacts__map']} id="map"></div>
+          {coordinates && (
+            <div className={contactsPageStyles['contacts__map']}>
+              <YandexMap logo={logo} coordinates={coordinates} />
+            </div>
+          )}
         </div>
       </section>
 
