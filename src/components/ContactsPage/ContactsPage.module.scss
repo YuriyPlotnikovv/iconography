@@ -73,9 +73,13 @@
 }
 
 .contacts__map {
+  position: relative;
+
+  overflow: hidden;
   grid-row: 1 / -1;
   grid-column: 2 / 3;
   min-height: 500px;
 
   background-color: $form-bg;
+  border-radius: 12px;
 }

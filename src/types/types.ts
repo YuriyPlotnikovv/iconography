@@ -7,6 +7,7 @@ export type PriceItem = {
   halo: number
   price_for_inch: boolean
 }
+
 export type MenuItem = {
   label: string
   href: string
@@ -26,14 +27,6 @@ export type ProcessItem = {
   title: string
   description: string
   image: ImageItem
-  alt: string
-}
-
-export type GalleryItem = {
-  id: number
-  title: string
-  text: string
-  image: string
   alt: string
 }
 
@@ -77,6 +70,7 @@ export type MainInfo = {
   logo: ImageItem
   image: ImageItem
   address: string
+  coordinates: string
   email: string
   phone: string
   telegram: string
@@ -144,13 +138,6 @@ export type MasterFromServer = {
 export type OrderFromServer = {
   _id: string
   description: string
-}
-
-export type GalleryFromServer = {
-  _id: string
-  title: string
-  description: string
-  image: ImageItem
 }
 
 export type GalleryTreeItem = {

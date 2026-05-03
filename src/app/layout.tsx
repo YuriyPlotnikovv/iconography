@@ -4,6 +4,7 @@ import { Montserrat, CyrillicOld } from './fonts'
 import type { Metadata } from 'next'
 import { JSX } from 'react'
 import clsx from 'clsx'
+import Script from 'next/script'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 import ScrollButton from '@/components/ScrollButton/ScrollButton'
@@ -54,6 +55,11 @@ export default function RootLayout({ children }: LayoutProps): JSX.Element {
   return (
     <html lang="ru">
       <body className={clsx(Montserrat.variable, CyrillicOld.variable)}>
+        <Script
+          src={`https://api-maps.yandex.ru/v3/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY}&lang=ru_RU`}
+          strategy="beforeInteractive"
+        />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
