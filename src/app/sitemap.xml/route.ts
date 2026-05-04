@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import cockpit from '@/lib/CockpitAPI'
+import type { WorkFromServer, NewsFromServer, CategoryFromServer } from '@/types/types'
 
 type SitemapUrl = {
   loc: string
@@ -35,7 +36,7 @@ export async function GET() {
     ])
 
     if (Array.isArray(works)) {
-      works.forEach((w: any) => {
+      works.forEach((w: WorkFromServer) => {
         if (w && (w.slug || w._id)) {
           urls.push({
             loc: `${siteUrl}/works/${w.slug || w._id}`,
@@ -48,7 +49,7 @@ export async function GET() {
     }
 
     if (Array.isArray(inStock)) {
-      inStock.forEach((w: any) => {
+      inStock.forEach((w: WorkFromServer) => {
         if (w && (w.slug || w._id)) {
           urls.push({
             loc: `${siteUrl}/in-stock/${w.slug || w._id}`,
@@ -61,7 +62,7 @@ export async function GET() {
     }
 
     if (Array.isArray(news)) {
-      news.forEach((n: any) => {
+      news.forEach((n: NewsFromServer) => {
         if (n && (n.slug || n._id)) {
           urls.push({
             loc: `${siteUrl}/news/${n.slug || n._id}`,
@@ -74,7 +75,7 @@ export async function GET() {
     }
 
     if (Array.isArray(categories)) {
-      categories.forEach((c: any) => {
+      categories.forEach((c: CategoryFromServer) => {
         if (c && (c.slug || c._id)) {
           urls.push({
             loc: `${siteUrl}/categories/${c.slug || c._id}`,
