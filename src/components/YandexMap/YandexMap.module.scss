@@ -13,6 +13,13 @@
   align-items: center;
 
   transform: translate(-50%, -100%);
+
+
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translate(-50%, -100%) scale(1.05);
+  }
 }
 
 .map__marker-icon {
@@ -26,8 +33,6 @@
   background-color: $accent-add-bg;
   box-shadow: $cardShadow;
   border-radius: 50%;
-
-  transition: transform 0.2s ease;
 }
 
 .map__marker-arrow {
