@@ -94,6 +94,8 @@ export type CategoryFromServer = {
   image: ImageItem
   slider: ImageItem[]
   slug?: string
+  _created?: number
+  _modified?: number
 }
 
 export type WorkFromServer = {
