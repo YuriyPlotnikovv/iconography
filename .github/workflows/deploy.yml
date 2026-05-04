@@ -47,6 +47,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
+            NEXT_PUBLIC_SITE_URL=https://icon-artel.ru
+            NEXT_PUBLIC_CAPTCHA_SITE_KEY=${{ secrets.CAPTCHA_SITE_KEY }}
+            CAPTCHA_SECRET=${{ secrets.CAPTCHA_SECRET }}
+            YANDEX_MAPS_API_KEY=${{ secrets.YANDEX_MAPS_API_KEY }}
             COCKPIT_API_URL=${{ secrets.COCKPIT_API_URL }}
             COCKPIT_API_KEY=${{ secrets.COCKPIT_API_KEY }}
           cache-from: type=gha
@@ -98,10 +102,10 @@ jobs:
             IMAGE_NAME=$IMAGE_NAME
             NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
             NEXT_PUBLIC_CAPTCHA_SITE_KEY=$NEXT_PUBLIC_CAPTCHA_SITE_KEY
+            NEXT_PUBLIC_YANDEX_MAPS_API_KEY=$NEXT_PUBLIC_YANDEX_MAPS_API_KEY
             CAPTCHA_SECRET=$CAPTCHA_SECRET
             COCKPIT_API_URL=$COCKPIT_API_URL
             COCKPIT_API_KEY=$COCKPIT_API_KEY
-            NEXT_PUBLIC_YANDEX_MAPS_API_KEY=$YANDEX_MAPS_API_KEY
             EOF
             echo "✅ .env file written"
 
