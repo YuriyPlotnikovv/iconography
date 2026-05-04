@@ -82,7 +82,7 @@ export default function GalleryPageClient({ items }: GalleryPageClientProps): JS
     const hasNestedCategories = item.hasNestedCategories
 
     if (isCategory && hasNestedCategories) {
-      router.push(`/gallery/${item.slug}`)
+      router.push(`/gallery/${item.fullPath}`)
     } else {
       const instance = lightGalleryInstances.current.get(item._id)
 

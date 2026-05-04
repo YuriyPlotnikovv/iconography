@@ -153,6 +153,7 @@ export type GalleryItemForClient = {
   _id: string
   title: string
   slug: string
+  fullPath: string
   type?: string
   imageUrl: string
   imageLargeUrl: string
