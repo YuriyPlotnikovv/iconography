@@ -6,7 +6,12 @@ import AboutPage from '@/components/AboutPage/AboutPage'
 
 export const metadata: Metadata = {
   title: 'О нас | Иконописная Артель',
-  description: 'Иконописная Артель - описание',
+  description: 'Наши мастера создают рукописные иконы в древней технологии яичной темперой, следуя каноническим образцам.',
+  openGraph: {
+    title: 'О нас | Иконописная Артель',
+    description:
+      'Наши мастера создают рукописные иконы в древней технологии яичной темперой, следуя каноническим образцам.',
+  },
 }
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -21,7 +26,7 @@ const breadcrumbsList: BreadcrumbItem[] = [
 
 export default function Page(): JSX.Element {
   const title = 'О нас'
-  const description = '<p></p>'
+  const description = '<p>Наша артель объединяет опытных иконописцев, которые создают рукописные иконы в строгом соответствии с каноническими традициями. Мы используем древнюю технологию яичной темперой, натуральные пигменты и следуем заветам мастеров прошлого.</p>'
 
   return (
     <>

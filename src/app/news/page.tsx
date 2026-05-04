@@ -6,7 +6,12 @@ import News from '@/components/News/News'
 
 export const metadata: Metadata = {
   title: 'Новости | Иконописная Артель',
-  description: 'Иконописная Артель - описание',
+  description: 'Новости и события Иконописной Артели. Актуальная информация о новых работах, мастер-классах и жизни нашей иконописной мастерской.',
+  openGraph: {
+    title: 'Новости | Иконописная Артель',
+    description:
+      'Новости и события Иконописной Артели. Актуальная информация о новых работах, мастер-классах и жизни нашей иконописной мастерской.',
+  },
 }
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -21,7 +26,7 @@ const breadcrumbsList: BreadcrumbItem[] = [
 
 export default function Page(): JSX.Element {
   const title = 'Новости'
-  const description = '<p></p>'
+  const description = '<p>Следите за новостями нашей артели: завершенные работы, мастер-классы по иконописи и другие события из жизни нашей мастерской.</p>'
 
   return (
     <>

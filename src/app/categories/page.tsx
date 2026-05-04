@@ -7,6 +7,10 @@ import Categories from '@/components/Categories/Categories'
 export const metadata: Metadata = {
   title: 'Категории икон | Иконописная Артель',
   description: 'Все категории икон, создаваемых в нашей иконописной мастерской',
+  openGraph: {
+    title: 'Категории икон | Иконописная Артель',
+    description: 'Все категории икон, создаваемых в нашей иконописной мастерской',
+  },
 }
 
 const breadcrumbsList: BreadcrumbItem[] = [

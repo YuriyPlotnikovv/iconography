@@ -79,8 +79,35 @@ export default async function Page({ params }: PageParams): Promise<JSX.Element>
       alt: image.title || news.title,
     })) || []
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: news.title,
+    description: (news.content || news.description || '').replace(/<[^>]*>/g, '').slice(0, 160),
+    image: news.image ? cockpit.getImageUrl(news.image._id, 1200, 630) : undefined,
+    datePublished: news._created ? new Date(news._created * 1000).toISOString() : undefined,
+    dateModified: news._modified ? new Date(news._modified * 1000).toISOString() : undefined,
+    author: {
+      '@type': 'Organization',
+      name: 'Иконописная Артель',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Иконописная Артель',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/logo.png`,
+      },
+    },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+
       <Heading breadcrumbsList={breadcrumbsList} />
 
       <Detail

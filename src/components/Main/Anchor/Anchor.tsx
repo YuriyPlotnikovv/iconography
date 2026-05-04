@@ -11,7 +11,7 @@ const anchorLinks: MenuItem[] = [
     href: '#masters',
   },
   {
-    label: 'Процесс изготовления',
+    label: 'Процесс сотворения образа',
     href: '#process',
   },
   {

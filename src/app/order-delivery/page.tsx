@@ -8,7 +8,12 @@ import Payment from '@/components/Payment/Payment'
 
 export const metadata: Metadata = {
   title: 'Заказ и доставка | Иконописная Артель',
-  description: 'Иконописная Артель - описание',
+  description: 'Как заказать икону в Иконописной Артели. Этапы работы, способы оплаты и доставки. Калькулятор расчета стоимости иконы.',
+  openGraph: {
+    title: 'Заказ и доставка | Иконописная Артель',
+    description:
+      'Как заказать икону в Иконописной Артели. Этапы работы, способы оплаты и доставки. Калькулятор расчета стоимости иконы.',
+  },
 }
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -23,7 +28,7 @@ const breadcrumbsList: BreadcrumbItem[] = [
 
 export default function Page(): JSX.Element {
   const title = 'Заказ и доставка'
-  const description = '<p></p>'
+  const description = '<p>Узнайте, как заказать рукописную икону в нашей артели: от первой консультации до доставки готовой работы. Информация об этапах создания иконы, способах оплаты и доставки по России и за рубеж.</p>'
 
   return (
     <>
