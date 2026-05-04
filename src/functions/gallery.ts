@@ -5,17 +5,20 @@ import cockpit from '@/lib/CockpitAPI'
  * Подготовка данных галереи для клиентского компонента
  * Рекурсивно обходит дерево и создает объекты с подготовленными URL изображений
  */
-export function prepareGalleryItems(items: GalleryTreeItem[]): GalleryItemForClient[] {
+export function prepareGalleryItems(items: GalleryTreeItem[], parentPath: string = ''): GalleryItemForClient[] {
   return items.map((item) => {
     const hasNestedCategories = item._children.some((child) => child.type === 'Категория')
     const categoriesCount = item._children.filter((child) => child.type === 'Категория').length
     const photosCount = item._children.filter((child) => child.type !== 'Категория').length
     const childrenCount = hasNestedCategories ? categoriesCount : photosCount
 
+    const fullPath = parentPath ? `${parentPath}/${item.slug}` : item.slug
+
     return {
       _id: item._id,
       title: item.title,
       slug: item.slug,
+      fullPath,
       type: item.type,
       imageUrl: cockpit.getImageUrl(item.image._id, 400, 400),
       imageLargeUrl: cockpit.getImageUrl(item.image._id, 1920, 1920),
@@ -25,7 +28,7 @@ export function prepareGalleryItems(items: GalleryTreeItem[]): GalleryItemForCli
       childrenCount,
       categoriesCount,
       photosCount,
-      children: prepareGalleryItems(item._children),
+      children: prepareGalleryItems(item._children, fullPath),
     }
   })
 }
@@ -72,4 +75,3 @@ export function buildGalleryBreadcrumbs(
   }
   return null
 }
-
