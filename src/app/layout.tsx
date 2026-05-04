@@ -41,14 +41,21 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
     other: [{ rel: 'manifest', url: '/manifest.json' }],
   },
-  // robots: {
-  //   index: true,
-  //   follow: true,
-  //   googleBot: {
-  //     index: true,
-  //     follow: true,
-  //   },
-  // },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  other: {
+    'llms-txt': '/llms.txt',
+    'llms-full': '/llms-full.txt',
+  },
 }
 
 export default function RootLayout({ children }: LayoutProps): JSX.Element {
@@ -69,6 +76,8 @@ export default function RootLayout({ children }: LayoutProps): JSX.Element {
               name: 'Иконописная Артель',
               url: process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL,
               logo: (process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL) + '/logo.png',
+              description:
+                'Рукописные канонические иконы — храмы, семейные иконы и реставрация. Мастера-иконописцы.',
             }),
           }}
         />

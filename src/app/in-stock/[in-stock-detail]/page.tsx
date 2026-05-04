@@ -92,8 +92,32 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
     ? await cockpit.getCollectionItem('masters', work.master?._id)
     : null
 
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: work.title,
+    description: work.description
+      ? work.description.replace(/<[^>]*>/g, '').slice(0, 160)
+      : work.title,
+    image: work.image ? cockpit.getImageUrl(work.image._id, 1200, 630) : undefined,
+    brand: {
+      '@type': 'Organization',
+      name: 'Иконописная Артель',
+    },
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      url: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work.slug || work._id}`,
+    },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+
       <Heading breadcrumbsList={breadcrumbsList} />
 
       <Detail

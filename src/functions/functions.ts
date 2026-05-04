@@ -16,7 +16,7 @@ export function createSanitizedHTML(htmlString: string | null | undefined): { __
 }
 
 export function normalizePhone(phone: string) {
-  return phone.replace(/[^\+0-9]+/g, '').replace(/^[78]/, '+7')
+  return phone.replace(/[^+0-9]+/g, '').replace(/^[78]/, '+7')
 }
 
 export function createEmailLink(email: string) {
@@ -42,3 +42,8 @@ export function createVkLink(vk: string) {
 export function createMaxLink(max: string) {
   return 'https://max.ru/' + max
 }
+
+export function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, '').trim()
+}
+

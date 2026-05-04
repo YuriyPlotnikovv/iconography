@@ -1,6 +1,9 @@
 {
   "name": "Иконописная артель",
   "short_name": "Иконописная артель",
+  "description": "Рукописные канонические иконы — храмы, семейные иконы и реставрация",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -17,5 +20,7 @@
   ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "ru"
 }

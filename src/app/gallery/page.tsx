@@ -7,8 +7,13 @@ import cockpit from '@/lib/CockpitAPI'
 import { prepareGalleryItems } from '@/functions/gallery'
 
 export const metadata: Metadata = {
-  title: 'Галерея',
-  description: 'Иконописная Артель - описание',
+  title: 'Галерея | Иконописная Артель',
+  description: 'Фотогалерея Иконописной Артели. Фотографии работ наших мастеров, процесса создания икон, мастерской и событий из жизни артели.',
+  openGraph: {
+    title: 'Галерея | Иконописная Артель',
+    description:
+      'Фотогалерея Иконописной Артели. Фотографии работ наших мастеров, процесса создания икон, мастерской и событий.',
+  },
 }
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -24,7 +29,7 @@ const breadcrumbsList: BreadcrumbItem[] = [
 
 export default async function Page(): Promise<JSX.Element> {
   const title = 'Галерея'
-  const description = '<p></p>'
+  const description = '<p>Ознакомьтесь с фотографиями из жизни нашей артели: работы мастеров, процесс создания икон, мастерская и другие события.</p>'
 
   const galleryData: GalleryTreeItem[] | null = await cockpit.getTree('gallery')
   const preparedItems = galleryData ? prepareGalleryItems(galleryData) : []

@@ -106,6 +106,8 @@ export type WorkFromServer = {
   master: MasterFromServer | null
   in_stock: boolean
   slug?: string
+  _created?: number
+  _modified?: number
 }
 
 export type NewsFromServer = {
@@ -117,6 +119,8 @@ export type NewsFromServer = {
   _id: string
   date: string
   slug?: string
+  _created?: number
+  _modified?: number
 }
 
 export type ReviewFromServer = {

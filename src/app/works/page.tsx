@@ -7,7 +7,12 @@ import cockpit from '@/lib/CockpitAPI'
 
 export const metadata: Metadata = {
   title: 'Наши работы | Иконописная Артель',
-  description: 'Иконописная Артель - описание',
+  description: 'Портфолио Иконописной Артели. Выполненные работы: храмовые, семейные, мерные иконы, венчальные пары. Примеры икон различных размеров и сложности.',
+  openGraph: {
+    title: 'Наши работы | Иконописная Артель',
+    description:
+      'Портфолио Иконописной Артели. Выполненные работы: храмовые, семейные, мерные иконы, венчальные пары.',
+  },
 }
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -22,7 +27,7 @@ const breadcrumbsList: BreadcrumbItem[] = [
 
 export default async function Page(): Promise<JSX.Element> {
   const title = 'Наши работы'
-  const description = '<p></p>'
+  const description = '<p>Ознакомьтесь с портфолио нашей артели. Здесь представлены выполненные заказы: храмовые образа, семейные и именные иконы, венчальные пары. Каждая икона создана с соблюдением канонических традиций.</p>'
 
   const worksData: WorkFromServer[] | null = await cockpit.getCollection('works', {
     sort: { date: -1 },

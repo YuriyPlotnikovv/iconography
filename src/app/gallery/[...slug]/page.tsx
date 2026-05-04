@@ -30,7 +30,9 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
     title: currentItem
       ? `${currentItem.title} | Галерея`
       : 'Галерея | Иконописная Артель',
-    description: 'Иконописная Артель - наши фото',
+    description: currentItem?.title
+      ? `Фотогалерея: ${currentItem.title}. Иконописная Артель.`
+      : 'Фотогалерея Иконописной Артели. Работы мастеров и события из жизни артели.',
   }
 }
 
@@ -84,6 +86,3 @@ export default async function Page({ params }: PageParams): Promise<JSX.Element>
     </>
   )
 }
-
-
-

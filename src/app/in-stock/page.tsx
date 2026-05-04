@@ -7,7 +7,12 @@ import cockpit from '@/lib/CockpitAPI'
 
 export const metadata: Metadata = {
   title: 'Рукописные иконы в наличии | Иконописная Артель',
-  description: 'Иконописная Артель - описание',
+  description: 'Готовые рукописные иконы в наличии. Каноничные образы, написанные яичной темперой на деревянной основе. Возможность приобретения без ожидания.',
+  openGraph: {
+    title: 'Рукописные иконы в наличии | Иконописная Артель',
+    description:
+      'Готовые рукописные иконы в наличии. Каноничные образы, написанные яичной темперой на деревянной основе.',
+  },
 }
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -22,7 +27,7 @@ const breadcrumbsList: BreadcrumbItem[] = [
 
 export default async function Page(): Promise<JSX.Element> {
   const title = 'Рукописные иконы в наличии'
-  const description = '<p></p>'
+  const description = '<p>Готовые рукописные иконы, которые можно приобрести без ожидания. Все образы написаны в строгом соответствии с каноном, в древней технологии яичной темперой на деревянной основе с золочением.</p>'
 
   const worksData: WorkFromServer[] | null = await cockpit.getCollection('works', {
     filter: { in_stock: true },
