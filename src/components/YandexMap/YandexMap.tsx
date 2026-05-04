@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import {JSX, ComponentType, ReactNode, useState, useEffect} from 'react'
 import Image from 'next/image'
 import yandexMapStyles from './YandexMap.module.scss'
 
@@ -18,27 +19,27 @@ type YMapLocationRequest = {
 }
 
 type ReactifiedModule = {
-  YMap: React.ComponentType<{
+  YMap: ComponentType<{
     location: YMapLocationRequest
     className?: string
-    children?: React.ReactNode
+    children?: ReactNode
   }>
-  YMapDefaultSchemeLayer: React.ComponentType
-  YMapDefaultFeaturesLayer: React.ComponentType
-  YMapMarker: React.ComponentType<{
+  YMapDefaultSchemeLayer: ComponentType
+  YMapDefaultFeaturesLayer: ComponentType
+  YMapMarker: ComponentType<{
     coordinates: LngLat
-    children?: React.ReactNode
+    children?: ReactNode
   }>
-  YMapControls: React.ComponentType<{
+  YMapControls: ComponentType<{
     position: string
-    children?: React.ReactNode
+    children?: ReactNode
   }>
 }
 
 type UIControls = {
-  YMapZoomControl: React.ComponentType
-  YMapGeolocationControl: React.ComponentType
-  YMapRouteControl: React.ComponentType<{
+  YMapZoomControl: ComponentType
+  YMapGeolocationControl: ComponentType
+  YMapRouteControl: ComponentType<{
     waypoints?: [LngLat | null, LngLat | null]
     availableTypes?: ('auto' | 'masstransit' | 'pedestrian')[]
     onRouteResult?: (result: unknown, type: string) => void
@@ -58,11 +59,11 @@ type ReactifyModule = {
   }
 }
 
-export default function YandexMap({ logo, coordinates }: YandexMapProps): React.JSX.Element | null {
-  const [reactifiedModule, setReactifiedModule] = React.useState<ReactifiedModule | null>(null)
-  const [uiControls, setUiControls] = React.useState<UIControls | null>(null)
+export default function YandexMap({ logo, coordinates }: YandexMapProps): JSX.Element | null {
+  const [reactifiedModule, setReactifiedModule] = useState<ReactifiedModule | null>(null)
+  const [uiControls, setUiControls] = useState<UIControls | null>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof ymaps3 === 'undefined') {
       return
     }
@@ -96,8 +97,7 @@ export default function YandexMap({ logo, coordinates }: YandexMapProps): React.
   const [lng, lat] = coords
   const destinationCoords: LngLat = [lng, lat]
 
-  const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker, YMapControls } =
-    reactifiedModule
+  const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker, YMapControls } = reactifiedModule
   const { YMapZoomControl, YMapGeolocationControl} = uiControls
 
   return (
