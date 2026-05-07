@@ -21,7 +21,7 @@ interface FetchOptions {
  */
 function getBaseUrl(): string {
   if (typeof window === 'undefined') {
-    return process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'http://localhost:3000'
+    return process.env.INTERNAL_URL || 'http://localhost:3000'
   }
 
   return window.location.origin
