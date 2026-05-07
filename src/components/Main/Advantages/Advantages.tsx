@@ -2,12 +2,12 @@ import { JSX } from 'react'
 import advantagesStyles from './Advantages.module.scss'
 import { AdvantageItem } from '@/types/types'
 import clsx from 'clsx'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 import Image from 'next/image'
 import logoStyles from '@/components/Logo/Logo.module.scss'
 
 export default async function Advantages(): Promise<JSX.Element | null> {
-  const advantagesList: AdvantageItem[] = await cockpit.getCollection('advantages', {
+  const advantagesList: AdvantageItem[] = await fetchCollection('advantages', {
     sort: { sort: 1 },
   })
 
@@ -24,7 +24,7 @@ export default async function Advantages(): Promise<JSX.Element | null> {
           {advantagesList.map((item) => {
             const title = item.title
             const description = item.description
-            const icon = cockpit.getImageUrl(item.icon._id, 100, 100)
+            const icon = getImageUrl(item.icon._id, 100, 100)
 
             return (
               <li className={advantagesStyles['advantages__item']} key={item._id}>

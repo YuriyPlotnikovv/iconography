@@ -3,12 +3,12 @@ import aboutStyles from './About.module.scss'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import { MainInfo } from '@/types/types'
 import { createSanitizedHTML } from '@/functions/functions'
 
 export default async function About(): Promise<JSX.Element | null> {
-  const mainInfo: MainInfo | null = await cockpit.getSingleItem('maininfo')
+  const mainInfo: MainInfo | null = await fetchSingleton('maininfo')
 
   if (!mainInfo) {
     return null
@@ -16,7 +16,7 @@ export default async function About(): Promise<JSX.Element | null> {
 
   const title = mainInfo.title
   const description = mainInfo.description
-  const image = mainInfo.image ? cockpit.getImageUrl(mainInfo.image._id, 800, 500) : ''
+  const image = mainInfo.image ? getImageUrl(mainInfo.image._id, 800, 500) : ''
   const alt = mainInfo.image?.alt ?? mainInfo.title
 
   return (

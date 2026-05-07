@@ -6,7 +6,8 @@ import NotFound from '@/components/NotFound/NotFound'
 
 export const metadata: Metadata = {
   title: 'Страница не найдена | Иконописная Артель',
-  description: 'Запрашиваемая страница не найдена. Вернитесь на главную страницу Иконописной Артели.',
+  description:
+    'Запрашиваемая страница не найдена. Вернитесь на главную страницу Иконописной Артели.',
 }
 
 const breadcrumbsList: BreadcrumbItem[] = [

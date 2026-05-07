@@ -3,10 +3,10 @@ import Link from 'next/link'
 
 import { ReviewFromServer, ReviewItem } from '@/types/types'
 import ReviewsList from '@/components/ReviewsList/ReviewsList'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection } from '@/lib/api-client'
 
 export default async function Reviews(): Promise<JSX.Element | null> {
-  const reviewsData: ReviewFromServer[] = await cockpit.getCollection('reviews', {
+  const reviewsData: ReviewFromServer[] = await fetchCollection('reviews', {
     sort: { date: -1 },
     limit: 6,
   })

@@ -3,7 +3,7 @@ import logoStyles from './Logo.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import { MainInfo } from '@/types/types'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import clsx from 'clsx'
 
 type LogoProps = {
@@ -12,13 +12,13 @@ type LogoProps = {
 }
 
 export default async function Logo({ addClass, isFooter }: LogoProps): Promise<JSX.Element | null> {
-  const mainInfo: MainInfo | null = await cockpit.getSingleItem('maininfo')
+  const mainInfo: MainInfo | null = await fetchSingleton('maininfo')
 
   if (!mainInfo || !mainInfo.logo) {
     return null
   }
 
-  const logo = cockpit.getImageUrl(mainInfo.logo._id, 60, 60)
+  const logo = getImageUrl(mainInfo.logo._id, 60, 60)
   const title = mainInfo.title ?? ''
 
   return (

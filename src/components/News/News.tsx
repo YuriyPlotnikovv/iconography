@@ -4,15 +4,13 @@ import { CardItem, NewsFromServer } from '@/types/types'
 import EmptySection from '@/components/EmptySection/EmptySection'
 import Card from '@/components/Card/Card'
 import clsx from 'clsx'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function News(): Promise<JSX.Element | null> {
-  const newsData: NewsFromServer[] = await cockpit.getCollection('news')
+  const newsData: NewsFromServer[] = await fetchCollection('news')
 
   if (!newsData || newsData.length === 0) {
-    return (
-      <EmptySection/>
-    )
+    return <EmptySection />
   }
 
   const newsList: CardItem[] = newsData.map((news) => ({
@@ -20,7 +18,7 @@ export default async function News(): Promise<JSX.Element | null> {
     title: news.title,
     description: news.description,
     href: `/news/${news.slug || news._id}`,
-    image: cockpit.getImageUrl(news.image._id, 400, 400),
+    image: getImageUrl(news.image._id, 400, 400),
     alt: news.image.title || news.title,
   }))
 

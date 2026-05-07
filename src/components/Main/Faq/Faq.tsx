@@ -3,11 +3,11 @@ import clsx from 'clsx'
 
 import { FaqFromServer } from '@/types/types'
 import faqStyles from './Faq.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection } from '@/lib/api-client'
 import { createSanitizedHTML, stripHtml } from '@/functions/functions'
 
 export default async function Faq(): Promise<JSX.Element | null> {
-  const faqData: FaqFromServer[] = await cockpit.getCollection('faq', {
+  const faqData: FaqFromServer[] = await fetchCollection('faq', {
     sort: { sort: 1 },
   })
 

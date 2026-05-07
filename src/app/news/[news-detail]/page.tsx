@@ -4,7 +4,7 @@ import { notFound, redirect } from 'next/navigation'
 import { BreadcrumbItem, NewsFromServer, SlideItem } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
 import Detail from '@/components/Detail/Detail'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollectionItem, getImageUrl } from '@/lib/api-client'
 
 type PageParams = {
   params: Promise<{
@@ -14,10 +14,9 @@ type PageParams = {
 
 export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
   const { ['news-detail']: slug } = await params
-  // Try to resolve by slug first (new), fallback to id if needed
-  const news: NewsFromServer | null =
-    (await cockpit.getCollectionItemByField('news', 'slug', slug)) ||
-    (await cockpit.getCollectionItem('news', slug))
+
+  let news = await fetchCollectionItem<NewsFromServer>('news', slug, { field: 'slug' })
+  if (!news) news = await fetchCollectionItem<NewsFromServer>('news', slug)
 
   if (!news) {
     return {
@@ -33,9 +32,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
     openGraph: {
       title: news.title,
       description,
-      images: news.image
-        ? [{ url: cockpit.getImageUrl(news.image._id, 1200, 630), alt: news.title }]
-        : [],
+      images: news.image ? [{ url: getImageUrl(news.image._id, 1200, 630), alt: news.title }] : [],
     },
     alternates: {
       canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/news/${news.slug || news._id}`,
@@ -45,9 +42,9 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
 
 export default async function Page({ params }: PageParams): Promise<JSX.Element> {
   const { ['news-detail']: slug } = await params
-  const news: NewsFromServer | null =
-    (await cockpit.getCollectionItemByField('news', 'slug', slug)) ||
-    (await cockpit.getCollectionItem('news', slug))
+
+  let news = await fetchCollectionItem<NewsFromServer>('news', slug, { field: 'slug' })
+  if (!news) news = await fetchCollectionItem<NewsFromServer>('news', slug)
 
   if (!news) {
     notFound()
@@ -75,7 +72,7 @@ export default async function Page({ params }: PageParams): Promise<JSX.Element>
   const slidesList: SlideItem[] =
     news.slider?.map((image) => ({
       id: image._id,
-      image: cockpit.getImageUrl(image._id, 800, 800),
+      image: getImageUrl(image._id, 800, 800),
       alt: image.title || news.title,
     })) || []
 
@@ -84,7 +81,7 @@ export default async function Page({ params }: PageParams): Promise<JSX.Element>
     '@type': 'Article',
     headline: news.title,
     description: (news.content || news.description || '').replace(/<[^>]*>/g, '').slice(0, 160),
-    image: news.image ? cockpit.getImageUrl(news.image._id, 1200, 630) : undefined,
+    image: news.image ? getImageUrl(news.image._id, 1200, 630) : undefined,
     datePublished: news._created ? new Date(news._created * 1000).toISOString() : undefined,
     dateModified: news._modified ? new Date(news._modified * 1000).toISOString() : undefined,
     author: {

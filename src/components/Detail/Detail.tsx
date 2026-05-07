@@ -4,7 +4,7 @@ import { ImageItem, SlideItem } from '@/types/types'
 import { createSanitizedHTML } from '@/functions/functions'
 import SliderDetail from '@/components/SliderDetail/SliderDetail'
 import detailStyles from './Detail.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { getImageUrl } from '@/lib/api-client'
 import Image from 'next/image'
 
 type DetailProps = {
@@ -20,7 +20,7 @@ export default function Detail({
   title,
   description,
 }: DetailProps): JSX.Element {
-  const src = cockpit.getImageUrl(image._id, 800, 500)
+  const src = getImageUrl(image._id, 800, 500)
   const alt = image.alt ?? title
 
   return (

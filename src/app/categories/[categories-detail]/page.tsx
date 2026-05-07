@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { BreadcrumbItem, CategoryFromServer, SlideItem } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
 import Detail from '@/components/Detail/Detail'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollectionItem, getImageUrl } from '@/lib/api-client'
 
 type PageProps = {
   params: Promise<{
@@ -16,9 +16,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { ['categories-detail']: slug } = await params
 
   try {
-    const category: CategoryFromServer =
-      (await cockpit.getCollectionItemByField('category', 'slug', slug)) ||
-      (await cockpit.getCollectionItem('category', slug))
+    let category = await fetchCollectionItem<CategoryFromServer>('category', slug, {
+      field: 'slug',
+    })
+    if (!category) category = await fetchCollectionItem<CategoryFromServer>('category', slug)
+
+    if (!category) {
+      return {
+        title: 'Категория не найдена | Иконописная Артель',
+      }
+    }
 
     return {
       title: `${category.title} | Иконописная Артель`,
@@ -31,7 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           ? category.description.replace(/<[^>]*>/g, '').slice(0, 160)
           : '',
         images: category.image
-          ? [{ url: cockpit.getImageUrl(category.image._id, 1200, 630), alt: category.title }]
+          ? [{ url: getImageUrl(category.image._id, 1200, 630), alt: category.title }]
           : [],
       },
       alternates: {
@@ -48,13 +55,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function Page({ params }: PageProps): Promise<JSX.Element> {
   const { ['categories-detail']: slug } = await params
 
-  let category: CategoryFromServer
+  let category = await fetchCollectionItem<CategoryFromServer>('category', slug, { field: 'slug' })
+  if (!category) category = await fetchCollectionItem<CategoryFromServer>('category', slug)
 
-  try {
-    category =
-      (await cockpit.getCollectionItemByField('category', 'slug', slug)) ||
-      (await cockpit.getCollectionItem('category', slug))
-  } catch {
+  if (!category) {
     notFound()
   }
 
@@ -74,7 +78,7 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
 
   const slidesList: SlideItem[] = category.slider?.map((image) => ({
     id: image._id,
-    image: cockpit.getImageUrl(image._id, 800, 800),
+    image: getImageUrl(image._id, 800, 800),
     alt: image.title || category.title,
   }))
 

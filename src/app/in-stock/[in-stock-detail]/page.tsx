@@ -5,7 +5,7 @@ import { BreadcrumbItem, MasterFromServer, SlideItem, WorkFromServer } from '@/t
 import Heading from '@/components/Heading/Heading'
 import Detail from '@/components/Detail/Detail'
 import Master from '@/components/Master/Master'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, fetchCollectionItem, getImageUrl } from '@/lib/api-client'
 
 type PageProps = {
   params: Promise<{
@@ -15,9 +15,9 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { ['in-stock-detail']: slug } = await params
-  const work: WorkFromServer | null =
-    (await cockpit.getCollectionItemByField('works', 'slug', slug)) ||
-    (await cockpit.getCollectionItem('works', slug))
+
+  let work = await fetchCollectionItem<WorkFromServer>('works', slug, { field: 'slug' })
+  if (!work) work = await fetchCollectionItem<WorkFromServer>('works', slug)
 
   if (!work) {
     return {
@@ -33,9 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: work.title,
       description,
-      images: work.image
-        ? [{ url: cockpit.getImageUrl(work.image._id, 1200, 630), alt: work.title }]
-        : [],
+      images: work.image ? [{ url: getImageUrl(work.image._id, 1200, 630), alt: work.title }] : [],
     },
     alternates: {
       canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work.slug || work._id}`,
@@ -44,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-  const works: WorkFromServer[] = await cockpit.getCollection('works', {
+  const works: WorkFromServer[] = await fetchCollection<WorkFromServer>('works', {
     filter: { in_stock: true },
   })
 
@@ -55,9 +53,9 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: PageProps): Promise<JSX.Element> {
   const { ['in-stock-detail']: slug } = await params
-  const work: WorkFromServer | null =
-    (await cockpit.getCollectionItemByField('works', 'slug', slug)) ||
-    (await cockpit.getCollectionItem('works', slug))
+
+  let work = await fetchCollectionItem<WorkFromServer>('works', slug, { field: 'slug' })
+  if (!work) work = await fetchCollectionItem<WorkFromServer>('works', slug)
 
   if (!work) {
     notFound()
@@ -84,12 +82,12 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
   const slidesList: SlideItem[] =
     work.slider?.map((image) => ({
       id: image._id,
-      image: cockpit.getImageUrl(image._id, 800, 800),
+      image: getImageUrl(image._id, 800, 800),
       alt: image.title || work.title,
     })) || []
 
   const MasterInfo: MasterFromServer | null = work.master
-    ? await cockpit.getCollectionItem('masters', work.master?._id)
+    ? await fetchCollectionItem<MasterFromServer>('masters', work.master?._id)
     : null
 
   const productSchema = {
@@ -99,7 +97,7 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
     description: work.description
       ? work.description.replace(/<[^>]*>/g, '').slice(0, 160)
       : work.title,
-    image: work.image ? cockpit.getImageUrl(work.image._id, 1200, 630) : undefined,
+    image: work.image ? getImageUrl(work.image._id, 1200, 630) : undefined,
     brand: {
       '@type': 'Organization',
       name: 'Иконописная Артель',

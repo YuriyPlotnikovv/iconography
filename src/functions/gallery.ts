@@ -1,11 +1,14 @@
 import { GalleryTreeItem, GalleryItemForClient } from '@/types/types'
-import cockpit from '@/lib/CockpitAPI'
+import { getImageUrl } from '@/lib/api-client'
 
 /**
  * Подготовка данных галереи для клиентского компонента
  * Рекурсивно обходит дерево и создает объекты с подготовленными URL изображений
  */
-export function prepareGalleryItems(items: GalleryTreeItem[], parentPath: string = ''): GalleryItemForClient[] {
+export function prepareGalleryItems(
+  items: GalleryTreeItem[],
+  parentPath: string = '',
+): GalleryItemForClient[] {
   return items.map((item) => {
     const hasNestedCategories = item._children.some((child) => child.type === 'Категория')
     const categoriesCount = item._children.filter((child) => child.type === 'Категория').length
@@ -20,9 +23,9 @@ export function prepareGalleryItems(items: GalleryTreeItem[], parentPath: string
       slug: item.slug,
       fullPath,
       type: item.type,
-      imageUrl: cockpit.getImageUrl(item.image._id, 400, 400),
-      imageLargeUrl: cockpit.getImageUrl(item.image._id, 1920, 1920),
-      imageThumbUrl: cockpit.getImageUrl(item.image._id, 400, 400),
+      imageUrl: getImageUrl(item.image._id, 400, 400),
+      imageLargeUrl: getImageUrl(item.image._id, 1920, 1920),
+      imageThumbUrl: getImageUrl(item.image._id, 400, 400),
       imageAlt: item.image.title || item.title,
       hasNestedCategories,
       childrenCount,

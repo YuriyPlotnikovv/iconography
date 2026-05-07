@@ -4,11 +4,11 @@ import clsx from 'clsx'
 
 import { RestorationFromServer } from '@/types/types'
 import restorationStyles from './Restoration.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import { createSanitizedHTML } from '@/functions/functions'
 
 export default async function Restoration(): Promise<JSX.Element | null> {
-  const restorationData: RestorationFromServer = await cockpit.getSingleItem('restoration')
+  const restorationData: RestorationFromServer | null = await fetchSingleton('restoration')
 
   if (!restorationData) {
     return null
@@ -16,7 +16,7 @@ export default async function Restoration(): Promise<JSX.Element | null> {
 
   const title = restorationData.title
   const description = restorationData.description
-  const image = cockpit.getImageUrl(restorationData.image._id, 800, 500)
+  const image = getImageUrl(restorationData.image._id, 800, 500)
   const alt = restorationData.image.alt ?? title
 
   return (

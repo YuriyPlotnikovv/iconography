@@ -5,10 +5,10 @@ import { CardItem, WorkFromServer } from '@/types/types'
 
 import LastWorksSlider from './LastWorksSlider'
 import lastWorksStyles from './LastWorks.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function LastWorks(): Promise<JSX.Element | null> {
-  const worksData: WorkFromServer[] = await cockpit.getCollection('works', {
+  const worksData: WorkFromServer[] = await fetchCollection('works', {
     sort: { date: -1 },
   })
 
@@ -21,7 +21,7 @@ export default async function LastWorks(): Promise<JSX.Element | null> {
     title: work.title,
     description: work.description,
     href: `/works/${work.slug || work._id}`,
-    image: cockpit.getImageUrl(work.image._id, 400, 400),
+    image: getImageUrl(work.image._id, 400, 400),
     alt: work.image.title || work.title,
   }))
 

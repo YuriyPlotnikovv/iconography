@@ -4,8 +4,12 @@ import { notFound } from 'next/navigation'
 import { BreadcrumbItem, GalleryTreeItem } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
 import GalleryPageClient from '@/components/GalleryPage/GalleryPageClient'
-import cockpit from '@/lib/CockpitAPI'
-import { prepareGalleryItems, findGalleryItemBySlug, buildGalleryBreadcrumbs } from '@/functions/gallery'
+import { fetchTree } from '@/lib/api-client'
+import {
+  prepareGalleryItems,
+  findGalleryItemBySlug,
+  buildGalleryBreadcrumbs,
+} from '@/functions/gallery'
 
 type PageParams = {
   params: Promise<{
@@ -16,7 +20,7 @@ type PageParams = {
 export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
   const { slug } = await params
   const lastSlug = slug[slug.length - 1]
-  const galleryData: GalleryTreeItem[] | null = await cockpit.getTree('gallery')
+  const galleryData: GalleryTreeItem[] | null = await fetchTree<GalleryTreeItem[]>('gallery')
 
   if (!galleryData) {
     return {
@@ -27,9 +31,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   const currentItem = findGalleryItemBySlug(galleryData, lastSlug)
 
   return {
-    title: currentItem
-      ? `${currentItem.title} | Галерея`
-      : 'Галерея | Иконописная Артель',
+    title: currentItem ? `${currentItem.title} | Галерея` : 'Галерея | Иконописная Артель',
     description: currentItem?.title
       ? `Фотогалерея: ${currentItem.title}. Иконописная Артель.`
       : 'Фотогалерея Иконописной Артели. Работы мастеров и события из жизни артели.',
@@ -39,7 +41,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
 export default async function Page({ params }: PageParams): Promise<JSX.Element> {
   const { slug } = await params
   const lastSlug = slug[slug.length - 1]
-  const galleryData: GalleryTreeItem[] | null = await cockpit.getTree('gallery')
+  const galleryData: GalleryTreeItem[] | null = await fetchTree<GalleryTreeItem[]>('gallery')
 
   if (!galleryData) {
     notFound()
@@ -62,7 +64,7 @@ export default async function Page({ params }: PageParams): Promise<JSX.Element>
       url: '/gallery',
     },
     ...breadcrumbPath.slice(0, -1).map((item, index, array) => {
-      const pathSegments = array.slice(0, index + 1).map(i => i.slug)
+      const pathSegments = array.slice(0, index + 1).map((i) => i.slug)
       return {
         title: item.title,
         url: `/gallery/${pathSegments.join('/')}`,
@@ -73,16 +75,20 @@ export default async function Page({ params }: PageParams): Promise<JSX.Element>
     },
   ]
 
-  const parentPath = breadcrumbPath.slice(0, -1).map(i => i.slug).join('/')
-  const preparedItems = prepareGalleryItems(currentItem._children, parentPath ? `${parentPath}/${currentItem.slug}` : currentItem.slug)
+  const parentPath = breadcrumbPath
+    .slice(0, -1)
+    .map((i) => i.slug)
+    .join('/')
+  const preparedItems = prepareGalleryItems(
+    currentItem._children,
+    parentPath ? `${parentPath}/${currentItem.slug}` : currentItem.slug,
+  )
 
   return (
     <>
       <Heading title={currentItem.title} breadcrumbsList={breadcrumbsList} />
 
-      {preparedItems.length > 0 && (
-        <GalleryPageClient items={preparedItems} />
-      )}
+      {preparedItems.length > 0 && <GalleryPageClient items={preparedItems} />}
     </>
   )
 }
