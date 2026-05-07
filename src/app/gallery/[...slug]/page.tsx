@@ -11,6 +11,8 @@ import {
   buildGalleryBreadcrumbs,
 } from '@/functions/gallery'
 
+export const dynamic = 'force-dynamic'
+
 type PageParams = {
   params: Promise<{
     slug: string[]

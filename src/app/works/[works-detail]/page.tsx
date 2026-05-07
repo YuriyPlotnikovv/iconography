@@ -5,7 +5,9 @@ import { BreadcrumbItem, MasterFromServer, SlideItem, WorkFromServer } from '@/t
 import Heading from '@/components/Heading/Heading'
 import Detail from '@/components/Detail/Detail'
 import Master from '@/components/Master/Master'
-import { fetchCollection, fetchCollectionItem, getImageUrl } from '@/lib/api-client'
+import { fetchCollectionItem, getImageUrl } from '@/lib/api-client'
+
+export const dynamic = 'force-dynamic'
 
 type PageProps = {
   params: Promise<{
@@ -39,14 +41,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/works/${work.slug || work._id}`,
     },
   }
-}
-
-export async function generateStaticParams() {
-  const works: WorkFromServer[] = await fetchCollection<WorkFromServer>('works')
-
-  return works.map((work) => ({
-    'works-detail': work.slug || work._id,
-  }))
 }
 
 export default async function Page({ params }: PageProps): Promise<JSX.Element> {
