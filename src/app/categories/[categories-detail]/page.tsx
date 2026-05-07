@@ -6,6 +6,8 @@ import Heading from '@/components/Heading/Heading'
 import Detail from '@/components/Detail/Detail'
 import { fetchCollectionItem, getImageUrl } from '@/lib/api-client'
 
+export const dynamic = 'force-dynamic'
+
 type PageProps = {
   params: Promise<{
     'categories-detail': string
