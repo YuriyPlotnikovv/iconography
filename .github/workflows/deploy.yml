@@ -62,17 +62,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Copy docker-compose and nginx config to server
+      - name: Copy docker-compose to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT || 22 }}
-          source: "docker-compose.yml,deploy/nginx/icon-artel.conf"
+          source: "docker-compose.yml"
           target: "/opt/icon-artel-deploy/"
 
-      - name: Deploy on server (write .env, pull image and restart + setup SSL)
+      - name: Deploy on server (write .env, pull image, restart container)
         uses: appleboy/ssh-action@v1.0.0
         env:
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
@@ -96,16 +96,18 @@ jobs:
             cd /opt/icon-artel-deploy
 
             echo "📝 Writing .env file..."
-            cat > .env <<EOF
-            IMAGE_NAME=$IMAGE_NAME
-            NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
-            NEXT_PUBLIC_CAPTCHA_SITE_KEY=$NEXT_PUBLIC_CAPTCHA_SITE_KEY
-            NEXT_PUBLIC_YANDEX_MAPS_API_KEY=$YANDEX_MAPS_API_KEY
-            CAPTCHA_SECRET=$CAPTCHA_SECRET
-            COCKPIT_API_URL=$COCKPIT_API_URL
-            COCKPIT_API_KEY=$COCKPIT_API_KEY
-            EOF
+            printf '%s\n' \
+              "IMAGE_NAME=${IMAGE_NAME}" \
+              "NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}" \
+              "NEXT_PUBLIC_CAPTCHA_SITE_KEY=${NEXT_PUBLIC_CAPTCHA_SITE_KEY}" \
+              "NEXT_PUBLIC_YANDEX_MAPS_API_KEY=${YANDEX_MAPS_API_KEY}" \
+              "CAPTCHA_SECRET=${CAPTCHA_SECRET}" \
+              "COCKPIT_API_URL=${COCKPIT_API_URL}" \
+              "COCKPIT_API_KEY=${COCKPIT_API_KEY}" \
+              > .env
             echo "✅ .env file written"
+            echo "🔍 .env keys (values masked):"
+            cut -d= -f1 .env
 
             echo "🔑 Logging into GitHub Container Registry..."
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin

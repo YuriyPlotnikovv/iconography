@@ -33,7 +33,6 @@ ENV INTERNAL_URL=http://localhost:3000
 
 # Copy only what is needed to run
 COPY --from=builder /app/package.json ./
-COPY --from=builder /app/.env ./
 COPY --from=builder /app/next.config.ts ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
