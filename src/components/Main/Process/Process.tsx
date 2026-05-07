@@ -3,11 +3,11 @@ import processStyles from './Process.module.scss'
 import { ProcessItem } from '@/types/types'
 import Image from 'next/image'
 import clsx from 'clsx'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 import { createSanitizedHTML } from '@/functions/functions'
 
 export default async function Process(): Promise<JSX.Element | null> {
-  const processList: ProcessItem[] = await cockpit.getCollection('createprocess', {
+  const processList: ProcessItem[] = await fetchCollection('createprocess', {
     sort: { sort: 1 },
   })
 
@@ -24,7 +24,7 @@ export default async function Process(): Promise<JSX.Element | null> {
           {processList.map((process) => {
             const title = process.title
             const description = process.description
-            const image = cockpit.getImageUrl(process.image._id, 800, 500)
+            const image = getImageUrl(process.image._id, 800, 500)
             const alt = process.alt ?? process.title
 
             return (

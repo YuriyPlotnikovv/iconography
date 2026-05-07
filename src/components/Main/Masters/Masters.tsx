@@ -5,10 +5,10 @@ import { CardItem, MasterFromServer } from '@/types/types'
 
 import MastersSlider from './MastersSlider'
 import mastersStyles from './Masters.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function Masters(): Promise<JSX.Element | null> {
-  const mastersData: MasterFromServer[] = await cockpit.getCollection('masters', {
+  const mastersData: MasterFromServer[] = await fetchCollection('masters', {
     sort: { sort: 1 },
   })
 
@@ -21,7 +21,7 @@ export default async function Masters(): Promise<JSX.Element | null> {
     title: master.name,
     description: master.description,
     href: `/masters/${master.slug || master._id}`,
-    image: cockpit.getImageUrl(master.image._id, 400, 400),
+    image: getImageUrl(master.image._id, 400, 400),
     alt: master.image.title || master.name,
   }))
 

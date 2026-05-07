@@ -18,7 +18,10 @@ function getCategoriesLabel(count: number): string {
 /**
  * Компонент бейджа для отображения количества разделов и фото в категории галереи
  */
-export default function GalleryBadge({ categoriesCount, photosCount }: GalleryBadgeProps): JSX.Element | null {
+export default function GalleryBadge({
+  categoriesCount,
+  photosCount,
+}: GalleryBadgeProps): JSX.Element | null {
   if (categoriesCount === 0 && photosCount === 0) {
     return null
   }
@@ -35,4 +38,3 @@ export default function GalleryBadge({ categoriesCount, photosCount }: GalleryBa
 
   return <div className={galleryPageStyles['gallery__badge']}>{badgeText}</div>
 }
-

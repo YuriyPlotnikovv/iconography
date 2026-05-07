@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { CardItem, WorkFromServer } from '@/types/types'
 import Card from '@/components/Card/Card'
 import inStockStyles from './InStock.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function InStock(): Promise<JSX.Element | null> {
-  const worksData: WorkFromServer[] = await cockpit.getCollection('works', {
+  const worksData: WorkFromServer[] = await fetchCollection('works', {
     filter: { in_stock: true },
     sort: { date: -1 },
   })
@@ -22,7 +22,7 @@ export default async function InStock(): Promise<JSX.Element | null> {
     title: work.title,
     description: work.description,
     href: `/in-stock/${work.slug || work._id}`,
-    image: cockpit.getImageUrl(work.image._id, 400, 400),
+    image: getImageUrl(work.image._id, 400, 400),
     alt: work.image.title || work.title,
   }))
 

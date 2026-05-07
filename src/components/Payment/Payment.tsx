@@ -3,10 +3,10 @@ import paymentStyles from './Payment.module.scss'
 import clsx from 'clsx'
 import { createSanitizedHTML } from '@/functions/functions'
 import { OrderFromServer } from '@/types/types'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton } from '@/lib/api-client'
 
 export default async function Payment(): Promise<JSX.Element | null> {
-  const orderInfo: OrderFromServer | null = await cockpit.getSingleItem('order')
+  const orderInfo: OrderFromServer | null = await fetchSingleton('order')
 
   if (!orderInfo) {
     return null

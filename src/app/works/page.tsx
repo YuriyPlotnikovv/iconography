@@ -3,11 +3,12 @@ import { JSX } from 'react'
 import { BreadcrumbItem, CardItem, WorkFromServer } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
 import Works from '@/components/Works/Works'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export const metadata: Metadata = {
   title: 'Наши работы | Иконописная Артель',
-  description: 'Портфолио Иконописной Артели. Выполненные работы: храмовые, семейные, мерные иконы, венчальные пары. Примеры икон различных размеров и сложности.',
+  description:
+    'Портфолио Иконописной Артели. Выполненные работы: храмовые, семейные, мерные иконы, венчальные пары. Примеры икон различных размеров и сложности.',
   openGraph: {
     title: 'Наши работы | Иконописная Артель',
     description:
@@ -27,9 +28,10 @@ const breadcrumbsList: BreadcrumbItem[] = [
 
 export default async function Page(): Promise<JSX.Element> {
   const title = 'Наши работы'
-  const description = '<p>Ознакомьтесь с портфолио нашей артели. Здесь представлены выполненные заказы: храмовые образа, семейные и именные иконы, венчальные пары. Каждая икона создана с соблюдением канонических традиций.</p>'
+  const description =
+    '<p>Ознакомьтесь с портфолио нашей артели. Здесь представлены выполненные заказы: храмовые образа, семейные и именные иконы, венчальные пары. Каждая икона создана с соблюдением канонических традиций.</p>'
 
-  const worksData: WorkFromServer[] | null = await cockpit.getCollection('works', {
+  const worksData: WorkFromServer[] = await fetchCollection<WorkFromServer>('works', {
     sort: { date: -1 },
   })
 
@@ -38,7 +40,7 @@ export default async function Page(): Promise<JSX.Element> {
     title: work.title,
     description: work.description,
     href: `/works/${work.slug || work._id}`,
-    image: cockpit.getImageUrl(work.image._id, 400, 400),
+    image: getImageUrl(work.image._id, 400, 400),
     alt: work.image.title || work.title,
   }))
 

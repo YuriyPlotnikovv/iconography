@@ -87,6 +87,20 @@ class CockpitClient {
     }
   }
 
+  async createItem(modelId: string, data: Record<string, unknown>) {
+    const endpoint = `content/item/${modelId}`
+
+    try {
+      return await this.cockpitFetch(endpoint, {
+        method: 'POST',
+        body: JSON.stringify({ data }),
+      })
+    } catch (e) {
+      console.error(`[Cockpit] createItem error in ${modelId}:`, e)
+      return null
+    }
+  }
+
   getImageUrl(imageId: string, width: number, height: number) {
     return `${this.baseUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1`
   }

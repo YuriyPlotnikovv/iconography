@@ -3,11 +3,12 @@ import { JSX } from 'react'
 import { BreadcrumbItem, CardItem, WorkFromServer } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
 import Works from '@/components/Works/Works'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export const metadata: Metadata = {
   title: 'Рукописные иконы в наличии | Иконописная Артель',
-  description: 'Готовые рукописные иконы в наличии. Каноничные образы, написанные яичной темперой на деревянной основе. Возможность приобретения без ожидания.',
+  description:
+    'Готовые рукописные иконы в наличии. Каноничные образы, написанные яичной темперой на деревянной основе. Возможность приобретения без ожидания.',
   openGraph: {
     title: 'Рукописные иконы в наличии | Иконописная Артель',
     description:
@@ -27,9 +28,10 @@ const breadcrumbsList: BreadcrumbItem[] = [
 
 export default async function Page(): Promise<JSX.Element> {
   const title = 'Рукописные иконы в наличии'
-  const description = '<p>Готовые рукописные иконы, которые можно приобрести без ожидания. Все образы написаны в строгом соответствии с каноном, в древней технологии яичной темперой на деревянной основе с золочением.</p>'
+  const description =
+    '<p>Готовые рукописные иконы, которые можно приобрести без ожидания. Все образы написаны в строгом соответствии с каноном, в древней технологии яичной темперой на деревянной основе с золочением.</p>'
 
-  const worksData: WorkFromServer[] | null = await cockpit.getCollection('works', {
+  const worksData: WorkFromServer[] = await fetchCollection<WorkFromServer>('works', {
     filter: { in_stock: true },
     sort: { date: -1 },
   })
@@ -39,7 +41,7 @@ export default async function Page(): Promise<JSX.Element> {
     title: work.title,
     description: work.description,
     href: `/in-stock/${work.slug || work._id}`,
-    image: cockpit.getImageUrl(work.image._id, 400, 400),
+    image: getImageUrl(work.image._id, 400, 400),
     alt: work.image.title || work.title,
   }))
 

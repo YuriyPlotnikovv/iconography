@@ -1,4 +1,4 @@
-@use "../../styles/variables.scss" as *;
+@use '../../styles/variables.scss' as *;
 
 .gallery {
 }
@@ -38,43 +38,43 @@
 
 .gallery__item {
   @media (min-width: $tablet-min-width) {
-    &[data-index="0"] .gallery__image,
-    &[data-index="5"] .gallery__image,
-    &[data-index="10"] .gallery__image,
-    &[data-index="15"] .gallery__image,
-    &[data-index="20"] .gallery__image {
+    &[data-index='0'] .gallery__image,
+    &[data-index='5'] .gallery__image,
+    &[data-index='10'] .gallery__image,
+    &[data-index='15'] .gallery__image,
+    &[data-index='20'] .gallery__image {
       height: 450px;
     }
 
-    &[data-index="1"] .gallery__image,
-    &[data-index="6"] .gallery__image,
-    &[data-index="11"] .gallery__image,
-    &[data-index="16"] .gallery__image,
-    &[data-index="21"] .gallery__image {
+    &[data-index='1'] .gallery__image,
+    &[data-index='6'] .gallery__image,
+    &[data-index='11'] .gallery__image,
+    &[data-index='16'] .gallery__image,
+    &[data-index='21'] .gallery__image {
       height: 320px;
     }
 
-    &[data-index="2"] .gallery__image,
-    &[data-index="7"] .gallery__image,
-    &[data-index="12"] .gallery__image,
-    &[data-index="17"] .gallery__image,
-    &[data-index="22"] .gallery__image {
+    &[data-index='2'] .gallery__image,
+    &[data-index='7'] .gallery__image,
+    &[data-index='12'] .gallery__image,
+    &[data-index='17'] .gallery__image,
+    &[data-index='22'] .gallery__image {
       height: 380px;
     }
 
-    &[data-index="3"] .gallery__image,
-    &[data-index="8"] .gallery__image,
-    &[data-index="13"] .gallery__image,
-    &[data-index="18"] .gallery__image,
-    &[data-index="23"] .gallery__image {
+    &[data-index='3'] .gallery__image,
+    &[data-index='8'] .gallery__image,
+    &[data-index='13'] .gallery__image,
+    &[data-index='18'] .gallery__image,
+    &[data-index='23'] .gallery__image {
       height: 300px;
     }
 
-    &[data-index="4"] .gallery__image,
-    &[data-index="9"] .gallery__image,
-    &[data-index="14"] .gallery__image,
-    &[data-index="19"] .gallery__image,
-    &[data-index="24"] .gallery__image {
+    &[data-index='4'] .gallery__image,
+    &[data-index='9'] .gallery__image,
+    &[data-index='14'] .gallery__image,
+    &[data-index='19'] .gallery__image,
+    &[data-index='24'] .gallery__image {
       height: 420px;
     }
   }
@@ -91,7 +91,9 @@
 
   cursor: pointer;
 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   @media (hover: hover) {
     &:hover,

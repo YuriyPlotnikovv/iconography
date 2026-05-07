@@ -67,6 +67,11 @@ export default function RootLayout({ children }: LayoutProps): JSX.Element {
           strategy="beforeInteractive"
         />
 
+        <Script
+          src="https://smartcaptcha.cloud.yandex.ru/captcha.js?render=onload&onload=onloadFunction"
+          strategy="beforeInteractive"
+        />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

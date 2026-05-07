@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import masterStyles from './Master.module.scss'
 import { MasterFromServer } from '@/types/types'
-import cockpit from '@/lib/CockpitAPI'
+import { getImageUrl } from '@/lib/api-client'
 import { createSanitizedHTML } from '@/functions/functions'
 
 type MasterProps = {
@@ -13,7 +13,7 @@ type MasterProps = {
 export default function Master({ master }: MasterProps): JSX.Element {
   const name = master.name
   const description = master.description
-  const image = cockpit.getImageUrl(master.image._id, 800, 500)
+  const image = getImageUrl(master.image._id, 800, 500)
   const alt = master.image.alt ?? name
 
   return (

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection } from '@/lib/api-client'
 import type { WorkFromServer, NewsFromServer, CategoryFromServer } from '@/types/types'
 
 type SitemapUrl = {
@@ -29,10 +29,10 @@ export async function GET() {
 
   try {
     const [works, news, categories, inStock] = await Promise.all([
-      cockpit.getCollection('works'),
-      cockpit.getCollection('news'),
-      cockpit.getCollection('category'),
-      cockpit.getCollection('works', { filter: { in_stock: true } }),
+      fetchCollection<WorkFromServer>('works'),
+      fetchCollection<NewsFromServer>('news'),
+      fetchCollection<CategoryFromServer>('category'),
+      fetchCollection<WorkFromServer>('works', { filter: { in_stock: true } }),
     ])
 
     if (Array.isArray(works)) {

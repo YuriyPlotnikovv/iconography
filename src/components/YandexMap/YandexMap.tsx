@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import {JSX, ComponentType, ReactNode, useState, useEffect} from 'react'
+import { JSX, ComponentType, ReactNode, useState, useEffect } from 'react'
 import Image from 'next/image'
 import yandexMapStyles from './YandexMap.module.scss'
 
@@ -97,8 +97,9 @@ export default function YandexMap({ logo, coordinates }: YandexMapProps): JSX.El
   const [lng, lat] = coords
   const destinationCoords: LngLat = [lng, lat]
 
-  const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker, YMapControls } = reactifiedModule
-  const { YMapZoomControl, YMapGeolocationControl} = uiControls
+  const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker, YMapControls } =
+    reactifiedModule
+  const { YMapZoomControl, YMapGeolocationControl } = uiControls
 
   return (
     <YMap
