@@ -2,7 +2,7 @@ import { JSX } from 'react'
 import contactsStyles from './Contacts.module.scss'
 import clsx from 'clsx'
 import { MainInfo } from '@/types/types'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton } from '@/lib/api-client'
 import { createEmailLink, createPhoneLink } from '@/functions/functions'
 
 type ContactsProps = {
@@ -10,7 +10,7 @@ type ContactsProps = {
 }
 
 export default async function Contacts({ addClass }: ContactsProps): Promise<JSX.Element | null> {
-  const mainInfo: MainInfo | null = await cockpit.getSingleItem('maininfo')
+  const mainInfo: MainInfo | null = await fetchSingleton<MainInfo>('maininfo')
 
   if (!mainInfo) {
     return null

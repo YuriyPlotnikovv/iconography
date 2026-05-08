@@ -1,10 +1,10 @@
 import { JSX } from 'react'
 import addressStyles from './Address.module.scss'
 import { MainInfo } from '@/types/types'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton } from '@/lib/api-client'
 
 export default async function Address(): Promise<JSX.Element | null> {
-  const mainInfo: MainInfo | null = await cockpit.getSingleItem('maininfo')
+  const mainInfo: MainInfo | null = await fetchSingleton<MainInfo>('maininfo')
 
   if (!mainInfo || !mainInfo.address) {
     return null

@@ -4,7 +4,7 @@ import { ImageItem, SlideItem } from '@/types/types'
 import { createSanitizedHTML } from '@/functions/functions'
 import SliderDetail from '@/components/SliderDetail/SliderDetail'
 import aboutPageStyles from './AboutPage.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import Image from 'next/image'
 import EmptySection from '@/components/EmptySection/EmptySection'
 
@@ -16,7 +16,7 @@ type AboutPageProps = {
 }
 
 export default async function AboutPage(): Promise<JSX.Element> {
-  const about: AboutPageProps | null = await cockpit.getSingleItem('about')
+  const about: AboutPageProps | null = await fetchSingleton<AboutPageProps>('about')
 
   if (!about) return <EmptySection />
 
@@ -25,11 +25,11 @@ export default async function AboutPage(): Promise<JSX.Element> {
 
   const slidesList: SlideItem[] = about.slider?.map((image) => ({
     id: image._id,
-    image: cockpit.getImageUrl(image._id, 800, 800),
+    image: getImageUrl(image._id, 800, 800),
     alt: image.title || about.title,
   }))
 
-  const imageSrc = about.image ? cockpit.getImageUrl(about.image._id, 800, 500) : ''
+  const imageSrc = about.image ? getImageUrl(about.image._id, 800, 500) : ''
   const alt = about.image?.alt ?? title
 
   return (
