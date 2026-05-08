@@ -29,12 +29,19 @@ export default async function InStock(): Promise<JSX.Element | null> {
   return (
     <section className={clsx('section', inStockStyles['in-stock'])}>
       <div className="container">
-        <h2 className="section__title">Рукописные иконы в наличии</h2>
+        <h2 className="section__title" data-animate="fade-up">
+          Рукописные иконы в наличии
+        </h2>
 
         <ul className={inStockStyles['in-stock__list']}>
-          {inStockList.map((work) => {
+          {inStockList.map((work, index) => {
             return (
-              <li className={inStockStyles['in-stock__item']} key={work.id}>
+              <li
+                className={inStockStyles['in-stock__item']}
+                key={work.id}
+                data-animate="fade-up"
+                data-stagger={String(index)}
+              >
                 <Card data={work} />
               </li>
             )

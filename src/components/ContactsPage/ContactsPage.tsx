@@ -29,7 +29,11 @@ export default async function ContactsPage(): Promise<JSX.Element | null> {
 
           <ul className={contactsPageStyles['contacts__list']}>
             {address && (
-              <li className={contactsPageStyles['contacts__item']}>
+              <li
+                className={contactsPageStyles['contacts__item']}
+                data-animate="fade-up"
+                data-stagger="0"
+              >
                 <address className={contactsPageStyles['contacts__address']}>
                   <span className={contactsPageStyles['contacts__link-caption']}>Адрес:</span>
 
@@ -39,7 +43,11 @@ export default async function ContactsPage(): Promise<JSX.Element | null> {
             )}
 
             {email && (
-              <li className={contactsPageStyles['contacts__item']}>
+              <li
+                className={contactsPageStyles['contacts__item']}
+                data-animate="fade-up"
+                data-stagger="1"
+              >
                 <a className={contactsPageStyles['contacts__link']} href={createEmailLink(email)}>
                   <span className={contactsPageStyles['contacts__link-caption']}>Email:</span>
 
@@ -49,7 +57,11 @@ export default async function ContactsPage(): Promise<JSX.Element | null> {
             )}
 
             {phone && (
-              <li className={contactsPageStyles['contacts__item']}>
+              <li
+                className={contactsPageStyles['contacts__item']}
+                data-animate="fade-up"
+                data-stagger="2"
+              >
                 <a className={contactsPageStyles['contacts__link']} href={createPhoneLink(phone)}>
                   <span className={contactsPageStyles['contacts__link-caption']}>Телефон:</span>
 
@@ -62,7 +74,11 @@ export default async function ContactsPage(): Promise<JSX.Element | null> {
           <Social addClass={contactsPageStyles['contacts__social']} />
 
           {coordinates && (
-            <div className={contactsPageStyles['contacts__map']}>
+            <div
+              className={contactsPageStyles['contacts__map']}
+              data-animate="fade-in"
+              data-stagger="3"
+            >
               <YandexMap logo={logo} coordinates={coordinates} />
             </div>
           )}
@@ -71,7 +87,9 @@ export default async function ContactsPage(): Promise<JSX.Element | null> {
 
       <section className="section">
         <div className="container">
-          <h2 className="section__title">Связаться с нами</h2>
+          <h2 className="section__title" data-animate="fade-up">
+            Связаться с нами
+          </h2>
 
           <FormContacts />
         </div>

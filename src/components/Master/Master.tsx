@@ -19,11 +19,18 @@ export default function Master({ master }: MasterProps): JSX.Element {
   return (
     <section className={clsx('section', masterStyles['master'])}>
       <div className={clsx('container', masterStyles['master__container'])}>
-        <h2 className={clsx('section__title', masterStyles['master__title'])}>
+        <h2
+          className={clsx('section__title', masterStyles['master__title'])}
+          data-animate="fade-up"
+        >
           Информация о мастере-художнике
         </h2>
 
-        <div className={masterStyles['master__image-wrapper']}>
+        <div
+          className={masterStyles['master__image-wrapper']}
+          data-animate="scale-in"
+          data-stagger="1"
+        >
           <Image
             className={masterStyles['master__image']}
             src={image}
@@ -33,7 +40,7 @@ export default function Master({ master }: MasterProps): JSX.Element {
           />
         </div>
 
-        <div className={masterStyles['master__info']}>
+        <div className={masterStyles['master__info']} data-animate="fade-up" data-stagger="2">
           <h3 className={masterStyles['master__info-name']}>{name}</h3>
 
           <div

@@ -17,10 +17,14 @@ export default async function Payment(): Promise<JSX.Element | null> {
   return (
     <section className={clsx('section', paymentStyles['payment'])}>
       <div className="container">
-        <h2 className="section__title">Оплата и доставка</h2>
+        <h2 className="section__title" data-animate="fade-up">
+          Оплата и доставка
+        </h2>
 
         <div
           className={clsx('block-html', paymentStyles['payment__info'])}
+          data-animate="fade-up"
+          data-stagger="1"
           dangerouslySetInnerHTML={createSanitizedHTML(description)}
         />
       </div>

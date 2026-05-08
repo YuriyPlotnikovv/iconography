@@ -18,16 +18,23 @@ export default async function Advantages(): Promise<JSX.Element | null> {
   return (
     <section className={clsx('section', advantagesStyles['advantages'])}>
       <div className="container">
-        <h2 className="section__title">Преимущества заказа у нас</h2>
+        <h2 className="section__title" data-animate="fade-up">
+          Преимущества заказа у нас
+        </h2>
 
         <ul className={advantagesStyles['advantages__list']}>
-          {advantagesList.map((item) => {
+          {advantagesList.map((item, index) => {
             const title = item.title
             const description = item.description
             const icon = getImageUrl(item.icon._id, 100, 100)
 
             return (
-              <li className={advantagesStyles['advantages__item']} key={item._id}>
+              <li
+                className={advantagesStyles['advantages__item']}
+                key={item._id}
+                data-animate="fade-up"
+                data-stagger={String(index + 1)}
+              >
                 <Image
                   className={logoStyles['logo__image']}
                   src={icon}

@@ -32,7 +32,9 @@ export default async function Reviews(): Promise<JSX.Element> {
 
       <section className="section">
         <div className="container">
-          <h2 className="section__title">Оставить отзыв</h2>
+          <h2 className="section__title" data-animate="fade-up">
+            Оставить отзыв
+          </h2>
 
           <FormReviews />
         </div>

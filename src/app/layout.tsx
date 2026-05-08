@@ -2,17 +2,19 @@ import '../styles/globals.scss'
 import '../styles/blocks.scss'
 import { Montserrat, CyrillicOld } from './fonts'
 import type { Metadata } from 'next'
-import { JSX } from 'react'
+import { JSX, ReactNode } from 'react'
 import clsx from 'clsx'
 import Script from 'next/script'
 import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 import ScrollButton from '@/components/ScrollButton/ScrollButton'
+import AnimationObserver from '@/components/AnimationObserver/AnimationObserver'
+import PageTransition from '@/components/PageTransition/PageTransition'
 
 export const dynamic = 'force-dynamic'
 
 type LayoutProps = {
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
 export const metadata: Metadata = {
@@ -90,9 +92,12 @@ export default function RootLayout({ children }: LayoutProps): JSX.Element {
         />
 
         <Header />
-        <main>{children}</main>
+        <main>
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
         <ScrollButton />
+        <AnimationObserver />
       </body>
     </html>
   )

@@ -26,7 +26,7 @@ export default function NewsSlider({ newsList }: NewsSliderProps): JSX.Element {
   const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null)
 
   return (
-    <div className={clsx('container', sliderStyles['slider'])}>
+    <div className={clsx('container', sliderStyles['slider'])} data-animate="fade-up">
       <div className={sliderStyles['slider__heading']}>
         <h2 className="section__title">Новости</h2>
 

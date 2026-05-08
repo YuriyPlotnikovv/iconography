@@ -10,15 +10,24 @@ export default function Footer(): JSX.Element {
   return (
     <footer className={footerStyles['footer']}>
       <div className={clsx('container', footerStyles['footer__container'])}>
-        <Logo addClass={footerStyles['footer__logo']} isFooter={true} />
+        <div className={footerStyles['footer__logo']} data-animate="fade-up" data-stagger="0">
+          <Logo isFooter={true} />
+        </div>
 
-        <Social addClass={footerStyles['footer__social']} />
+        <div className={footerStyles['footer__social']} data-animate="fade-up" data-stagger="1">
+          <Social />
+        </div>
 
-        <nav className={footerStyles['footer__navigation']} aria-label="Дополнительная по сайту">
+        <nav
+          className={footerStyles['footer__navigation']}
+          aria-label="Дополнительная по сайту"
+          data-animate="fade-up"
+          data-stagger="2"
+        >
           <Menu addClass={footerStyles['footer__menu']} isFooter={true} />
         </nav>
 
-        <div className={footerStyles['footer__wrapper']}>
+        <div className={footerStyles['footer__wrapper']} data-animate="fade-up" data-stagger="3">
           <p className={footerStyles['footer__copyright']}>
             © Иконописная Артель, {new Date().getFullYear()}
           </p>

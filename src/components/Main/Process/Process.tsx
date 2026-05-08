@@ -18,17 +18,23 @@ export default async function Process(): Promise<JSX.Element | null> {
   return (
     <section className={clsx('section', processStyles['process'])} id="process">
       <div className="container">
-        <h2 className="section__title">Процесс сотворения образа</h2>
+        <h2 className="section__title" data-animate="fade-up">
+          Процесс сотворения образа
+        </h2>
 
         <ul className={processStyles['process__list']}>
-          {processList.map((process) => {
+          {processList.map((process, index) => {
             const title = process.title
             const description = process.description
             const image = getImageUrl(process.image._id, 800, 500)
             const alt = process.alt ?? process.title
 
             return (
-              <li className={processStyles['process__item']} key={process._id}>
+              <li
+                className={processStyles['process__item']}
+                key={process._id}
+                data-animate={index % 2 === 0 ? 'fade-left' : 'fade-right'}
+              >
                 <Image
                   className={processStyles['process__item-image']}
                   src={image}

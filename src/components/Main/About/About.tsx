@@ -22,9 +22,15 @@ export default async function About(): Promise<JSX.Element | null> {
   return (
     <section className={clsx('section', aboutStyles['about'])}>
       <div className={clsx('container', aboutStyles['about__container'])}>
-        <h2 className={aboutStyles['about__title']}>{title}</h2>
+        <h2 className={aboutStyles['about__title']} data-animate="fade-up">
+          {title}
+        </h2>
 
-        <div className={aboutStyles['about__image-wrapper']}>
+        <div
+          className={aboutStyles['about__image-wrapper']}
+          data-animate="scale-in"
+          data-stagger="1"
+        >
           <Image
             className={aboutStyles['about__image']}
             src={image}
@@ -36,6 +42,8 @@ export default async function About(): Promise<JSX.Element | null> {
 
         <div
           className={clsx('block-html', aboutStyles['about__text'])}
+          data-animate="fade-up"
+          data-stagger="2"
           dangerouslySetInnerHTML={createSanitizedHTML(description)}
         />
 

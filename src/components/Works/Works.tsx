@@ -16,9 +16,14 @@ export default function Works({ worksList }: WorksProps): JSX.Element {
         <h2 className="visually-hidden">Список работ</h2>
 
         <ul className={worksStyles['works__list']}>
-          {worksList.map((work) => {
+          {worksList.map((work, index) => {
             return (
-              <li className={worksStyles['works__item']} key={work.id}>
+              <li
+                className={worksStyles['works__item']}
+                key={work.id}
+                data-animate="fade-up"
+                data-stagger={String(index % 6)}
+              >
                 <Card data={work} />
               </li>
             )

@@ -111,7 +111,13 @@ export default function GalleryPageClient({ items }: GalleryPageClientProps): JS
             const isCategory = item.type === 'Категория'
 
             return (
-              <div className={galleryPageStyles['gallery__item']} key={item._id} data-index={index}>
+              <div
+                className={galleryPageStyles['gallery__item']}
+                key={item._id}
+                data-index={index}
+                data-animate="scale-in"
+                data-stagger={String(index % 8)}
+              >
                 <div
                   className={galleryPageStyles['gallery__card']}
                   ref={(el) => {
