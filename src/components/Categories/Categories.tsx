@@ -3,10 +3,10 @@ import clsx from 'clsx'
 import { CardItem, CategoryFromServer } from '@/types/types'
 import Card from '@/components/Card/Card'
 import categoriesStyles from './Categories.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function Categories(): Promise<JSX.Element | null> {
-  const categoriesData: CategoryFromServer[] = await cockpit.getCollection('category', {
+  const categoriesData: CategoryFromServer[] = await fetchCollection<CategoryFromServer>('category', {
     sort: { sort: 1 },
   })
 
@@ -19,7 +19,7 @@ export default async function Categories(): Promise<JSX.Element | null> {
     title: category.title,
     description: category.description,
     href: `/categories/${category.slug || category._id}`,
-    image: cockpit.getImageUrl(category.image._id, 400, 400),
+    image: getImageUrl(category.image._id, 400, 400),
     alt: category.image.title || category.title,
   }))
 

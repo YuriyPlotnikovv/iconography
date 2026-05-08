@@ -5,17 +5,17 @@ import Social from '@/components/Social/Social'
 import FormContacts from '@/components/Forms/FormContacts/FormContacts'
 import YandexMap from '@/components/YandexMap/YandexMap'
 import { MainInfo } from '@/types/types'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import { createEmailLink, createPhoneLink } from '@/functions/functions'
 
 export default async function ContactsPage(): Promise<JSX.Element | null> {
-  const contactsInfo: MainInfo | null = await cockpit.getSingleItem('maininfo')
+  const contactsInfo: MainInfo | null = await fetchSingleton<MainInfo>('maininfo')
 
   if (!contactsInfo) {
     return null
   }
 
-  const logo = cockpit.getImageUrl(contactsInfo.logo._id, 60, 60)
+  const logo = getImageUrl(contactsInfo.logo._id, 60, 60)
   const address = contactsInfo.address
   const coordinates = contactsInfo.coordinates
   const email = contactsInfo.email
