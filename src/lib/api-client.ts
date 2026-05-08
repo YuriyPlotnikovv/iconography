@@ -68,7 +68,7 @@ export async function fetchSingleton<T = unknown>(
 
   try {
     const response = await fetch(url, {
-      cache: options.cache ?? 'no-store',
+      cache: options.cache ?? 'force-cache',
       next: {
         ...(options.revalidate !== undefined && { revalidate: options.revalidate }),
         tags: options.tags || [`singleton-${model}`],
@@ -106,7 +106,7 @@ export async function fetchCollection<T = unknown>(
 
   try {
     const response = await fetch(url, {
-      cache: options.cache ?? 'no-store',
+      cache: options.cache ?? 'force-cache',
       next: {
         ...(options.revalidate !== undefined && { revalidate: options.revalidate }),
         tags: options.tags || [`collection-${model}`],
@@ -144,7 +144,7 @@ export async function fetchCollectionItem<T = unknown>(
 
   try {
     const response = await fetch(url, {
-      cache: options.cache ?? 'no-store',
+      cache: options.cache ?? 'force-cache',
       next: {
         ...(options.revalidate !== undefined && { revalidate: options.revalidate }),
         tags: options.tags || [`collection-${model}-${id}`],
@@ -182,7 +182,7 @@ export async function fetchTree<T = unknown>(
 
   try {
     const response = await fetch(url, {
-      cache: options.cache ?? 'no-store',
+      cache: options.cache ?? 'force-cache',
       next: {
         ...(options.revalidate !== undefined && { revalidate: options.revalidate }),
         tags: options.tags || [`tree-${model}`],

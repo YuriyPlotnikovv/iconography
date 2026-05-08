@@ -82,12 +82,13 @@ jobs:
           COCKPIT_API_URL: ${{ secrets.COCKPIT_API_URL }}
           COCKPIT_API_KEY: ${{ secrets.COCKPIT_API_KEY }}
           YANDEX_MAPS_API_KEY: ${{ secrets.YANDEX_MAPS_API_KEY }}
+          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT || 22 }}
-          envs: IMAGE_NAME,NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_CAPTCHA_SITE_KEY,CAPTCHA_SECRET,COCKPIT_API_URL,COCKPIT_API_KEY,YANDEX_MAPS_API_KEY
+          envs: IMAGE_NAME,NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_CAPTCHA_SITE_KEY,CAPTCHA_SECRET,COCKPIT_API_URL,COCKPIT_API_KEY,YANDEX_MAPS_API_KEY,REVALIDATE_SECRET
           script: |
             set -euo pipefail
             echo "🚀 Starting deployment process..."
@@ -104,6 +105,7 @@ jobs:
               "CAPTCHA_SECRET=${CAPTCHA_SECRET}" \
               "COCKPIT_API_URL=${COCKPIT_API_URL}" \
               "COCKPIT_API_KEY=${COCKPIT_API_KEY}" \
+              "REVALIDATE_SECRET=${REVALIDATE_SECRET}" \
               > .env
             echo "✅ .env file written"
             echo "🔍 .env keys (values masked):"

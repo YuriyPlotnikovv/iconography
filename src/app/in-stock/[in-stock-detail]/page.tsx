@@ -7,8 +7,6 @@ import Detail from '@/components/Detail/Detail'
 import Master from '@/components/Master/Master'
 import { fetchCollectionItem, getImageUrl } from '@/lib/api-client'
 
-export const dynamic = 'force-dynamic'
-
 type PageProps = {
   params: Promise<{
     'in-stock-detail': string
