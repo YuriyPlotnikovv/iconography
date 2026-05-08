@@ -40,7 +40,9 @@ export default function Page(): JSX.Element {
 
       <section className="section">
         <div className="container">
-          <h2 className="section__title">Связаться с нами</h2>
+          <h2 className="section__title" data-animate="fade-up">
+            Связаться с нами
+          </h2>
 
           <FormContacts />
         </div>
@@ -48,9 +50,11 @@ export default function Page(): JSX.Element {
 
       <section className="section calculation">
         <div className="container">
-          <h2 className="section__title">Расчёт примерной стоимости</h2>
+          <h2 className="section__title" data-animate="fade-up">
+            Расчёт примерной стоимости
+          </h2>
 
-          <p className="section__description">
+          <p className="section__description" data-animate="fade-up" data-stagger="1">
             (выполнение гравировки и ассиста рассчитывается отдельно)
           </p>
 

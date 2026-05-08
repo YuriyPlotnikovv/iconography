@@ -10,9 +10,14 @@ type ReviewsListProps = {
 export default function ReviewsList({ reviewsList }: ReviewsListProps): JSX.Element {
   return (
     <ul className={reviewsListStyles['reviews']}>
-      {reviewsList.map((review) => {
+      {reviewsList.map((review, index) => {
         return (
-          <li className={reviewsListStyles['reviews__item']} key={review.id}>
+          <li
+            className={reviewsListStyles['reviews__item']}
+            key={review.id}
+            data-animate="fade-up"
+            data-stagger={String(index % 6)}
+          >
             <svg
               className={reviewsListStyles['reviews__item-decor']}
               xmlns="http://www.w3.org/2000/svg"

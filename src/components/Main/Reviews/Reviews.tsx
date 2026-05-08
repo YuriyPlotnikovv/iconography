@@ -26,7 +26,9 @@ export default async function Reviews(): Promise<JSX.Element | null> {
   return (
     <section className="section">
       <div className="container">
-        <h2 className="section__title">Отзывы</h2>
+        <h2 className="section__title" data-animate="fade-up">
+          Отзывы
+        </h2>
 
         <ReviewsList reviewsList={reviewsList} />
 

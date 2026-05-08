@@ -37,21 +37,21 @@ export async function POST(request: NextRequest) {
 
     const modelTagMap: Record<string, string[]> = {
       // Collections
-      news:          ['collection-news'],
-      works:         ['collection-works'],
-      reviews:       ['collection-reviews'],
-      category:      ['collection-category'],
-      faq:           ['collection-faq'],
-      advantages:    ['collection-advantages'],
+      news: ['collection-news'],
+      works: ['collection-works'],
+      reviews: ['collection-reviews'],
+      category: ['collection-category'],
+      faq: ['collection-faq'],
+      advantages: ['collection-advantages'],
       createprocess: ['collection-createprocess'],
-      restoration:   ['singleton-restoration'],
-      masters:       ['collection-masters'],
-      mainslider:    ['collection-mainslider'],
+      restoration: ['singleton-restoration'],
+      masters: ['collection-masters'],
+      mainslider: ['collection-mainslider'],
       // Singletons
-      maininfo:      ['singleton-maininfo'],
-      order:         ['singleton-order'],
+      maininfo: ['singleton-maininfo'],
+      order: ['singleton-order'],
       // Trees
-      gallery:       ['tree-gallery'],
+      gallery: ['tree-gallery'],
     }
 
     const tagsToRevalidate = modelTagMap[model] || []

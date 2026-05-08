@@ -22,9 +22,15 @@ export default async function Restoration(): Promise<JSX.Element | null> {
   return (
     <section className={clsx('section', restorationStyles['restoration'])} id="restoration">
       <div className={clsx('container', restorationStyles['restoration__container'])}>
-        <h2 className={restorationStyles['restoration__title']}>{title}</h2>
+        <h2 className={restorationStyles['restoration__title']} data-animate="fade-up">
+          {title}
+        </h2>
 
-        <div className={restorationStyles['restoration__image-wrapper']}>
+        <div
+          className={restorationStyles['restoration__image-wrapper']}
+          data-animate="scale-in"
+          data-stagger="1"
+        >
           <Image
             className={restorationStyles['restoration__image']}
             src={image}
@@ -36,6 +42,8 @@ export default async function Restoration(): Promise<JSX.Element | null> {
 
         <div
           className={clsx('block-html', restorationStyles['restoration__text'])}
+          data-animate="fade-up"
+          data-stagger="2"
           dangerouslySetInnerHTML={createSanitizedHTML(description)}
         />
       </div>

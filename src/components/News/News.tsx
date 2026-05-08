@@ -28,9 +28,14 @@ export default async function News(): Promise<JSX.Element | null> {
         <h2 className="visually-hidden">Список новостей</h2>
 
         <ul className={newsStyles['news__list']}>
-          {newsList.map((news) => {
+          {newsList.map((news, index) => {
             return (
-              <li className={newsStyles['news__item']} key={news.id}>
+              <li
+                className={newsStyles['news__item']}
+                key={news.id}
+                data-animate="fade-up"
+                data-stagger={String(index % 6)}
+              >
                 <Card data={news} />
               </li>
             )

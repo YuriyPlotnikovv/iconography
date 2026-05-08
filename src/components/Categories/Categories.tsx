@@ -29,9 +29,14 @@ export default async function Categories(): Promise<JSX.Element | null> {
         <h2 className="visually-hidden">Категории икон</h2>
 
         <ul className={categoriesStyles['categories__list']}>
-          {categoriesList.map((category) => {
+          {categoriesList.map((category, index) => {
             return (
-              <li className={categoriesStyles['categories__item']} key={category.id}>
+              <li
+                className={categoriesStyles['categories__item']}
+                key={category.id}
+                data-animate="fade-up"
+                data-stagger={String(index % 6)}
+              >
                 <Card data={category} />
               </li>
             )

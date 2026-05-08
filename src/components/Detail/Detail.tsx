@@ -26,7 +26,7 @@ export default function Detail({
   return (
     <section className={clsx('section', detailStyles['detail'])}>
       <div className={clsx('container', detailStyles['detail__container'])}>
-        <div className={detailStyles['detail__content']}>
+        <div className={detailStyles['detail__content']} data-animate="fade-up">
           <h2 className="section__title">{title}</h2>
 
           <div
@@ -36,13 +36,17 @@ export default function Detail({
         </div>
 
         {slidesList.length > 0 && (
-          <div className={detailStyles['detail__slider']}>
+          <div className={detailStyles['detail__slider']} data-animate="scale-in" data-stagger="1">
             <SliderDetail items={slidesList} />
           </div>
         )}
 
         {slidesList.length === 0 && image && (
-          <div className={detailStyles['detail__image-wrapper']}>
+          <div
+            className={detailStyles['detail__image-wrapper']}
+            data-animate="scale-in"
+            data-stagger="1"
+          >
             <Image
               className={detailStyles['detail__image']}
               src={src}

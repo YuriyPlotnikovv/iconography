@@ -37,12 +37,19 @@ export default async function Faq(): Promise<JSX.Element | null> {
 
       <section className={clsx('section', faqStyles['faq'])} id="faq">
         <div className="container">
-          <h2 className="section__title">Вопрос-ответ</h2>
+          <h2 className="section__title" data-animate="fade-up">
+            Вопрос-ответ
+          </h2>
 
           <ul className={faqStyles['faq__list']}>
-            {faqData.map((faq) => {
+            {faqData.map((faq, index) => {
               return (
-                <li className={faqStyles['faq__item']} key={faq._id}>
+                <li
+                  className={faqStyles['faq__item']}
+                  key={faq._id}
+                  data-animate="fade-up"
+                  data-stagger={String(index)}
+                >
                   <details className={faqStyles['faq__item-details']} name="question">
                     <summary
                       className={clsx('block-html', faqStyles['faq__item-title'])}

@@ -35,7 +35,7 @@ export default async function AboutPage(): Promise<JSX.Element> {
   return (
     <section className={clsx('section', aboutPageStyles['about'])}>
       <div className={clsx('container', aboutPageStyles['about__container'])}>
-        <div className={aboutPageStyles['about__content']}>
+        <div className={aboutPageStyles['about__content']} data-animate="fade-up">
           <h2 className="visually-hidden">{title}</h2>
 
           <div
@@ -45,13 +45,21 @@ export default async function AboutPage(): Promise<JSX.Element> {
         </div>
 
         {slidesList.length > 0 && (
-          <div className={aboutPageStyles['about__slider']}>
+          <div
+            className={aboutPageStyles['about__slider']}
+            data-animate="scale-in"
+            data-stagger="1"
+          >
             <SliderDetail items={slidesList} />
           </div>
         )}
 
         {slidesList.length === 0 && imageSrc && (
-          <div className={aboutPageStyles['about__image-wrapper']}>
+          <div
+            className={aboutPageStyles['about__image-wrapper']}
+            data-animate="scale-in"
+            data-stagger="1"
+          >
             <Image
               className={aboutPageStyles['about__image']}
               src={imageSrc}
