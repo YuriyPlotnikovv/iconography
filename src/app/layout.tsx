@@ -9,6 +9,8 @@ import Header from '@/components/Header/Header'
 import Footer from '@/components/Footer/Footer'
 import ScrollButton from '@/components/ScrollButton/ScrollButton'
 
+export const dynamic = 'force-dynamic'
+
 type LayoutProps = {
   children?: React.ReactNode
 }
