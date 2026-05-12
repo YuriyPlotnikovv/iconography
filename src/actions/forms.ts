@@ -102,6 +102,7 @@ export async function submitReview(
 
   const date = new Date().toISOString().slice(0, 10)
   const safeName = name.replace(/\s+/g, '_').replace(/[^a-zA-Zа-яёА-ЯЁ0-9_]/g, '')
+  const targetFolder = '6a00a163c6c8763d26aad9a3'
 
   const renamedFiles = photoFiles.map((file, index) => {
     const ext = file.name.includes('.') ? file.name.split('.').pop() : 'jpg'
@@ -111,7 +112,8 @@ export async function submitReview(
     return new File([file], newName, { type: file.type })
   })
 
-  const uploadedAssets = renamedFiles.length > 0 ? await cockpit.uploadAssets(renamedFiles) : []
+  const uploadedAssets =
+    renamedFiles.length > 0 ? await cockpit.uploadAssets(renamedFiles, targetFolder) : []
 
   const result = await cockpit.createItem('reviews', {
     name,
@@ -211,6 +213,7 @@ export async function submitApplication(
 
   const date = new Date().toISOString().slice(0, 10)
   const safeName = name.replace(/\s+/g, '_').replace(/[^a-zA-Zа-яёА-ЯЁ0-9_]/g, '')
+  const targetFolder = '6a03738dc6c876f8f315ef7f'
 
   const renamedFiles = photoFiles.map((file, index) => {
     const ext = file.name.includes('.') ? file.name.split('.').pop() : 'jpg'
@@ -219,7 +222,8 @@ export async function submitApplication(
     return new File([file], newName, { type: file.type })
   })
 
-  const uploadedAssets = renamedFiles.length > 0 ? await cockpit.uploadAssets(renamedFiles) : []
+  const uploadedAssets =
+    renamedFiles.length > 0 ? await cockpit.uploadAssets(renamedFiles, targetFolder) : []
 
   const result = await cockpit.createItem('applications', {
     name,
