@@ -1,15 +1,18 @@
 import { JSX } from 'react'
 import processStyles from './Process.module.scss'
-import { ProcessItem } from '@/types/types'
+import { ProcessFromServer } from '@/types/types'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { fetchCollection, getImageUrl } from '@/lib/api-client'
 import { createSanitizedHTML } from '@/functions/functions'
 
 export default async function Process(): Promise<JSX.Element | null> {
-  const processList: ProcessItem[] = await fetchCollection('createprocess', {
-    sort: { sort: 1 },
-  })
+  const processList: ProcessFromServer[] = await fetchCollection<ProcessFromServer>(
+    'createprocess',
+    {
+      sort: { sort: 1 },
+    },
+  )
 
   if (!processList || processList.length === 0) {
     return null

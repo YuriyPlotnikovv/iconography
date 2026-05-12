@@ -3,6 +3,21 @@ import { MenuItem } from '@/types/types'
 export const ITEMS_PER_PAGE = 12
 export const REVIEWS_PER_PAGE = 1
 
+export const SCROLL_THRESHOLD = 500
+
+export const STARS_COUNT = 5
+export const MAX_PHOTOS = 5
+
+export const DEFAULT_MAX_FILES = 5
+export const DEFAULT_MAX_SIZE_MB = 5
+
+export const GALLERY_BREAKPOINT_COLUMNS = {
+  default: 4,
+  1200: 3,
+  768: 2,
+  480: 1,
+}
+
 export const MENU_ITEMS: MenuItem[] = [
   {
     href: '/about',
@@ -35,5 +50,32 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     href: '/contacts',
     label: 'Контакты',
+  },
+]
+
+export const ANCHOR_LINKS: MenuItem[] = [
+  {
+    label: 'Наши мастера',
+    href: '#masters',
+  },
+  {
+    label: 'Процесс сотворения образа',
+    href: '#process',
+  },
+  {
+    label: 'Категории икон',
+    href: '#categories',
+  },
+  {
+    label: 'Расчёт стоимости',
+    href: '#calculation',
+  },
+  {
+    label: 'Реставрация',
+    href: '#restoration',
+  },
+  {
+    label: 'Вопрос-ответ',
+    href: '#faq',
   },
 ]

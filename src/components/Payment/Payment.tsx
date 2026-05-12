@@ -6,7 +6,7 @@ import { OrderFromServer } from '@/types/types'
 import { fetchSingleton } from '@/lib/api-client'
 
 export default async function Payment(): Promise<JSX.Element | null> {
-  const orderInfo: OrderFromServer | null = await fetchSingleton('order')
+  const orderInfo: OrderFromServer | null = await fetchSingleton<OrderFromServer>('order')
 
   if (!orderInfo) {
     return null

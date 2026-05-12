@@ -4,9 +4,12 @@ import type { CardItem, MainSliderFromServer } from '@/types/types'
 import SliderMainClient from './SliderMainClient'
 
 export default async function SliderMain(): Promise<JSX.Element | null> {
-  const mainSliderData: MainSliderFromServer[] = await fetchCollection('mainslider', {
-    sort: { sort: 1 },
-  })
+  const mainSliderData: MainSliderFromServer[] = await fetchCollection<MainSliderFromServer>(
+    'mainslider',
+    {
+      sort: { sort: 1 },
+    },
+  )
 
   if (!mainSliderData || mainSliderData.length === 0) {
     return null

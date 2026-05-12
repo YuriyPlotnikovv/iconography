@@ -8,7 +8,8 @@ import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import { createSanitizedHTML } from '@/functions/functions'
 
 export default async function Restoration(): Promise<JSX.Element | null> {
-  const restorationData: RestorationFromServer | null = await fetchSingleton('restoration')
+  const restorationData: RestorationFromServer | null =
+    await fetchSingleton<RestorationFromServer>('restoration')
 
   if (!restorationData) {
     return null

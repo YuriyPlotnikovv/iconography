@@ -6,7 +6,7 @@ import ReviewsList from '@/components/ReviewsList/ReviewsList'
 import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function Reviews(): Promise<JSX.Element | null> {
-  const reviewsData: ReviewFromServer[] = await fetchCollection('reviews', {
+  const reviewsData: ReviewFromServer[] = await fetchCollection<ReviewFromServer>('reviews', {
     sort: { date: -1 },
     limit: 6,
   })

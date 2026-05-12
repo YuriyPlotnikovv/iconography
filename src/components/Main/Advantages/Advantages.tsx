@@ -1,15 +1,18 @@
 import { JSX } from 'react'
 import advantagesStyles from './Advantages.module.scss'
-import { AdvantageItem } from '@/types/types'
+import { AdvantageFromServer } from '@/types/types'
 import clsx from 'clsx'
 import { fetchCollection, getImageUrl } from '@/lib/api-client'
 import Image from 'next/image'
 import logoStyles from '@/components/Logo/Logo.module.scss'
 
 export default async function Advantages(): Promise<JSX.Element | null> {
-  const advantagesList: AdvantageItem[] = await fetchCollection('advantages', {
-    sort: { sort: 1 },
-  })
+  const advantagesList: AdvantageFromServer[] = await fetchCollection<AdvantageFromServer>(
+    'advantages',
+    {
+      sort: { sort: 1 },
+    },
+  )
 
   if (!advantagesList || advantagesList.length === 0) {
     return null

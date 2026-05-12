@@ -62,7 +62,7 @@ class CockpitClient {
       const filter = { ...(options.filter || {}), [field]: value }
       const items: unknown[] = await this.getCollection(modelId, { ...options, filter, limit: 1 })
 
-      if (Array.isArray(items) && items.length > 0) return items[0] as unknown
+      if (Array.isArray(items) && items.length > 0) return items[0]
       return null
     } catch (err) {
       console.error('[Cockpit] getCollectionItemByField error', err)
@@ -144,7 +144,7 @@ class CockpitClient {
     return `${this.baseUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1`
   }
 
-  private createQueryString(options: object = {}) {
+  private createQueryString(options: CockpitOptions = {}) {
     const params = new URLSearchParams()
 
     Object.entries(options).forEach(([key, value]) => {

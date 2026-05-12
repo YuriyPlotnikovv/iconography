@@ -8,7 +8,7 @@ import lastWorksStyles from './LastWorks.module.scss'
 import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function LastWorks(): Promise<JSX.Element | null> {
-  const worksData: WorkFromServer[] = await fetchCollection('works', {
+  const worksData: WorkFromServer[] = await fetchCollection<WorkFromServer>('works', {
     sort: { date: -1 },
   })
 

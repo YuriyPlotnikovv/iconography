@@ -3,8 +3,7 @@
 import React, { JSX, MouseEventHandler, useEffect, useState, useRef } from 'react'
 import clsx from 'clsx'
 import scrollButtonStyles from './ScrollButton.module.scss'
-
-const SCROLL_THRESHOLD = 500
+import { SCROLL_THRESHOLD } from '@/const/const'
 
 export default function ScrollButton(): JSX.Element {
   const [visible, setVisible] = useState(false)

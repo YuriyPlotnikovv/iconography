@@ -11,9 +11,7 @@ import {
 } from 'react'
 import clsx from 'clsx'
 import dropZoneStyles from './DropZone.module.scss'
-
-const DEFAULT_MAX_FILES = 5
-const DEFAULT_MAX_SIZE_MB = 5
+import { DEFAULT_MAX_FILES, DEFAULT_MAX_SIZE_MB } from '@/const/const'
 
 export type DropZoneRef = {
   reset: () => void

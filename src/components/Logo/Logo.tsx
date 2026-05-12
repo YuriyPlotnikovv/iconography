@@ -2,7 +2,7 @@ import { JSX } from 'react'
 import logoStyles from './Logo.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
-import { MainInfo } from '@/types/types'
+import { MainInfoFromServer } from '@/types/types'
 import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import clsx from 'clsx'
 
@@ -12,7 +12,7 @@ type LogoProps = {
 }
 
 export default async function Logo({ addClass, isFooter }: LogoProps): Promise<JSX.Element | null> {
-  const mainInfo: MainInfo | null = await fetchSingleton('maininfo')
+  const mainInfo: MainInfoFromServer | null = await fetchSingleton('maininfo')
 
   if (!mainInfo || !mainInfo.logo) {
     return null
