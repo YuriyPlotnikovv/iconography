@@ -1,26 +1,19 @@
-import { JSX } from 'react'
+import { JSX, ReactNode } from 'react'
 import newsStyles from './News.module.scss'
-import { CardItem, NewsFromServer } from '@/types/types'
+import { CardItem } from '@/types/types'
 import EmptySection from '@/components/EmptySection/EmptySection'
 import Card from '@/components/Card/Card'
 import clsx from 'clsx'
-import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
-export default async function News(): Promise<JSX.Element | null> {
-  const newsData: NewsFromServer[] = await fetchCollection('news')
+type NewsProps = {
+  newsList: CardItem[]
+  children?: ReactNode
+}
 
-  if (!newsData || newsData.length === 0) {
+export default function News({ newsList, children }: NewsProps): JSX.Element {
+  if (!newsList || newsList.length === 0) {
     return <EmptySection />
   }
-
-  const newsList: CardItem[] = newsData.map((news) => ({
-    id: news.slug || news._id,
-    title: news.title,
-    description: news.description,
-    href: `/news/${news.slug || news._id}`,
-    image: getImageUrl(news.image._id, 400, 400),
-    alt: news.image.title || news.title,
-  }))
 
   return (
     <section className={clsx('section', newsStyles['news'])}>
@@ -41,6 +34,8 @@ export default async function News(): Promise<JSX.Element | null> {
             )
           })}
         </ul>
+
+        {children}
       </div>
     </section>
   )

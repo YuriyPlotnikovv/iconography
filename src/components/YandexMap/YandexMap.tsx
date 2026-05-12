@@ -78,8 +78,8 @@ export default function YandexMap({ logo, coordinates }: YandexMapProps): JSX.El
         setReactifiedModule(ymapsApi)
         setUiControls(uiThemeReactified)
       })
-      .catch((error) => {
-        console.error('Ошибка загрузки Яндекс.Карт:', error)
+      .catch((err) => {
+        console.error('Ошибка загрузки Яндекс.Карт:', err)
       })
   }, [])
 

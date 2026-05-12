@@ -1,6 +1,6 @@
 'use client'
 
-import { JSX, useEffect, useRef, useState, useMemo } from 'react'
+import { JSX, PointerEvent, KeyboardEvent, useEffect, useRef, useState, useMemo } from 'react'
 import formStyles from '../../../styles/modules/form.module.scss'
 import clsx from 'clsx'
 import type { PriceItem } from '@/types/types'
@@ -34,27 +34,23 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
     closeSelect()
   }
 
-  const handleToggleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation()
+  const handleToggleClick = (evt: PointerEvent<HTMLButtonElement>) => {
+    evt.stopPropagation()
     toggleSelect()
   }
 
-  const handleCurrentKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
-      e.preventDefault()
+  const handleCurrentKeyDown = (evt: KeyboardEvent<HTMLButtonElement>) => {
+    if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(evt.key)) {
+      evt.preventDefault()
       openSelect()
-      const idx = prices.findIndex((p) => p._id === selectedId)
+      const idx = prices.findIndex((price) => price._id === selectedId)
       const useIdx = idx >= 0 ? idx : 0
       ;(optionsRef.current[useIdx] as HTMLElement)?.focus()
     }
-    if (e.key === 'Escape') closeSelect()
+    if (evt.key === 'Escape') closeSelect()
   }
 
-  const handleOptionKeyDown = (
-    evt: React.KeyboardEvent<HTMLLIElement>,
-    index: number,
-    id: string,
-  ) => {
+  const handleOptionKeyDown = (evt: KeyboardEvent<HTMLLIElement>, index: number, id: string) => {
     let nextIndex: number | undefined
     const total = prices.length
     switch (evt.key) {
@@ -133,7 +129,7 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
       setCalculated('')
       return
     }
-    const item = prices.find((p) => p._id === selectedId)
+    const item = prices.find((price) => price._id === selectedId)
     if (!item) {
       setCalculated('')
       return
@@ -171,13 +167,13 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
             aria-expanded={selectOpen}
             id="calculationSortingButton"
             onClick={handleToggleClick}
-            onKeyDown={(e) => {
-              e.stopPropagation()
-              handleCurrentKeyDown(e)
+            onKeyDown={(evt) => {
+              evt.stopPropagation()
+              handleCurrentKeyDown(evt)
             }}
           >
             {selectedId
-              ? prices.find((p) => p._id === selectedId)?.size || '—'
+              ? prices.find((price) => price._id === selectedId)?.size || '—'
               : 'Размер/категория'}
 
             <svg
@@ -243,41 +239,20 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
           role="radiogroup"
           aria-label="Тип золочения"
         >
-          <input
-            id="gold-without"
-            className="visually-hidden"
-            type="radio"
-            name="goldTypeSwitch"
-            value="without_gold"
-            checked={goldType === 'without_gold'}
-            onChange={() => setGoldType('without_gold')}
-          />
-          <input
-            id="gold-all"
-            className="visually-hidden"
-            type="radio"
-            name="goldTypeSwitch"
-            value="all"
-            checked={goldType === 'all'}
-            onChange={() => setGoldType('all')}
-          />
-          <input
-            id="gold-halo"
-            className="visually-hidden"
-            type="radio"
-            name="goldTypeSwitch"
-            value="halo"
-            checked={goldType === 'halo'}
-            onChange={() => setGoldType('halo')}
-          />
-
           <label
             ref={(el: HTMLLabelElement | null) => {
               radioLabelRefs.current[0] = el
             }}
-            htmlFor="gold-without"
             className={formStyles['form__radio-option']}
           >
+            <input
+              className="visually-hidden"
+              type="radio"
+              name="goldTypeSwitch"
+              value="without_gold"
+              checked={goldType === 'without_gold'}
+              onChange={() => setGoldType('without_gold')}
+            />
             Без золота
           </label>
 
@@ -285,9 +260,16 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
             ref={(el: HTMLLabelElement | null) => {
               radioLabelRefs.current[1] = el
             }}
-            htmlFor="gold-all"
             className={formStyles['form__radio-option']}
           >
+            <input
+              className="visually-hidden"
+              type="radio"
+              name="goldTypeSwitch"
+              value="all"
+              checked={goldType === 'all'}
+              onChange={() => setGoldType('all')}
+            />
             Золотой фон и нимб
           </label>
 
@@ -295,9 +277,16 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
             ref={(el: HTMLLabelElement | null) => {
               radioLabelRefs.current[2] = el
             }}
-            htmlFor="gold-halo"
             className={formStyles['form__radio-option']}
           >
+            <input
+              className="visually-hidden"
+              type="radio"
+              name="goldTypeSwitch"
+              value="halo"
+              checked={goldType === 'halo'}
+              onChange={() => setGoldType('halo')}
+            />
             Только нимб
           </label>
 

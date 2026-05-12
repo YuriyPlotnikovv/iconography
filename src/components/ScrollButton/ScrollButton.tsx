@@ -1,6 +1,6 @@
 'use client'
 
-import React, { JSX, useEffect, useState, useRef } from 'react'
+import React, { JSX, MouseEventHandler, useEffect, useState, useRef } from 'react'
 import clsx from 'clsx'
 import scrollButtonStyles from './ScrollButton.module.scss'
 
@@ -32,8 +32,8 @@ export default function ScrollButton(): JSX.Element {
     }
   }, [])
 
-  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault()
+  const handleClick: MouseEventHandler<HTMLButtonElement> = (evt) => {
+    evt.preventDefault()
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

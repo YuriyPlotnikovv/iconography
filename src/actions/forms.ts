@@ -5,6 +5,13 @@ import { revalidatePath } from 'next/cache'
 import cockpit from '@/lib/CockpitAPI'
 import { verifyCaptcha } from '@/lib/captcha'
 import { formRateLimiter } from '@/lib/rate-limiter'
+import {
+  reviewFormSchema,
+  applicationFormSchema,
+  zodErrors,
+  ReviewFormData,
+  ApplicationFormData,
+} from '@/lib/schemas'
 
 export type FormState = {
   success: boolean
@@ -28,22 +35,6 @@ async function getClientIp(): Promise<string> {
 }
 
 /**
- * Валидация Email
- */
-function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  return emailRegex.test(email)
-}
-
-/**
- * Валидация номера телефона
- */
-function isValidPhone(phone: string): boolean {
-  const phoneRegex = /^(\+?\d{1,4}?[\s\-]?)?(\(?\d{1,4}?\)?[\s\-]?)?[\d\s\-]{6,20}$/
-  return phoneRegex.test(phone)
-}
-
-/**
  * Отправка формы отзывов
  */
 export async function submitReview(
@@ -54,52 +45,57 @@ export async function submitReview(
 
   if (!formRateLimiter.check(clientIp)) {
     const retryAfter = formRateLimiter.getRetryAfter(clientIp)
+
     return {
       success: false,
       message: `Слишком много запросов. Попробуйте через ${Math.ceil(retryAfter / 60)} минут.`,
     }
   }
 
-  const name = formData.get('name')?.toString().trim() || ''
-  const phone = formData.get('phone')?.toString().trim() || ''
-  const email = formData.get('email')?.toString().trim() || ''
-  const review = formData.get('review')?.toString().trim() || ''
-  const captchaToken = formData.get('smart-token')?.toString() || ''
-  const agreed = formData.get('agreement') === 'on'
+  const starsRaw = formData.get('stars')?.toString() || ''
 
-  const errors: Record<string, string> = {}
+  const parsed = reviewFormSchema.safeParse({
+    name: formData.get('name')?.toString().trim() ?? '',
+    phone: formData.get('phone')?.toString().trim() ?? '',
+    email: formData.get('email')?.toString().trim() ?? '',
+    review: formData.get('review')?.toString().trim() ?? '',
+    stars: parseInt(starsRaw, 10),
+    agreement: formData.get('agreement') === 'on',
+  })
 
-  if (!name || name.length < 2) {
-    errors.name = 'Имя должно содержать минимум 2 символа'
-  }
-
-  if (phone && !isValidPhone(phone)) {
-    errors.phone = 'Некорректный формат телефона'
-  }
-
-  if (!email) {
-    errors.email = 'Email обязателен для заполнения'
-  } else if (!isValidEmail(email)) {
-    errors.email = 'Некорректный формат email'
-  }
-
-  if (!review || review.length < 50) {
-    errors.message = 'Отзыв должен содержать минимум 50 символов'
-  }
-
-  if (!agreed) {
-    errors.agreement = 'Необходимо согласие на обработку данных'
-  }
-
-  if (Object.keys(errors).length > 0) {
+  if (!parsed.success) {
     return {
       success: false,
-      message: 'Пожалуйста, исправьте ошибки в форме',
-      errors,
+      message: 'Пожалуйста, заполните форму корректными значениями',
+      errors: zodErrors(parsed.error),
     }
   }
 
+  const { name, phone, email, review, stars }: ReviewFormData = parsed.data
+
+  const photoFiles = formData
+    .getAll('photos')
+    .filter((file): file is File => file instanceof File && file.size > 0)
+
+  if (photoFiles.length > 5) {
+    return {
+      success: false,
+      message: 'Пожалуйста, заполните форму корректными значениями',
+      errors: { photo: 'Можно загрузить не более 5 фото' },
+    }
+  }
+
+  if (photoFiles.some((file) => !file.type.startsWith('image/') || file.size > 5 * 1024 * 1024)) {
+    return {
+      success: false,
+      message: 'Пожалуйста, заполните форму корректными значениями',
+      errors: { photo: 'Допустимы только изображения до 5 МБ каждое' },
+    }
+  }
+
+  const captchaToken = formData.get('smart-token')?.toString() || ''
   const captchaValid = await verifyCaptcha(captchaToken, clientIp)
+
   if (!captchaValid) {
     return {
       success: false,
@@ -107,11 +103,27 @@ export async function submitReview(
     }
   }
 
+  const date = new Date().toISOString().slice(0, 10)
+  const safeName = name.replace(/\s+/g, '_').replace(/[^a-zA-Zа-яёА-ЯЁ0-9_]/g, '')
+
+  const renamedFiles = photoFiles.map((file, index) => {
+    const ext = file.name.includes('.') ? file.name.split('.').pop() : 'jpg'
+    const suffix = photoFiles.length > 1 ? `_${index + 1}` : ''
+    const newName = `${safeName}_${date}${suffix}.${ext}`
+
+    return new File([file], newName, { type: file.type })
+  })
+
+  const uploadedAssets = renamedFiles.length > 0 ? await cockpit.uploadAssets(renamedFiles) : []
+
   const result = await cockpit.createItem('reviews', {
     name,
     phone: phone || null,
     email,
     review,
+    stars,
+    date,
+    ...(uploadedAssets.length > 0 ? { photos: uploadedAssets } : {}),
     _state: false,
     ip: clientIp,
   })
@@ -142,48 +154,34 @@ export async function submitApplication(
 
   if (!formRateLimiter.check(clientIp)) {
     const retryAfter = formRateLimiter.getRetryAfter(clientIp)
+
     return {
       success: false,
       message: `Слишком много запросов. Попробуйте через ${Math.ceil(retryAfter / 60)} минут.`,
     }
   }
 
-  const name = formData.get('name')?.toString().trim() || ''
-  const phone = formData.get('phone')?.toString().trim() || ''
-  const email = formData.get('email')?.toString().trim() || ''
-  const message = formData.get('message')?.toString().trim() || ''
-  const captchaToken = formData.get('smart-token')?.toString() || ''
-  const agreed = formData.get('agreement') === 'on'
+  const parsed = applicationFormSchema.safeParse({
+    name: formData.get('name')?.toString().trim() ?? '',
+    phone: formData.get('phone')?.toString().trim() ?? '',
+    email: formData.get('email')?.toString().trim() ?? '',
+    message: formData.get('message')?.toString().trim() ?? '',
+    agreement: formData.get('agreement') === 'on',
+  })
 
-  const errors: Record<string, string> = {}
-
-  if (!name || name.length < 2) {
-    errors.name = 'Имя должно содержать минимум 2 символа'
-  }
-
-  if (phone && !isValidPhone(phone)) {
-    errors.phone = 'Некорректный формат телефона'
-  }
-
-  if (!email) {
-    errors.email = 'Email обязателен для заполнения'
-  } else if (!isValidEmail(email)) {
-    errors.email = 'Некорректный формат email'
-  }
-
-  if (!agreed) {
-    errors.agreement = 'Необходимо согласие на обработку данных'
-  }
-
-  if (Object.keys(errors).length > 0) {
+  if (!parsed.success) {
     return {
       success: false,
-      message: 'Пожалуйста, исправьте ошибки в форме',
-      errors,
+      message: 'Пожалуйста, заполните форму корректными значениями',
+      errors: zodErrors(parsed.error),
     }
   }
 
+  const { name, phone, email, message }: ApplicationFormData = parsed.data
+
+  const captchaToken = formData.get('smart-token')?.toString() || ''
   const captchaValid = await verifyCaptcha(captchaToken, clientIp)
+
   if (!captchaValid) {
     return {
       success: false,
@@ -191,11 +189,14 @@ export async function submitApplication(
     }
   }
 
+  const date = new Date().toISOString().slice(0, 10)
+
   const result = await cockpit.createItem('applications', {
     name,
     phone: phone || null,
     email,
     message: message || null,
+    date,
     _state: false,
     ip: clientIp,
   })
