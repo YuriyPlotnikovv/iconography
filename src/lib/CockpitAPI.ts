@@ -106,7 +106,7 @@ class CockpitClient {
 
     try {
       const url = `${this.baseUrl.replace(/\/$/, '')}/api/upload` + (folder ? `?folder=${folder}` : '')
-      console.log(`Uploading ${url} to ${folder}`, formData)
+
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'api-key': this.apiKey },
