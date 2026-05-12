@@ -32,6 +32,15 @@ export default function Footer(): JSX.Element {
             © Иконописная Артель, {new Date().getFullYear()}
           </p>
 
+          <a
+            className={footerStyles['footer__policy']}
+            href="/api/documents/policy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Политика обработки персональных данных
+          </a>
+
           <Developer addClass={footerStyles['footer__developer']} />
         </div>
       </div>

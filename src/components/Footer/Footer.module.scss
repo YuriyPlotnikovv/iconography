@@ -27,8 +27,6 @@
 .footer__logo {
   grid-row: 1 / 2;
   grid-column: 1 / 2;
-
-  // Pass through display so Logo link fills the wrapper naturally
   display: flex;
 }
 
@@ -84,6 +82,24 @@
 }
 
 .footer__copyright {
+}
+
+.footer__policy {
+  font-size: 14px;
+
+  transition: opacity 0.3s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  &:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid $accent-add-bg;
+    outline-offset: 2px;
+  }
 }
 
 .footer__developer {

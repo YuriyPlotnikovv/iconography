@@ -256,3 +256,12 @@ export function getImageUrl(
   const cockpitUrl = process.env.COCKPIT_API_URL || ''
   return `${cockpitUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1${mode ? `&m=${mode}` : ''}`
 }
+
+/**
+ * Получение ссылки на файл
+ * @param path - путь к файлу из объекта ассета (поле path)
+ */
+export function getAssetUrl(path: string): string {
+  const cockpitUrl = process.env.COCKPIT_API_URL || ''
+  return `${cockpitUrl}storage/uploads${path}`
+}
