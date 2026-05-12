@@ -62,6 +62,15 @@ export type ImageItem = {
   height: string
 }
 
+export type AssetItem = {
+  _id: string
+  path: string
+  title?: string
+  mime?: string
+  type?: string
+  size?: number
+}
+
 export type MainInfoFromServer = {
   title: string
   description: string
@@ -75,6 +84,8 @@ export type MainInfoFromServer = {
   whatsapp: string
   vk: string
   max: string
+  agreement: AssetItem
+  policy: AssetItem
 }
 
 export type AdvantageFromServer = {

@@ -26,8 +26,25 @@ export const reviewFormSchema = z.object({
 
 export type ReviewFormData = z.infer<typeof reviewFormSchema>
 
-// Контакты
+// Заказ
 export const applicationFormSchema = z.object({
+  name: z.string().min(2, 'Имя должно содержать минимум 2 символа'),
+  phone: phoneField,
+  email: z
+    .string()
+    .min(1, 'Email обязателен для заполнения')
+    .check(z.email('Некорректный формат email')),
+  message: z.string().min(1, 'Сообщение обязательно для заполнения'),
+  category: z.string().optional(),
+  size: z.string().optional(),
+  goldType: z.enum(['without_gold', 'all', 'halo']).optional(),
+  agreement: agreementField,
+})
+
+export type ApplicationFormData = z.infer<typeof applicationFormSchema>
+
+// Контакты (обратная связь → коллекция messages)
+export const messageFormSchema = z.object({
   name: z.string().min(2, 'Имя должно содержать минимум 2 символа'),
   phone: phoneField,
   email: z
@@ -38,7 +55,7 @@ export const applicationFormSchema = z.object({
   agreement: agreementField,
 })
 
-export type ApplicationFormData = z.infer<typeof applicationFormSchema>
+export type MessageFormData = z.infer<typeof messageFormSchema>
 
 // ошибки Zod → плоский Record
 export function zodErrors(error: z.ZodError): Record<string, string> {

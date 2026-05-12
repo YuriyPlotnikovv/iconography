@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import { JSX } from 'react'
 import { BreadcrumbItem } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
-import FormCalculation from '@/components/Forms/FormCalculation/FormCalculation'
 import Payment from '@/components/Payment/Payment'
-import FormContacts from '@/components/Forms/FormContacts/FormContacts'
+import FormOrder from '@/components/Forms/FormOrder/FormOrder'
 
 export const metadata: Metadata = {
   title: 'Заказ и доставка | Иконописная Артель',
@@ -41,24 +40,10 @@ export default function Page(): JSX.Element {
       <section className="section">
         <div className="container">
           <h2 className="section__title" data-animate="fade-up">
-            Связаться с нами
+            Оформить заказ
           </h2>
 
-          <FormContacts />
-        </div>
-      </section>
-
-      <section className="section calculation">
-        <div className="container">
-          <h2 className="section__title" data-animate="fade-up">
-            Расчёт примерной стоимости
-          </h2>
-
-          <p className="section__description" data-animate="fade-up" data-stagger="1">
-            (выполнение гравировки и ассиста рассчитывается отдельно)
-          </p>
-
-          <FormCalculation />
+          <FormOrder />
         </div>
       </section>
     </>
