@@ -1,6 +1,9 @@
 import { MenuItem } from '@/types/types'
 
-export const menuItems: MenuItem[] = [
+export const ITEMS_PER_PAGE = 12
+export const REVIEWS_PER_PAGE = 1
+
+export const MENU_ITEMS: MenuItem[] = [
   {
     href: '/about',
     label: 'О нас',

@@ -4,11 +4,15 @@ import { JSX, SubmitEvent, useEffect, useActionState, useRef, useState, useTrans
 import formStyles from '../../../styles/modules/form.module.scss'
 import clsx from 'clsx'
 import { submitApplication } from '@/actions/forms'
+import { applicationFormSchema, validateFormField } from '@/lib/schemas'
+import { z } from 'zod'
 
 export default function FormContacts(): JSX.Element {
   const [state, formAction] = useActionState(submitApplication, null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isPending, startTransition] = useTransition()
+  const [clientErrors, setClientErrors] = useState<Record<string, string>>({})
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
 
   const formRef = useRef<HTMLFormElement>(null)
   const captchaContainerRef = useRef<HTMLDivElement>(null)
@@ -54,6 +58,8 @@ export default function FormContacts(): JSX.Element {
     if (state?.success && formRef.current) {
       formRef.current.reset()
       setIsSubmitting(false)
+      setClientErrors({})
+      setTouched({})
 
       if (widgetIdRef.current !== null && window.smartCaptcha) {
         window.smartCaptcha.reset(widgetIdRef.current)
@@ -67,7 +73,25 @@ export default function FormContacts(): JSX.Element {
     }
   }, [state])
 
-  // Handle form submit - execute captcha
+  const getError = (field: string): string =>
+    touched[field] ? clientErrors[field] || '' : state?.errors?.[field] || ''
+
+  const handleBlur = (field: string, value: string) => {
+    setTouched((prev) => ({ ...prev, [field]: true }))
+    setClientErrors((prev) => ({
+      ...prev,
+      [field]: validateFormField(applicationFormSchema, field, value),
+    }))
+  }
+
+  const handleAgreementChange = (checked: boolean) => {
+    setTouched((prev) => ({ ...prev, agreement: true }))
+    setClientErrors((prev) => ({
+      ...prev,
+      agreement: validateFormField(applicationFormSchema, 'agreement', checked || undefined),
+    }))
+  }
+
   const handleSubmit = async (evt: SubmitEvent<HTMLFormElement>) => {
     evt.preventDefault()
 
@@ -75,6 +99,41 @@ export default function FormContacts(): JSX.Element {
       return
     }
 
+    const formEl = formRef.current
+    const nameVal = (formEl?.elements.namedItem('name') as HTMLInputElement)?.value || ''
+    const phoneVal = (formEl?.elements.namedItem('phone') as HTMLInputElement)?.value || ''
+    const emailVal = (formEl?.elements.namedItem('email') as HTMLInputElement)?.value || ''
+    const messageVal = (formEl?.elements.namedItem('message') as HTMLTextAreaElement)?.value || ''
+    const agreementChecked =
+      (formEl?.elements.namedItem('agreement') as HTMLInputElement)?.checked || false
+
+    const parseResult = applicationFormSchema.safeParse({
+      name: nameVal,
+      phone: phoneVal,
+      email: emailVal,
+      message: messageVal,
+      agreement: agreementChecked || undefined,
+    })
+
+    const allTouched = Object.fromEntries(
+      Object.keys(applicationFormSchema.shape).map((key) => [key, true]),
+    )
+    setTouched(allTouched)
+
+    if (!parseResult.success) {
+      const flat = z.flattenError(parseResult.error).fieldErrors as Record<
+        string,
+        string[] | undefined
+      >
+      setClientErrors(
+        Object.fromEntries(
+          Object.keys(applicationFormSchema.shape).map((key) => [key, flat[key]?.[0] ?? '']),
+        ),
+      )
+      return
+    }
+
+    setClientErrors({})
     setIsSubmitting(true)
 
     if (widgetIdRef.current !== null && window.smartCaptcha) {
@@ -93,6 +152,7 @@ export default function FormContacts(): JSX.Element {
       ref={formRef}
       className={clsx(formStyles['form'], formStyles['form--contacts'])}
       onSubmit={handleSubmit}
+      noValidate
     >
       {state?.message && (
         <div
@@ -112,18 +172,19 @@ export default function FormContacts(): JSX.Element {
 
             <input
               className={clsx(formStyles['form__input'], {
-                [formStyles['form__input--error']]: state?.errors?.name,
+                [formStyles['form__input--error']]: getError('name'),
               })}
               type="text"
               name="name"
               autoComplete="on"
               placeholder="Имя"
               required
+              onBlur={(evt) => handleBlur('name', evt.target.value)}
             />
 
-            {state?.errors?.name && (
-              <span className={formStyles['form__error']}>{state.errors.name}</span>
-            )}
+            <span className={formStyles['form__error']} aria-live="polite">
+              {getError('name')}
+            </span>
           </label>
 
           <label className={formStyles['form__label']}>
@@ -131,18 +192,18 @@ export default function FormContacts(): JSX.Element {
 
             <input
               className={clsx(formStyles['form__input'], {
-                [formStyles['form__input--error']]: state?.errors?.phone,
+                [formStyles['form__input--error']]: getError('phone'),
               })}
               type="tel"
               name="phone"
               autoComplete="on"
               placeholder="Телефон"
-              pattern="^(\+?\d{1,4}?[\s\-]?)?(\(?\d{1,4}?\)?[\s\-]?)?[\d\s\-]{6,20}$"
+              onBlur={(evt) => handleBlur('phone', evt.target.value)}
             />
 
-            {state?.errors?.phone && (
-              <span className={formStyles['form__error']}>{state.errors.phone}</span>
-            )}
+            <span className={formStyles['form__error']} aria-live="polite">
+              {getError('phone')}
+            </span>
           </label>
 
           <label className={formStyles['form__label']}>
@@ -150,39 +211,51 @@ export default function FormContacts(): JSX.Element {
 
             <input
               className={clsx(formStyles['form__input'], {
-                [formStyles['form__input--error']]: state?.errors?.email,
+                [formStyles['form__input--error']]: getError('email'),
               })}
               type="email"
               name="email"
               autoComplete="on"
               placeholder="Email"
               required
+              onBlur={(evt) => handleBlur('email', evt.target.value)}
             />
 
-            {state?.errors?.email && (
-              <span className={formStyles['form__error']}>{state.errors.email}</span>
-            )}
+            <span className={formStyles['form__error']} aria-live="polite">
+              {getError('email')}
+            </span>
           </label>
 
           <label className={formStyles['form__label']}>
             <span className="visually-hidden">Введите ваше сообщение:</span>
 
             <textarea
-              className={clsx(formStyles['form__input'], {
-                [formStyles['form__input--error']]: state?.errors?.message,
-              })}
+              className={formStyles['form__input']}
               name="message"
               rows={5}
               placeholder="Ваше сообщение"
               autoComplete="off"
             ></textarea>
 
-            {state?.errors?.message && (
-              <span className={formStyles['form__error']}>{state.errors.message}</span>
-            )}
+            <span className={formStyles['form__error']} aria-live="polite">
+              {getError('message')}
+            </span>
           </label>
 
-          <label className={clsx(formStyles['form__label'], formStyles['form__label--checkbox'])}>
+          <label
+            className={clsx(formStyles['form__label'], formStyles['form__label--checkbox'], {
+              [formStyles['form__label--checkbox--error']]: getError('agreement'),
+            })}
+          >
+            <input
+              className="visually-hidden"
+              type="checkbox"
+              name="agreement"
+              autoComplete="off"
+              required
+              onChange={(evt) => handleAgreementChange(evt.target.checked)}
+            />
+
             <span className={formStyles['form__label-text']}>
               <a className={formStyles['form__label-link']} href="#">
                 Я согласен
@@ -193,17 +266,9 @@ export default function FormContacts(): JSX.Element {
               </a>
             </span>
 
-            <input
-              className="visually-hidden"
-              type="checkbox"
-              name="agreement"
-              autoComplete="off"
-              required
-            />
-
-            {state?.errors?.agreement && (
-              <span className={formStyles['form__error']}>{state.errors.agreement}</span>
-            )}
+            <span className={formStyles['form__error']} aria-live="polite">
+              {getError('agreement')}
+            </span>
           </label>
 
           <button

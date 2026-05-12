@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { ReviewFromServer, ReviewItem } from '@/types/types'
 import ReviewsList from '@/components/ReviewsList/ReviewsList'
-import { fetchCollection } from '@/lib/api-client'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function Reviews(): Promise<JSX.Element | null> {
   const reviewsData: ReviewFromServer[] = await fetchCollection('reviews', {
@@ -15,13 +15,29 @@ export default async function Reviews(): Promise<JSX.Element | null> {
     return null
   }
 
-  const reviewsList: ReviewItem[] = reviewsData.map((review) => ({
-    id: review._id,
-    date: review.date,
-    stars: review.stars,
-    name: review.name,
-    review: review.review,
-  }))
+  const reviewsList: ReviewItem[] = reviewsData.map((review) => {
+    const photos: Array<{ thumb: string; full: string }> = []
+
+    if (review.photos && review.photos.length > 0) {
+      review.photos.forEach((img) => {
+        if (img._id) {
+          photos.push({
+            thumb: getImageUrl(img._id, 400, 300, 'thumbnail'),
+            full: getImageUrl(img._id, 1920, 1080, 'bestFit'),
+          })
+        }
+      })
+    }
+
+    return {
+      id: review._id,
+      date: review.date,
+      stars: review.stars,
+      name: review.name,
+      review: review.review,
+      ...(photos.length > 0 ? { photos } : {}),
+    }
+  })
 
   return (
     <section className="section">

@@ -37,6 +37,10 @@ html {
   &.lg-on {
     overflow: hidden;
   }
+
+  .lg-outer .lg-thumb-outer {
+    background-color: transparent;
+  }
 }
 
 body {

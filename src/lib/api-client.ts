@@ -40,7 +40,7 @@ function buildUrl(path: string, options: FetchOptions = {}): string {
   if (options.filter) params.set('filter', JSON.stringify(options.filter))
   if (options.sort) params.set('sort', JSON.stringify(options.sort))
   if (options.limit) params.set('limit', String(options.limit))
-  if (options.skip) params.set('skip', String(options.skip))
+  if (options.skip !== undefined && options.skip !== null) params.set('skip', String(options.skip))
   if (options.populate) params.set('populate', String(options.populate))
   if (options.field) params.set('field', options.field)
 
@@ -83,8 +83,8 @@ export async function fetchSingleton<T = unknown>(
     }
 
     return await response.json()
-  } catch (error) {
-    console.error(`Error fetching singleton ${model}:`, error)
+  } catch (err) {
+    console.error(`Error fetching singleton ${model}:`, err)
     return null
   }
 }
@@ -118,8 +118,8 @@ export async function fetchCollection<T = unknown>(
     }
 
     return await response.json()
-  } catch (error) {
-    console.error(`Error fetching collection ${model}:`, error)
+  } catch (err) {
+    console.error(`Error fetching collection ${model}:`, err)
     return []
   }
 }
@@ -159,8 +159,8 @@ export async function fetchCollectionItem<T = unknown>(
     }
 
     return await response.json()
-  } catch (error) {
-    console.error(`Error fetching collection item ${model}/${id}:`, error)
+  } catch (err) {
+    console.error(`Error fetching collection item ${model}/${id}:`, err)
     return null
   }
 }
@@ -197,9 +197,46 @@ export async function fetchTree<T = unknown>(
     }
 
     return await response.json()
-  } catch (error) {
-    console.error(`Error fetching tree ${model}:`, error)
+  } catch (err) {
+    console.error(`Error fetching tree ${model}:`, err)
     return null
+  }
+}
+
+/**
+ * Получение количества записей в коллекции
+ * @param model - Название модели
+ * @param options - Опции запроса (filter, cache, revalidate, tags)
+ * @returns Общее количество записей
+ */
+export async function fetchCollectionCount(
+  model: string,
+  options: Pick<FetchOptions, 'filter' | 'cache' | 'revalidate' | 'tags'> = {},
+): Promise<number> {
+  const params = new URLSearchParams()
+
+  if (options.filter) params.set('filter', JSON.stringify(options.filter))
+
+  const baseUrl = getBaseUrl()
+  const queryString = params.toString()
+  const url = `${baseUrl}/api/content/collection/${model}/count${queryString ? `?${queryString}` : ''}`
+
+  try {
+    const response = await fetch(url, {
+      cache: options.cache ?? 'force-cache',
+      next: {
+        ...(options.revalidate !== undefined && { revalidate: options.revalidate }),
+        tags: options.tags || [`collection-${model}-count`],
+      },
+    })
+
+    if (!response.ok) return 0
+
+    const data = await response.json()
+    return data.count ?? 0
+  } catch (err) {
+    console.error(`Error fetching collection count ${model}:`, err)
+    return 0
   }
 }
 
@@ -208,8 +245,14 @@ export async function fetchTree<T = unknown>(
  * @param imageId - ID изображения
  * @param width - ширина
  * @param height - высота
+ * @param mode - режим ресайза
  */
-export function getImageUrl(imageId: string, width: number, height: number): string {
+export function getImageUrl(
+  imageId: string,
+  width: number,
+  height: number,
+  mode?: string | null,
+): string {
   const cockpitUrl = process.env.COCKPIT_API_URL || ''
-  return `${cockpitUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1`
+  return `${cockpitUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1${mode ? `&m=${mode}` : ''}`
 }

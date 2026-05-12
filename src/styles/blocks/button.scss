@@ -17,7 +17,12 @@
 
   cursor: pointer;
 
-  transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+
+  &:focus-visible {
+    outline: 2px solid $accent-add-bg;
+    outline-offset: 2px;
+  }
 
   @media (max-width: $tablet-min-width) {
     padding: 10px 20px;
@@ -30,6 +35,11 @@
     &:active {
       opacity: 0.6;
     }
+  }
+
+  &--default {
+    background-color: $accent-light-bg;
+    border: 1px dashed $accent-add-bg;
   }
 
   &--accent {

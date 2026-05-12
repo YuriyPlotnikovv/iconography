@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import Link from 'next/link'
 import type { MenuItem } from '@/types/types'
-import { menuItems } from '@/const/const'
+import { MENU_ITEMS } from '@/const/const'
 import menuStyles from './Menu.module.scss'
 
 type MenuProps = {
@@ -25,7 +25,7 @@ export default function Menu({
 
   return (
     <ul className={clsx(addClass, menuStyles.menu)}>
-      {menuItems.map((menuItem: MenuItem, index) => {
+      {MENU_ITEMS.map((menuItem: MenuItem, index) => {
         const isActive =
           menuItem.href === '/' ? currentPath === '/' : currentPath.startsWith(menuItem.href)
 

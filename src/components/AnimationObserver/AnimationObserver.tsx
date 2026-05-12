@@ -1,15 +1,15 @@
 'use client'
 
 import { useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 export default function AnimationObserver(): null {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   useEffect(() => {
     let observer: IntersectionObserver | null = null
 
-    // rAF ensures DOM has fully updated after Next.js navigation
     const raf = requestAnimationFrame(() => {
       const elements = document.querySelectorAll<HTMLElement>('[data-animate]:not(.is-visible)')
 
@@ -44,7 +44,7 @@ export default function AnimationObserver(): null {
       cancelAnimationFrame(raf)
       observer?.disconnect()
     }
-  }, [pathname])
+  }, [pathname, searchParams])
 
   return null
 }

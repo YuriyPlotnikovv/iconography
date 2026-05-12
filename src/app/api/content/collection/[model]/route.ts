@@ -21,7 +21,6 @@ export async function GET(
   try {
     const { model } = await params
     const searchParams = request.nextUrl.searchParams
-
     const options: CockpitCollectionOptions = {}
 
     if (searchParams.get('locale')) {
@@ -58,7 +57,13 @@ export async function GET(
 
     const data = await cockpit.getCollection(model, options)
 
-    return Response.json(data, {
+    const entries: unknown[] = Array.isArray(data)
+      ? data
+      : Array.isArray(data?.data)
+        ? data.data
+        : []
+
+    return Response.json(entries, {
       headers: {
         'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },

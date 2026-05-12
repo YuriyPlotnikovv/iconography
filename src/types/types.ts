@@ -36,6 +36,10 @@ export type ReviewItem = {
   stars: number
   name: string
   review: string
+  photos?: {
+    thumb: string
+    full: string
+  }[]
 }
 
 export type FaqItem = {
@@ -131,6 +135,7 @@ export type ReviewFromServer = {
   review: string
   stars: number
   date: string
+  photos?: ImageItem[]
 }
 
 export type MasterFromServer = {

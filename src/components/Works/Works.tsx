@@ -1,4 +1,4 @@
-import { JSX } from 'react'
+import { JSX, ReactNode } from 'react'
 import { CardItem } from '@/types/types'
 import EmptySection from '@/components/EmptySection/EmptySection'
 import Card from '@/components/Card/Card'
@@ -7,9 +7,10 @@ import clsx from 'clsx'
 
 type WorksProps = {
   worksList: CardItem[]
+  children?: ReactNode
 }
 
-export default function Works({ worksList }: WorksProps): JSX.Element {
+export default function Works({ worksList, children }: WorksProps): JSX.Element {
   return worksList.length > 0 ? (
     <section className={clsx('section', worksStyles['works'])}>
       <div className="container">
@@ -29,6 +30,8 @@ export default function Works({ worksList }: WorksProps): JSX.Element {
             )
           })}
         </ul>
+
+        {children}
       </div>
     </section>
   ) : (

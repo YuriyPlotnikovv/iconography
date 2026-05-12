@@ -1,6 +1,5 @@
 interface CockpitOptions {
   locale?: string
-  // filter values can be string, number, boolean or complex objects (e.g. { field: value })
   filter?: Record<string, unknown>
   sort?: Record<string, number>
   limit?: number
@@ -23,8 +22,8 @@ class CockpitClient {
 
     try {
       return await this.cockpitFetch(endpoint)
-    } catch (e) {
-      console.error('Cockpit getSingleItem error', e)
+    } catch (err) {
+      console.error('[Cockpit] getSingleItem error', err)
       return null
     }
   }
@@ -35,8 +34,8 @@ class CockpitClient {
 
     try {
       return await this.cockpitFetch(endpoint)
-    } catch (e) {
-      console.error('Cockpit getCollection error', e)
+    } catch (err) {
+      console.error('[Cockpit] getCollection error', err)
       return []
     }
   }
@@ -47,16 +46,12 @@ class CockpitClient {
 
     try {
       return await this.cockpitFetch(endpoint)
-    } catch (e) {
-      console.error('Cockpit getCollectionItem error', e)
+    } catch (err) {
+      console.error('[Cockpit] getCollectionItem error', err)
       return null
     }
   }
 
-  /**
-   * Fetch single item from a collection by arbitrary field (e.g. slug)
-   * Returns first matched item or null
-   */
   async getCollectionItemByField(
     modelId: string,
     field: string,
@@ -69,8 +64,8 @@ class CockpitClient {
 
       if (Array.isArray(items) && items.length > 0) return items[0] as unknown
       return null
-    } catch (e) {
-      console.error('Cockpit getCollectionItemByField error', e)
+    } catch (err) {
+      console.error('[Cockpit] getCollectionItemByField error', err)
       return null
     }
   }
@@ -81,8 +76,8 @@ class CockpitClient {
 
     try {
       return await this.cockpitFetch(endpoint)
-    } catch (e) {
-      console.error('Cockpit getTree error', e)
+    } catch (err) {
+      console.error('[Cockpit] getTree error', err)
       return null
     }
   }
@@ -95,10 +90,54 @@ class CockpitClient {
         method: 'POST',
         body: JSON.stringify({ data }),
       })
-    } catch (e) {
-      console.error(`[Cockpit] createItem error in ${modelId}:`, e)
+    } catch (err) {
+      console.error(`[Cockpit] createItem error in ${modelId}:`, err)
       return null
     }
+  }
+
+  private async uploadSingleAsset(file: File): Promise<Record<string, unknown> | null> {
+    const formData = new FormData()
+    const folder = '6a00a163c6c8763d26aad9a3'
+
+    formData.append('file', file, file.name)
+
+    try {
+      const url = `${this.baseUrl.replace(/\/$/, '')}/api/upload?folder=${folder}`
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'api-key': this.apiKey },
+        body: formData,
+      })
+
+      if (!response.ok) {
+        console.error(`[Cockpit] uploadSingleAsset error: ${response.statusText}`)
+        return null
+      }
+
+      const result = await response.json()
+      const assets = result?.asset?.assets as Array<Record<string, unknown>> | undefined
+
+      if (Array.isArray(assets) && assets.length > 0) return assets[0]
+
+      return null
+    } catch (err) {
+      console.error(`[Cockpit] uploadSingleAsset error for "${file.name}":`, err)
+      return null
+    }
+  }
+
+  async uploadAssets(files: File[]): Promise<Record<string, unknown>[]> {
+    const assets: Record<string, unknown>[] = []
+
+    for (const file of files) {
+      const asset = await this.uploadSingleAsset(file)
+      if (asset) {
+        assets.push(asset)
+      }
+    }
+
+    return assets
   }
 
   getImageUrl(imageId: string, width: number, height: number) {
@@ -121,7 +160,7 @@ class CockpitClient {
 
   private async cockpitFetch(endpoint: string, options: RequestInit = {}) {
     if (!this.baseUrl) {
-      throw new Error('Cockpit base URL is not configured. Set COCKPIT_API_URL in environment')
+      throw new Error('[Cockpit] base URL is not configured. Set COCKPIT_API_URL in environment')
     }
 
     const url = `${this.baseUrl.replace(/\/$/, '')}/api/${endpoint}`
@@ -137,7 +176,7 @@ class CockpitClient {
     const response = await fetch(url, config)
 
     if (!response.ok) {
-      throw new Error(`Cockpit error: ${response.statusText}`)
+      throw new Error(`[Cockpit] error: ${response.statusText}`)
     }
 
     return response.json()
