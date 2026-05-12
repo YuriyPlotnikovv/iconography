@@ -8,7 +8,7 @@ import inStockStyles from './InStock.module.scss'
 import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function InStock(): Promise<JSX.Element | null> {
-  const worksData: WorkFromServer[] = await fetchCollection('works', {
+  const worksData: WorkFromServer[] = await fetchCollection<WorkFromServer>('works', {
     filter: { in_stock: true },
     sort: { date: -1 },
   })

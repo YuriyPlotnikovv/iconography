@@ -7,7 +7,7 @@ import newsStyles from './News.module.scss'
 import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function News(): Promise<JSX.Element | null> {
-  const newsData: NewsFromServer[] = await fetchCollection('news', {
+  const newsData: NewsFromServer[] = await fetchCollection<NewsFromServer>('news', {
     sort: { date: -1 },
     limit: 10,
   })

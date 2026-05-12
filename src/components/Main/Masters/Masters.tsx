@@ -8,7 +8,7 @@ import mastersStyles from './Masters.module.scss'
 import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function Masters(): Promise<JSX.Element | null> {
-  const mastersData: MasterFromServer[] = await fetchCollection('masters', {
+  const mastersData: MasterFromServer[] = await fetchCollection<MasterFromServer>('masters', {
     sort: { sort: 1 },
   })
 

@@ -4,12 +4,13 @@ import clsx from 'clsx'
 import Social from '@/components/Social/Social'
 import FormContacts from '@/components/Forms/FormContacts/FormContacts'
 import YandexMap from '@/components/YandexMap/YandexMap'
-import { MainInfo } from '@/types/types'
+import { MainInfoFromServer } from '@/types/types'
 import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import { createEmailLink, createPhoneLink } from '@/functions/functions'
 
 export default async function ContactsPage(): Promise<JSX.Element | null> {
-  const contactsInfo: MainInfo | null = await fetchSingleton<MainInfo>('maininfo')
+  const contactsInfo: MainInfoFromServer | null =
+    await fetchSingleton<MainInfoFromServer>('maininfo')
 
   if (!contactsInfo) {
     return null

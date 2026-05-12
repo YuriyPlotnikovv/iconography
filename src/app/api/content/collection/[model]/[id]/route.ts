@@ -30,7 +30,7 @@ export async function GET(
 
     const field = searchParams.get('field')
 
-    let data
+    let data: unknown
 
     if (field && field !== '_id') {
       data = await cockpit.getCollectionItemByField(model, field, id, options)

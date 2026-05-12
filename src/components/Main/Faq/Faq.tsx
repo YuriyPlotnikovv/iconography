@@ -7,7 +7,7 @@ import { fetchCollection } from '@/lib/api-client'
 import { createSanitizedHTML, stripHtml } from '@/functions/functions'
 
 export default async function Faq(): Promise<JSX.Element | null> {
-  const faqData: FaqFromServer[] = await fetchCollection('faq', {
+  const faqData: FaqFromServer[] = await fetchCollection<FaqFromServer>('faq', {
     sort: { sort: 1 },
   })
 

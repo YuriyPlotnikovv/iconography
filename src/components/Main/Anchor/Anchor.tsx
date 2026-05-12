@@ -4,40 +4,14 @@ import React, { JSX, useEffect, useState } from 'react'
 import anchorStyles from './Anchor.module.scss'
 import { MenuItem } from '@/types/types'
 import clsx from 'clsx'
-
-const anchorLinks: MenuItem[] = [
-  {
-    label: 'Наши мастера',
-    href: '#masters',
-  },
-  {
-    label: 'Процесс сотворения образа',
-    href: '#process',
-  },
-  {
-    label: 'Категории икон',
-    href: '#categories',
-  },
-  {
-    label: 'Расчёт стоимости',
-    href: '#calculation',
-  },
-  {
-    label: 'Реставрация',
-    href: '#restoration',
-  },
-  {
-    label: 'Вопрос-ответ',
-    href: '#faq',
-  },
-]
+import { ANCHOR_LINKS } from '@/const/const'
 
 export default function Anchor(): JSX.Element {
   const [visibleLinks, setVisibleLinks] = useState<MenuItem[]>([])
 
   useEffect(() => {
     const checkLinks = () => {
-      const present = anchorLinks.filter((link) => {
+      const present = ANCHOR_LINKS.filter((link) => {
         if (link.href && link.href.startsWith('#')) {
           const id = link.href.slice(1)
           try {

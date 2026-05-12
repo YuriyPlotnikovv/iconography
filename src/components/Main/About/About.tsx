@@ -4,11 +4,11 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { fetchSingleton, getImageUrl } from '@/lib/api-client'
-import { MainInfo } from '@/types/types'
+import { MainInfoFromServer } from '@/types/types'
 import { createSanitizedHTML } from '@/functions/functions'
 
 export default async function About(): Promise<JSX.Element | null> {
-  const mainInfo: MainInfo | null = await fetchSingleton('maininfo')
+  const mainInfo: MainInfoFromServer | null = await fetchSingleton<MainInfoFromServer>('maininfo')
 
   if (!mainInfo) {
     return null

@@ -12,12 +12,7 @@ import {
   ReviewFormData,
   ApplicationFormData,
 } from '@/lib/schemas'
-
-export type FormState = {
-  success: boolean
-  message: string
-  errors?: Record<string, string>
-}
+import type { FormState } from '@/types/types'
 
 /**
  * Получение IP адреса

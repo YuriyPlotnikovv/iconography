@@ -16,9 +16,7 @@ import formStyles from '../../../styles/modules/form.module.scss'
 import DropZone, { DropZoneRef } from '@/components/DropZone/DropZone'
 import { reviewFormSchema, validateFormField } from '@/lib/schemas'
 import { z } from 'zod'
-
-const STARS_COUNT = 5
-const MAX_PHOTOS = 5
+import { STARS_COUNT, MAX_PHOTOS } from '@/const/const'
 
 export default function FormReviews(): JSX.Element {
   const [state, formAction] = useActionState(submitReview, null)

@@ -22,12 +22,12 @@ export type CardItem = {
   alt: string
 }
 
-export type ProcessItem = {
+export type ProcessFromServer = {
   _id: string
   title: string
   description: string
   image: ImageItem
-  alt: string
+  alt?: string
 }
 
 export type ReviewItem = {
@@ -40,12 +40,6 @@ export type ReviewItem = {
     thumb: string
     full: string
   }[]
-}
-
-export type FaqItem = {
-  id: number
-  question: string
-  answer: string
 }
 
 export type SlideItem = {
@@ -68,7 +62,7 @@ export type ImageItem = {
   height: string
 }
 
-export type MainInfo = {
+export type MainInfoFromServer = {
   title: string
   description: string
   logo: ImageItem
@@ -83,8 +77,8 @@ export type MainInfo = {
   max: string
 }
 
-export type AdvantageItem = {
-  _id: number
+export type AdvantageFromServer = {
+  _id: string
   title: string
   description: string
   icon: ImageItem
@@ -196,4 +190,10 @@ export type MainSliderFromServer = {
   description?: string
   link?: string
   image: ImageItem
+}
+
+export type FormState = {
+  success: boolean
+  message: string
+  errors?: Record<string, string>
 }

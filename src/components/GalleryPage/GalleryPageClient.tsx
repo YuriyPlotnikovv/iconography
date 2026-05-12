@@ -15,16 +15,10 @@ import type { LightGallery } from 'lightgallery/lightgallery'
 import { GalleryItemForClient } from '@/types/types'
 import galleryPageStyles from './GalleryPage.module.scss'
 import GalleryBadge from './GalleryBadge'
+import { GALLERY_BREAKPOINT_COLUMNS } from '@/const/const'
 
 type GalleryPageClientProps = {
   items: GalleryItemForClient[]
-}
-
-const breakpointColumnsObj = {
-  default: 4,
-  1200: 3,
-  768: 2,
-  480: 1,
 }
 
 export default function GalleryPageClient({ items }: GalleryPageClientProps): JSX.Element {
@@ -104,7 +98,7 @@ export default function GalleryPageClient({ items }: GalleryPageClientProps): JS
       <div className="container">
         <Masonry
           className={galleryPageStyles['gallery__masonry']}
-          breakpointCols={breakpointColumnsObj}
+          breakpointCols={GALLERY_BREAKPOINT_COLUMNS}
           columnClassName={galleryPageStyles['gallery__masonry-column']}
         >
           {items.map((item, index) => {

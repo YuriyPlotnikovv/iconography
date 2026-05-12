@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import notfoundStyles from './NotFound.module.scss'
 
 export default function NotFound(): JSX.Element {
-  const stars = []
+  const stars: JSX.Element[] = []
 
   for (let i = 1; i <= 100; i++) {
     stars.push(<div className={notfoundStyles['not-found__star']} key={i}></div>)
