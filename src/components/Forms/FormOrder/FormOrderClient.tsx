@@ -241,7 +241,6 @@ export default function FormOrderClient({
               const formData = new FormData(formRef.current)
               formData.set('smart-token', token)
 
-              // Добавляем файлы из DropZone вручную
               const files = dropZoneRef.current?.getFiles() ?? []
               files.forEach((file) => formData.append('photos', file))
 

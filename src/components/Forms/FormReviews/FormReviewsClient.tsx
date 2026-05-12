@@ -58,6 +58,9 @@ export default function FormReviewsClient({ agreementUrl, policyUrl }: Props): J
               const formData = new FormData(formRef.current)
               formData.set('smart-token', token)
 
+              const files = dropZoneRef.current?.getFiles() ?? []
+              files.forEach((file) => formData.append('photos', file))
+
               startTransition(() => {
                 formAction(formData)
               })

@@ -96,14 +96,17 @@ class CockpitClient {
     }
   }
 
-  private async uploadSingleAsset(file: File): Promise<Record<string, unknown> | null> {
+  private async uploadSingleAsset(
+    file: File,
+    folder?: string | null,
+  ): Promise<Record<string, unknown> | null> {
     const formData = new FormData()
-    const folder = '6a00a163c6c8763d26aad9a3'
 
     formData.append('file', file, file.name)
 
     try {
-      const url = `${this.baseUrl.replace(/\/$/, '')}/api/upload?folder=${folder}`
+      const url = `${this.baseUrl.replace(/\/$/, '')}/api/upload` + (folder ? `?folder=${folder}` : '')
+      console.log(`Uploading ${url} to ${folder}`, formData)
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'api-key': this.apiKey },
@@ -127,11 +130,11 @@ class CockpitClient {
     }
   }
 
-  async uploadAssets(files: File[]): Promise<Record<string, unknown>[]> {
+  async uploadAssets(files: File[], folder?: string | null): Promise<Record<string, unknown>[]> {
     const assets: Record<string, unknown>[] = []
 
     for (const file of files) {
-      const asset = await this.uploadSingleAsset(file)
+      const asset = await this.uploadSingleAsset(file, folder)
       if (asset) {
         assets.push(asset)
       }
