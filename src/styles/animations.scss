@@ -83,3 +83,14 @@
     opacity: 1;
   }
 }
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(calc(100% + 30px));
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}

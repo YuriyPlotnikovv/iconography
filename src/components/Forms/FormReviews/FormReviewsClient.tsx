@@ -17,6 +17,7 @@ import DropZone, { DropZoneRef } from '@/components/DropZone/DropZone'
 import { reviewFormSchema, validateFormField } from '@/lib/schemas'
 import { z } from 'zod'
 import { STARS_COUNT, MAX_PHOTOS } from '@/const/const'
+import Link from 'next/link'
 
 type Props = {
   agreementUrl: string
@@ -374,23 +375,23 @@ export default function FormReviewsClient({ agreementUrl, policyUrl }: Props): J
               />
 
               <span className={formStyles['form__label-text']}>
-                <a
+                <Link
                   className={formStyles['form__label-link']}
                   href={agreementUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Я согласен
-                </a>
+                </Link>
                 &nbsp;на обработку персональных данных в соответствии с условиями&nbsp;
-                <a
+                <Link
                   className={formStyles['form__label-link']}
                   href={policyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Политики обработки персональных данных
-                </a>
+                </Link>
               </span>
 
               <span className={formStyles['form__error']} aria-live="polite">

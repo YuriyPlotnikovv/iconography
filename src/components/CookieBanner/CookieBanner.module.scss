@@ -1,0 +1,200 @@
+@use '../../styles/variables' as *;
+@use '../../styles/animations';
+
+.banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  z-index: 1000;
+
+  width: calc(100% - 40px);
+  max-width: 600px;
+  padding: 20px;
+
+  font-size: 12px;
+  line-height: 1.5;
+  color: $base-text-color;
+
+  background: $base-bg;
+  box-shadow: $cardShadow;
+  border-radius: 12px;
+
+  transform: translateX(-50%) translateY(calc(100% + 30px));
+  animation: 1s slideUp 0.6s ease-in-out forwards;
+}
+
+.banner__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+
+  font-size: 14px;
+  color: $add-text-color;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
+
+  transition: color 0.3s ease-in-out;
+
+  &:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid $accent-add-bg;
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: $accent-add-bg;
+    }
+  }
+}
+
+.banner__text {
+  margin-bottom: 14px;
+}
+
+.banner__link {
+  color: $accent-add-bg;
+
+  border-bottom: 1px solid $accent-add-bg;
+
+  transition: opacity 0.3s ease-in-out;
+
+  &:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid $accent-add-bg;
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
+.banner__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  @media (max-width: $mobile-mid-width - 100) {
+    flex-direction: column;
+  }
+}
+
+.banner__button {
+  margin: 0;
+  padding: 7px 14px;
+
+  font-size: 12px;
+
+  border-radius: 8px;
+
+  @media (max-width: $mobile-mid-width - 100) {
+    width: 100%;
+  }
+}
+
+.banner__categories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.banner__category {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  padding-left: 30px;
+
+  cursor: pointer;
+
+  &::before {
+    position: absolute;
+    top: 3px;
+    left: 0;
+
+    width: 20px;
+    height: 20px;
+
+    background-color: $accent-light-bg;
+    border: 1px solid $form-bg;
+    border-radius: 4px;
+
+    transition:
+      border-color 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out;
+
+    content: '';
+  }
+
+  &::after {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+
+    font-size: 18px;
+    line-height: 1;
+
+    color: $base-text-color;
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease-in-out;
+
+    content: '✓';
+  }
+
+  &:has(input[type='checkbox']:checked)::before {
+    border-color: $accent-add-bg;
+  }
+
+  &:has(input[type='checkbox']:checked)::after {
+    opacity: 1;
+  }
+
+  &:has(input[type='checkbox']:disabled) {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  &:has(input[type='checkbox']:focus-visible)::before {
+    box-shadow: 0 0 0 3px rgba($accent-add-bg, 0.35);
+    border-color: $accent-add-bg;
+  }
+
+  @media (hover: hover) {
+    &:not(:has(input[type='checkbox']:disabled)):hover::before {
+      border-color: $accent-add-bg;
+    }
+  }
+}
+
+.banner__category-title {
+  display: block;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: $base-text-color;
+}
+
+.banner__category-description {
+  display: block;
+
+  font-size: 12px;
+  color: $add-text-color;
+}

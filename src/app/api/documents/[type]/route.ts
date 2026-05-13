@@ -4,6 +4,7 @@ import cockpit from '@/lib/CockpitAPI'
 const DOCUMENT_TITLES: Record<string, string> = {
   agreement: 'Согласие на обработку персональных данных - Иконописная Артель',
   policy: 'Политика обработки персональных данных - Иконописная Артель',
+  cookie: 'Политика использования файлов cookie - Иконописная Артель',
 }
 
 /**
