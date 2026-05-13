@@ -2,10 +2,9 @@ import { JSX } from 'react'
 import clsx from 'clsx'
 import { ImageItem, SlideItem } from '@/types/types'
 import { createSanitizedHTML } from '@/functions/functions'
-import SliderDetail from '@/components/SliderDetail/SliderDetail'
 import detailStyles from './Detail.module.scss'
 import { getImageUrl } from '@/lib/api-client'
-import Image from 'next/image'
+import GalleryBlock from '@/components/GalleryBlock/GalleryBlock'
 
 type DetailProps = {
   title: string
@@ -21,6 +20,7 @@ export default function Detail({
   description,
 }: DetailProps): JSX.Element {
   const src = getImageUrl(image._id, 800, 500)
+  const fullSrc = getImageUrl(image._id, 1600, 1000)
   const alt = image.alt ?? title
 
   return (
@@ -35,27 +35,12 @@ export default function Detail({
           />
         </div>
 
-        {slidesList.length > 0 && (
-          <div className={detailStyles['detail__slider']} data-animate="scale-in" data-stagger="1">
-            <SliderDetail items={slidesList} />
-          </div>
-        )}
-
-        {slidesList.length === 0 && image && (
-          <div
-            className={detailStyles['detail__image-wrapper']}
-            data-animate="scale-in"
-            data-stagger="1"
-          >
-            <Image
-              className={detailStyles['detail__image']}
-              src={src}
-              sizes="(max-width: 768px) 100vw, 40vw"
-              alt={alt}
-              fill
-            />
-          </div>
-        )}
+        <GalleryBlock
+          slidesList={slidesList}
+          imageSrc={src}
+          imageFullSrc={fullSrc}
+          imageAlt={alt}
+        />
       </div>
     </section>
   )

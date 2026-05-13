@@ -2,11 +2,10 @@ import { JSX } from 'react'
 import clsx from 'clsx'
 import { ImageItem, SlideItem } from '@/types/types'
 import { createSanitizedHTML } from '@/functions/functions'
-import SliderDetail from '@/components/SliderDetail/SliderDetail'
 import aboutPageStyles from './AboutPage.module.scss'
 import { fetchSingleton, getImageUrl } from '@/lib/api-client'
-import Image from 'next/image'
 import EmptySection from '@/components/EmptySection/EmptySection'
+import GalleryBlock from '@/components/GalleryBlock/GalleryBlock'
 
 type AboutPageProps = {
   title: string
@@ -30,6 +29,7 @@ export default async function AboutPage(): Promise<JSX.Element> {
   }))
 
   const imageSrc = about.image ? getImageUrl(about.image._id, 800, 500) : ''
+  const imageFullSrc = about.image ? getImageUrl(about.image._id, 1600, 1000) : ''
   const alt = about.image?.alt ?? title
 
   return (
@@ -44,31 +44,12 @@ export default async function AboutPage(): Promise<JSX.Element> {
           />
         </div>
 
-        {slidesList.length > 0 && (
-          <div
-            className={aboutPageStyles['about__slider']}
-            data-animate="scale-in"
-            data-stagger="1"
-          >
-            <SliderDetail items={slidesList} />
-          </div>
-        )}
-
-        {slidesList.length === 0 && imageSrc && (
-          <div
-            className={aboutPageStyles['about__image-wrapper']}
-            data-animate="scale-in"
-            data-stagger="1"
-          >
-            <Image
-              className={aboutPageStyles['about__image']}
-              src={imageSrc}
-              sizes="(max-width: 768px) 100vw, 40vw"
-              alt={alt}
-              fill
-            />
-          </div>
-        )}
+        <GalleryBlock
+          slidesList={slidesList}
+          imageSrc={imageSrc}
+          imageFullSrc={imageFullSrc}
+          imageAlt={alt}
+        />
       </div>
     </section>
   )
