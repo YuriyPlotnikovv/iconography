@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import { submitMessage } from '@/actions/forms'
 import { messageFormSchema, validateFormField } from '@/lib/schemas'
 import { z } from 'zod'
+import Link from 'next/link'
 
 type Props = {
   agreementUrl: string
@@ -265,23 +266,23 @@ export default function FormContactsClient({ agreementUrl, policyUrl }: Props): 
               />
 
               <span className={formStyles['form__label-text']}>
-                <a
+                <Link
                   className={formStyles['form__label-link']}
                   href={agreementUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Я согласен
-                </a>
+                </Link>
                 &nbsp;на обработку персональных данных в соответствии с условиями&nbsp;
-                <a
+                <Link
                   className={formStyles['form__label-link']}
                   href={policyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Политики обработки персональных данных
-                </a>
+                </Link>
               </span>
 
               <span className={formStyles['form__error']} aria-live="polite">

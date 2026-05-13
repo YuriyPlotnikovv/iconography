@@ -20,6 +20,7 @@ import { applicationFormSchema, validateFormField } from '@/lib/schemas'
 import type { CategoryFromServer, PriceItem, GoldTypeValue } from '@/types/types'
 import { GOLD_TYPE_OPTIONS } from '@/const/const'
 import DropZone, { DropZoneRef } from '@/components/DropZone/DropZone'
+import Link from 'next/link'
 
 type Props = {
   categories: CategoryFromServer[]
@@ -683,23 +684,23 @@ export default function FormOrderClient({
               />
 
               <span className={formStyles['form__label-text']}>
-                <a
+                <Link
                   className={formStyles['form__label-link']}
                   href={agreementUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Я согласен
-                </a>
+                </Link>
                 &nbsp;на обработку персональных данных в соответствии с условиями&nbsp;
-                <a
+                <Link
                   className={formStyles['form__label-link']}
                   href={policyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Политики обработки персональных данных
-                </a>
+                </Link>
               </span>
 
               <span className={formStyles['form__error']} aria-live="polite">

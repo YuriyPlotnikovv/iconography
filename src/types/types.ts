@@ -90,6 +90,7 @@ export type MainInfoFromServer = {
   max: string
   agreement: AssetItem
   policy: AssetItem
+  cookie: AssetItem
 }
 
 export type AdvantageFromServer = {
@@ -221,3 +222,6 @@ export interface ImageOptions {
   mime?: ImageMime
   quality?: number
 }
+
+export type CookieCategoryId = 'necessary' | 'functional' | 'statistical' | 'marketing'
+export type CookieConsent = Record<CookieCategoryId, boolean>

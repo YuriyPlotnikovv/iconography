@@ -1,4 +1,4 @@
-import { MenuItem } from '@/types/types'
+import { CookieCategoryId, MenuItem } from '@/types/types'
 
 export const ITEMS_PER_PAGE = 12
 export const REVIEWS_PER_PAGE = 1
@@ -83,5 +83,40 @@ export const ANCHOR_LINKS: MenuItem[] = [
   {
     label: 'Вопрос-ответ',
     href: '#faq',
+  },
+]
+
+export const COOKIE_CATEGORIES: {
+  id: CookieCategoryId
+  label: string
+  description: string
+  required: boolean
+}[] = [
+  {
+    id: 'necessary',
+    label: 'Обязательные cookie',
+    description: 'Обеспечивают базовую функциональность сайта',
+    required: true,
+  },
+  {
+    id: 'functional',
+    label: 'Функциональные cookie',
+    description:
+      'Адаптируют сайт к предпочтениям пользователя: запоминают выбранный язык, размер шрифта, тему оформления',
+    required: false,
+  },
+  {
+    id: 'statistical',
+    label: 'Статистические cookie',
+    description:
+      'Собирают данные о том, как пользователи используют сайт: какие страницы посещают, сколько времени проводят на них',
+    required: false,
+  },
+  {
+    id: 'marketing',
+    label: 'Маркетинговые cookie',
+    description:
+      'Отслеживают поведение пользователей на сайте для предоставления персонализированной рекламы',
+    required: false,
   },
 ]
