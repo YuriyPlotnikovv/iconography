@@ -105,7 +105,8 @@ class CockpitClient {
     formData.append('file', file, file.name)
 
     try {
-      const url = `${this.baseUrl.replace(/\/$/, '')}/api/upload` + (folder ? `?folder=${folder}` : '')
+      const url =
+        `${this.baseUrl.replace(/\/$/, '')}/api/upload` + (folder ? `?folder=${folder}` : '')
 
       const response = await fetch(url, {
         method: 'POST',

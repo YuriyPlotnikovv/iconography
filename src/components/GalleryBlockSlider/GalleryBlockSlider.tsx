@@ -15,19 +15,23 @@ import { SlideItem } from '@/types/types'
 
 import Image from 'next/image'
 import sliderStyles from '../../styles/modules/slider.module.scss'
-import sliderDetailStyles from './SliderDetail.module.scss'
+import galleryBlockSliderStyles from './GalleryBlockSlider.module.scss'
 
-type SliderDetailProps = {
+type GalleryBlockSliderProps = {
   items: SlideItem[]
+  onSlideClick?: (index: number) => void
 }
 
-export default function SliderDetail({ items }: SliderDetailProps): JSX.Element {
+export default function GalleryBlockSlider({
+  items,
+  onSlideClick,
+}: GalleryBlockSliderProps): JSX.Element {
   const [prevEl, setPrevEl] = useState<HTMLButtonElement | null>(null)
   const [nextEl, setNextEl] = useState<HTMLButtonElement | null>(null)
   const [paginationEl, setPaginationEl] = useState<HTMLDivElement | null>(null)
 
   return (
-    <div className={clsx(sliderStyles['slider'], sliderDetailStyles['slider-detail'])}>
+    <div className={clsx(sliderStyles['slider'], galleryBlockSliderStyles['slider-detail'])}>
       <Swiper
         className={sliderStyles['slider__list']}
         modules={[Navigation, Pagination, A11y, Autoplay]}
@@ -54,21 +58,55 @@ export default function SliderDetail({ items }: SliderDetailProps): JSX.Element 
           } as PaginationOptions
         }
       >
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
             <SwiperSlide
               className={clsx(
                 sliderStyles['slider__item'],
-                sliderDetailStyles['slider-detail__item'],
+                galleryBlockSliderStyles['slider-detail__item'],
               )}
-              key={item.id}
+              key={item.id + index}
             >
-              <Image
-                className={sliderDetailStyles['slider-detail__item-image']}
-                src={item.image}
-                alt={item.alt}
-                fill
-              />
+              {onSlideClick ? (
+                <button
+                  type="button"
+                  className={galleryBlockSliderStyles['slider-detail__item-btn']}
+                  onClick={() => onSlideClick(index)}
+                  aria-label={`Открыть изображение ${index + 1}`}
+                >
+                  <Image
+                    className={galleryBlockSliderStyles['slider-detail__item-image']}
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                  />
+                  <span className={galleryBlockSliderStyles['slider-detail__item-overlay']}>
+                    <svg
+                      className={galleryBlockSliderStyles['slider-detail__item-overlay-icon']}
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                      <line x1="11" y1="8" x2="11" y2="14" />
+                      <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg>
+                  </span>
+                </button>
+              ) : (
+                <Image
+                  className={galleryBlockSliderStyles['slider-detail__item-image']}
+                  src={item.image}
+                  alt={item.alt}
+                  fill
+                />
+              )}
             </SwiperSlide>
           )
         })}
@@ -77,7 +115,7 @@ export default function SliderDetail({ items }: SliderDetailProps): JSX.Element 
           ref={setPaginationEl}
           className={clsx(
             sliderStyles['slider__pagination'],
-            sliderDetailStyles['slider-detail__pagination'],
+            galleryBlockSliderStyles['slider-detail__pagination'],
           )}
         ></div>
 
@@ -85,8 +123,8 @@ export default function SliderDetail({ items }: SliderDetailProps): JSX.Element 
           ref={setPrevEl}
           className={clsx(
             sliderStyles['slider__navigation-item'],
-            sliderDetailStyles['slider-detail__navigation-item'],
-            sliderDetailStyles['slider-detail__navigation-item--prev'],
+            galleryBlockSliderStyles['slider-detail__navigation-item'],
+            galleryBlockSliderStyles['slider-detail__navigation-item--prev'],
           )}
           aria-label="Предыдущий слайд"
         >
@@ -102,8 +140,8 @@ export default function SliderDetail({ items }: SliderDetailProps): JSX.Element 
           ref={setNextEl}
           className={clsx(
             sliderStyles['slider__navigation-item'],
-            sliderDetailStyles['slider-detail__navigation-item'],
-            sliderDetailStyles['slider-detail__navigation-item--next'],
+            galleryBlockSliderStyles['slider-detail__navigation-item'],
+            galleryBlockSliderStyles['slider-detail__navigation-item--next'],
           )}
           aria-label="Следующий слайд"
         >
