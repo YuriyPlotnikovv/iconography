@@ -182,7 +182,7 @@ export default function FormContactsClient({ agreementUrl, policyUrl }: Props): 
               type="text"
               name="name"
               autoComplete="on"
-              placeholder="Имя"
+              placeholder="Имя *"
               required
               onBlur={(evt) => handleBlur('name', evt.target.value)}
             />
@@ -221,7 +221,7 @@ export default function FormContactsClient({ agreementUrl, policyUrl }: Props): 
               type="email"
               name="email"
               autoComplete="on"
-              placeholder="Email"
+              placeholder="Email *"
               required
               onBlur={(evt) => handleBlur('email', evt.target.value)}
             />
@@ -238,8 +238,10 @@ export default function FormContactsClient({ agreementUrl, policyUrl }: Props): 
               className={formStyles['form__input']}
               name="message"
               rows={5}
-              placeholder="Ваше сообщение"
+              placeholder="Сообщение *"
               autoComplete="off"
+              required
+              onBlur={(evt) => handleBlur('message', evt.target.value)}
             ></textarea>
 
             <span className={formStyles['form__error']} aria-live="polite">

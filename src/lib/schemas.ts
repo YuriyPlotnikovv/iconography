@@ -37,13 +37,13 @@ export const applicationFormSchema = z.object({
   message: z.string().min(1, 'Сообщение обязательно для заполнения'),
   category: z.string().optional(),
   size: z.string().optional(),
-  goldType: z.enum(['without_gold', 'all', 'halo']).optional(),
+  goldType: z.string().optional(),
   agreement: agreementField,
 })
 
 export type ApplicationFormData = z.infer<typeof applicationFormSchema>
 
-// Контакты (обратная связь → коллекция messages)
+// Контакты
 export const messageFormSchema = z.object({
   name: z.string().min(2, 'Имя должно содержать минимум 2 символа'),
   phone: phoneField,
@@ -51,7 +51,7 @@ export const messageFormSchema = z.object({
     .string()
     .min(1, 'Email обязателен для заполнения')
     .check(z.email('Некорректный формат email')),
-  message: z.string().optional(),
+  message: z.string().min(1, 'Сообщение обязательно для заполнения'),
   agreement: agreementField,
 })
 

@@ -11,6 +11,12 @@ export const MAX_PHOTOS = 5
 export const DEFAULT_MAX_FILES = 5
 export const DEFAULT_MAX_SIZE_MB = 5
 
+export const GOLD_TYPE_OPTIONS = [
+  { value: 'without_gold', label: 'Без золота' },
+  { value: 'all', label: 'Золотой фон и нимб' },
+  { value: 'halo', label: 'Только нимб' },
+] as const
+
 export const GALLERY_BREAKPOINT_COLUMNS = {
   default: 4,
   1200: 3,

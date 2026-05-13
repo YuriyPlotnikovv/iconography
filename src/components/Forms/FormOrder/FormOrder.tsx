@@ -5,7 +5,7 @@ import type { CategoryFromServer, PriceItem } from '@/types/types'
 
 export default async function FormOrder(): Promise<JSX.Element> {
   const [categories, prices] = await Promise.all([
-    fetchCollection<CategoryFromServer>('categories', { sort: { sort: 1 } }),
+    fetchCollection<CategoryFromServer>('category', { sort: { sort: 1 } }),
     fetchCollection<PriceItem>('price', { sort: { sort: 1 } }),
   ])
 
