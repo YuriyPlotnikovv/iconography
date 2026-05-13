@@ -1,3 +1,7 @@
+import { GOLD_TYPE_OPTIONS } from '@/const/const'
+
+export type GoldTypeValue = (typeof GOLD_TYPE_OPTIONS)[number]['value']
+
 export type PriceItem = {
   _id: string
   sort: number

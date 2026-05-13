@@ -3,7 +3,8 @@
 import { JSX, PointerEvent, KeyboardEvent, useEffect, useRef, useState, useMemo } from 'react'
 import formStyles from '../../../styles/modules/form.module.scss'
 import clsx from 'clsx'
-import type { PriceItem } from '@/types/types'
+import type { PriceItem, GoldTypeValue } from '@/types/types'
+import { GOLD_TYPE_OPTIONS } from '@/const/const'
 
 type Props = {
   prices: PriceItem[]
@@ -12,7 +13,7 @@ type Props = {
 export default function FormCalculationClient({ prices: initialPrices }: Props): JSX.Element {
   const prices: PriceItem[] = useMemo(() => initialPrices || [], [initialPrices])
   const [selectedId, setSelectedId] = useState<string>('')
-  const [goldType, setGoldType] = useState<'without_gold' | 'all' | 'halo'>('without_gold')
+  const [goldType, setGoldType] = useState<GoldTypeValue>('without_gold')
   const [calculated, setCalculated] = useState<string>('')
   const isLoading = false
   const error: string | null =
@@ -239,56 +240,25 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
           role="radiogroup"
           aria-label="Тип золочения"
         >
-          <label
-            ref={(el: HTMLLabelElement | null) => {
-              radioLabelRefs.current[0] = el
-            }}
-            className={formStyles['form__radio-option']}
-          >
-            <input
-              className="visually-hidden"
-              type="radio"
-              name="goldTypeSwitch"
-              value="without_gold"
-              checked={goldType === 'without_gold'}
-              onChange={() => setGoldType('without_gold')}
-            />
-            Без золота
-          </label>
-
-          <label
-            ref={(el: HTMLLabelElement | null) => {
-              radioLabelRefs.current[1] = el
-            }}
-            className={formStyles['form__radio-option']}
-          >
-            <input
-              className="visually-hidden"
-              type="radio"
-              name="goldTypeSwitch"
-              value="all"
-              checked={goldType === 'all'}
-              onChange={() => setGoldType('all')}
-            />
-            Золотой фон и нимб
-          </label>
-
-          <label
-            ref={(el: HTMLLabelElement | null) => {
-              radioLabelRefs.current[2] = el
-            }}
-            className={formStyles['form__radio-option']}
-          >
-            <input
-              className="visually-hidden"
-              type="radio"
-              name="goldTypeSwitch"
-              value="halo"
-              checked={goldType === 'halo'}
-              onChange={() => setGoldType('halo')}
-            />
-            Только нимб
-          </label>
+          {GOLD_TYPE_OPTIONS.map((opt, idx) => (
+            <label
+              key={opt.value}
+              ref={(el: HTMLLabelElement | null) => {
+                radioLabelRefs.current[idx] = el
+              }}
+              className={formStyles['form__radio-option']}
+            >
+              <input
+                className="visually-hidden"
+                type="radio"
+                name="goldTypeSwitch"
+                value={opt.value}
+                checked={goldType === opt.value}
+                onChange={() => setGoldType(opt.value)}
+              />
+              {opt.label}
+            </label>
+          ))}
 
           <span
             ref={radioIndicatorRef}

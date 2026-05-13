@@ -229,7 +229,7 @@ export default function FormReviewsClient({ agreementUrl, policyUrl }: Props): J
               type="text"
               name="name"
               autoComplete="on"
-              placeholder="Имя"
+              placeholder="Имя *"
               required
               onBlur={(evt) => handleBlur('name', evt.target.value)}
             />
@@ -268,7 +268,7 @@ export default function FormReviewsClient({ agreementUrl, policyUrl }: Props): J
               type="email"
               name="email"
               autoComplete="on"
-              placeholder="Email"
+              placeholder="Email *"
               required
               onBlur={(evt) => handleBlur('email', evt.target.value)}
             />
@@ -336,7 +336,7 @@ export default function FormReviewsClient({ agreementUrl, policyUrl }: Props): J
               })}
               name="review"
               rows={5}
-              placeholder="Ваш отзыв (минимум 50 символов)"
+              placeholder="Ваш отзыв * (минимум 50 символов)"
               autoComplete="off"
               required
               onBlur={(evt) => handleBlur('review', evt.target.value)}

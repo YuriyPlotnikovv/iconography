@@ -17,7 +17,8 @@ import { z } from 'zod'
 import formStyles from '../../../styles/modules/form.module.scss'
 import { submitApplication } from '@/actions/forms'
 import { applicationFormSchema, validateFormField } from '@/lib/schemas'
-import type { CategoryFromServer, PriceItem } from '@/types/types'
+import type { CategoryFromServer, PriceItem, GoldTypeValue } from '@/types/types'
+import { GOLD_TYPE_OPTIONS } from '@/const/const'
 import DropZone, { DropZoneRef } from '@/components/DropZone/DropZone'
 
 type Props = {
@@ -54,7 +55,8 @@ export default function FormOrderClient({
   const sizeOptionsRef = useRef<Array<HTMLLIElement | null>>([])
 
   // Радио-переключатель типа золочения
-  const [goldType, setGoldType] = useState<'without_gold' | 'all' | 'halo'>('without_gold')
+  const [goldType, setGoldType] = useState<GoldTypeValue>('without_gold')
+  const goldTypeLabel = GOLD_TYPE_OPTIONS.find((o) => o.value === goldType)?.label ?? ''
   const radioSwitchRef = useRef<HTMLDivElement | null>(null)
   const radioLabelRefs = useRef<Array<HTMLLabelElement | null>>([])
   const radioIndicatorRef = useRef<HTMLSpanElement | null>(null)
@@ -405,7 +407,7 @@ export default function FormOrderClient({
         <>
           <input type="hidden" name="category" value={selectedCategory} />
           <input type="hidden" name="size" value={selectedSizeLabel} />
-          <input type="hidden" name="goldType" value={goldType} />
+          <input type="hidden" name="goldType" value={goldTypeLabel} />
 
           <div className={formStyles['form__group']}>
             <h3 className={formStyles['form__group-title']}>Вид иконы</h3>
@@ -540,13 +542,7 @@ export default function FormOrderClient({
                   role="radiogroup"
                   aria-label="Тип золочения"
                 >
-                  {(
-                    [
-                      { value: 'without_gold', label: 'Без золота' },
-                      { value: 'all', label: 'Золотой фон и нимб' },
-                      { value: 'halo', label: 'Только нимб' },
-                    ] as const
-                  ).map((opt, idx) => (
+                  {GOLD_TYPE_OPTIONS.map((opt, idx) => (
                     <label
                       key={opt.value}
                       ref={(el: HTMLLabelElement | null) => {
