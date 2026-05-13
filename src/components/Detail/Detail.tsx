@@ -20,7 +20,7 @@ export default function Detail({
   description,
 }: DetailProps): JSX.Element {
   const src = getImageUrl(image._id, 800, 500)
-  const fullSrc = getImageUrl(image._id, 1600, 1000)
+  const fullSrc = getImageUrl(image._id, 1600, 1000, { mode: 'bestFit' })
   const alt = image.alt ?? title
 
   return (

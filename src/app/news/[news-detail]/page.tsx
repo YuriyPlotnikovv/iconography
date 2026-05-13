@@ -32,7 +32,9 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
     openGraph: {
       title: news.title,
       description,
-      images: news.image ? [{ url: getImageUrl(news.image._id, 1200, 630), alt: news.title }] : [],
+      images: news.image
+        ? [{ url: getImageUrl(news.image._id, 1200, 630, { mime: 'jpeg' }), alt: news.title }]
+        : [],
     },
     alternates: {
       canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/news/${news.slug || news._id}`,
@@ -72,7 +74,7 @@ export default async function Page({ params }: PageParams): Promise<JSX.Element>
   const slidesList: SlideItem[] =
     news.slider?.map((image) => ({
       id: image._id,
-      image: getImageUrl(image._id, 800, 800),
+      image: getImageUrl(image._id, 800, 500),
       alt: image.title || news.title,
     })) || []
 
@@ -81,7 +83,7 @@ export default async function Page({ params }: PageParams): Promise<JSX.Element>
     '@type': 'Article',
     headline: news.title,
     description: (news.content || news.description || '').replace(/<[^>]*>/g, '').slice(0, 160),
-    image: news.image ? getImageUrl(news.image._id, 1200, 630) : undefined,
+    image: news.image ? getImageUrl(news.image._id, 1200, 630, { mime: 'jpeg' }) : undefined,
     datePublished: news._created ? new Date(news._created * 1000).toISOString() : undefined,
     dateModified: news._modified ? new Date(news._modified * 1000).toISOString() : undefined,
     author: {

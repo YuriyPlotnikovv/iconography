@@ -57,7 +57,7 @@ export default function SliderMainClient({ slidesList }: SliderMainClientProps):
           } as PaginationOptions
         }
       >
-        {slidesList.map((slide) => {
+        {slidesList.map((slide, index) => {
           return (
             <SwiperSlide
               className={clsx(sliderStyles['slider__item'], stylesSliderMain['slider-main__item'])}
@@ -68,6 +68,9 @@ export default function SliderMainClient({ slidesList }: SliderMainClientProps):
                 src={slide.image}
                 alt={slide.alt}
                 fill
+                sizes="100vw"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                priority={index === 0}
               />
 
               <div className={stylesSliderMain['slider-main__item-content']}>

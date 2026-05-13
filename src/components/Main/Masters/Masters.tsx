@@ -21,7 +21,7 @@ export default async function Masters(): Promise<JSX.Element | null> {
     title: master.name,
     description: master.description,
     href: `/masters/${master.slug || master._id}`,
-    image: getImageUrl(master.image._id, 400, 400),
+    image: getImageUrl(master.image._id, 600, 500),
     alt: master.image.title || master.name,
   }))
 

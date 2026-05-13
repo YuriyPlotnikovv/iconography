@@ -17,7 +17,7 @@ export default async function SliderMain(): Promise<JSX.Element | null> {
 
   const slidesList: CardItem[] = mainSliderData.map((item) => ({
     id: item._id,
-    image: getImageUrl(item.image._id, 1200, 800),
+    image: getImageUrl(item.image._id, 1920, 1080, { mode: 'bestFit' }),
     alt: item.title || '',
     title: item.title || '',
     description: item.description || '',

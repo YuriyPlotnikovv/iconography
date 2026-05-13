@@ -144,8 +144,15 @@ class CockpitClient {
     return assets
   }
 
-  getImageUrl(imageId: string, width: number, height: number) {
-    return `${this.baseUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1`
+  getImageUrl(
+    imageId: string,
+    width: number,
+    height: number,
+    mode: 'thumbnail' | 'bestFit' | 'resize' | 'fitToWidth' | 'fitToHeight' = 'bestFit',
+    mime: 'auto' | 'gif' | 'jpeg' | 'png' | 'webp' | 'bmp' = 'webp',
+    quality: number = 90,
+  ) {
+    return `${this.baseUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=${quality}&o=1&mime=${mime}&m=${mode}`
   }
 
   private createQueryString(options: CockpitOptions = {}) {

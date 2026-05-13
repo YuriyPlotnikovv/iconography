@@ -29,7 +29,7 @@ export default async function Process(): Promise<JSX.Element | null> {
           {processList.map((process, index) => {
             const title = process.title
             const description = process.description
-            const image = getImageUrl(process.image._id, 800, 500)
+            const image = getImageUrl(process.image._id, 800, 600)
             const alt = process.alt ?? process.title
 
             return (
@@ -42,8 +42,8 @@ export default async function Process(): Promise<JSX.Element | null> {
                   className={processStyles['process__item-image']}
                   src={image}
                   alt={alt}
-                  width={500}
-                  height={500}
+                  width={800}
+                  height={600}
                 />
 
                 <h3 className={processStyles['process__item-title']}>{title}</h3>
