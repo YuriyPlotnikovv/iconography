@@ -58,8 +58,8 @@ export default async function Page({
       review.photos.forEach((img) => {
         if (img._id) {
           photos.push({
-            thumb: getImageUrl(img._id, 400, 300, 'thumbnail'),
-            full: getImageUrl(img._id, 1920, 1080, 'bestFit'),
+            thumb: getImageUrl(img._id, 400, 300),
+            full: getImageUrl(img._id, 1920, 1080, { mode: 'bestFit' }),
           })
         }
       })

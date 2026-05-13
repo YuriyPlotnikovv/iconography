@@ -79,6 +79,7 @@ export default function GalleryBlockSlider({
                     src={item.image}
                     alt={item.alt}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <span className={galleryBlockSliderStyles['slider-detail__item-overlay']}>
                     <svg
@@ -105,6 +106,7 @@ export default function GalleryBlockSlider({
                   src={item.image}
                   alt={item.alt}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               )}
             </SwiperSlide>

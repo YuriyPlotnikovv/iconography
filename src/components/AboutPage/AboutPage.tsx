@@ -24,12 +24,14 @@ export default async function AboutPage(): Promise<JSX.Element> {
 
   const slidesList: SlideItem[] = about.slider?.map((image) => ({
     id: image._id,
-    image: getImageUrl(image._id, 800, 800),
+    image: getImageUrl(image._id, 800, 500),
     alt: image.title || about.title,
   }))
 
   const imageSrc = about.image ? getImageUrl(about.image._id, 800, 500) : ''
-  const imageFullSrc = about.image ? getImageUrl(about.image._id, 1600, 1000) : ''
+  const imageFullSrc = about.image
+    ? getImageUrl(about.image._id, 1600, 1000, { mode: 'bestFit' })
+    : ''
   const alt = about.image?.alt ?? title
 
   return (

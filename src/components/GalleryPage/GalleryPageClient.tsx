@@ -126,8 +126,9 @@ export default function GalleryPageClient({ items }: GalleryPageClientProps): JS
                     className={galleryPageStyles['gallery__image']}
                     src={item.imageUrl}
                     alt={item.imageAlt}
-                    width={400}
-                    height={400}
+                    width={600}
+                    height={450}
+                    sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
                   />
 
                   <div className={galleryPageStyles['gallery__content']}>

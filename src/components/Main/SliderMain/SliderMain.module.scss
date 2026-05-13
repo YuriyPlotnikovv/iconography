@@ -78,6 +78,7 @@
 }
 
 .slider-main__item-image {
+  object-fit: cover;
   filter: brightness(0.75);
 }
 

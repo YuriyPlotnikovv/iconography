@@ -6,6 +6,7 @@ const cockpitHost = cockpitUrl ? new URL(cockpitUrl).hostname : ''
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [80, 90],
     remotePatterns: [
       {
         protocol: 'https',

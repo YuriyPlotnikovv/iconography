@@ -74,6 +74,7 @@
   height: auto;
   max-height: 400px;
 
+  object-fit: cover;
   box-shadow: $cardShadow;
   border-radius: 40px;
   aspect-ratio: 4 / 3;

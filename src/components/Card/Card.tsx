@@ -17,8 +17,8 @@ export default function Card({ data }: CardProps): JSX.Element {
         className={cardStyles['card__image']}
         src={data.image}
         alt={data.alt}
-        width={400}
-        height={400}
+        width={600}
+        height={500}
       />
 
       <div className={cardStyles['card__content']}>

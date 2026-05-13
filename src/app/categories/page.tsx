@@ -53,7 +53,7 @@ export default async function Page({
     title: category.title,
     description: category.description,
     href: `/categories/${category.slug || category._id}`,
-    image: getImageUrl(category.image._id, 400, 400),
+    image: getImageUrl(category.image._id, 600, 500),
     alt: category.image.title || category.title,
   }))
 

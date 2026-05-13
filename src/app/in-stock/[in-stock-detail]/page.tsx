@@ -33,7 +33,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: work.title,
       description,
-      images: work.image ? [{ url: getImageUrl(work.image._id, 1200, 630), alt: work.title }] : [],
+      images: work.image
+        ? [{ url: getImageUrl(work.image._id, 1200, 630, { mime: 'jpeg' }), alt: work.title }]
+        : [],
     },
     alternates: {
       canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work.slug || work._id}`,
@@ -72,7 +74,7 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
   const slidesList: SlideItem[] =
     work.slider?.map((image) => ({
       id: image._id,
-      image: getImageUrl(image._id, 800, 800),
+      image: getImageUrl(image._id, 800, 500),
       alt: image.title || work.title,
     })) || []
 
@@ -87,7 +89,9 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
     description: work.description
       ? work.description.replace(/<[^>]*>/g, '').slice(0, 160)
       : work.title,
-    image: work.image ? getImageUrl(work.image._id, 1200, 630) : undefined,
+    image: work.image
+      ? getImageUrl(work.image._id, 1200, 630, { mode: 'thumbnail', mime: 'jpeg' })
+      : undefined,
     brand: {
       '@type': 'Organization',
       name: 'Иконописная Артель',

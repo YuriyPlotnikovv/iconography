@@ -55,7 +55,7 @@ export default async function Page({
     title: work.title,
     description: work.description,
     href: `/works/${work.slug || work._id}`,
-    image: getImageUrl(work.image._id, 400, 400),
+    image: getImageUrl(work.image._id, 600, 500),
     alt: work.image.title || work.title,
   }))
 

@@ -212,3 +212,12 @@ export type FormState = {
   message: string
   errors?: Record<string, string>
 }
+
+export type ImageMode = 'thumbnail' | 'bestFit' | 'resize' | 'fitToWidth' | 'fitToHeight'
+export type ImageMime = 'auto' | 'gif' | 'jpeg' | 'png' | 'webp' | 'bmp'
+
+export interface ImageOptions {
+  mode?: ImageMode
+  mime?: ImageMime
+  quality?: number
+}

@@ -1,3 +1,5 @@
+import type { ImageOptions } from '@/types/types'
+
 /**
  * API Client
  */
@@ -245,16 +247,20 @@ export async function fetchCollectionCount(
  * @param imageId - ID изображения
  * @param width - ширина
  * @param height - высота
- * @param mode - режим ресайза
+ * @param options - опции ресайза
+ * @param options.mode - режим ресайза (по умолчанию 'thumbnail')
+ * @param options.mime - формат изображения (по умолчанию 'webp')
+ * @param options.quality - качество от 1 до 100 (по умолчанию 90)
  */
 export function getImageUrl(
   imageId: string,
   width: number,
   height: number,
-  mode?: string | null,
+  options: ImageOptions = {},
 ): string {
+  const { mode = 'thumbnail', mime = 'webp', quality = 90 } = options
   const cockpitUrl = process.env.COCKPIT_API_URL || ''
-  return `${cockpitUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=80&o=1${mode ? `&m=${mode}` : ''}`
+  return `${cockpitUrl}api/assets/image/${imageId}?w=${width}&h=${height}&q=${quality}&o=1&mime=${mime}&m=${mode}`
 }
 
 /**

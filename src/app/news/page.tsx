@@ -55,7 +55,7 @@ export default async function Page({
     title: news.title,
     description: news.description,
     href: `/news/${news.slug || news._id}`,
-    image: getImageUrl(news.image._id, 400, 400),
+    image: getImageUrl(news.image._id, 600, 500),
     alt: news.image.title || news.title,
   }))
 
