@@ -1,6 +1,6 @@
 {
-  "date": "04.2026",
-  "complexity": "4",
+  "date": "05.2026",
+  "complexity": "5",
   "category": "commercial",
   "deploy": "https:\/\/icon-artel.ru",
   "title": {
@@ -8,24 +8,69 @@
     "en": "Icon Painting Artel"
   },
   "textFirst": {
-    "ru": "Частный проект на React + Next.js",
-    "en": "A private project on React + Next.js"
+    "ru": "Сложный проект на Next.js + TypeScript + Cockpit CMS",
+    "en": "A difficult project on Next.js + TypeScript + Cockpit CMS"
   },
   "textSecond": {
-    "ru": "",
-    "en": ""
+    "ru": "Иконописная Артель — сайт иконописной мастерской: галерея работ, полноэкранная галерея и контакты с картой.",
+    "en": "Icon Painting Artel — a site for icon painting artel: gallery of works, fullscreen gallery and contact info with map."
   },
   "functionality": {
-    "ru": ["Cockpit CMS", "Подключен Swiper"],
-    "en": ["Cockpit CMS", "Swiper is integrated"]
+    "ru": [
+      "Получение и отправка данных в Cockpit CMS",
+      "Слайдер Swiper для галерей",
+      "Lightgallery для полноэкранного просмотра фотографий",
+      "Интеграция с Яндекс.Картами",
+      "Yandex Smart Captcha на формах обратной связи",
+      "Генерация sitemap.xml через route",
+      "Публикация через GitHub Actions и Docker на сервер"
+    ],
+    "en": [
+      "Data fetching and submission with Cockpit CMS",
+      "Swiper slider for galleries",
+      "Lightgallery for fullscreen photo viewing",
+      "Integration with Yandex.Maps",
+      "Yandex Smart Captcha on contact forms",
+      "sitemap.xml generation via route",
+      "Deployment via GitHub Actions and Docker on server"
+    ]
   },
-  "technologies": ["html", "scss", "javascript", "react", "next"],
+  "technologies": [
+    "html",
+    "scss",
+    "typescript",
+    "react",
+    "next",
+    "cockpit"
+  ],
   "pages": {
-    "ru": ["Главная"],
-    "en": ["Main"]
+    "ru": [
+      "Главная",
+      "О нас",
+      "Категории",
+      "Контакты",
+      "Галерея",
+      "В наличии",
+      "Доставка и заказ",
+      "Новости",
+      "Отзывы",
+      "Работы"
+    ],
+    "en": [
+      "Main",
+      "About",
+      "Categories",
+      "Contacts",
+      "Gallery",
+      "In stock",
+      "Order & Delivery",
+      "News",
+      "Reviews",
+      "Works"
+    ]
   },
   "notImplemented": {
-    "ru": ["Интеграция с Telegram и ВК"],
-    "en": ["Integration with Telegram and VK"]
+    "ru": ["Онлайн-оплаты"],
+    "en": ["Online payments"]
   }
 }
