@@ -16,6 +16,7 @@ export default function NotFound(): JSX.Element {
         <h2 className={notfoundStyles['not-found__title']}>404</h2>
 
         <p className={notfoundStyles['not-found__text']}>Страница затерялась в космосе</p>
+
         <Link className="button button--accent" href="/">
           Перейти на главную
         </Link>

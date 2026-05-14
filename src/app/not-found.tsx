@@ -20,7 +20,7 @@ const breadcrumbsList: BreadcrumbItem[] = [
   },
 ]
 
-export default function Page(): JSX.Element {
+export default function NotFoundPage(): JSX.Element {
   return (
     <>
       <Heading title={'Страница не найдена'} breadcrumbsList={breadcrumbsList} />

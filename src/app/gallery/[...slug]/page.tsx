@@ -11,13 +11,13 @@ import {
   buildGalleryBreadcrumbs,
 } from '@/functions/gallery'
 
-type PageParams = {
+type PageProps = {
   params: Promise<{
     slug: string[]
   }>
 }
 
-export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const lastSlug = slug[slug.length - 1]
   const galleryData: GalleryTreeItem[] | null = await fetchTree<GalleryTreeItem[]>('gallery')
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   }
 }
 
-export default async function Page({ params }: PageParams): Promise<JSX.Element> {
+export default async function Page({ params }: PageProps): Promise<JSX.Element> {
   const { slug } = await params
   const lastSlug = slug[slug.length - 1]
   const galleryData: GalleryTreeItem[] | null = await fetchTree<GalleryTreeItem[]>('gallery')

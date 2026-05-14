@@ -21,4 +21,55 @@
 
 .detail__text {
   font-size: 22px;
+
+  @media (max-width: $tablet-min-width) {
+    font-size: 18px;
+  }
+}
+
+.detail__price-block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  gap: 20px 40px;
+  width: 100%;
+  max-width: max-content;
+  padding: 20px 24px;
+
+  background-color: $accent-light-bg;
+  box-shadow: $boxShadowOutset;
+  border: 1px solid $accent-add-bg;
+  border-radius: 12px;
+
+  @media (max-width: $tablet-min-width) {
+    padding: 15px 20px;
+  }
+}
+
+.detail__size {
+  flex-basis: 100%;
+
+  font-size: 22px;
+  text-align: center;
+
+  @media (max-width: $tablet-min-width) {
+    font-size: 18px;
+  }
+}
+
+.detail__price {
+  font-family: $font-decor;
+  font-size: 28px;
+  font-weight: 700;
+  color: $accent-bg;
+
+  @media (max-width: $tablet-min-width) {
+    font-size: 24px;
+  }
+}
+
+.detail__price-button {
+  margin: 0;
 }

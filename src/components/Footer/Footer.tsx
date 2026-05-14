@@ -5,6 +5,7 @@ import Logo from '@/components/Logo/Logo'
 import Social from '@/components/Social/Social'
 import Menu from '@/components/Menu/Menu'
 import Developer from '@/components/Developer/Developer'
+import Link from 'next/link'
 
 export default function Footer(): JSX.Element {
   return (
@@ -32,14 +33,14 @@ export default function Footer(): JSX.Element {
             © Иконописная Артель, {new Date().getFullYear()}
           </p>
 
-          <a
+          <Link
             className={footerStyles['footer__policy']}
             href="/api/documents/policy"
             target="_blank"
             rel="noopener noreferrer"
           >
             Политика обработки персональных данных
-          </a>
+          </Link>
 
           <Developer addClass={footerStyles['footer__developer']} />
         </div>

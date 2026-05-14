@@ -6,13 +6,13 @@ import Heading from '@/components/Heading/Heading'
 import Detail from '@/components/Detail/Detail'
 import { fetchCollectionItem, getImageUrl } from '@/lib/api-client'
 
-type PageParams = {
+type PageProps = {
   params: Promise<{
     'news-detail': string
   }>
 }
 
-export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { ['news-detail']: slug } = await params
 
   let news = await fetchCollectionItem<NewsFromServer>('news', slug, { field: 'slug' })
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   }
 }
 
-export default async function Page({ params }: PageParams): Promise<JSX.Element> {
+export default async function Page({ params }: PageProps): Promise<JSX.Element> {
   const { ['news-detail']: slug } = await params
 
   let news = await fetchCollectionItem<NewsFromServer>('news', slug, { field: 'slug' })

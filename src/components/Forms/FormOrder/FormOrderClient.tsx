@@ -20,21 +20,14 @@ import { applicationFormSchema, validateFormField } from '@/lib/schemas'
 import type { CategoryFromServer, PriceItem, GoldTypeValue } from '@/types/types'
 import { GOLD_TYPE_OPTIONS } from '@/const/const'
 import DropZone, { DropZoneRef } from '@/components/DropZone/DropZone'
-import Link from 'next/link'
+import FormAgreementCheckbox from '@/components/Forms/FormAgreementCheckbox/FormAgreementCheckbox'
 
 type Props = {
   categories: CategoryFromServer[]
   prices: PriceItem[]
-  agreementUrl: string
-  policyUrl: string
 }
 
-export default function FormOrderClient({
-  categories,
-  prices: initialPrices,
-  agreementUrl,
-  policyUrl,
-}: Props): JSX.Element {
+export default function FormOrderClient({ categories, prices: initialPrices }: Props): JSX.Element {
   const prices: PriceItem[] = useMemo(() => initialPrices || [], [initialPrices])
 
   const [state, formAction] = useActionState(submitApplication, null)
@@ -669,44 +662,10 @@ export default function FormOrderClient({
           </label>
 
           <div className={formStyles['form__footer']}>
-            <label
-              className={clsx(formStyles['form__label'], formStyles['form__label--checkbox'], {
-                [formStyles['form__label--checkbox--error']]: getError('agreement'),
-              })}
-            >
-              <input
-                className="visually-hidden"
-                type="checkbox"
-                name="agreement"
-                autoComplete="off"
-                required
-                onChange={(evt) => handleAgreementChange(evt.target.checked)}
-              />
-
-              <span className={formStyles['form__label-text']}>
-                <Link
-                  className={formStyles['form__label-link']}
-                  href={agreementUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Я согласен
-                </Link>
-                &nbsp;на обработку персональных данных в соответствии с условиями&nbsp;
-                <Link
-                  className={formStyles['form__label-link']}
-                  href={policyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Политики обработки персональных данных
-                </Link>
-              </span>
-
-              <span className={formStyles['form__error']} aria-live="polite">
-                {getError('agreement')}
-              </span>
-            </label>
+            <FormAgreementCheckbox
+              error={getError('agreement')}
+              onChangeAction={handleAgreementChange}
+            />
 
             <button
               className={clsx(formStyles['form__button'], 'button', 'button--accent')}

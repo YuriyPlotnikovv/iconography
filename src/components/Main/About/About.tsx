@@ -4,20 +4,23 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { fetchSingleton, getImageUrl } from '@/lib/api-client'
-import { MainInfoFromServer } from '@/types/types'
+import { AboutFromServer, MainInfoFromServer } from '@/types/types'
 import { createSanitizedHTML } from '@/functions/functions'
 
 export default async function About(): Promise<JSX.Element | null> {
-  const mainInfo: MainInfoFromServer | null = await fetchSingleton<MainInfoFromServer>('maininfo')
+  const [mainInfo, about] = await Promise.all([
+    fetchSingleton<MainInfoFromServer>('maininfo'),
+    fetchSingleton<AboutFromServer>('about'),
+  ])
 
-  if (!mainInfo) {
+  if (!mainInfo || !about) {
     return null
   }
 
   const title = mainInfo.title
-  const description = mainInfo.description
-  const image = mainInfo.image ? getImageUrl(mainInfo.image._id, 800, 500) : ''
-  const alt = mainInfo.image?.alt ?? mainInfo.title
+  const description = about.preview ?? ''
+  const image = about.image ? getImageUrl(about.image._id, 800, 500) : ''
+  const alt = about.image?.alt ?? title
 
   return (
     <section className={clsx('section', aboutStyles['about'])}>
