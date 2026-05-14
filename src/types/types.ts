@@ -121,6 +121,8 @@ export type WorkFromServer = {
   date: string
   master: MasterFromServer | null
   in_stock: boolean
+  price?: string
+  size?: string
   slug?: string
   _created?: number
   _modified?: number
@@ -187,6 +189,14 @@ export type GalleryItemForClient = {
   children: GalleryItemForClient[]
 }
 
+export type AboutFromServer = {
+  title: string
+  description: string
+  preview: string
+  image: ImageItem
+  slider: ImageItem[]
+}
+
 export type FaqFromServer = {
   _id: string
   question: string
@@ -200,12 +210,26 @@ export type RestorationFromServer = {
   image: ImageItem
 }
 
+export type ButtonLink = {
+  link?: string
+  name?: string
+}
+
 export type MainSliderFromServer = {
   _id: string
   title?: string
   description?: string
-  link?: string
+  button?: ButtonLink
   image: ImageItem
+}
+
+export type MainSliderItem = {
+  id: string | number
+  image: string
+  alt: string
+  title?: string
+  description?: string
+  button?: ButtonLink
 }
 
 export type FormState = {
@@ -225,3 +249,14 @@ export interface ImageOptions {
 
 export type CookieCategoryId = 'necessary' | 'functional' | 'statistical' | 'marketing'
 export type CookieConsent = Record<CookieCategoryId, boolean>
+
+export type FilePreview = {
+  name: string
+  isImage: boolean
+  preview: string | null
+}
+
+export type PhotoItem = {
+  thumb: string
+  full: string
+}

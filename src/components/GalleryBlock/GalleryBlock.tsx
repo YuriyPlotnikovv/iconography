@@ -75,7 +75,7 @@ export default function GalleryBlock({
           >
             <button
               type="button"
-              className={galleryBlockStyles['gallery-block__image-btn']}
+              className={galleryBlockStyles['gallery-block__image-button']}
               onClick={() => handleSlideClick(0)}
               aria-label="Открыть изображение"
             >

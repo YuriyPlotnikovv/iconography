@@ -5,6 +5,7 @@ import formStyles from '../../../styles/modules/form.module.scss'
 import clsx from 'clsx'
 import type { PriceItem, GoldTypeValue } from '@/types/types'
 import { GOLD_TYPE_OPTIONS } from '@/const/const'
+import { formatPrice } from '@/functions/functions'
 
 type Props = {
   prices: PriceItem[]
@@ -140,9 +141,9 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
     if (goldType === 'all') value = item.all
     if (goldType === 'halo') value = item.halo
     if (item.price_for_inch) {
-      setCalculated(`от ${value} руб./дм²`)
+      setCalculated(`от ${formatPrice(value)}/дм²`)
     } else {
-      setCalculated(`${value} руб.`)
+      setCalculated(formatPrice(value))
     }
   }, [selectedId, goldType, prices])
 
@@ -270,7 +271,7 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
 
       <div className={clsx(formStyles['form__cell'], formStyles['form__result'])}>
         <p>Итоговая стоимость:</p>
-        <p>{calculated || '—'}</p>
+        <p className={formStyles['form__result-price']}>{calculated || '—'}</p>
       </div>
     </form>
   )

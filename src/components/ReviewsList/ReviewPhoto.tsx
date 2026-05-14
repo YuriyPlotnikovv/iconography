@@ -10,8 +10,7 @@ import 'lightgallery/css/lg-thumbnail.css'
 import 'lightgallery/css/lg-zoom.css'
 import type { LightGallery } from 'lightgallery/lightgallery'
 import reviewsListStyles from './ReviewsList.module.scss'
-
-type PhotoItem = { thumb: string; full: string }
+import { PhotoItem } from '@/types/types'
 
 type ReviewPhotoProps = {
   photos: PhotoItem[]
@@ -54,7 +53,7 @@ export default function ReviewPhoto({ photos, authorName, date }: ReviewPhotoPro
         <button
           key={index}
           type="button"
-          className={reviewsListStyles['reviews__item-photo-btn']}
+          className={reviewsListStyles['reviews__item-photo-button']}
           onClick={() => handleClick(index)}
           aria-label={`Открыть фото ${index + 1}`}
         >

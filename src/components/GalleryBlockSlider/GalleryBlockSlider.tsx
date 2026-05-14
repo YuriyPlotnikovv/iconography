@@ -70,7 +70,7 @@ export default function GalleryBlockSlider({
               {onSlideClick ? (
                 <button
                   type="button"
-                  className={galleryBlockSliderStyles['slider-detail__item-btn']}
+                  className={galleryBlockSliderStyles['slider-detail__item-button']}
                   onClick={() => onSlideClick(index)}
                   aria-label={`Открыть изображение ${index + 1}`}
                 >

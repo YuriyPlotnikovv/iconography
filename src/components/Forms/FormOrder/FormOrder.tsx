@@ -9,12 +9,5 @@ export default async function FormOrder(): Promise<JSX.Element> {
     fetchCollection<PriceItem>('price', { sort: { sort: 1 } }),
   ])
 
-  return (
-    <FormOrderClient
-      categories={categories}
-      prices={prices}
-      agreementUrl="/api/documents/agreement"
-      policyUrl="/api/documents/policy"
-    />
-  )
+  return <FormOrderClient categories={categories} prices={prices} />
 }

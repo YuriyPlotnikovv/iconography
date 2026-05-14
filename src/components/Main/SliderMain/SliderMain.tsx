@@ -1,6 +1,6 @@
 import { JSX } from 'react'
 import { fetchCollection, getImageUrl } from '@/lib/api-client'
-import type { CardItem, MainSliderFromServer } from '@/types/types'
+import type { MainSliderItem, MainSliderFromServer } from '@/types/types'
 import SliderMainClient from './SliderMainClient'
 
 export default async function SliderMain(): Promise<JSX.Element | null> {
@@ -15,13 +15,16 @@ export default async function SliderMain(): Promise<JSX.Element | null> {
     return null
   }
 
-  const slidesList: CardItem[] = mainSliderData.map((item) => ({
+  const slidesList: MainSliderItem[] = mainSliderData.map((item) => ({
     id: item._id,
     image: getImageUrl(item.image._id, 1920, 1080, { mode: 'bestFit' }),
     alt: item.title || '',
     title: item.title || '',
     description: item.description || '',
-    href: item.link || '',
+    button: {
+      link: item.button?.link || '',
+      name: item.button?.name || '',
+    },
   }))
 
   return <SliderMainClient slidesList={slidesList} />

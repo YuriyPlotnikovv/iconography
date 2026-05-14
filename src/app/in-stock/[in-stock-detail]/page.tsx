@@ -100,6 +100,9 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
       '@type': 'Offer',
       availability: 'https://schema.org/InStock',
       url: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work.slug || work._id}`,
+      ...(work.price && !isNaN(parseFloat(work.price))
+        ? { price: parseFloat(work.price), priceCurrency: 'RUB' }
+        : {}),
     },
   }
 
@@ -117,6 +120,8 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
         description={work.description}
         image={work.image}
         slidesList={slidesList}
+        price={work.price}
+        size={work.size}
       />
 
       {MasterInfo && <Master master={MasterInfo} />}

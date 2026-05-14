@@ -46,3 +46,13 @@ export function createMaxLink(max: string): string {
 export function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, '').trim()
 }
+
+export function formatPrice(price: string | number): string {
+  const num = typeof price === 'number' ? price : parseFloat(price)
+  if (isNaN(num)) return String(price)
+  return (
+    new Intl.NumberFormat('ru-RU', {
+      maximumFractionDigits: 0,
+    }).format(num) + '\u00a0₽'
+  )
+}

@@ -1,21 +1,14 @@
 import { JSX } from 'react'
 import clsx from 'clsx'
-import { ImageItem, SlideItem } from '@/types/types'
+import { AboutFromServer, SlideItem } from '@/types/types'
 import { createSanitizedHTML } from '@/functions/functions'
 import aboutPageStyles from './AboutPage.module.scss'
 import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import EmptySection from '@/components/EmptySection/EmptySection'
 import GalleryBlock from '@/components/GalleryBlock/GalleryBlock'
 
-type AboutPageProps = {
-  title: string
-  description: string
-  image: ImageItem
-  slider: ImageItem[]
-}
-
 export default async function AboutPage(): Promise<JSX.Element> {
-  const about: AboutPageProps | null = await fetchSingleton<AboutPageProps>('about')
+  const about: AboutFromServer | null = await fetchSingleton<AboutFromServer>('about')
 
   if (!about) return <EmptySection />
 

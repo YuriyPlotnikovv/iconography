@@ -180,8 +180,9 @@
 
   width: calc(100% / 3);
 
-  background: $accent-light-bg;
-  box-shadow: $cardShadow;
+  background-color: $accent-light-bg;
+  box-shadow: $boxShadowOutset;
+  border: 1px solid $accent-add-bg;
   border-radius: 6px;
 
   transition:
@@ -419,8 +420,13 @@
   font-weight: 700;
 
   background-color: $accent-light-bg;
-  box-shadow: $cardShadow;
-  border-radius: 6px;
+  box-shadow: $boxShadowOutset;
+  border: 1px solid $accent-add-bg;
+  border-radius: 12px;
+}
+
+.form__result-price {
+  color: $accent-bg;
 }
 
 .form__message {
