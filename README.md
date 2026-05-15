@@ -12,9 +12,9 @@
 
 Project: https://icon-artel.ru
 
-A private project on React + Next.js
+A difficult project on Next.js + TypeScript + Cockpit CMS
 
-
+Icon Painting Artel — a site for icon painting artel: gallery of works, fullscreen gallery and contact info with map.
 
 ---
 
@@ -22,16 +22,30 @@ A private project on React + Next.js
 
 #### Functionality
 
-- Cockpit CMS
-- Swiper is integrated
+- Data fetching and submission with Cockpit CMS
+- Swiper slider for galleries
+- Lightgallery for fullscreen photo viewing
+- Integration with Yandex.Maps
+- Yandex Smart Captcha on contact forms
+- sitemap.xml generation via route
+- Deployment via GitHub Actions and Docker on server
 
 #### Pages
 
 - Main
+- About
+- Categories
+- Contacts
+- Gallery
+- In stock
+- Order & Delivery
+- News
+- Reviews
+- Works
 
 #### Not Implemented
 
-- Integration with Telegram and VK
+- Online payments
 
 ---
 
@@ -54,9 +68,9 @@ Website: https://yuriyplotnikovv.ru
 
 Проект: https://icon-artel.ru
 
-Частный проект на React + Next.js
+Сложный проект на Next.js + TypeScript + Cockpit CMS
 
-
+Иконописная Артель — сайт иконописной мастерской: галерея работ, полноэкранная галерея и контакты с картой.
 
 ---
 
@@ -64,16 +78,30 @@ Website: https://yuriyplotnikovv.ru
 
 #### Функциональность
 
-- Cockpit CMS
-- Подключен Swiper
+- Получение и отправка данных в Cockpit CMS
+- Слайдер Swiper для галерей
+- Lightgallery для полноэкранного просмотра фотографий
+- Интеграция с Яндекс.Картами
+- Yandex Smart Captcha на формах обратной связи
+- Генерация sitemap.xml через route
+- Публикация через GitHub Actions и Docker на сервер
 
 #### Страницы
 
 - Главная
+- О нас
+- Категории
+- Контакты
+- Галерея
+- В наличии
+- Доставка и заказ
+- Новости
+- Отзывы
+- Работы
 
 #### Не реализовано
 
-- Интеграция с Telegram и ВК
+- Онлайн-оплаты
 
 ---
 
