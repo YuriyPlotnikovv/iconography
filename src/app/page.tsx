@@ -15,6 +15,9 @@ import News from '@/components/Main/News/News'
 import Faq from '@/components/Main/Faq/Faq'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  ),
   title: 'Иконописная Артель',
   description:
     'В нашей артели Вы можете заказать рукописную каноническую икону. Мы пишем в древней технологии яичной темперой храмовые, семейные, мерные иконы, венчальные пары.',
