@@ -4,10 +4,10 @@ import clsx from 'clsx'
 import { CardItem, NewsFromServer } from '@/types/types'
 import NewsSlider from './NewsSlider'
 import newsStyles from './News.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function News(): Promise<JSX.Element | null> {
-  const newsData: NewsFromServer[] = await cockpit.getCollection('news', {
+  const newsData: NewsFromServer[] = await fetchCollection<NewsFromServer>('news', {
     sort: { date: -1 },
     limit: 10,
   })
@@ -17,11 +17,11 @@ export default async function News(): Promise<JSX.Element | null> {
   }
 
   const newsList: CardItem[] = newsData.map((news) => ({
-    id: news._id,
+    id: news.slug || news._id,
     title: news.title,
     description: news.description,
-    href: `/news/${news._id}`,
-    image: cockpit.getImageUrl(news.image._id, 400, 400),
+    href: `/news/${news.slug || news._id}`,
+    image: getImageUrl(news.image._id, 600, 500),
     alt: news.image.title || news.title,
   }))
 

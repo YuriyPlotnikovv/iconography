@@ -9,16 +9,38 @@ import Masters from '@/components/Main/Masters/Masters'
 import Process from '@/components/Main/Process/Process'
 import Categories from '@/components/Main/Categories/Categories'
 import Calculation from '@/components/Main/Calculation/Calculation'
-import Gallery from '@/components/Main/Gallery/Gallery'
 import Restoration from '@/components/Main/Restoration/Restoration'
 import Reviews from '@/components/Main/Reviews/Reviews'
 import News from '@/components/Main/News/News'
 import Faq from '@/components/Main/Faq/Faq'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  ),
   title: 'Иконописная Артель',
   description:
     'В нашей артели Вы можете заказать рукописную каноническую икону. Мы пишем в древней технологии яичной темперой храмовые, семейные, мерные иконы, венчальные пары.',
+  keywords: [
+    'иконописная артель',
+    'заказать икону',
+    'рукописные иконы',
+    'каноническая икона',
+    'яичная темпера',
+    'храмовые иконы',
+    'семейные иконы',
+    'мерные иконы',
+    'венчальные пары',
+    'реставрация икон',
+    'иконописцы',
+    'иконопись',
+  ],
+  openGraph: {
+    title: 'Иконописная Артель - Рукописные канонические иконы',
+    description:
+      'Закажите рукописную каноническую икону. Храмовые, семейные, мерные иконы, венчальные пары. Древняя технология яичной темперой.',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Иконописная Артель' }],
+  },
 }
 
 export default function Page() {
@@ -36,7 +58,6 @@ export default function Page() {
       <Process />
       <Categories />
       <Calculation />
-      <Gallery />
       <Restoration />
       <Reviews />
       <News />

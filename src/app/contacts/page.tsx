@@ -6,7 +6,13 @@ import ContactsPage from '@/components/ContactsPage/ContactsPage'
 
 export const metadata: Metadata = {
   title: 'Контакты | Иконописная Артель',
-  description: 'Иконописная Артель - описание',
+  description:
+    'Контактная информация Иконописной Артели. Адрес мастерской, телефон, email для заказа икон. Свяжитесь с нами для консультации.',
+  openGraph: {
+    title: 'Контакты | Иконописная Артель',
+    description:
+      'Контактная информация Иконописной Артели. Адрес мастерской, телефон, email для заказа икон.',
+  },
 }
 
 const breadcrumbsList: BreadcrumbItem[] = [
@@ -21,7 +27,8 @@ const breadcrumbsList: BreadcrumbItem[] = [
 
 export default function Page(): JSX.Element {
   const title = 'Контакты'
-  const description = '<p></p>'
+  const description =
+    '<p>Свяжитесь с нами для консультации по заказу икон. Наши мастера ответят на все вопросы о технологии написания, сроках изготовления и стоимости работ. Приглашаем посетить нашу мастерскую.</p>'
 
   return (
     <>

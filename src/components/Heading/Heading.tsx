@@ -21,11 +21,17 @@ export default function Heading({
       <div className={clsx('container', headingStyles['heading__container'])}>
         <Breadcrumbs breadcrumbsList={breadcrumbsList} />
 
-        {title && <h1 className="section__title">{title}</h1>}
+        {title && (
+          <h1 className="section__title" data-animate="fade-up">
+            {title}
+          </h1>
+        )}
 
         {description && (
           <div
             className={clsx('block-html', 'section__description')}
+            data-animate="fade-up"
+            data-stagger="1"
             dangerouslySetInnerHTML={createSanitizedHTML(description)}
           />
         )}

@@ -1,21 +1,84 @@
-@use '../../../styles/variables' as var;
+@use '../../../styles/variables' as *;
 
 .slider-main {
   overflow: hidden;
 
-  padding: 0;
-}
-
-.slider-main__item {
   height: 800px;
   max-height: calc(100vh - 80px);
+  padding: 0;
 
   @supports (max-height: calc(100svh - 80px)) {
     max-height: calc(100svh - 80px);
   }
+
+  .slider-main__pagination {
+    position: absolute;
+    top: unset;
+    right: 30px;
+    bottom: 30px;
+    left: unset;
+    z-index: 2;
+
+    opacity: 0.8;
+  }
+
+  .slider-main__navigation-item {
+    position: absolute;
+    top: 50%;
+    bottom: unset;
+    z-index: 2;
+
+    width: 80px;
+    height: 80px;
+
+    transform: translateY(-50%);
+
+    @media (max-width: $tablet-min-width) {
+      width: 60px;
+      height: 60px;
+    }
+
+    &--prev {
+      left: 100px;
+
+      @media (max-width: $desktop-mid-width) {
+        left: 80px;
+      }
+      @media (max-width: $desktop-min-width) {
+        left: 60px;
+      }
+      @media (max-width: $tablet-mid-width) {
+        left: 40px;
+      }
+      @media (max-width: $tablet-min-width) {
+        left: 20px;
+      }
+    }
+
+    &--next {
+      right: 100px;
+
+      @media (max-width: $desktop-mid-width) {
+        right: 80px;
+      }
+      @media (max-width: $desktop-min-width) {
+        right: 60px;
+      }
+      @media (max-width: $tablet-mid-width) {
+        right: 40px;
+      }
+      @media (max-width: $tablet-min-width) {
+        right: 20px;
+      }
+    }
+  }
+}
+
+.slider-main__item {
 }
 
 .slider-main__item-image {
+  object-fit: cover;
   filter: brightness(0.75);
 }
 
@@ -29,7 +92,7 @@
   flex-direction: column;
   gap: 20px;
 
-  color: var.$bg-text-color;
+  color: $bg-text-color;
 
   transform: translateX(-50%);
 }
@@ -37,16 +100,16 @@
 .slider-main__item-title {
   font-size: 72px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 60px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 48px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 36px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 24px;
   }
 }
@@ -54,81 +117,27 @@
 .slider-main__item-text {
   font-size: 28px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 26px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 22px;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     font-size: 18px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 14px;
   }
 }
 
 .slider-main__item-button {
-}
+  font-size: 18px;
 
-.slider-main__pagination {
-  position: absolute;
-  top: unset;
-  right: 30px;
-  bottom: 30px;
-  left: unset;
-  z-index: 2;
-
-  opacity: 0.8;
-}
-
-.slider-main__navigation-item {
-  position: absolute;
-  top: 50%;
-  bottom: unset;
-  z-index: 2;
-
-  width: 80px;
-  height: 80px;
-
-  transform: translateY(-50%);
-
-  @media (max-width: var.$tablet-min-width) {
-    width: 60px;
-    height: 60px;
+  @media (max-width: $tablet-min-width) {
+    font-size: 16px;
   }
-
-  &--prev {
-    left: 100px;
-
-    @media (max-width: var.$desktop-mid-width) {
-      left: 80px;
-    }
-    @media (max-width: var.$desktop-min-width) {
-      left: 60px;
-    }
-    @media (max-width: var.$tablet-mid-width) {
-      left: 40px;
-    }
-    @media (max-width: var.$tablet-min-width) {
-      left: 20px;
-    }
-  }
-
-  &--next {
-    right: 100px;
-
-    @media (max-width: var.$desktop-mid-width) {
-      right: 80px;
-    }
-    @media (max-width: var.$desktop-min-width) {
-      right: 60px;
-    }
-    @media (max-width: var.$tablet-mid-width) {
-      right: 40px;
-    }
-    @media (max-width: var.$tablet-min-width) {
-      right: 20px;
-    }
+  @media (max-width: $mobile-mid-width) {
+    font-size: 14px;
   }
 }

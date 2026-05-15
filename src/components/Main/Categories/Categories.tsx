@@ -5,10 +5,10 @@ import { CardItem, CategoryFromServer } from '@/types/types'
 
 import CategoriesSlider from './CategoriesSlider'
 import categoriesStyles from './Categories.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function Categories(): Promise<JSX.Element | null> {
-  const categoriesData: CategoryFromServer[] = await cockpit.getCollection('category', {
+  const categoriesData: CategoryFromServer[] = await fetchCollection('category', {
     sort: { sort: 1 },
   })
 
@@ -17,11 +17,11 @@ export default async function Categories(): Promise<JSX.Element | null> {
   }
 
   const categoriesList: CardItem[] = categoriesData.map((category) => ({
-    id: category._id,
+    id: category.slug || category._id,
     title: category.title,
     description: category.description,
-    href: `/categories/${category._id}`,
-    image: cockpit.getImageUrl(category.image._id, 400, 400),
+    href: `/categories/${category.slug || category._id}`,
+    image: getImageUrl(category.image._id, 400, 400),
     alt: category.image.title || category.title,
   }))
 

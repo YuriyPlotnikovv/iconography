@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables' as *;
 
 .works {
 }
@@ -9,13 +9,13 @@
   grid-auto-rows: 1fr;
   gap: 30px;
 
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     grid-template-columns: 1fr 1fr 1fr;
   }
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     grid-template-columns: 1fr 1fr;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     grid-template-columns: 1fr;
   }
 }

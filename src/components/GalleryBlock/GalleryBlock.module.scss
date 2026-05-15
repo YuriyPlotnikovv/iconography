@@ -1,0 +1,85 @@
+@use '../../styles/variables' as *;
+
+.gallery-block__slider {
+  overflow: hidden;
+}
+
+.gallery-block__slider-wrapper {
+  display: contents;
+}
+
+.gallery-block__image-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 500px;
+
+  @media (max-width: $tablet-min-width) {
+    height: 400px;
+  }
+}
+
+.gallery-block__image-button {
+  position: relative;
+
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+
+  background: none;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      .gallery-block__image {
+        transform: scale(1.05);
+      }
+
+      .gallery-block__image-overlay {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.gallery-block__image-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+  border-radius: 40px;
+
+  pointer-events: none;
+
+  transition: opacity 0.3s ease-in-out;
+}
+
+.gallery-block__image-overlay-icon {
+  width: 48px;
+  height: 48px;
+
+  color: $base-bg;
+
+  @media (max-width: $tablet-min-width) {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.gallery-block__image {
+  object-fit: cover;
+  box-shadow: $cardShadow;
+  border-radius: 40px;
+
+  transition: transform 0.3s ease-in-out;
+}

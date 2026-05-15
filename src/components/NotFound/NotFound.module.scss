@@ -1,6 +1,6 @@
 @use 'sass:math';
-@use '../../styles/variables.scss' as var;
-@use '../../styles/animations.scss';
+@use '../../styles/variables' as *;
+@use '../../styles/animations';
 
 .not-found {
   z-index: 10;
@@ -13,10 +13,10 @@
   height: 80vh;
   padding: 100px 20px;
 
-  font-family: var.$font-text;
+  font-family: $font-text;
   text-align: center;
 
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
     height: 100%;
@@ -31,7 +31,7 @@
   align-items: center;
   gap: 20px;
 
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     justify-self: center;
     order: 2;
   }
@@ -41,9 +41,9 @@
   font-size: 240px;
   font-weight: 700;
   line-height: 1;
-  color: var.$base-text-color;
+  color: $base-text-color;
 
-  @media (max-width: var.$mobile-min-width) {
+  @media (max-width: $mobile-min-width) {
     font-size: 140px;
   }
 }
@@ -52,9 +52,9 @@
   font-size: 44px;
   font-weight: 500;
   line-height: 1.2;
-  color: var.$base-text-color;
+  color: $base-text-color;
 
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     width: 100%;
     padding: 0 22px;
 
@@ -73,11 +73,11 @@
   width: 300px;
   height: 350px;
 
-  background: var.$windowGradient;
-  box-shadow: var.$cardShadow;
+  background: $windowGradient;
+  box-shadow: $cardShadow;
   border-radius: 100px;
 
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     margin: 0 auto;
   }
 
@@ -103,7 +103,7 @@
   position: absolute;
 
   opacity: 0.8;
-  background: var.$base-bg;
+  background: $base-bg;
   border-radius: 50%;
 
   @for $i from 1 through 100 {
@@ -127,7 +127,7 @@
         width: $size;
         height: $size;
 
-        background: var.$bg-text-color;
+        background: $bg-text-color;
         filter: blur(1px);
 
         content: '';

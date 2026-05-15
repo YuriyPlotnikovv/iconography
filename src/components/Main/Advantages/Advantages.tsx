@@ -1,15 +1,18 @@
 import { JSX } from 'react'
 import advantagesStyles from './Advantages.module.scss'
-import { AdvantageItem } from '@/types/types'
+import { AdvantageFromServer } from '@/types/types'
 import clsx from 'clsx'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 import Image from 'next/image'
 import logoStyles from '@/components/Logo/Logo.module.scss'
 
 export default async function Advantages(): Promise<JSX.Element | null> {
-  const advantagesList: AdvantageItem[] = await cockpit.getCollection('advantages', {
-    sort: { sort: 1 },
-  })
+  const advantagesList: AdvantageFromServer[] = await fetchCollection<AdvantageFromServer>(
+    'advantages',
+    {
+      sort: { sort: 1 },
+    },
+  )
 
   if (!advantagesList || advantagesList.length === 0) {
     return null
@@ -18,16 +21,23 @@ export default async function Advantages(): Promise<JSX.Element | null> {
   return (
     <section className={clsx('section', advantagesStyles['advantages'])}>
       <div className="container">
-        <h2 className="section__title">Преимущества заказа у нас</h2>
+        <h2 className="section__title" data-animate="fade-up">
+          Преимущества заказа у нас
+        </h2>
 
         <ul className={advantagesStyles['advantages__list']}>
-          {advantagesList.map((item) => {
+          {advantagesList.map((item, index) => {
             const title = item.title
             const description = item.description
-            const icon = cockpit.getImageUrl(item.icon._id, 100, 100)
+            const icon = getImageUrl(item.icon._id, 100, 100)
 
             return (
-              <li className={advantagesStyles['advantages__item']} key={item._id}>
+              <li
+                className={advantagesStyles['advantages__item']}
+                key={item._id}
+                data-animate="fade-up"
+                data-stagger={String(index + 1)}
+              >
                 <Image
                   className={logoStyles['logo__image']}
                   src={icon}

@@ -1,0 +1,100 @@
+@use '../../styles/variables' as *;
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination__list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.pagination__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 8px;
+
+  font-size: 14px;
+  text-decoration: none;
+  color: $base-text-color;
+
+  background: transparent;
+  border: 1px solid $add-bg;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
+
+  &:hover {
+    background: $add-bg;
+    border-color: $accent-text-color;
+  }
+
+  &--active {
+    color: $bg-text-color;
+
+    background: $accent-bg;
+    border-color: $accent-bg;
+
+    pointer-events: none;
+  }
+}
+
+.pagination__prev,
+.pagination__next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+
+  text-decoration: none;
+  color: $base-text-color;
+
+  border: 1px solid $add-bg;
+  border-radius: 4px;
+
+  transition:
+    background 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
+
+  &:hover {
+    background: $add-bg;
+    border-color: $accent-text-color;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+
+    fill: currentColor;
+  }
+}
+
+.pagination__ellipsis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+
+  font-size: 14px;
+  color: $add-text-color;
+
+  user-select: none;
+}

@@ -2,6 +2,7 @@ import { JSX } from 'react'
 import reviewsListStyles from './ReviewsList.module.scss'
 import { ReviewItem } from '@/types/types'
 import { convertDateToLocale } from '@/functions/functions'
+import ReviewPhoto from './ReviewPhoto'
 
 type ReviewsListProps = {
   reviewsList: ReviewItem[]
@@ -10,9 +11,14 @@ type ReviewsListProps = {
 export default function ReviewsList({ reviewsList }: ReviewsListProps): JSX.Element {
   return (
     <ul className={reviewsListStyles['reviews']}>
-      {reviewsList.map((review) => {
+      {reviewsList.map((review, index) => {
         return (
-          <li className={reviewsListStyles['reviews__item']} key={review.id}>
+          <li
+            className={reviewsListStyles['reviews__item']}
+            key={review.id}
+            data-animate="fade-up"
+            data-stagger={String(index % 6)}
+          >
             <svg
               className={reviewsListStyles['reviews__item-decor']}
               xmlns="http://www.w3.org/2000/svg"
@@ -31,6 +37,14 @@ export default function ReviewsList({ reviewsList }: ReviewsListProps): JSX.Elem
               </defs>
             </svg>
 
+            {review.photos && review.photos.length > 0 && (
+              <ReviewPhoto
+                photos={review.photos}
+                authorName={review.name}
+                date={convertDateToLocale(review.date)}
+              />
+            )}
+
             <div className={reviewsListStyles['reviews__item-text']}>{review.review}</div>
 
             <div className={reviewsListStyles['reviews__item-info']}>
@@ -40,23 +54,26 @@ export default function ReviewsList({ reviewsList }: ReviewsListProps): JSX.Elem
 
               <p className={reviewsListStyles['reviews__item-name']}>{review.name}</p>
 
-              <p className={reviewsListStyles['reviews__item-rating']}>
-                <span className={reviewsListStyles['reviews__item-rating-value']}>
-                  {review.stars}
-                </span>
-
-                <svg
-                  className={reviewsListStyles['reviews__item-rating-icon']}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 25"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="m12 1.435 3.63 6.49L23 9.318l-5.133 5.39.916 7.334L12 18.925l-6.783 3.153.916-7.333L1 9.318l7.37-1.393L12 1.435Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </p>
+              {review.stars && (
+                <p className={reviewsListStyles['reviews__item-rating']}>
+                  {Array.from({ length: review.stars }, (_, i) => (
+                    <svg
+                      key={i}
+                      className={reviewsListStyles['reviews__item-rating-icon']}
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 25"
+                      aria-hidden={i > 0}
+                      aria-label={i === 0 ? `${review.stars} из 5` : undefined}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="m12 1.435 3.63 6.49L23 9.318l-5.133 5.39.916 7.334L12 18.925l-6.783 3.153.916-7.333L1 9.318l7.37-1.393L12 1.435Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  ))}
+                </p>
+              )}
             </div>
           </li>
         )

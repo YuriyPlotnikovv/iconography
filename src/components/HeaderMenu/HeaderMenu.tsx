@@ -8,6 +8,8 @@ import Menu from '@/components/Menu/Menu'
 export default function HeaderMenu(): JSX.Element {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const firstMenuItemRef = useRef<HTMLAnchorElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
 
   const handleMenuButtonClick = () => {
     setIsMenuOpen((prevState) => !prevState)
@@ -39,9 +41,32 @@ export default function HeaderMenu(): JSX.Element {
     }
   }, [isMenuOpen])
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isMenuOpen &&
+        menuRef.current &&
+        buttonRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        closeMenu()
+      }
+    }
+
+    if (isMenuOpen) {
+      document.addEventListener('click', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [isMenuOpen])
+
   return (
     <>
       <button
+        ref={buttonRef}
         className={clsx(
           headerMenuStyles['menu-button'],
           isMenuOpen && headerMenuStyles['menu-button--menu-open'],
@@ -56,6 +81,7 @@ export default function HeaderMenu(): JSX.Element {
       </button>
 
       <nav
+        ref={menuRef}
         className={clsx(
           headerMenuStyles['navigation'],
           isMenuOpen && headerMenuStyles['navigation--open'],

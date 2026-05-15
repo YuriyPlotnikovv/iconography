@@ -1,4 +1,15 @@
-@use '../../styles/variables.scss' as var;
+@use '../../styles/variables' as *;
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 .header {
   position: fixed;
@@ -7,9 +18,15 @@
   left: 0;
   z-index: 12;
 
-  background-color: var.$accent-light-bg;
-  box-shadow: var.$boxShadowOutset;
-  border-bottom: 1px solid var.$accent-add-bg;
+  background-color: $accent-light-bg;
+  box-shadow: $boxShadowOutset;
+  border-bottom: 1px solid $accent-add-bg;
+
+  animation: slideDown 0.5s ease-out both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
 
 .header__container {
@@ -20,10 +37,10 @@
   gap: 40px;
   height: 80px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     gap: 20px;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     gap: 10px;
   }
 }
@@ -32,11 +49,11 @@
   display: flex;
   gap: 20px;
 
-  @media (max-width: var.$tablet-mid-width) {
+  @media (max-width: $tablet-mid-width) {
     flex-direction: column;
     gap: 0;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     display: none;
   }
 }

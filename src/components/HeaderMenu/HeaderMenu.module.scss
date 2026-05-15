@@ -1,4 +1,4 @@
-@use '../../styles/variables.scss' as var;
+@use "../../styles/variables" as *;
 
 .menu-button {
   display: flex;
@@ -9,6 +9,15 @@
   padding: 10px;
 
   cursor: pointer;
+
+  transition: opacity 0.4s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover,
+    &:active {
+      opacity: 0.6;
+    }
+  }
 
   &--menu-open {
     .menu-button-line {
@@ -33,7 +42,7 @@
 
 .menu-button-line {
   height: 5px;
-  background: var.$accent-add-bg;
+  background: $accent-add-bg;
   border-radius: 10px;
 
   transition: 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
@@ -64,7 +73,7 @@
   margin-top: 80px;
   padding: 30px 20px;
 
-  background-color: rgba(var.$add-bg, 0.9);
+  background-color: rgba($add-bg, 0.9);
 
   transition: 0.6s ease-in-out;
 
@@ -84,13 +93,13 @@
 
   font-size: 26px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 24px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 22px;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     gap: 10px;
 
     font-size: 20px;

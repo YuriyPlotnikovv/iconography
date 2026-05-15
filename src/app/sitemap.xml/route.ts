@@ -1,64 +1,112 @@
 import { NextResponse } from 'next/server'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection } from '@/lib/api-client'
+import type { WorkFromServer, NewsFromServer, CategoryFromServer } from '@/types/types'
+
+type SitemapUrl = {
+  loc: string
+  lastmod?: string
+  changefreq: string
+  priority: number
+}
 
 export async function GET() {
   const siteUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL
 
-  const staticPages = [
-    '/',
-    '/news',
-    '/works',
-    '/in-stock',
-    '/contacts',
-    '/categories',
-    '/gallery',
-    '/reviews',
-    '/order-delivery',
+  const staticPages: SitemapUrl[] = [
+    { loc: `${siteUrl}/`, changefreq: 'daily', priority: 1.0 },
+    { loc: `${siteUrl}/about`, changefreq: 'monthly', priority: 0.8 },
+    { loc: `${siteUrl}/works`, changefreq: 'weekly', priority: 0.9 },
+    { loc: `${siteUrl}/in-stock`, changefreq: 'daily', priority: 0.9 },
+    { loc: `${siteUrl}/contacts`, changefreq: 'monthly', priority: 0.8 },
+    { loc: `${siteUrl}/categories`, changefreq: 'monthly', priority: 0.8 },
+    { loc: `${siteUrl}/gallery`, changefreq: 'weekly', priority: 0.7 },
+    { loc: `${siteUrl}/news`, changefreq: 'weekly', priority: 0.8 },
+    { loc: `${siteUrl}/reviews`, changefreq: 'weekly', priority: 0.7 },
+    { loc: `${siteUrl}/order-delivery`, changefreq: 'monthly', priority: 0.8 },
   ]
 
-  const urls: string[] = staticPages.map((p) => `${siteUrl}${p}`)
+  const urls: SitemapUrl[] = [...staticPages]
 
   try {
-    const [works, news, categories] = await Promise.all([
-      cockpit.getCollection('works'),
-      cockpit.getCollection('news'),
-      cockpit.getCollection('category'),
+    const [works, news, categories, inStock] = await Promise.all([
+      fetchCollection<WorkFromServer>('works'),
+      fetchCollection<NewsFromServer>('news'),
+      fetchCollection<CategoryFromServer>('category'),
+      fetchCollection<WorkFromServer>('works', { filter: { in_stock: true } }),
     ])
 
     if (Array.isArray(works)) {
-      works.forEach((w: unknown) => {
-        const item = w as { _id?: string }
-        if (item && item._id) urls.push(`${siteUrl}/works/${item._id}`)
+      works.forEach((w: WorkFromServer) => {
+        if (w && (w.slug || w._id)) {
+          urls.push({
+            loc: `${siteUrl}/works/${w.slug || w._id}`,
+            lastmod: w._modified ? new Date(w._modified * 1000).toISOString() : undefined,
+            changefreq: 'monthly',
+            priority: 0.7,
+          })
+        }
+      })
+    }
+
+    if (Array.isArray(inStock)) {
+      inStock.forEach((w: WorkFromServer) => {
+        if (w && (w.slug || w._id)) {
+          urls.push({
+            loc: `${siteUrl}/in-stock/${w.slug || w._id}`,
+            lastmod: w._modified ? new Date(w._modified * 1000).toISOString() : undefined,
+            changefreq: 'daily',
+            priority: 0.8,
+          })
+        }
       })
     }
 
     if (Array.isArray(news)) {
-      news.forEach((n: unknown) => {
-        const item = n as { _id?: string }
-        if (item && item._id) urls.push(`${siteUrl}/news/${item._id}`)
+      news.forEach((n: NewsFromServer) => {
+        if (n && (n.slug || n._id)) {
+          urls.push({
+            loc: `${siteUrl}/news/${n.slug || n._id}`,
+            lastmod: n._modified ? new Date(n._modified * 1000).toISOString() : undefined,
+            changefreq: 'monthly',
+            priority: 0.6,
+          })
+        }
       })
     }
 
     if (Array.isArray(categories)) {
-      categories.forEach((c: unknown) => {
-        const item = c as { _id?: string }
-        if (item && item._id) urls.push(`${siteUrl}/categories/${item._id}`)
+      categories.forEach((c: CategoryFromServer) => {
+        if (c && (c.slug || c._id)) {
+          urls.push({
+            loc: `${siteUrl}/categories/${c.slug || c._id}`,
+            lastmod: c._modified ? new Date(c._modified * 1000).toISOString() : undefined,
+            changefreq: 'monthly',
+            priority: 0.7,
+          })
+        }
       })
     }
   } catch (e) {
-    // If Cockpit is unavailable, still return sitemap with static pages
     console.error('Sitemap generation error:', e)
   }
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
-    .map((u) => `  <url>\n    <loc>${u}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`)
-    .join('\n')}\n</urlset>`
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                ${urls
+                  .map(
+                    (u) => `  <url>
+                    <loc>${u.loc}</loc>${u.lastmod ? `\n    <lastmod>${u.lastmod}</lastmod>` : ''}
+                    <changefreq>${u.changefreq}</changefreq>
+                    <priority>${u.priority}</priority>
+                  </url>`,
+                  )
+                  .join('\n')}
+                </urlset>`
 
   return new NextResponse(xml, {
     headers: {
       'Content-Type': 'application/xml',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
     },
   })
 }
-
-

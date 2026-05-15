@@ -4,11 +4,12 @@ import clsx from 'clsx'
 
 import { RestorationFromServer } from '@/types/types'
 import restorationStyles from './Restoration.module.scss'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton, getImageUrl } from '@/lib/api-client'
 import { createSanitizedHTML } from '@/functions/functions'
 
 export default async function Restoration(): Promise<JSX.Element | null> {
-  const restorationData: RestorationFromServer = await cockpit.getSingleItem('restoration')
+  const restorationData: RestorationFromServer | null =
+    await fetchSingleton<RestorationFromServer>('restoration')
 
   if (!restorationData) {
     return null
@@ -16,15 +17,21 @@ export default async function Restoration(): Promise<JSX.Element | null> {
 
   const title = restorationData.title
   const description = restorationData.description
-  const image = cockpit.getImageUrl(restorationData.image._id, 800, 500)
+  const image = getImageUrl(restorationData.image._id, 800, 500)
   const alt = restorationData.image.alt ?? title
 
   return (
     <section className={clsx('section', restorationStyles['restoration'])} id="restoration">
       <div className={clsx('container', restorationStyles['restoration__container'])}>
-        <h2 className={restorationStyles['restoration__title']}>{title}</h2>
+        <h2 className={restorationStyles['restoration__title']} data-animate="fade-up">
+          {title}
+        </h2>
 
-        <div className={restorationStyles['restoration__image-wrapper']}>
+        <div
+          className={restorationStyles['restoration__image-wrapper']}
+          data-animate="scale-in"
+          data-stagger="1"
+        >
           <Image
             className={restorationStyles['restoration__image']}
             src={image}
@@ -36,6 +43,8 @@ export default async function Restoration(): Promise<JSX.Element | null> {
 
         <div
           className={clsx('block-html', restorationStyles['restoration__text'])}
+          data-animate="fade-up"
+          data-stagger="2"
           dangerouslySetInnerHTML={createSanitizedHTML(description)}
         />
       </div>

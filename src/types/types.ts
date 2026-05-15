@@ -1,3 +1,7 @@
+import { GOLD_TYPE_OPTIONS } from '@/const/const'
+
+export type GoldTypeValue = (typeof GOLD_TYPE_OPTIONS)[number]['value']
+
 export type PriceItem = {
   _id: string
   sort: number
@@ -7,6 +11,7 @@ export type PriceItem = {
   halo: number
   price_for_inch: boolean
 }
+
 export type MenuItem = {
   label: string
   href: string
@@ -21,20 +26,12 @@ export type CardItem = {
   alt: string
 }
 
-export type ProcessItem = {
+export type ProcessFromServer = {
   _id: string
   title: string
   description: string
   image: ImageItem
-  alt: string
-}
-
-export type GalleryItem = {
-  id: number
-  title: string
-  text: string
-  image: string
-  alt: string
+  alt?: string
 }
 
 export type ReviewItem = {
@@ -43,18 +40,17 @@ export type ReviewItem = {
   stars: number
   name: string
   review: string
-}
-
-export type FaqItem = {
-  id: number
-  question: string
-  answer: string
+  photos?: {
+    thumb: string
+    full: string
+  }[]
 }
 
 export type SlideItem = {
   id: string
   image: string
   alt: string
+  imageFull?: string
   href?: string
 }
 
@@ -71,22 +67,35 @@ export type ImageItem = {
   height: string
 }
 
-export type MainInfo = {
+export type AssetItem = {
+  _id: string
+  path: string
+  title?: string
+  mime?: string
+  type?: string
+  size?: number
+}
+
+export type MainInfoFromServer = {
   title: string
   description: string
   logo: ImageItem
   image: ImageItem
   address: string
+  coordinates: string
   email: string
   phone: string
   telegram: string
   whatsapp: string
   vk: string
   max: string
+  agreement: AssetItem
+  policy: AssetItem
+  cookie: AssetItem
 }
 
-export type AdvantageItem = {
-  _id: number
+export type AdvantageFromServer = {
+  _id: string
   title: string
   description: string
   icon: ImageItem
@@ -99,6 +108,9 @@ export type CategoryFromServer = {
   description: string
   image: ImageItem
   slider: ImageItem[]
+  slug?: string
+  _created?: number
+  _modified?: number
 }
 
 export type WorkFromServer = {
@@ -110,6 +122,11 @@ export type WorkFromServer = {
   date: string
   master: MasterFromServer | null
   in_stock: boolean
+  price?: string
+  size?: string
+  slug?: string
+  _created?: number
+  _modified?: number
 }
 
 export type NewsFromServer = {
@@ -120,6 +137,9 @@ export type NewsFromServer = {
   image: ImageItem
   _id: string
   date: string
+  slug?: string
+  _created?: number
+  _modified?: number
 }
 
 export type ReviewFromServer = {
@@ -128,6 +148,7 @@ export type ReviewFromServer = {
   review: string
   stars: number
   date: string
+  photos?: ImageItem[]
 }
 
 export type MasterFromServer = {
@@ -135,6 +156,7 @@ export type MasterFromServer = {
   name: string
   description: string
   image: ImageItem
+  slug?: string
 }
 
 export type OrderFromServer = {
@@ -142,11 +164,38 @@ export type OrderFromServer = {
   description: string
 }
 
-export type GalleryFromServer = {
+export type GalleryTreeItem = {
   _id: string
   title: string
-  description: string
+  slug: string
+  type?: 'Категория' | 'Фото'
   image: ImageItem
+  _children: GalleryTreeItem[]
+}
+
+export type GalleryItemForClient = {
+  _id: string
+  title: string
+  slug: string
+  fullPath: string
+  type?: string
+  imageUrl: string
+  imageLargeUrl: string
+  imageThumbUrl: string
+  imageAlt: string
+  hasNestedCategories: boolean
+  childrenCount: number
+  categoriesCount: number
+  photosCount: number
+  children: GalleryItemForClient[]
+}
+
+export type AboutFromServer = {
+  title: string
+  description: string
+  preview: string
+  image: ImageItem
+  slider: ImageItem[]
 }
 
 export type FaqFromServer = {
@@ -162,10 +211,53 @@ export type RestorationFromServer = {
   image: ImageItem
 }
 
+export type ButtonLink = {
+  link?: string
+  name?: string
+}
+
 export type MainSliderFromServer = {
   _id: string
   title?: string
   description?: string
-  link?: string
+  button?: ButtonLink
   image: ImageItem
+}
+
+export type MainSliderItem = {
+  id: string | number
+  image: string
+  alt: string
+  title?: string
+  description?: string
+  button?: ButtonLink
+}
+
+export type FormState = {
+  success: boolean
+  message: string
+  errors?: Record<string, string>
+}
+
+export type ImageMode = 'thumbnail' | 'bestFit' | 'resize' | 'fitToWidth' | 'fitToHeight'
+export type ImageMime = 'auto' | 'gif' | 'jpeg' | 'png' | 'webp' | 'bmp'
+
+export interface ImageOptions {
+  mode?: ImageMode
+  mime?: ImageMime
+  quality?: number
+}
+
+export type CookieCategoryId = 'necessary' | 'functional' | 'statistical' | 'marketing'
+export type CookieConsent = Record<CookieCategoryId, boolean>
+
+export type FilePreview = {
+  name: string
+  isImage: boolean
+  preview: string | null
+}
+
+export type PhotoItem = {
+  thumb: string
+  full: string
 }

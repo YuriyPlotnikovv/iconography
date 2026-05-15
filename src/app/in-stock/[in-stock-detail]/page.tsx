@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { JSX } from 'react'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { BreadcrumbItem, MasterFromServer, SlideItem, WorkFromServer } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
 import Detail from '@/components/Detail/Detail'
 import Master from '@/components/Master/Master'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollectionItem, getImageUrl } from '@/lib/api-client'
 
 type PageProps = {
   params: Promise<{
@@ -14,8 +14,10 @@ type PageProps = {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { ['in-stock-detail']: workId } = await params
-  const work: WorkFromServer | null = await cockpit.getCollectionItem('works', workId)
+  const { ['in-stock-detail']: slug } = await params
+
+  let work = await fetchCollectionItem<WorkFromServer>('works', slug, { field: 'slug' })
+  if (!work) work = await fetchCollectionItem<WorkFromServer>('works', slug)
 
   if (!work) {
     return {
@@ -31,30 +33,28 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: work.title,
       description,
-      images: work.image? [{ url: cockpit.getImageUrl(work.image._id, 1200, 630), alt: work.title }] : [],
+      images: work.image
+        ? [{ url: getImageUrl(work.image._id, 1200, 630, { mime: 'jpeg' }), alt: work.title }]
+        : [],
     },
     alternates: {
-      canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work._id}`,
+      canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work.slug || work._id}`,
     },
   }
 }
 
-export async function generateStaticParams() {
-  const works: WorkFromServer[] = await cockpit.getCollection('works', {
-    filter: { in_stock: true },
-  })
-
-  return works.map((work) => ({
-    'in-stock-detail': work._id,
-  }))
-}
-
 export default async function Page({ params }: PageProps): Promise<JSX.Element> {
-  const { ['in-stock-detail']: workId } = await params
-  const work: WorkFromServer | null = await cockpit.getCollectionItem('works', workId)
+  const { ['in-stock-detail']: slug } = await params
+
+  let work = await fetchCollectionItem<WorkFromServer>('works', slug, { field: 'slug' })
+  if (!work) work = await fetchCollectionItem<WorkFromServer>('works', slug)
 
   if (!work) {
     notFound()
+  }
+
+  if (work.slug && work.slug !== slug) {
+    redirect(`/in-stock/${work.slug}`)
   }
 
   const breadcrumbsList: BreadcrumbItem[] = [
@@ -74,16 +74,46 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
   const slidesList: SlideItem[] =
     work.slider?.map((image) => ({
       id: image._id,
-      image: cockpit.getImageUrl(image._id, 800, 800),
+      image: getImageUrl(image._id, 800, 500),
+      imageFull: getImageUrl(image._id, 1600, 1000, { mode: 'bestFit' }),
       alt: image.title || work.title,
     })) || []
 
   const MasterInfo: MasterFromServer | null = work.master
-    ? await cockpit.getCollectionItem('masters', work.master?._id)
+    ? await fetchCollectionItem<MasterFromServer>('masters', work.master?._id)
     : null
+
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: work.title,
+    description: work.description
+      ? work.description.replace(/<[^>]*>/g, '').slice(0, 160)
+      : work.title,
+    image: work.image
+      ? getImageUrl(work.image._id, 1200, 630, { mode: 'thumbnail', mime: 'jpeg' })
+      : undefined,
+    brand: {
+      '@type': 'Organization',
+      name: 'Иконописная Артель',
+    },
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      url: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/in-stock/${work.slug || work._id}`,
+      ...(work.price && !isNaN(parseFloat(work.price))
+        ? { price: parseFloat(work.price), priceCurrency: 'RUB' }
+        : {}),
+    },
+  }
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+
       <Heading breadcrumbsList={breadcrumbsList} />
 
       <Detail
@@ -91,6 +121,8 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
         description={work.description}
         image={work.image}
         slidesList={slidesList}
+        price={work.price}
+        size={work.size}
       />
 
       {MasterInfo && <Master master={MasterInfo} />}

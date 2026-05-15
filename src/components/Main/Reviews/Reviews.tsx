@@ -3,10 +3,10 @@ import Link from 'next/link'
 
 import { ReviewFromServer, ReviewItem } from '@/types/types'
 import ReviewsList from '@/components/ReviewsList/ReviewsList'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
 
 export default async function Reviews(): Promise<JSX.Element | null> {
-  const reviewsData: ReviewFromServer[] = await cockpit.getCollection('reviews', {
+  const reviewsData: ReviewFromServer[] = await fetchCollection<ReviewFromServer>('reviews', {
     sort: { date: -1 },
     limit: 6,
   })
@@ -15,18 +15,36 @@ export default async function Reviews(): Promise<JSX.Element | null> {
     return null
   }
 
-  const reviewsList: ReviewItem[] = reviewsData.map((review) => ({
-    id: review._id,
-    date: review.date,
-    stars: review.stars,
-    name: review.name,
-    review: review.review,
-  }))
+  const reviewsList: ReviewItem[] = reviewsData.map((review) => {
+    const photos: Array<{ thumb: string; full: string }> = []
+
+    if (review.photos && review.photos.length > 0) {
+      review.photos.forEach((img) => {
+        if (img._id) {
+          photos.push({
+            thumb: getImageUrl(img._id, 400, 300),
+            full: getImageUrl(img._id, 1920, 1080, { mode: 'bestFit' }),
+          })
+        }
+      })
+    }
+
+    return {
+      id: review._id,
+      date: review.date,
+      stars: review.stars,
+      name: review.name,
+      review: review.review,
+      ...(photos.length > 0 ? { photos } : {}),
+    }
+  })
 
   return (
     <section className="section">
       <div className="container">
-        <h2 className="section__title">Отзывы</h2>
+        <h2 className="section__title" data-animate="fade-up">
+          Отзывы
+        </h2>
 
         <ReviewsList reviewsList={reviewsList} />
 

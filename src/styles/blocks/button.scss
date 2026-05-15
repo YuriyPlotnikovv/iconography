@@ -1,4 +1,4 @@
-@use '../variables.scss' as var;
+@use '../variables.scss' as *;
 
 .button {
   display: flex;
@@ -12,14 +12,19 @@
   line-height: 1.2;
   text-transform: uppercase;
 
-  box-shadow: var.$cardShadow;
+  box-shadow: $cardShadow;
   border-radius: 10px;
 
   cursor: pointer;
 
-  transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 
-  @media (max-width: var.$tablet-min-width) {
+  &:focus-visible {
+    outline: 2px solid $accent-add-bg;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: $tablet-min-width) {
     padding: 10px 20px;
 
     font-size: 14px;
@@ -32,18 +37,23 @@
     }
   }
 
-  &--accent {
-    color: var.$bg-text-color;
+  &--default {
+    background-color: $accent-light-bg;
+    border: 1px dashed $accent-add-bg;
+  }
 
-    background-color: var.$accent-bg;
-    border: 1px solid var.$accent-bg;
+  &--accent {
+    color: $bg-text-color;
+
+    background-color: $accent-bg;
+    border: 1px solid $accent-bg;
   }
 
   &--clear {
-    color: var.$accent-text-color;
+    color: $accent-text-color;
 
     background-color: transparent;
-    border: 1px solid var.$accent-add-bg;
+    border: 1px solid $accent-add-bg;
   }
 
   &--arrow {

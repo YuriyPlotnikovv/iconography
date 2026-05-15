@@ -1,27 +1,21 @@
-import { JSX } from 'react'
+import { JSX, ReactNode } from 'react'
 import clsx from 'clsx'
-import { CardItem, CategoryFromServer } from '@/types/types'
+import { CardItem } from '@/types/types'
 import Card from '@/components/Card/Card'
 import categoriesStyles from './Categories.module.scss'
-import cockpit from '@/lib/CockpitAPI'
 
-export default async function Categories(): Promise<JSX.Element | null> {
-  const categoriesData: CategoryFromServer[] = await cockpit.getCollection('category', {
-    sort: { sort: 1 },
-  })
+type CategoriesProps = {
+  categoriesList: CardItem[]
+  children?: ReactNode
+}
 
-  if (!categoriesData || categoriesData.length === 0) {
+export default function Categories({
+  categoriesList,
+  children,
+}: CategoriesProps): JSX.Element | null {
+  if (!categoriesList || categoriesList.length === 0) {
     return null
   }
-
-  const categoriesList: CardItem[] = categoriesData.map((category) => ({
-    id: category._id,
-    title: category.title,
-    description: category.description,
-    href: `/categories/${category._id}`,
-    image: cockpit.getImageUrl(category.image._id, 400, 400),
-    alt: category.image.title || category.title,
-  }))
 
   return (
     <section className={clsx('section', categoriesStyles['categories'])}>
@@ -29,14 +23,21 @@ export default async function Categories(): Promise<JSX.Element | null> {
         <h2 className="visually-hidden">Категории икон</h2>
 
         <ul className={categoriesStyles['categories__list']}>
-          {categoriesList.map((category) => {
+          {categoriesList.map((category, index) => {
             return (
-              <li className={categoriesStyles['categories__item']} key={category.id}>
+              <li
+                className={categoriesStyles['categories__item']}
+                key={category.id}
+                data-animate="fade-up"
+                data-stagger={String(index % 6)}
+              >
                 <Card data={category} />
               </li>
             )
           })}
         </ul>
+
+        {children}
       </div>
     </section>
   )

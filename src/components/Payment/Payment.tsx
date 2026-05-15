@@ -3,10 +3,10 @@ import paymentStyles from './Payment.module.scss'
 import clsx from 'clsx'
 import { createSanitizedHTML } from '@/functions/functions'
 import { OrderFromServer } from '@/types/types'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchSingleton } from '@/lib/api-client'
 
 export default async function Payment(): Promise<JSX.Element | null> {
-  const orderInfo: OrderFromServer | null = await cockpit.getSingleItem('order')
+  const orderInfo: OrderFromServer | null = await fetchSingleton<OrderFromServer>('order')
 
   if (!orderInfo) {
     return null
@@ -17,10 +17,14 @@ export default async function Payment(): Promise<JSX.Element | null> {
   return (
     <section className={clsx('section', paymentStyles['payment'])}>
       <div className="container">
-        <h2 className="section__title">Оплата и доставка</h2>
+        <h2 className="section__title" data-animate="fade-up">
+          Оплата и доставка
+        </h2>
 
         <div
           className={clsx('block-html', paymentStyles['payment__info'])}
+          data-animate="fade-up"
+          data-stagger="1"
           dangerouslySetInnerHTML={createSanitizedHTML(description)}
         />
       </div>

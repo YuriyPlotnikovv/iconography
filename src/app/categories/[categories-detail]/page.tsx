@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { BreadcrumbItem, CategoryFromServer, SlideItem } from '@/types/types'
 import Heading from '@/components/Heading/Heading'
 import Detail from '@/components/Detail/Detail'
-import cockpit from '@/lib/CockpitAPI'
+import { fetchCollectionItem, getImageUrl } from '@/lib/api-client'
 
 type PageProps = {
   params: Promise<{
@@ -13,21 +13,41 @@ type PageProps = {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { ['categories-detail']: categoryId } = await params
+  const { ['categories-detail']: slug } = await params
 
   try {
-    const category: CategoryFromServer = await cockpit.getCollectionItem('category', categoryId)
+    let category = await fetchCollectionItem<CategoryFromServer>('category', slug, {
+      field: 'slug',
+    })
+    if (!category) category = await fetchCollectionItem<CategoryFromServer>('category', slug)
+
+    if (!category) {
+      return {
+        title: 'Категория не найдена | Иконописная Артель',
+      }
+    }
 
     return {
       title: `${category.title} | Иконописная Артель`,
-      description: category.description ? category.description.replace(/<[^>]*>/g, '').slice(0, 160) : '',
+      description: category.description
+        ? category.description.replace(/<[^>]*>/g, '').slice(0, 160)
+        : '',
       openGraph: {
         title: category.title,
-        description: category.description ? category.description.replace(/<[^>]*>/g, '').slice(0, 160) : '',
-        images: category.image ? [{ url: cockpit.getImageUrl(category.image._id, 1200, 630), alt: category.title }] : [],
+        description: category.description
+          ? category.description.replace(/<[^>]*>/g, '').slice(0, 160)
+          : '',
+        images: category.image
+          ? [
+              {
+                url: getImageUrl(category.image._id, 1200, 630, { mime: 'jpeg' }),
+                alt: category.title,
+              },
+            ]
+          : [],
       },
       alternates: {
-        canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/categories/${category._id}`,
+        canonical: `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/categories/${category.slug || category._id}`,
       },
     }
   } catch {
@@ -38,13 +58,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps): Promise<JSX.Element> {
-  const { ['categories-detail']: categoryId } = await params
+  const { ['categories-detail']: slug } = await params
 
-  let category: CategoryFromServer
+  let category = await fetchCollectionItem<CategoryFromServer>('category', slug, { field: 'slug' })
+  if (!category) category = await fetchCollectionItem<CategoryFromServer>('category', slug)
 
-  try {
-    category = await cockpit.getCollectionItem('category', categoryId)
-  } catch {
+  if (!category) {
     notFound()
   }
 
@@ -64,7 +83,8 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
 
   const slidesList: SlideItem[] = category.slider?.map((image) => ({
     id: image._id,
-    image: cockpit.getImageUrl(image._id, 800, 800),
+    image: getImageUrl(image._id, 800, 500),
+    imageFull: getImageUrl(image._id, 1600, 1000, { mode: 'bestFit' }),
     alt: image.title || category.title,
   }))
 

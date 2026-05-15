@@ -11,7 +11,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 import type { NavigationOptions, PaginationOptions } from 'swiper/types'
-import { CardItem } from '@/types/types'
+import { MainSliderItem } from '@/types/types'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,7 +20,7 @@ import stylesSliderMain from './SliderMain.module.scss'
 import { createSanitizedHTML } from '@/functions/functions'
 
 type SliderMainClientProps = {
-  slidesList: CardItem[]
+  slidesList: MainSliderItem[]
 }
 
 export default function SliderMainClient({ slidesList }: SliderMainClientProps): JSX.Element {
@@ -57,7 +57,7 @@ export default function SliderMainClient({ slidesList }: SliderMainClientProps):
           } as PaginationOptions
         }
       >
-        {slidesList.map((slide) => {
+        {slidesList.map((slide, index) => {
           return (
             <SwiperSlide
               className={clsx(sliderStyles['slider__item'], stylesSliderMain['slider-main__item'])}
@@ -68,6 +68,9 @@ export default function SliderMainClient({ slidesList }: SliderMainClientProps):
                 src={slide.image}
                 alt={slide.alt}
                 fill
+                sizes="100vw"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                priority={index === 0}
               />
 
               <div className={stylesSliderMain['slider-main__item-content']}>
@@ -84,9 +87,9 @@ export default function SliderMainClient({ slidesList }: SliderMainClientProps):
                     'button',
                     'button--arrow',
                   )}
-                  href={slide.href}
+                  href={slide.button?.link ?? '#'}
                 >
-                  Подробнее
+                  {slide.button?.name ?? 'Подробнее'}
                 </Link>
               </div>
             </SwiperSlide>

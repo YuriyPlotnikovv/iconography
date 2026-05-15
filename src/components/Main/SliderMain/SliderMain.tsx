@@ -1,24 +1,30 @@
 import { JSX } from 'react'
-import cockpit from '@/lib/CockpitAPI'
-import type { CardItem, MainSliderFromServer } from '@/types/types'
+import { fetchCollection, getImageUrl } from '@/lib/api-client'
+import type { MainSliderItem, MainSliderFromServer } from '@/types/types'
 import SliderMainClient from './SliderMainClient'
 
 export default async function SliderMain(): Promise<JSX.Element | null> {
-  const mainSliderData: MainSliderFromServer[] = await cockpit.getCollection('mainslider', {
-    sort: { sort: 1 },
-  })
+  const mainSliderData: MainSliderFromServer[] = await fetchCollection<MainSliderFromServer>(
+    'mainslider',
+    {
+      sort: { sort: 1 },
+    },
+  )
 
   if (!mainSliderData || mainSliderData.length === 0) {
     return null
   }
 
-  const slidesList: CardItem[] = mainSliderData.map((item) => ({
+  const slidesList: MainSliderItem[] = mainSliderData.map((item) => ({
     id: item._id,
-    image: cockpit.getImageUrl(item.image._id, 1200, 800),
+    image: getImageUrl(item.image._id, 1920, 1080, { mode: 'bestFit' }),
     alt: item.title || '',
     title: item.title || '',
     description: item.description || '',
-    href: item.link || '',
+    button: {
+      link: item.button?.link || '',
+      name: item.button?.name || '',
+    },
   }))
 
   return <SliderMainClient slidesList={slidesList} />

@@ -1,8 +1,8 @@
 import { JSX } from 'react'
 import socialStyles from './Social.module.scss'
 import clsx from 'clsx'
-import { MainInfo } from '@/types/types'
-import cockpit from '@/lib/CockpitAPI'
+import { MainInfoFromServer } from '@/types/types'
+import { fetchSingleton } from '@/lib/api-client'
 import {
   createMaxLink,
   createTelegramLink,
@@ -15,7 +15,7 @@ type SocialProps = {
 }
 
 export default async function Social({ addClass }: SocialProps): Promise<JSX.Element | null> {
-  const mainInfo: MainInfo | null = await cockpit.getSingleItem('maininfo')
+  const mainInfo: MainInfoFromServer | null = await fetchSingleton('maininfo')
 
   if (!mainInfo) {
     return null

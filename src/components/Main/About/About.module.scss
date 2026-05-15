@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as var;
+@use '../../../styles/variables' as *;
 
 .about {
 }
@@ -8,7 +8,7 @@
   grid-template-rows: auto 1fr;
   grid-template-columns: 1fr 1fr;
 
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     grid-template-rows: auto auto 300px;
     grid-template-columns: 1fr;
   }
@@ -20,18 +20,18 @@
 
   font-size: 56px;
 
-  @media (max-width: var.$desktop-mid-width) {
+  @media (max-width: $desktop-mid-width) {
     font-size: 52px;
   }
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 44px;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     grid-row: 1 / 2;
     grid-column: 1 / -1;
     font-size: 36px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 28px;
   }
 }
@@ -44,7 +44,7 @@
   width: 100%;
   height: 500px;
 
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     grid-row: 3 / 4;
     grid-column: 1 / -1;
     height: 100%;
@@ -53,7 +53,7 @@
 
 .about__image {
   border-radius: 40px;
-  box-shadow: var.$cardShadow;
+  box-shadow: $cardShadow;
 }
 
 .about__text {
@@ -62,16 +62,16 @@
 
   font-size: 22px;
 
-  @media (max-width: var.$desktop-min-width) {
+  @media (max-width: $desktop-min-width) {
     font-size: 20px;
   }
-  @media (max-width: var.$tablet-min-width) {
+  @media (max-width: $tablet-min-width) {
     grid-row: 2 / 3;
     grid-column: 1 / -1;
 
     font-size: 18px;
   }
-  @media (max-width: var.$mobile-mid-width) {
+  @media (max-width: $mobile-mid-width) {
     font-size: 16px;
   }
 }
