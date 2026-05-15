@@ -75,6 +75,7 @@ export default async function Page({ params }: PageProps): Promise<JSX.Element> 
     news.slider?.map((image) => ({
       id: image._id,
       image: getImageUrl(image._id, 800, 500),
+      imageFull: getImageUrl(image._id, 1600, 1000, { mode: 'bestFit' }),
       alt: image.title || news.title,
     })) || []
 

@@ -79,6 +79,9 @@
   border-radius: 40px;
   aspect-ratio: 4 / 3;
 
+  @media (max-width: $desktop-mid-width) {
+    max-height: 400px;
+  }
   @media (max-width: $tablet-min-width) {
     grid-row: 1 / 2;
     max-height: 300px;

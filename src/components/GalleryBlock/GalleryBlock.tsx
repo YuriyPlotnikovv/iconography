@@ -35,7 +35,7 @@ export default function GalleryBlock({
     if (!containerRef.current) return
 
     const dynamicEl = hasSlides
-      ? slidesList.map((item) => ({ src: item.image, thumb: item.image, alt: item.alt }))
+      ? slidesList.map((item) => ({ src: item.imageFull || item.image, thumb: item.image, alt: item.alt }))
       : [{ src: imageFullSrc, thumb: imageSrc, alt: imageAlt }]
 
     lgInstanceRef.current = lightGallery(containerRef.current, {
