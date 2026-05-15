@@ -1,4 +1,4 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .menu-button {
   display: flex;
@@ -9,6 +9,15 @@
   padding: 10px;
 
   cursor: pointer;
+
+  transition: opacity 0.4s ease-in-out;
+
+  @media (hover: hover) {
+    &:hover,
+    &:active {
+      opacity: 0.6;
+    }
+  }
 
   &--menu-open {
     .menu-button-line {
