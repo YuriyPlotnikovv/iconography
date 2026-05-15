@@ -50,6 +50,7 @@ export type SlideItem = {
   id: string
   image: string
   alt: string
+  imageFull?: string
   href?: string
 }
 

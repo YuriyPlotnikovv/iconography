@@ -5,4 +5,14 @@
 
 .payment__info {
   font-size: 22px;
+
+  @media (max-width: $desktop-min-width) {
+    font-size: 20px;
+  }
+  @media (max-width: $tablet-min-width) {
+    font-size: 18px;
+  }
+  @media (max-width: $mobile-mid-width) {
+    font-size: 16px;
+  }
 }
