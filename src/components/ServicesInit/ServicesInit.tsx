@@ -6,14 +6,14 @@ export default function ServicesInit(): JSX.Element | null {
   const { registerCallback } = useCookieConsent()
 
   useEffect(() => {
-    registerCallback('statistical', () => {
-      // Placeholder for statistical
-      console.log('[CookieConsent] Statistical callbacks initialized')
+    registerCallback('performance', () => {
+      // Placeholder for performance
+      console.log('[CookieConsent] Performance callbacks initialized')
     })
 
-    registerCallback('marketing', () => {
-      // Placeholder for marketing
-      console.log('[CookieConsent] Marketing callbacks initialized')
+    registerCallback('targeting', () => {
+      // Placeholder for targeting
+      console.log('[CookieConsent] Targeting callbacks initialized')
     })
 
     registerCallback('functional', () => {

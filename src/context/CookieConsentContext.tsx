@@ -31,9 +31,9 @@ type Props = {
 export function CookieConsentProvider({ initialConsent, children }: Props): JSX.Element {
   const defaultConsent: CookieConsent = {
     necessary: true,
+    performance: false,
     functional: false,
-    statistical: false,
-    marketing: false,
+    targeting: false,
   }
 
   const [consent, setConsent] = useState<CookieConsent>(initialConsent ?? defaultConsent)

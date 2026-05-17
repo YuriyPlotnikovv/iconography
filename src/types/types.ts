@@ -248,7 +248,7 @@ export interface ImageOptions {
   quality?: number
 }
 
-export type CookieCategoryId = 'necessary' | 'functional' | 'statistical' | 'marketing'
+export type CookieCategoryId = 'necessary' | 'performance' | 'functional' | 'targeting'
 export type CookieConsent = Record<CookieCategoryId, boolean>
 
 export type FilePreview = {
