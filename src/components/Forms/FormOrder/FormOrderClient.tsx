@@ -357,7 +357,7 @@ export default function FormOrderClient({ categories, prices: initialPrices }: P
 
   const SelectArrow = () => (
     <svg
-      className={formStyles['form__select__icon']}
+      className={formStyles['form__select-icon']}
       width="10"
       height="10"
       viewBox="0 0 10 10"
@@ -417,7 +417,7 @@ export default function FormOrderClient({ categories, prices: initialPrices }: P
                     <button
                       type="button"
                       className={clsx(
-                        formStyles['form__select__current'],
+                        formStyles['form__select-current'],
                         formStyles['form__input'],
                       )}
                       aria-haspopup="listbox"
@@ -434,7 +434,7 @@ export default function FormOrderClient({ categories, prices: initialPrices }: P
                     </button>
 
                     <ul
-                      className={formStyles['form__select__list']}
+                      className={formStyles['form__select-list']}
                       role="listbox"
                       tabIndex={-1}
                       aria-labelledby="orderCategoryButton"
@@ -448,8 +448,8 @@ export default function FormOrderClient({ categories, prices: initialPrices }: P
                           ref={(el: HTMLLIElement | null) => {
                             categoryOptionsRef.current[index] = el
                           }}
-                          className={clsx(formStyles['form__select__option'], {
-                            [formStyles['form__select__option--selected']]:
+                          className={clsx(formStyles['form__select-option'], {
+                            [formStyles['form__select-option--selected']]:
                               cat.title === selectedCategory,
                           })}
                           aria-selected={cat.title === selectedCategory}
@@ -475,7 +475,7 @@ export default function FormOrderClient({ categories, prices: initialPrices }: P
                     <button
                       type="button"
                       className={clsx(
-                        formStyles['form__select__current'],
+                        formStyles['form__select-current'],
                         formStyles['form__input'],
                       )}
                       aria-haspopup="listbox"
@@ -492,7 +492,7 @@ export default function FormOrderClient({ categories, prices: initialPrices }: P
                     </button>
 
                     <ul
-                      className={formStyles['form__select__list']}
+                      className={formStyles['form__select-list']}
                       role="listbox"
                       tabIndex={-1}
                       aria-labelledby="orderSizeButton"
@@ -506,8 +506,8 @@ export default function FormOrderClient({ categories, prices: initialPrices }: P
                           ref={(el: HTMLLIElement | null) => {
                             sizeOptionsRef.current[index] = el
                           }}
-                          className={clsx(formStyles['form__select__option'], {
-                            [formStyles['form__select__option--selected']]:
+                          className={clsx(formStyles['form__select-option'], {
+                            [formStyles['form__select-option--selected']]:
                               item._id === selectedSizeId,
                           })}
                           aria-selected={item._id === selectedSizeId}

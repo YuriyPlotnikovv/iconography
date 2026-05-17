@@ -17,19 +17,19 @@ export default function CookieBannerClient({ cookiePolicyUrl }: Props): JSX.Elem
   const [showDetails, setShowDetails] = useState(false)
   const [selected, setSelected] = useState<CookieConsent>({
     necessary: true,
+    performance: consent.performance,
     functional: consent.functional,
-    statistical: consent.statistical,
-    marketing: consent.marketing,
+    targeting: consent.targeting,
   })
 
   if (!isBannerVisible) return null
 
   const acceptAll = () => {
-    saveConsent({ necessary: true, functional: true, statistical: true, marketing: true })
+    saveConsent({ necessary: true, performance: true, functional: true, targeting: true })
   }
 
   const acceptNecessary = () => {
-    saveConsent({ necessary: true, functional: false, statistical: false, marketing: false })
+    saveConsent({ necessary: true, performance: false, functional: false, targeting: false })
   }
 
   const saveSelected = () => {

@@ -320,7 +320,7 @@
   width: 100%;
 }
 
-.form__select__current {
+.form__select-current {
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
@@ -329,6 +329,7 @@
 
   font-family: $font-text;
   font-size: 16px;
+  color: inherit;
 
   background: none;
   border: none;
@@ -344,11 +345,11 @@
   }
 }
 
-.form__select__current[aria-expanded='true'] .form__select__icon {
+.form__select-current[aria-expanded='true'] .form__select-icon {
   transform: rotate(180deg);
 }
 
-.form__select__icon {
+.form__select-icon {
   display: block;
   width: 10px;
   height: 10px;
@@ -356,7 +357,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.form__select__list {
+.form__select-list {
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
@@ -370,7 +371,7 @@
   border-radius: 4px;
 }
 
-.form__select__option {
+.form__select-option {
   padding: 10px;
 
   font-size: 16px;
@@ -380,20 +381,20 @@
   cursor: pointer;
 }
 
-.form__select__option:hover,
-.form__select__option:active {
+.form__select-option:hover,
+.form__select-option:active {
   background: $add-bg;
   outline: none;
   box-shadow: inset 3px 0 0 $accent-add-bg;
 }
 
-.form__select__option:focus {
+.form__select-option:focus {
   background: $add-bg;
   outline: none;
   box-shadow: inset 3px 0 0 $accent-add-bg;
 }
 
-.form__select__option--selected {
+.form__select-option--selected {
   font-weight: 700;
 
   background: $add-bg;
