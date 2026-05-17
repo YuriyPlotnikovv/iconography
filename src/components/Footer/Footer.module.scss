@@ -95,6 +95,10 @@
     }
   }
 
+  @media (max-width: $tablet-mid-width) {
+    text-align: center;
+  }
+
   &:focus-visible {
     border-radius: 2px;
     outline: 2px solid $accent-add-bg;

@@ -1,4 +1,4 @@
-@use './variables.scss' as *;
+@use "./variables.scss" as *;
 
 *,
 *::before,
@@ -9,6 +9,7 @@
 html,
 body {
   display: flex;
+  overflow-x: hidden;
   flex-direction: column;
   min-width: $mobile-min-width;
   height: 100%;

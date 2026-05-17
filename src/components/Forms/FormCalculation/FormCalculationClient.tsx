@@ -164,7 +164,7 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
         <div id="calculation-sort" ref={selectRef} className={formStyles['form__select']}>
           <button
             type="button"
-            className={clsx(formStyles['form__select__current'], formStyles['form__input'])}
+            className={clsx(formStyles['form__select-current'], formStyles['form__input'])}
             aria-haspopup="listbox"
             aria-expanded={selectOpen}
             id="calculationSortingButton"
@@ -179,7 +179,7 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
               : 'Размер/категория'}
 
             <svg
-              className={formStyles['form__select__icon']}
+              className={formStyles['form__select-icon']}
               width="10"
               height="10"
               viewBox="0 0 10 10"
@@ -198,7 +198,7 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
           </button>
 
           <ul
-            className={formStyles['form__select__list']}
+            className={formStyles['form__select-list']}
             role="listbox"
             tabIndex={-1}
             aria-labelledby="calculationSortingButton"
@@ -212,8 +212,8 @@ export default function FormCalculationClient({ prices: initialPrices }: Props):
                 ref={(el: HTMLLIElement | null) => {
                   optionsRef.current[index] = el
                 }}
-                className={clsx(formStyles['form__select__option'], {
-                  [formStyles['form__select__option--selected']]: item._id === selectedId,
+                className={clsx(formStyles['form__select-option'], {
+                  [formStyles['form__select-option--selected']]: item._id === selectedId,
                 })}
                 data-value={item._id}
                 aria-selected={item._id === selectedId}
